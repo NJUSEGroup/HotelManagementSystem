@@ -1,5 +1,6 @@
 package hrs.client.util;
 
+import java.sql.Date;
 import java.util.Calendar;
 
 import javax.swing.JComboBox;
@@ -101,6 +102,18 @@ public class DateChoosePanel extends JPanel {
 		}
 		
 		
+	}
+	
+	/**
+	 * 得到当前panel选择的日期
+	 * @return Date
+	 */
+	public Date getDate(){
+		int year = (Integer)yearBox.getSelectedItem();
+		int month = (Integer)monthBox.getSelectedItem();
+		int day = (Integer)dayBox.getSelectedItem();
+		Date date = new Date(year, month, day);
+		return date;
 	}
 	
 }
