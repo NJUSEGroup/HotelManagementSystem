@@ -31,20 +31,22 @@ public class RoomUIPanel extends JPanel {
 	private JTableHeader jthOrderList;
 	private RoomTableModel roomTableModel;
 	private JButton jbAdd;
-	private HotelVO hotel;
+	private JButton jbEdit;
+	private HotelVO theHotel;
 	private IRoomController roomController;
 	private AddListener addListener;
+	List<RoomVO> rooms;
 	
 	/**
 	 * Create the panel.
 	 * @throws RoomNotFoundException 
 	 */
-	public RoomUIPanel(HotelVO hotel) throws RoomNotFoundException{
-		init(hotel);
+	public RoomUIPanel(HotelVO theHotel) throws RoomNotFoundException{
+		init(theHotel);
 	}
 	
-	public void init(HotelVO hotel) throws RoomNotFoundException{
-		this.hotel = hotel;
+	public void init(HotelVO theHotel) throws RoomNotFoundException{
+		this.theHotel = theHotel;
 		this.setSize(1080, 722);
 		this.setLayout(null);
 		
@@ -59,7 +61,7 @@ public class RoomUIPanel extends JPanel {
 		jpButton.setLayout(null);
 		
 		roomController = ControllerFactory.getRoomController();
-		List<RoomVO> rooms= roomController.findByHotelID(hotel.id);
+		rooms= roomController.findByHotelID(theHotel.id);
 		
 		roomTableModel = new RoomTableModel(rooms);
 		
@@ -86,22 +88,37 @@ public class RoomUIPanel extends JPanel {
 		addListener = new AddListener(this);
 		
 		jbAdd = new JButton();
-		jbAdd.setBounds(887, 13, 90, 40);
+		jbAdd.setBounds(736, 13, 90, 40);
 		jbAdd.setText("添加");
 		jbAdd.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbAdd.addMouseListener(addListener);
 		
+		jbEdit = new JButton();
+		jbEdit.setBounds(905, 13, 90, 40);
+		jbEdit.setText("修改");
+		jbEdit.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		
 		jpRoom.add(jspRoom);
 		
 		jpButton.add(jbAdd);
+		jpButton.add(jbEdit);
 		
 		this.add(jpRoom);
 		this.add(jpButton);
 	}
 	
 	public void addRoom(){
-		List<RoomType> notAddedRoom = roomController.findNotAddedRoomType(hotel.id);
+		List<RoomType> notAddedRoom = roomController.findNotAddedRoomType(theHotel.id);
 		
-		AddRoomDialog addRoomDialog = new AddRoomDialog(notAddedRoom, hotel);
+		AddRoomDialog addRoomDialog = new AddRoomDialog(notAddedRoom, this);
+	}
+	
+	public void refreshRoomList(RoomVO newRoom) throws RoomNotFoundException{
+		newRoom.hotel = theHotel;
+		roomController.addRoom(newRoom);
+		
+		rooms= roomController.findByHotelID(theHotel.id);
+		roomTableModel = new RoomTableModel(rooms);
+		jtRoom.setModel(roomTableModel);
 	}
 }

@@ -1,29 +1,29 @@
-package hrs.client.UI.HotelUI.RoomUI.Listener;
+package hrs.client.UI.HotelUI.HotelOrderUI.Listener;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import hrs.client.UI.HotelUI.Components.AddRoomDialog;
-import hrs.common.Exception.RoomService.RoomNotFoundException;
+import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderMainPanel;
+import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderUIPanel;
+import hrs.common.VO.OrderVO;
 
-public class AddConfirmListener implements MouseListener{
-
-	private AddRoomDialog addRoomDialog;
+public class DetailListener implements MouseListener{
 	
-	public AddConfirmListener(AddRoomDialog addRoomDialog){
-		this.addRoomDialog = addRoomDialog;
+	private HotelOrderMainPanel jpMain;
+	private HotelOrderUIPanel jpOrderList;
+	
+	public DetailListener(HotelOrderMainPanel jpMain, HotelOrderUIPanel jpOrderList){
+		this.jpMain = jpMain;
+		this.jpOrderList = jpOrderList;
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-		try {
-			addRoomDialog.addConfirm();
-		} catch (RoomNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		OrderVO order = jpOrderList.getSelectedOrder();
+		jpMain.showDetail(order);
+		
 	}
 
 	@Override

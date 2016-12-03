@@ -2,9 +2,11 @@ package hrs.client.UI.HotelUI.HotelOrderUI.Listener;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 
 import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderUIPanel;
 import hrs.common.Exception.OrderService.OrderNotFoundException;
+import hrs.common.VO.OrderVO;
 
 public class SearchByOrderTypeListener implements MouseListener{
 
@@ -17,12 +19,13 @@ public class SearchByOrderTypeListener implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		try {
-			jpHotelOrder.searchByOrderType();
-		} catch (OrderNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
+		String orderType = jpHotelOrder.getOrderType();
+		List<OrderVO> orderList = null;
+		
+		orderList = jpHotelOrder.searchByOrderType(orderType);
+		
+		jpHotelOrder.refreshOrderList(orderList);
 	}
 
 	@Override

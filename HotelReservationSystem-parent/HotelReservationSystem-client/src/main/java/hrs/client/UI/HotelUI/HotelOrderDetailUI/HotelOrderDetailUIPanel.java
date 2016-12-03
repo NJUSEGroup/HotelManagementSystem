@@ -13,6 +13,13 @@ import java.awt.Insets;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import org.hibernate.type.descriptor.java.DataHelper;
+
+import hrs.client.UI.HotelUI.HotelOrderDetailUI.Listener.ReturnListener;
+import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderMainPanel;
+import hrs.common.VO.OrderVO;
+import hrs.common.util.DateHelper;
+
 public class HotelOrderDetailUIPanel extends JPanel {
 
 	private JPanel jpDetail;
@@ -57,15 +64,16 @@ public class HotelOrderDetailUIPanel extends JPanel {
 	private JTextField jtfPhoneNum;
 	private JTextField jtfFirm;
 	private JTextField jtfCredit;
+	private ReturnListener returnListener;
 	
 	/**
 	 * Create the panel.
 	 */
-	public HotelOrderDetailUIPanel() {
-		init();
+	public HotelOrderDetailUIPanel(HotelOrderMainPanel jpMain) {
+		init(jpMain);
 	}
 	
-	public void init(){
+	public void init(HotelOrderMainPanel jpMain){
 		this.setSize(1080, 722);
 		this.setLayout(null);
 		
@@ -85,10 +93,13 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jpButton.setBackground(new Color(211, 237, 249));
 		jpButton.setLayout(null);
 		
+		returnListener = new ReturnListener(jpMain);
+		
 		jbReturn = new JButton();
 		jbReturn.setBounds(805, 13, 90, 40);
 		jbReturn.setText("返回");
 		jbReturn.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jbReturn.addMouseListener(returnListener);
 		
 		jpButton.add(jbReturn);
 		
@@ -531,4 +542,67 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		this.add(jpButton);
 	}
 
+	public void showDetailInfo(OrderVO order){
+		jtfID.setText(Integer.toString(order.id));
+		jtfPlaceOrder.setText(DateHelper.format(order.placeTime));
+		jtfExecute.setText(DateHelper.format(order.execTime));
+		jtfCheckin.setText(DateHelper.format(order.checkinTime));
+		jtfExpectedCheckout.setText(DateHelper.format(order.expectedCheckoutTime));
+		jtfCheckout.setText(DateHelper.format(order.checkoutTime));
+		jtfCancel.setText(DateHelper.format(order.revokeTime));
+		
+		if(order.type.toString().equals("Single")){
+			jtfRoomType.setText("单人房");
+		}
+		else if(order.type.toString().equals("Double")){
+			jtfRoomType.setText("双人房");
+		}
+		else if(order.type.toString().equals("KingSize")){
+			jtfRoomType.setText("大床间");
+		}
+		else if(order.type.toString().equals("Standard")){
+			jtfRoomType.setText("标准间");
+		}
+		else if(order.type.toString().equals("Deluxe")){
+			jtfRoomType.setText("豪华间");
+		}
+		else if(order.type.toString().equals("Business")){
+			jtfRoomType.setText("商务标间");
+		}
+		else{
+			jtfRoomType.setText("行政标间");
+		}
+		
+		jtfRoomNum.setText(Integer.toString(order.roomNum));
+		jtfPeople.setText(Integer.toString(order.peopleNum));
+		
+		if(order.hasChild){
+			jtfChildren.setText("有");
+		}
+		else{
+			jtfChildren.setText("无");
+		}
+		
+		jtfMoney.setText(Double.toString(order.value));
+		
+		if(order.status.toString().equals("Unexecuted")){
+			jtfOrderStatus.setText("未执行");
+		}
+		else if(order.status.toString().equals("Executed")){
+			jtfOrderStatus.setText("已执行");
+		}
+		else if(order.status.toString().equals("Abnormal")){
+			jtfOrderStatus.setText("异常");
+		}
+		else if(order.status.toString().equals("RevokedHalfValue")||order.type.toString().equals("RevokedFullValue")||order.type.toString().equals("UserRevoked")){
+			jtfOrderStatus.setText("已撤销");
+		}
+		
+		jtfUsername.setText(order.user.username);
+		jtfName.setText(order.user.name);
+		jtfBirthday.setText(DateHelper.format(order.user.birthDate));
+		jtfPhoneNum.setText(order.user.phone);
+		jtfFirm.setText(order.user.enterprise);
+		jtfCredit.setText(Double.toString(order.user.credit));
+	}
 }

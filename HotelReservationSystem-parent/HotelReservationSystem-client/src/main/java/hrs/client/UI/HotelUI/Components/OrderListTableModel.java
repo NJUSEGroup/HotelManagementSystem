@@ -25,7 +25,8 @@ public class OrderListTableModel implements TableModel{
 	public int getRowCount() {
 		// TODO Auto-generated method stub
 		
-		return orderList.size();
+			return orderList.size();
+		
 	}
 
 	@Override
@@ -142,8 +143,11 @@ public class OrderListTableModel implements TableModel{
 			else if(status.equals("Executed")){
 				return "已执行";
 			}
-			else{
-				return "异常和已撤销";
+			else if(status.equals("Abnormal")){
+				return "异常";
+			}
+			else if(status.equals("RevokedHalfValue")||status.equals("RevokedFullValue")||status.equals("UserRevoked")){
+				return "已撤销";
 			}
 			
 		}

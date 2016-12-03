@@ -16,10 +16,12 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
 
+import hrs.client.UI.HotelUI.RoomUI.RoomUIPanel;
 import hrs.client.UI.HotelUI.RoomUI.Listener.AddCancelListener;
 import hrs.client.UI.HotelUI.RoomUI.Listener.AddConfirmListener;
 import hrs.client.util.ControllerFactory;
 import hrs.common.Controller.HotelController.IRoomController;
+import hrs.common.Exception.RoomService.RoomNotFoundException;
 import hrs.common.VO.HotelVO;
 import hrs.common.VO.RoomVO;
 import hrs.common.util.type.RoomType;
@@ -46,12 +48,14 @@ public class AddRoomDialog extends JDialog {
 	private AddCancelListener addCancelListener;
 	private AddConfirmListener addConfirmListener;
 	private HotelVO theHotel;
+	private RoomUIPanel jpRoomUI;
 
 	/**
 	 * 初始化添加房间对话框
 	 */
-	public AddRoomDialog(List<RoomType> roomType, HotelVO theHotel) {
-		this.theHotel = theHotel;
+	public AddRoomDialog(List<RoomType> roomType, RoomUIPanel jRroomUI) {
+		this.jpRoomUI = jpRoomUI;
+		setLocationRelativeTo(null);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(null);
@@ -135,8 +139,6 @@ public class AddRoomDialog extends JDialog {
 		jbConfirm.setBounds(92, 13, 70, 40);
 		jbConfirm.addMouseListener(addConfirmListener);
 		
-		addCancelListener = new AddCancelListener(this);
-		
 		jbCancel = new JButton();
 		jbCancel.setFont(new Font("宋体", Font.PLAIN, 16));
 		jbCancel.setText("取消");
@@ -166,9 +168,33 @@ public class AddRoomDialog extends JDialog {
 	
 	/**
 	 * 确认添加房间
+	 * @throws RoomNotFoundException 
 	 */
-	public void addConfirm(){
+	public void addConfirm() throws RoomNotFoundException{
 		RoomVO newRoom = new RoomVO();
+		
+		String newType = (String) jcbRoomType.getSelectedItem();
+		if(newType.equals("单人房")){
+			newRoom.type = RoomType.Single;
+		}
+		else if(newType.equals("双人房")){
+			newRoom.type = RoomType.Double;
+		}
+		else if(newType.equals("大床间")){
+			newRoom.type = RoomType.KingSize;
+		}
+		else if(newType.equals("标准间")){
+			newRoom.type = RoomType.Standard;
+		}
+		else if(newType.equals("豪华间")){
+			newRoom.type = RoomType.Deluxe;
+		}
+		else if(newType.equals("商务标间")){
+			newRoom.type = RoomType.Business;
+		}
+		else if(newType.equals("行政标间")){
+			newRoom.type = RoomType.Executive;
+		}
 		
 		if(((Integer) jsRoomNum.getValue()).intValue()<0){
 			JOptionPane.showMessageDialog(this, "房间数量不能为负数！", "错误", JOptionPane.ERROR_MESSAGE);
@@ -180,33 +206,12 @@ public class AddRoomDialog extends JDialog {
 			JOptionPane.showMessageDialog(this, "原始价格不能为负数！", "错误", JOptionPane.ERROR_MESSAGE);
 		}
 		else{
-			newRoom.hotel = theHotel;
-			
-			String newType = (String) jcbRoomType.getSelectedItem();
-			if(newType.equals("单人房")){
-				newRoom.type = RoomType.Single;
-			}
-			else if(newType.equals("双人房")){
-				newRoom.type = RoomType.Double;
-			}
-			else if(newType.equals("大床房")){
-				newRoom.type = RoomType.KingSize;
-			}
-			else if(newType.equals("标准间")){
-				newRoom.type = RoomType.Standard;
-			}
-			else if(newType.equals("豪华间")){
-				newRoom.type = RoomType.Deluxe;
-			}
-			else if(newType.equals("商务标间")){
-				newRoom.type = RoomType.Business;
-			}
-			else if(newType.equals("行政标间")){
-				newRoom.type = RoomType.Executive;
-			}
 			newRoom.roomNum = ((Integer) jsRoomNum.getValue()).intValue();
 			newRoom.roomValue = Double.valueOf(jtfMoney.getText());
-			roomController.addRoom(newRoom);//
+			
+			jpRoomUI.refreshRoomList(newRoom);
+			
+			this.dispose();
 		}
 
 	}
@@ -215,7 +220,7 @@ public class AddRoomDialog extends JDialog {
 	 * 取消添加房间
 	 */
 	public void addCancel(){
-		//System.exit(0);
+		this.dispose();
 	}
 	
 }
