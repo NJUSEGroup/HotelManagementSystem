@@ -1,7 +1,11 @@
 package hrs.client.UI.UserUI.HotelSearchUI;
 
 import java.awt.Color;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonModel;
@@ -9,17 +13,23 @@ import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import android.R.integer;
 import hrs.client.UI.UserUI.CommonComponents.CommonLabel;
+import hrs.client.UI.UserUI.HotelSearchUI.Listener.cityBoxListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.DateChoosePanel;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.UserController.IUserHotelController;
+import hrs.common.Exception.HotelService.HotelNotFoundException;
 import hrs.common.VO.CommercialCircleVO;
+import hrs.common.VO.HotelVO;
 import hrs.common.VO.LocationVO;
+import hrs.common.VO.RoomVO;
+import hrs.common.VO.UserVO;
 /**
  * 查询条件 面板
  * 大小为1000*280
@@ -27,8 +37,8 @@ import hrs.common.VO.LocationVO;
  *
  */
 public class SearchPanel extends JPanel {
-	private IUserHotelController controller = ControllerFactory.getUserHotelController();
-	List<LocationVO> locList;
+	private IUserHotelController controller ;
+	
 	
 	private static int JL_HEIGHT = 40;//所有标签的高度均为40
 	private static int JL_WIDTH = 105;//标签的高度均为40
@@ -41,11 +51,13 @@ public class SearchPanel extends JPanel {
 	private static int LEFTIN_X = LEFTJL_X+JL_WIDTH;//左侧一列输入域的起始x位置
 	private static int RIGHTIN_X = RIGHTJL_X+JL_WIDTH;//右侧一列输入域的起始x位置
 	
+	private List<LocationVO> locs;
+	
 	
 	private JComboBox<String> cityBox;//城市选择框
 	private JComboBox<String> commercialBox;//城市选择框
 	private DateChoosePanel checkInDate;//入住时间选择面板
-	private DateChoosePanel checkIOutDate;//退房时间选择面板
+	private DateChoosePanel checkOutDate;//退房时间选择面板
 	private JComboBox<String> roomTypeBox;//房间类型选框
 	private JTextField roomNumField;//房间数量
 	private TwoFieldPanel valueField;//价格区间
@@ -54,7 +66,11 @@ public class SearchPanel extends JPanel {
 	private JTextField hotelNameField;//酒店名称输入区
 	private JCheckBox hasOrderedBox;
 	
-	public SearchPanel(){
+	private UserVO userVO;
+	
+	public SearchPanel(UserVO userVO){
+		this.userVO = userVO;
+		controller = ControllerFactory.getUserHotelController();
 		Init();
 	}
 
@@ -88,9 +104,9 @@ public class SearchPanel extends JPanel {
 		}
 		add(commercialBox);
 		
-		checkIOutDate = new DateChoosePanel();
-		checkIOutDate.setBounds(RIGHTIN_X, JL_HEIGHT*2, checkInDate.getWidth(), checkInDate.getHeight());
-		add(checkIOutDate);
+		checkOutDate = new DateChoosePanel();
+		checkOutDate.setBounds(RIGHTIN_X, JL_HEIGHT*2, checkInDate.getWidth(), checkInDate.getHeight());
+		add(checkOutDate);
 		
 		roomNumField = new JTextField();
 		roomNumField.setBounds(RIGHTIN_X, JL_HEIGHT*3+GAP, 150, TEXT_H);
@@ -111,13 +127,14 @@ public class SearchPanel extends JPanel {
 
 	private void setLeftText() {
 		cityBox = new JComboBox<>();
-		List<LocationVO> locs = controller.findAllLocations();
+		locs = controller.findAllLocations();
 		for(int i = 0;i<locs.size();i++){
 			cityBox.addItem(locs.get(i).name);
 		}
 		cityBox.setFont(UIConstants.jlabelChinese);
 		cityBox.setBounds(LEFTIN_X, JL_HEIGHT+GAP, 150, TEXT_H);
 		cityBox.setSelectedItem(locs.get(0).name);
+		cityBox.addItemListener(new cityBoxListener(this));
 		add(cityBox);
 		
 		checkInDate = new DateChoosePanel();
@@ -206,5 +223,62 @@ public class SearchPanel extends JPanel {
 		
 		
 	}
+
+	public Map<HotelVO, List<RoomVO>> findHotels(){
+		Map<HotelVO, List<RoomVO>> hotels = new HashMap<>();
+		
+		int locID = getLocID();
+		int circleID = 1;
+		
+		
+		//得到商圈ID
+		List<CommercialCircleVO> circles = controller.findCircleByLoc(locID);
+		for(CommercialCircleVO vo:circles){
+			if(vo.name.equals((String)commercialBox.getSelectedItem())){
+				circleID = vo.id;
+				break;
+			}
+			
+		}
+		
+		Date begin = checkInDate.getDate();
+		Date end = checkOutDate.getDate();
+		
+		
+		try {
+			hotels = controller.findHotels(locID, circleID, begin, end, userVO.username);
+		} catch (HotelNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("未找到酒店");
+			JOptionPane.showMessageDialog(null, "未找到酒店!", "提示", JOptionPane.INFORMATION_MESSAGE);
+			e.printStackTrace();
+		}
+		return hotels;
+	}
+
+	public void changeCity() {
+		commercialBox.removeAllItems();
+		int locID = getLocID();
+		
+		List<CommercialCircleVO> circles = controller.findCircleByLoc(locID);
+		for(CommercialCircleVO vo:circles){
+			commercialBox.addItem(vo.name);
+		}
+		
+	}
+	
+	private int getLocID(){
+		int locID = 1;
+		for(LocationVO vo:locs){
+			if(vo.name.equals((String)cityBox.getSelectedItem())){
+				locID = vo.id;
+				break;
+			}
+			
+		}
+		return locID;
+	}
+	
+	
 	
 }
