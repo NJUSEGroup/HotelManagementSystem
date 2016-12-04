@@ -26,83 +26,84 @@ public class HotelSearchPanel extends CommonPanel {
 	private JPanel contentPane;
 	private JScrollPane scrollPane;
 	private SearchPanel searchPanel;
-	private IUserHotelController controller ;
+	private IUserHotelController controller;
 	private SearchResultTable table;
+
 	public HotelSearchPanel(UserVO user) {
 		this.user = user;
-		controller= ControllerFactory.getUserHotelController();
+		controller = ControllerFactory.getUserHotelController();
 		Init();
 	}
+
 	@Override
 	public void Init() {
 		contentPane = new JPanel();
-		contentPane.setBounds(0, 30, this.getWidth(),this.getHeight()-30);
+		contentPane.setBounds(0, 30, this.getWidth(), this.getHeight() - 30);
 		contentPane.setBackground(UIConstants.jframe);
 		contentPane.setLayout(null);
-		
+
 		add(contentPane);
-		
-		
+
 		setSearchPanel();
 		setButton();
 		setTable();
-		
-		
-//		scrollPane = new JScrollPane(contentPane);
-//		scrollPane.setBounds(0, 30, this.getWidth(),this.getHeight()-30);
-//		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
-//		add(scrollPane);
+
+		// scrollPane = new JScrollPane(contentPane);
+		// scrollPane.setBounds(0, 30, this.getWidth(),this.getHeight()-30);
+		// scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+		// add(scrollPane);
 
 	}
-	
+
 	private void setTable() {
-		//默认空表
+		// 默认空表
 		table = new SearchResultTable();
-		
+
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
-		scrollPane.setBounds(30, 350, 1020,380);
-		scrollPane.setBorder(new EmptyBorder(0,0,0,0));
+		scrollPane.setBounds(30, 350, 1020, 380);
+		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		scrollPane.getViewport().setBackground(new Color(211, 237, 249));
 		scrollPane.setOpaque(true);
-		
+
 		Map<HotelVO, List<RoomVO>> map = new HashMap<>();
 		table.setModel(new SearchResultTableModel(map));
-		
+
 		contentPane.add(scrollPane);
-		
+
 	}
+
 	private void setSearchPanel() {
 		searchPanel = new SearchPanel(user);
-		searchPanel.setBounds(30,0,1020,283);
+		searchPanel.setBounds(30, 0, 1020, 283);
 		contentPane.add(searchPanel);
 	}
 
-	private void setButton(){
+	private void setButton() {
 		JButton searchJB = new JButton("搜索");
-		searchJB.setBounds(this.getWidth()-160,295, 100, 40);
+		searchJB.setBounds(this.getWidth() - 160, 295, 100, 40);
 		searchJB.setFont(UIConstants.jlabelChinese);
 		contentPane.add(searchJB);
 		searchJB.addActionListener(new SearchListener(this));
 	}
-	
+
 	public void doSearch() {
 		Map<HotelVO, List<RoomVO>> map = getSearchResult();
-		
+
 	}
-	
-	private Map<HotelVO, List<RoomVO>> getSearchResult(){
+
+	private Map<HotelVO, List<RoomVO>> getSearchResult() {
 		Map<HotelVO, List<RoomVO>> map = searchPanel.findHotels();
 		Iterator iter = map.entrySet().iterator();
 		while (iter.hasNext()) {
-		Map.Entry entry = (Map.Entry) iter.next();
-		HotelVO key = (HotelVO)entry.getKey();
-		System.out.println(key.name);
+			Map.Entry entry = (Map.Entry) iter.next();
+			HotelVO key = (HotelVO) entry.getKey();
+			System.out.println(key.name);
 		}
 		return map;
 	}
-	
-	private void setModel(SearchResultTableModel model){
+
+	private void setModel(SearchResultTableModel model) {
 		table.setModel(model);
 	}
 }
