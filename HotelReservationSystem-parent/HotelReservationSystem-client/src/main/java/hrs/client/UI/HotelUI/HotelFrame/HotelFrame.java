@@ -205,6 +205,10 @@ public class HotelFrame extends JFrame {
 		this.getContentPane().add(jpCard);
 	}
 	
+	/**
+	 * 根据鼠标点击的标签展示相应界面
+	 * @param label
+	 */
 	public void show(String label){
 		if(label.equals("酒店信息")){
 			card.show(jpCard, "1");
@@ -224,6 +228,10 @@ public class HotelFrame extends JFrame {
 		}
 	}
 	
+	/**
+	 * 当光标置于标签上时，标签变色
+	 * @param e
+	 */
 	public void changeColorWhenEnter(MouseEvent e){
 		String label = ((JLabel) e.getSource()).getText();
 		
@@ -249,6 +257,10 @@ public class HotelFrame extends JFrame {
 		}
 	}
 	
+	/**
+	 * 当光标离开标签时，标签变色
+	 * @param e
+	 */
 	public void changeColorWhenExit(MouseEvent e){
 		String label = ((JLabel) e.getSource()).getText();
 		

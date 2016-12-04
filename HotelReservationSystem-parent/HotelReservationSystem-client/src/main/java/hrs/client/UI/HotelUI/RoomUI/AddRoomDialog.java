@@ -1,4 +1,4 @@
-package hrs.client.UI.HotelUI.Components;
+package hrs.client.UI.HotelUI.RoomUI;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -53,10 +53,10 @@ public class AddRoomDialog extends JDialog {
 	/**
 	 * 初始化添加房间对话框
 	 */
-	public AddRoomDialog(List<RoomType> roomType, RoomUIPanel jRroomUI) {
+	public AddRoomDialog(List<RoomType> roomType, RoomUIPanel jpRoomUI) {
 		this.jpRoomUI = jpRoomUI;
+		setSize(450, 300);
 		setLocationRelativeTo(null);
-		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(null);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -139,6 +139,8 @@ public class AddRoomDialog extends JDialog {
 		jbConfirm.setBounds(92, 13, 70, 40);
 		jbConfirm.addMouseListener(addConfirmListener);
 		
+		addCancelListener = new AddCancelListener(this);
+		
 		jbCancel = new JButton();
 		jbCancel.setFont(new Font("宋体", Font.PLAIN, 16));
 		jbCancel.setText("取消");
@@ -170,7 +172,7 @@ public class AddRoomDialog extends JDialog {
 	 * 确认添加房间
 	 * @throws RoomNotFoundException 
 	 */
-	public void addConfirm() throws RoomNotFoundException{
+	public void addConfirm(){
 		RoomVO newRoom = new RoomVO();
 		
 		String newType = (String) jcbRoomType.getSelectedItem();
@@ -209,9 +211,12 @@ public class AddRoomDialog extends JDialog {
 			newRoom.roomNum = ((Integer) jsRoomNum.getValue()).intValue();
 			newRoom.roomValue = Double.valueOf(jtfMoney.getText());
 			
-			jpRoomUI.refreshRoomList(newRoom);
+			jpRoomUI.addRoom(newRoom);
+			jpRoomUI.refreshRoomList();
 			
 			this.dispose();
+			
+			JOptionPane.showMessageDialog(this, "房间信息已更新", "更新成功", JOptionPane.INFORMATION_MESSAGE);
 		}
 
 	}

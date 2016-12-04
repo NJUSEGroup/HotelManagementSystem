@@ -17,7 +17,8 @@ public class HotelOrderMainPanel extends JPanel {
 	private HotelOrderDetailUIPanel jpOrderDetail;
 	
 	/**
-	 * Create the panel.
+	 * 初始化酒店订单管理主界面面板
+	 * @param hotel
 	 */
 	public HotelOrderMainPanel(HotelVO hotel) {
 		init(hotel);
@@ -37,16 +38,26 @@ public class HotelOrderMainPanel extends JPanel {
 		
 	}
 	
+	/**
+	 * 显示酒店订单管理界面
+	 */
 	public void showList(){
 		card.show(this, "1");
 	}
 	
+	/**
+	 * 刷新酒店订单管理界面
+	 */
 	public void refresh(){
 		jpOrderList.refreshSearchTerms();
 		List<OrderVO> orders= jpOrderList.getAllOrders();
 		jpOrderList.refreshOrderList(orders);
 	}
 	
+	/**
+	 * 显示酒店订单详细界面
+	 * @param order
+	 */
 	public void showDetail(OrderVO order){
 		card.show(this, "2");
 		jpOrderDetail.showDetailInfo(order);

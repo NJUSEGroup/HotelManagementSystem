@@ -3,21 +3,22 @@ package hrs.client.UI.HotelUI.RoomUI.Listener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import hrs.client.UI.HotelUI.RoomUI.RoomUIPanel;
+import hrs.client.UI.HotelUI.RoomUI.EditRoomDialog;
 
-public class AddListener implements MouseListener{
+
+public class EditConfirmListener implements MouseListener{
+
+	private EditRoomDialog editRoomDialog;
 	
-	private RoomUIPanel jpRoom;
-	
-	public AddListener(RoomUIPanel jpRoom){
-		this.jpRoom = jpRoom;
+	public EditConfirmListener(EditRoomDialog editRoomDialog){
+		this.editRoomDialog = editRoomDialog;
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-		jpRoom.add();
+		editRoomDialog.editConfirm();
 	}
 
 	@Override
@@ -45,4 +46,3 @@ public class AddListener implements MouseListener{
 	}
 
 }
-

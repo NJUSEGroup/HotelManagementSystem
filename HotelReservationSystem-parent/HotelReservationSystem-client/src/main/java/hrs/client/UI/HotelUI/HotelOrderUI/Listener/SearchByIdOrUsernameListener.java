@@ -17,12 +17,14 @@ public class SearchByIdOrUsernameListener implements MouseListener{
 		this.jpHotelOrder = jpHotelOrder;
 	}
 	
+	/**
+	 * 根据所选择的搜索条件（用户名或订单号）搜索订单
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 		List<OrderVO> orderList = new ArrayList<OrderVO>();
-		OrderVO order;
 		String username;
 		int id;
 		

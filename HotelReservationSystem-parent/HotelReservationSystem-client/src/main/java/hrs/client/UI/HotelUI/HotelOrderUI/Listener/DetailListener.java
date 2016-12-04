@@ -17,12 +17,16 @@ public class DetailListener implements MouseListener{
 		this.jpOrderList = jpOrderList;
 	}
 	
+	/**
+	 * 显示所选择的订单的详细信息
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 		OrderVO order = jpOrderList.getSelectedOrder();
 		jpMain.showDetail(order);
+		
 		
 	}
 

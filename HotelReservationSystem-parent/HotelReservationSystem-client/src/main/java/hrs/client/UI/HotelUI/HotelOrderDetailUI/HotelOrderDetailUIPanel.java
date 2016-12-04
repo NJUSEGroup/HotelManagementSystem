@@ -605,4 +605,17 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jtfFirm.setText(order.user.enterprise);
 		jtfCredit.setText(Double.toString(order.user.credit));
 	}
+	
+	public void checkin(){
+		jtfCheckin.setEditable(true);
+	}
+	
+	public void checkout(){
+		jtfCheckout.setEditable(true);
+	}
+	
+	public void delayCheckin(){
+		
+	}
+
 }

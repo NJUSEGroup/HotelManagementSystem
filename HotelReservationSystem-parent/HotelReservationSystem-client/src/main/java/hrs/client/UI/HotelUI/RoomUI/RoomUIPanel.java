@@ -12,9 +12,9 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
 
-import hrs.client.UI.HotelUI.Components.AddRoomDialog;
 import hrs.client.UI.HotelUI.Components.RoomTableModel;
 import hrs.client.UI.HotelUI.RoomUI.Listener.AddListener;
+import hrs.client.UI.HotelUI.RoomUI.Listener.EditListener;
 import hrs.client.util.ControllerFactory;
 import hrs.common.Controller.HotelController.IRoomController;
 import hrs.common.Exception.RoomService.RoomNotFoundException;
@@ -35,17 +35,18 @@ public class RoomUIPanel extends JPanel {
 	private HotelVO theHotel;
 	private IRoomController roomController;
 	private AddListener addListener;
+	private EditListener editListener;
 	List<RoomVO> rooms;
 	
 	/**
 	 * Create the panel.
 	 * @throws RoomNotFoundException 
 	 */
-	public RoomUIPanel(HotelVO theHotel) throws RoomNotFoundException{
+	public RoomUIPanel(HotelVO theHotel){
 		init(theHotel);
 	}
 	
-	public void init(HotelVO theHotel) throws RoomNotFoundException{
+	public void init(HotelVO theHotel){
 		this.theHotel = theHotel;
 		this.setSize(1080, 722);
 		this.setLayout(null);
@@ -61,7 +62,12 @@ public class RoomUIPanel extends JPanel {
 		jpButton.setLayout(null);
 		
 		roomController = ControllerFactory.getRoomController();
-		rooms= roomController.findByHotelID(theHotel.id);
+		try {
+			rooms= roomController.findByHotelID(theHotel.id);
+		} catch (RoomNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		roomTableModel = new RoomTableModel(rooms);
 		
@@ -93,10 +99,13 @@ public class RoomUIPanel extends JPanel {
 		jbAdd.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbAdd.addMouseListener(addListener);
 		
+		editListener = new EditListener(this);
+		
 		jbEdit = new JButton();
 		jbEdit.setBounds(905, 13, 90, 40);
 		jbEdit.setText("修改");
 		jbEdit.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jbEdit.addMouseListener(editListener);
 		
 		jpRoom.add(jspRoom);
 		
@@ -105,20 +114,72 @@ public class RoomUIPanel extends JPanel {
 		
 		this.add(jpRoom);
 		this.add(jpButton);
+		
+		buttonThread();
 	}
 	
-	public void addRoom(){
+	public void add(){
 		List<RoomType> notAddedRoom = roomController.findNotAddedRoomType(theHotel.id);
 		
 		AddRoomDialog addRoomDialog = new AddRoomDialog(notAddedRoom, this);
 	}
 	
-	public void refreshRoomList(RoomVO newRoom) throws RoomNotFoundException{
+	public void addRoom(RoomVO newRoom) {
 		newRoom.hotel = theHotel;
 		roomController.addRoom(newRoom);
+	}
+	
+	public void edit(){
+		EditRoomDialog editRoomDialog = new EditRoomDialog(this);
+	}
+	
+	public void editRoom(RoomVO editRoom){
+		editRoom.hotel = theHotel;
+		roomController.updateRoom(editRoom);
+	}
+	
+	public String getSelectedRoomType(){
+		int row = jtRoom.getSelectedRow();
+		String roomType = (String) jtRoom.getValueAt(row, 0);
 		
-		rooms= roomController.findByHotelID(theHotel.id);
+		return roomType;
+	}
+	
+	public void refreshRoomList(){
+		try {
+			rooms= roomController.findByHotelID(theHotel.id);
+		} catch (RoomNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		roomTableModel = new RoomTableModel(rooms);
 		jtRoom.setModel(roomTableModel);
 	}
+	
+	private void buttonThread() {
+		Thread thread = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				while(true){
+					if(jtRoom.getSelectedRowCount() == 0){
+						jbEdit.setEnabled(false);
+				}
+					else{
+						jbEdit.setEnabled(true);	
+					}
+					try {
+						Thread.sleep(200);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				}	
+		});
+		
+			thread.start();
+			
+	}
+
 }
