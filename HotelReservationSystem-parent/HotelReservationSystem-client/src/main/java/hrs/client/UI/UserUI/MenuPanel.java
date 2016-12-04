@@ -8,16 +8,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class MenuPanel extends JPanel {
-	private JLabel searchJLabel = new MyLabel("搜索酒店");
-	private JLabel infoJLabel = new MyLabel("个人信息");
-	private JLabel orderJLabel = new MyLabel("订单信息");
-	private JLabel hotelJLabel = new MyLabel("酒店信息");
-	private JLabel creditJLabel = new MyLabel("信用记录");
+	private JLabel searchJLabel = new MenuLabel("搜索酒店");
+	private JLabel infoJLabel = new MenuLabel("个人信息");
+	private JLabel orderJLabel = new MenuLabel("订单信息");
+	private JLabel hotelJLabel = new MenuLabel("酒店信息");
+	private JLabel creditJLabel = new MenuLabel("信用记录");
 	
 	private final int LABEL_WIDTH = 260;
 	private final int LABEL_HEIGHT = 70;
 	
-	private MyLabelListener listener= MyLabelListenerFactory.getListener();
+	private MenuLabelListener listener= MenuLabelListenerFactory.getListener();
 	public MenuPanel(){
 		setBounds(0, 140, 260, 628);
 //		jp.setBackground(frameColor);

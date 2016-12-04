@@ -4,9 +4,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import hrs.client.UI.UserUI.CommonComponents.CommonLabel;
-import hrs.client.UI.UserUI.CommonComponents.CommonPanel;
-
+import hrs.client.UI.UserUI.ComComponents.CommonLabel;
+import hrs.client.UI.UserUI.ComComponents.CommonPanel;
 import hrs.client.UI.UserUI.OrderInfoUI.Listener.BackJBListener;
 import hrs.client.util.EnumHelper;
 

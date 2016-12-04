@@ -15,8 +15,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-import hrs.client.UI.UserUI.CommonComponents.CommonLabel;
-import hrs.client.UI.UserUI.CommonComponents.CommonPanel;
+import hrs.client.UI.UserUI.ComComponents.CommonLabel;
+import hrs.client.UI.UserUI.ComComponents.CommonPanel;
 import hrs.client.UI.UserUI.OrderInfoUI.Listener.DetailButtonLisener;
 import hrs.client.UI.UserUI.OrderInfoUI.Listener.EvalueButtonListener;
 import hrs.client.UI.UserUI.OrderInfoUI.Listener.StatusBoxListener;

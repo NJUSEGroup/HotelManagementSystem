@@ -66,37 +66,16 @@ public class CreditTableModel implements TableModel {
 	// 得到第rowIndex行，第columnIndex列数据
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
+		
 		CreditRecordVO info = creditList.get(rowIndex);
 		
-		// 第一列为日期
-		if (columnIndex == 0) {
-			Date d = info.date;
-			String s = DateHelper.format(d);
-			return s;
-		
-		}
-		// 第二列为id
-		else if (columnIndex == 1)
-			return info.order.id;
-		// 第三列为动作
-		else if (columnIndex == 2) {
-			CreditRecordType type = info.type;
-			return type.toString();
-		}
-
-		// 第四列为信用值变化值
-		else if (columnIndex == 3) {
-			double x = info.variation;
-			String s = "" + x;
-			return s;
-		}
-		// 第五列为当前信用值
-		else {
-			double x = info.currCredit;
-			String s = "" + x;
-			return s;
-		}
+		List<String> list = new ArrayList<>();
+		list.add(DateHelper.format(info.date));// 第一列为日期
+		list.add(info.order.id+"");// 第二列为id
+		list.add(info.type.toString());// 第三列为动作
+		list.add(info.variation+"");// 第四列为信用值变化值
+		list.add(info.currCredit+"");// 第五列为当前信用值
+		return list.get(columnIndex);
 	}
 
 	@Override

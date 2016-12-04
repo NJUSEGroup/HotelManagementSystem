@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 
-import hrs.client.UI.UserUI.CommonComponents.CommonPanel;
+import hrs.client.UI.UserUI.ComComponents.CommonPanel;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.UserController.IUserController;

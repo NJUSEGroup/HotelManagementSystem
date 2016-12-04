@@ -52,7 +52,7 @@ public class MainFrame extends JFrame{
 		card.show(cardPanel, "hotelPanel");
 	
 		
-		MyLabelListenerFactory.getListener().setCard(card,cardPanel);
+		MenuLabelListenerFactory.getListener().setCard(card,cardPanel);
 		
 		//设置左侧面板
 		this.add(leftPanel);

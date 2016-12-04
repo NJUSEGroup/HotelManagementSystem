@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import antlr.collections.List;
-import hrs.client.UI.UserUI.CommonComponents.CommonLabel;
+import hrs.client.UI.UserUI.ComComponents.CommonLabel;
 import hrs.client.util.UIConstants;
 /**
  * 带有两个输入域

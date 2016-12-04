@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import hrs.client.UI.HotelUI.Components.RoomTableModel;
-import hrs.client.UI.UserUI.CommonComponents.CommonPanel;
+import hrs.client.UI.UserUI.ComComponents.CommonPanel;
 import hrs.client.UI.UserUI.HotelSearchUI.Listener.SearchListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.UIConstants;

@@ -1,4 +1,4 @@
-package hrs.client.UI.UserUI.CommonComponents;
+package hrs.client.UI.UserUI.ComComponents;
 
 import java.awt.Color;
 import java.awt.Font;

@@ -4,7 +4,7 @@ import java.awt.CardLayout;
 
 import javax.swing.JPanel;
 
-import hrs.client.UI.UserUI.CommonComponents.CommonPanel;
+import hrs.client.UI.UserUI.ComComponents.CommonPanel;
 import hrs.common.VO.OrderVO;
 import hrs.common.VO.UserVO;
 

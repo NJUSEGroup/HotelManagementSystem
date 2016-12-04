@@ -1,6 +1,6 @@
 package hrs.client.UI.UserUI.HotelSearchUI;
 
-import hrs.client.UI.UserUI.CommonComponents.CommonPanel;
+import hrs.client.UI.UserUI.ComComponents.CommonPanel;
 import hrs.common.VO.OrderVO;
 
 public class PlaceOrderPanel extends CommonPanel {

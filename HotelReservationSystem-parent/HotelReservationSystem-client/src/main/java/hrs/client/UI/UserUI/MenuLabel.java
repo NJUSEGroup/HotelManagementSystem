@@ -8,11 +8,11 @@ import javax.swing.JLabel;
 
 import hrs.client.util.UIConstants;
 
-public class MyLabel extends JLabel {
+public class MenuLabel extends JLabel {
 	Color color = UIConstants.jlabel;
-	private MyLabelListener listener = MyLabelListenerFactory.getListener();
+	private MenuLabelListener listener = MenuLabelListenerFactory.getListener();
 	
-	public MyLabel(String s){
+	public MenuLabel(String s){
 		this.setFont(new Font("微软雅黑",Font.PLAIN,24));
 		
 		//标签固定大小

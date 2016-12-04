@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import android.R.integer;
-import hrs.client.UI.UserUI.CommonComponents.CommonLabel;
+import hrs.client.UI.UserUI.ComComponents.CommonLabel;
 import hrs.client.UI.UserUI.HotelSearchUI.Listener.cityBoxListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.DateChoosePanel;

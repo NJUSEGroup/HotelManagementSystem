@@ -10,7 +10,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import hrs.client.UI.UserUI.CommonComponents.CommonPanel;
+import hrs.client.UI.UserUI.ComComponents.CommonPanel;
 import hrs.client.UI.UserUI.UserInfoUI.UserInfoListener.CancelListener;
 import hrs.client.UI.UserUI.UserInfoUI.UserInfoListener.ConfirmListener;
 import hrs.client.util.ControllerFactory;
