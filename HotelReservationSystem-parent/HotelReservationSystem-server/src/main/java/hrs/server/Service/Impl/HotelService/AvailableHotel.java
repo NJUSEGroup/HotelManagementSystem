@@ -25,14 +25,13 @@ public class AvailableHotel {
 	/**
 	 * 存储一个酒店和房间列表的键值对
 	 */
-	private Map<HotelVO, List<RoomVO>> data;
 
 	/**
 	 * 
 	 * @Title: filter @Description: 过滤酒店和房间 @param conditions @param @return
 	 * Map<HotelVO,List<RoomVO>> @throws
 	 */
-	public Map<HotelVO, List<RoomVO>> filter(List<FilterCondition> conditions) {
+	public Map<HotelVO, List<RoomVO>> filter(Map<HotelVO, List<RoomVO>> data,List<FilterCondition> conditions) {
 		// 拷贝一份，每次过滤都不修改原始的缓存
 		Map<HotelVO, List<RoomVO>> res = new HashMap<>();
 		res.putAll(data);
@@ -50,19 +49,12 @@ public class AvailableHotel {
 	 * @Title: order @Description: 按照给定的排序规则和升降序对酒店进行排序 @param rule @param
 	 * isDecrease @return Map<HotelVO,List<RoomVO>> @throws
 	 */
-	public Map<HotelVO, List<RoomVO>> order(OrderRule rule, boolean isDecrease) {
+	public Map<HotelVO, List<RoomVO>> order(Map<HotelVO, List<RoomVO>> data,OrderRule rule, boolean isDecrease) {
 		HotelComparator comp = SpringUtils.getBean(rule.toString()+"Comparator");
 		comp.setDecrease(isDecrease);
 		Map<HotelVO, List<RoomVO>> res = new TreeMap<>(comp);
 		res.putAll(data);
 		return res;
 	}
-
-	public Map<HotelVO, List<RoomVO>> getData() {
-		return data;
-	}
-
-	public void setData(Map<HotelVO, List<RoomVO>> data) {
-		this.data = data;
-	}
+	
 }

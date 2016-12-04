@@ -128,24 +128,6 @@ public class TestHotelService {
 		}
 	}
 
-	@Test
-	public void testGetRoomDetail1() throws HotelNotFoundException {
-		for (RoomVO vo : service.getRoomDetail(1)) {
-			System.out.println(vo);
-			assertEquals(vo.hotel.id, 1);
-		}
-	}
-
-	@Test
-	public void testGetRoomDetail2() throws ParseException, HotelNotFoundException {
-		Date begin = DateHelper.parseWithHMS("2016-10-27 00:00:00");
-		Date end = DateHelper.parseWithHMS("2016-11-19 00:00:00");
-		service.find(1, 2, begin, end, "admin");
-		for (RoomVO vo : service.getRoomDetail(1)) {
-			System.out.println(vo);
-			assertEquals(vo.hotel.id, 1);
-		}
-	}
 
 	@Test
 	public void testOrderByScore() throws ParseException, HotelNotFoundException {
@@ -161,7 +143,7 @@ public class TestHotelService {
 		}
 		System.out.println();
 
-		Map<HotelVO, List<RoomVO>> res = service.order(OrderRule.Score, true);
+		Map<HotelVO, List<RoomVO>> res = service.order(map,OrderRule.Score, true);
 		for (HotelVO vo : res.keySet()) {
 			System.out.println(vo);
 			for (RoomVO room : map.get(vo)) {
@@ -185,7 +167,7 @@ public class TestHotelService {
 		}
 		System.out.println();
 
-		Map<HotelVO, List<RoomVO>> res = service.order(OrderRule.Star, true);
+		Map<HotelVO, List<RoomVO>> res = service.order(map,OrderRule.Star, true);
 		for (HotelVO vo : res.keySet()) {
 			System.out.println(vo);
 			for (RoomVO room : map.get(vo)) {
@@ -209,7 +191,7 @@ public class TestHotelService {
 		}
 		System.out.println();
 
-		Map<HotelVO, List<RoomVO>> res = service.order(OrderRule.Value, true);
+		Map<HotelVO, List<RoomVO>> res = service.order(map,OrderRule.Value, true);
 		for (HotelVO vo : res.keySet()) {
 			System.out.println(vo);
 			for (RoomVO room : map.get(vo)) {
@@ -237,7 +219,7 @@ public class TestHotelService {
 		NameFilterCondition fc = new NameFilterCondition(FilterType.Name);
 		fc.setHotelName("仙林");
 		list.add(fc);
-		Map<HotelVO, List<RoomVO>> res = service.filter(list);
+		Map<HotelVO, List<RoomVO>> res = service.filter(map,list);
 		System.out.println(res.size());
 		for (HotelVO vo : res.keySet()) {
 			System.out.println(vo);
@@ -266,7 +248,7 @@ public class TestHotelService {
 		RoomTypeFilterCondition condition = new RoomTypeFilterCondition(FilterType.RoomType);
 		condition.setRoomType(RoomType.Single);
 		list.add(condition);
-		Map<HotelVO, List<RoomVO>> res = service.filter(list);
+		Map<HotelVO, List<RoomVO>> res = service.filter(map,list);
 		System.out.println(res.size());
 		for (HotelVO vo : res.keySet()) {
 			System.out.println(vo);
@@ -296,7 +278,7 @@ public class TestHotelService {
 		RoomTypeFilterCondition condition = new RoomTypeFilterCondition(FilterType.RoomType);
 		condition.setRoomType(RoomType.Standard);
 		list.add(condition);
-		Map<HotelVO, List<RoomVO>> res = service.filter(list);
+		Map<HotelVO, List<RoomVO>> res = service.filter(map,list);
 		System.out.println(res.size());
 		for (HotelVO vo : res.keySet()) {
 			System.out.println(vo);
@@ -327,7 +309,7 @@ public class TestHotelService {
 		condition.setLow(9);
 		condition.setHigh(10);
 		list.add(condition);
-		Map<HotelVO, List<RoomVO>> res = service.filter(list);
+		Map<HotelVO, List<RoomVO>> res = service.filter(map,list);
 		System.out.println(res.size());
 		for (HotelVO vo : res.keySet()) {
 			System.out.println(vo);
@@ -356,7 +338,7 @@ public class TestHotelService {
 		StarFilterCondition condition = new StarFilterCondition(FilterType.Star);
 		condition.setStar(3);
 		list.add(condition);
-		Map<HotelVO, List<RoomVO>> res = service.filter(list);
+		Map<HotelVO, List<RoomVO>> res = service.filter(map,list);
 		System.out.println(res.size());
 		for (HotelVO vo : res.keySet()) {
 			assertEquals(vo.star,3);
@@ -389,7 +371,7 @@ public class TestHotelService {
 		c2.setHigh(10);
 		list.add(c1);
 		list.add(c2);
-		Map<HotelVO, List<RoomVO>> res = service.filter(list);
+		Map<HotelVO, List<RoomVO>> res = service.filter(map,list);
 		assertEquals(res.size(),0);
 	}
 }

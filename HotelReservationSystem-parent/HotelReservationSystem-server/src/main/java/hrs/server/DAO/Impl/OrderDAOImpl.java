@@ -58,8 +58,8 @@ public class OrderDAOImpl implements OrderDAO {
 	public List<OrderPO> findByUsernameAndStatus(String username, OrderStatus status) {
 		String hql = "from OrderPO o inner join fetch o.user u "
 				+ "where u.username = :username and o.status = :status";
-		return getSession().createQuery(hql).setCacheable(true).setParameter("username", username).setParameter("status", status)
-				.getResultList();
+		return getSession().createQuery(hql).setCacheable(true).setParameter("username", username)
+				.setParameter("status", status).getResultList();
 
 	}
 
@@ -77,8 +77,8 @@ public class OrderDAOImpl implements OrderDAO {
 	public List<OrderPO> findByHotelAndUsername(int hotelID, String username) {
 		String hql = "from OrderPO o " + "inner join fetch o.hotel hotel " + "inner join fetch o.user u "
 				+ "where hotel.id = :hotelID and u.username = :username";
-		return getSession().createQuery(hql).setCacheable(true).setParameter("hotelID", hotelID).setParameter("username", username)
-				.getResultList();
+		return getSession().createQuery(hql).setCacheable(true).setParameter("hotelID", hotelID)
+				.setParameter("username", username).getResultList();
 
 	}
 
@@ -145,8 +145,8 @@ public class OrderDAOImpl implements OrderDAO {
 	public List<OrderPO> findByHotelAndStatus(int hotelID, OrderStatus type) {
 		String hql = "from OrderPO o inner join fetch o.hotel hotel " + "where hotel.id = :hotelID "
 				+ "and o.status = :type";
-		return getSession().createQuery(hql).setCacheable(true).setParameter("hotelID", hotelID).setParameter("type", type)
-				.getResultList();
+		return getSession().createQuery(hql).setCacheable(true).setParameter("hotelID", hotelID)
+				.setParameter("type", type).getResultList();
 
 	}
 
@@ -176,6 +176,15 @@ public class OrderDAOImpl implements OrderDAO {
 	public ResultMessage update(OrderPO orderpo) {
 		getSession().update(orderpo);
 		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public List<OrderPO> findByHotelID(int hotelID) {
+		String hql = "from OrderPO o inner join fetch o.hotel hotel " + "where hotel.id = :hotelID ";
+		return getSession().createQuery(hql)
+						   .setCacheable(true)
+						   .setParameter("hotelID", hotelID)
+						   .getResultList();
 	}
 
 }

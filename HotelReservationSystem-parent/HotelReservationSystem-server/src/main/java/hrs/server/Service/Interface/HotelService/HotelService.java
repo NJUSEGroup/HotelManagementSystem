@@ -23,11 +23,9 @@ public interface HotelService {
 
 	Map<HotelVO, List<RoomVO>> find(int loc, int circle, Date begin, Date end,String username) throws HotelNotFoundException;
 
-	Map<HotelVO, List<RoomVO>> filter(List<FilterCondition> conditions);
+	Map<HotelVO, List<RoomVO>> filter(Map<HotelVO, List<RoomVO>> data,List<FilterCondition> conditions);
 
-	Map<HotelVO, List<RoomVO>> order(OrderRule rule, boolean isDecrease);
-
-	List<RoomVO> getRoomDetail(int hotelID) throws HotelNotFoundException;
+	Map<HotelVO, List<RoomVO>> order(Map<HotelVO, List<RoomVO>> data,OrderRule rule, boolean isDecrease);
 
 	void  addRemark(HotelVO hotel, int score);
 }

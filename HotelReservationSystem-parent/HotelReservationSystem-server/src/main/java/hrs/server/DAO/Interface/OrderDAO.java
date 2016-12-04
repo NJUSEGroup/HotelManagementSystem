@@ -9,6 +9,7 @@ import hrs.common.util.type.OrderStatus;
 
 public interface OrderDAO {
 	 OrderPO findByID(int ID);
+	 List<OrderPO> findByHotelID(int hotelID);
 	 List<OrderPO> findByUsernameAndStatus(String username,OrderStatus status);
 	 List<OrderPO> findByHotelAndUsername(int hotelID,String username);
 	 List<OrderPO> findByUsername(String username);

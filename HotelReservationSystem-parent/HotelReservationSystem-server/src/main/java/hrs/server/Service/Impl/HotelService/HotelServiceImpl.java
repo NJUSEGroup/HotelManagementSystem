@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import hrs.common.Exception.HotelService.HotelNotFoundException;
-import hrs.common.Exception.HotelService.HotelQueryNotExecutedException;
 import hrs.common.Exception.OrderService.OrderNotFoundException;
 import hrs.common.POJO.HotelPO;
 import hrs.common.VO.HotelVO;
@@ -133,45 +132,20 @@ public class HotelServiceImpl implements HotelService {
 			}
 			map.put(vo, rooms);
 		}
-		hotel.setData(map);
 		return map;
 	}
 
 	@Transactional
 	@Override
-	public Map<HotelVO, List<RoomVO>> filter(List<FilterCondition> conditions) {
-		return hotel.filter(conditions);
+	public Map<HotelVO, List<RoomVO>> filter(Map<HotelVO, List<RoomVO>> data,List<FilterCondition> conditions) {
+		return hotel.filter(data, conditions);
 	}
 	
-	/**
-	 * 
-	 * @Title: getRoomDetail 
-	 * @Description 获得某个酒店的房间详细信息
-	 * @param hotelID
-	 * @return 
-	 * @throws HotelNotFoundException 
-	 * @see hrs.server.Service.Interface.HotelService.HotelService#getRoomDetail(int)
-	 */
-	@Transactional
-	@Override
-	public List<RoomVO> getRoomDetail(int hotelID) throws HotelNotFoundException {
-		if(hotel.getData() == null){
-			throw new HotelQueryNotExecutedException();
-		}
-		Map<HotelVO,List<RoomVO>> map = hotel.getData();
-		for (HotelVO vo : map.keySet()) {
-			if (vo.id == hotelID) {
-				return map.get(vo);
-			}
-		}
-		throw new HotelNotFoundException();
-	}
-
 	
 	@Transactional
 	@Override
-	public Map<HotelVO, List<RoomVO>> order(OrderRule rule, boolean isDecrease) {
-		return hotel.order(rule, isDecrease);
+	public Map<HotelVO, List<RoomVO>> order(Map<HotelVO, List<RoomVO>> data,OrderRule rule, boolean isDecrease) {
+		return hotel.order(data, rule, isDecrease);
 	}
 	
 	@Transactional
