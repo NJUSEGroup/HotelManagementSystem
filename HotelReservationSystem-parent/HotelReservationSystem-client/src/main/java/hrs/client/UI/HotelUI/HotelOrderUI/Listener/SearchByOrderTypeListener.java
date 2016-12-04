@@ -22,6 +22,8 @@ public class SearchByOrderTypeListener implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+		jpHotelOrder.OrderNotSelected();
+		
 		String orderType = jpHotelOrder.getOrderType();
 		List<OrderVO> orderList = null;
 		

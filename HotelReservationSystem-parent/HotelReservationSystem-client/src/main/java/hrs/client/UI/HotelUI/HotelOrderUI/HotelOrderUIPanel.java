@@ -3,7 +3,10 @@ package hrs.client.UI.HotelUI.HotelOrderUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -20,6 +23,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
 
 import hrs.client.UI.HotelUI.Components.OrderListTableModel;
+import hrs.client.UI.HotelUI.HotelOrderUI.Listener.CheckinListener;
+import hrs.client.UI.HotelUI.HotelOrderUI.Listener.CheckoutListener;
+import hrs.client.UI.HotelUI.HotelOrderUI.Listener.DelayCheckinListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.Listener.DetailListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.Listener.OrderSelectedListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.Listener.SearchByIdOrUsernameListener;
@@ -60,6 +66,9 @@ public class HotelOrderUIPanel extends JPanel {
 	private SearchByIdOrUsernameListener searchListener2;
 	private OrderSelectedListener orderSelectedListener;
 	private DetailListener detailListener;
+	private CheckinListener checkinListener;
+	private CheckoutListener checkoutListener;
+	private DelayCheckinListener delayListener;
 	private HotelVO hotel;
 	
 	/**
@@ -148,37 +157,39 @@ public class HotelOrderUIPanel extends JPanel {
 		jbDetail.addMouseListener(detailListener);
 		jbDetail.setEnabled(false);
 		
+		checkinListener = new CheckinListener(this);
+		
 		jbCheckin = new JButton();
 		jbCheckin.setBounds(550, 13, 110, 40);
 		jbCheckin.setText("入住");
 		jbCheckin.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbCheckin.setEnabled(false);
+		jbCheckin.addMouseListener(checkinListener);
+		
+		checkoutListener = new CheckoutListener(this);
 		
 		jbCheckout = new JButton();
 		jbCheckout.setBounds(690, 13, 110, 40);
 		jbCheckout.setText("退房");
 		jbCheckout.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbCheckout.setEnabled(false);
+		jbCheckout.addMouseListener(checkoutListener);
+		
+		delayListener = new DelayCheckinListener(this);
 		
 		jbDelay = new JButton();
 		jbDelay.setBounds(830, 13, 110, 40);
 		jbDelay.setText("延迟入住");
 		jbDelay.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbDelay.setEnabled(false);
+		jbDelay.addMouseListener(delayListener);
 		
 		orderSelectedListener = new OrderSelectedListener(this);
 		
-		List<OrderVO> orders = new ArrayList<OrderVO>();
-		List<OrderVO> unexecutedOrders = this.searchByOrderType("未执行");
-		List<OrderVO> executedOrders = this.searchByOrderType("已执行");
-		List<OrderVO> abnormalOrders = this.searchByOrderType("异常");
-		List<OrderVO> cancelOrders = this.searchByOrderType("已撤销");
-		orders.addAll(unexecutedOrders);
-		orders.addAll(executedOrders);
-		orders.addAll(abnormalOrders);
-		orders.addAll(cancelOrders);
+		List<OrderVO> orderList = new ArrayList<OrderVO>();
+		orderList = this.getAllOrders();
 		
-		orderListTableModel = new OrderListTableModel(orders);
+		orderListTableModel = new OrderListTableModel(orderList);
 		
 		jtOrderList = new JTable(orderListTableModel);
 		jtOrderList.setBackground(new Color(211, 237, 249));
@@ -227,21 +238,16 @@ public class HotelOrderUIPanel extends JPanel {
 	 * @return
 	 */
 	public List<OrderVO> getAllOrders(){
-		List<OrderVO> orders = this.searchByOrderType("未执行");
-		List<OrderVO> orders1 = this.searchByOrderType("已执行");
-		List<OrderVO> orders2 = this.searchByOrderType("异常");
-		List<OrderVO> orders3 = this.searchByOrderType("已撤销");
-		if(orders1.size()!=0){
-			orders.addAll(orders1);
-		}
-		if(orders2.size()!=0){
-			orders.addAll(orders2);
-		}
-		if(orders2.size()!=0){
-			orders.addAll(orders3);
+		List<OrderVO> orderList = new ArrayList<OrderVO>();
+		
+		try {
+			orderList = hotelOrderController.findOrderByHotelID(hotel.id);
+		} catch (OrderNotFoundException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(this, "您的酒店尚无订单！", "订单不存在", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
-		return orders;
+		return orderList;
 	}
 	
 	/**
@@ -294,6 +300,10 @@ public class HotelOrderUIPanel extends JPanel {
 		return jtfSearch.getText();
 	}
 	
+	/**
+	 * 获取在表格中被选中的行数
+	 * @return
+	 */
 	public int getSelectedRow(){
 		return jtOrderList.getSelectedRow();
 	}
@@ -304,7 +314,8 @@ public class HotelOrderUIPanel extends JPanel {
 	 */
 	public OrderVO getSelectedOrder(int row){
 		int id = Integer.valueOf((String) jtOrderList.getValueAt(row, 0));
-		OrderVO order = this.searchByOrderID(id).get(0);
+		List<OrderVO> orderList = this.searchByOrderID(id);
+		OrderVO order = orderList.get(0);
 		
 		return order;
 	}
@@ -401,12 +412,111 @@ public class HotelOrderUIPanel extends JPanel {
 		return orderList;
 	}
 	
-	public void isOrderSelected(){
-		if(jtOrderList.getSelectedRow() != -1){
+	/**
+	 * 当表格中的某个订单被选中时，根据该订单的状态将按钮面板的相应按钮设置为可用，并在不可用按钮上设置提示信息
+	 */
+	public void OrderSelected(){
+		int row = getSelectedRow();
+		OrderVO order = null;
+		if(row != -1){
+			order = this.getSelectedOrder(row);
 			jbDetail.setEnabled(true);
-			jbCheckin.setEnabled(true);
-			jbCheckout.setEnabled(true);
-			jbDelay.setEnabled(true);
+			if(order.status==OrderStatus.Unexecuted){
+				jbCheckin.setEnabled(true);
+				jbCheckout.setEnabled(false);
+				jbCheckout.setToolTipText("您只能对未进行过退房操作的已执行订单进行退房操作");
+				jbDelay.setEnabled(false);
+				jbDelay.setToolTipText("您只能对异常订单进行延迟入住操作");
+			}
+			else if(order.status==OrderStatus.Executed){
+				jbCheckin.setEnabled(false);
+				jbCheckin.setToolTipText("您只能对未执行订单进行入住操作");
+				jbDelay.setEnabled(false);
+				jbDelay.setToolTipText("您只能对异常订单进行延迟入住操作");
+				
+				String checkoutTime = "";
+				try {
+					checkoutTime = order.checkoutTime.toString();
+				} catch (NullPointerException e) {
+					// TODO Auto-generated catch block
+					checkoutTime = "";
+				}
+				if(checkoutTime.equals("")){
+					jbCheckout.setEnabled(true);
+				}
+				else{
+					jbCheckout.setEnabled(false);
+					jbCheckout.setToolTipText("您只能对未进行过退房操作的已执行订单进行退房操作");
+				}
+			}
+			else if(order.status==OrderStatus.Abnormal){
+				jbCheckin.setEnabled(false);
+				jbCheckin.setToolTipText("您只能对未执行订单进行入住操作");
+				jbCheckout.setEnabled(false);
+				jbCheckout.setToolTipText("您只能对未进行过退房操作的已执行订单进行退房操作");
+				jbDelay.setEnabled(true);
+			}
+			else if((order.status==OrderStatus.RevokedFullValue)||(order.status==OrderStatus.RevokedHalfValue)
+					||(order.status==OrderStatus.UserRevoked)){
+				jbCheckin.setEnabled(false);
+				jbCheckin.setToolTipText("您只能对未执行订单进行入住操作");
+				jbCheckout.setEnabled(false);
+				jbCheckout.setToolTipText("您只能对未进行过退房操作的已执行订单进行退房操作");
+				jbDelay.setEnabled(false);
+				jbDelay.setToolTipText("您只能对异常订单进行延迟入住操作");
+			}
+		}
+	}
+	
+	/**
+	 * 当表格中没有订单被选中时，按钮面板的四个按钮皆不可用
+	 */
+	public void OrderNotSelected(){
+		jbDetail.setEnabled(false);
+		jbCheckin.setEnabled(false);
+		jbCheckout.setEnabled(false);
+		jbDelay.setEnabled(false);
+	}
+	
+	/**
+	 * 对未执行订单进行入住操作
+	 * @param order
+	 */
+	public void checkin(OrderVO order){
+		hotelOrderController.checkin(order);
+		JOptionPane.showMessageDialog(null, "订单信息已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	/**
+	 * 对已执行订单进行退房操作
+	 * @param order
+	 */
+	public void checkout(OrderVO order){
+		hotelOrderController.checkout(order);
+		JOptionPane.showMessageDialog(null, "订单信息已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	/**
+	 * 对异常订单进行延迟入住操作
+	 * @param order
+	 */
+	public void delayCheckin(OrderVO order){
+		hotelOrderController.delayCheckin(order);
+		JOptionPane.showMessageDialog(null, "订单信息已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	/**
+	 * 获得相应按钮的可用状态
+	 */
+	public boolean isButtonEnable(String buttonName){
+		if(buttonName.equals("入住")){
+			return jbCheckin.isEnabled();
+		}
+		else if(buttonName.equals("退房")){
+			return jbCheckout.isEnabled();
+		}
+		else{
+			return jbDelay.isEnabled();
 		}
 	}
 }

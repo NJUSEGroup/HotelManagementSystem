@@ -4,20 +4,25 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderUIPanel;
+import hrs.common.VO.OrderVO;
 
-public class OrderSelectedListener implements MouseListener{
+public class DelayCheckinListener implements MouseListener{
+
+	private HotelOrderUIPanel jpHotelOrder;
 	
-	private HotelOrderUIPanel jpOrderList;
-	
-	public OrderSelectedListener(HotelOrderUIPanel jpOrderList){
-		this.jpOrderList = jpOrderList;
+	public DelayCheckinListener(HotelOrderUIPanel jpHotelOrder){
+		this.jpHotelOrder = jpHotelOrder;
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
-		jpOrderList.OrderSelected();
+		if(jpHotelOrder.isButtonEnable("延迟入住")){
+			int row = jpHotelOrder.getSelectedRow();
+			OrderVO order = jpHotelOrder.getSelectedOrder(row);
+			jpHotelOrder.delayCheckin(order);
+			jpHotelOrder.refreshOrderList(jpHotelOrder.getAllOrders());
+		}
 	}
 
 	@Override

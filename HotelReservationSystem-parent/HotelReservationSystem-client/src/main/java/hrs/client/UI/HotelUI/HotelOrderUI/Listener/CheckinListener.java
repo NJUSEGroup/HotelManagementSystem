@@ -3,21 +3,29 @@ package hrs.client.UI.HotelUI.HotelOrderUI.Listener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderUIPanel;
+import javax.swing.JOptionPane;
 
-public class OrderSelectedListener implements MouseListener{
+import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderUIPanel;
+import hrs.common.VO.OrderVO;
+import hrs.common.util.type.OrderStatus;
+
+public class CheckinListener implements MouseListener{
+
+	private HotelOrderUIPanel jpHotelOrder;
 	
-	private HotelOrderUIPanel jpOrderList;
-	
-	public OrderSelectedListener(HotelOrderUIPanel jpOrderList){
-		this.jpOrderList = jpOrderList;
+	public CheckinListener(HotelOrderUIPanel jpHotelOrder){
+		this.jpHotelOrder = jpHotelOrder;
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
-		jpOrderList.OrderSelected();
+		if(jpHotelOrder.isButtonEnable("入住")){
+			int row = jpHotelOrder.getSelectedRow();
+			OrderVO order = jpHotelOrder.getSelectedOrder(row);
+			jpHotelOrder.checkin(order);
+			jpHotelOrder.refreshOrderList(jpHotelOrder.getAllOrders());
+		}
 	}
 
 	@Override

@@ -23,6 +23,8 @@ public class SearchByIdOrUsernameListener implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+		jpHotelOrder.OrderNotSelected();
+		
 		List<OrderVO> orderList = new ArrayList<OrderVO>();
 		String username = null;
 		int id = 0;

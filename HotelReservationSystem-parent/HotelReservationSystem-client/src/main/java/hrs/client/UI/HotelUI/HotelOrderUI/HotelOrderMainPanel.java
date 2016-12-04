@@ -54,8 +54,9 @@ public class HotelOrderMainPanel extends JPanel {
 	 */
 	public void refresh(){
 		jpOrderList.refreshSearchTerms();
-		List<OrderVO> orders= jpOrderList.getAllOrders();
-		jpOrderList.refreshOrderList(orders);
+		List<OrderVO> orderList = jpOrderList.getAllOrders();
+		jpOrderList.refreshOrderList(orderList);
+		jpOrderList.OrderNotSelected();
 	}
 	
 	/**
