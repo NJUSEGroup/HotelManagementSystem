@@ -8,7 +8,6 @@ import java.awt.EventQueue;
 import hrs.client.UI.HotelUI.HotelDiscountUI.HotelDiscountUIPanel;
 import hrs.client.UI.HotelUI.HotelFrame.Listener.MenuListListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderMainPanel;
-import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderUIPanel;
 import hrs.client.UI.HotelUI.HotelUI.HotelUIPanel;
 import hrs.client.UI.HotelUI.OfflineRecordUI.OfflineRecordUIPanel;
 import hrs.client.UI.HotelUI.RoomUI.RoomUIPanel;
@@ -17,15 +16,11 @@ import hrs.common.Controller.HotelController.IHotelController;
 import hrs.common.Exception.HotelService.HotelNotFoundException;
 import hrs.common.Exception.OrderService.OrderNotFoundException;
 import hrs.common.Exception.RoomService.RoomNotFoundException;
-import hrs.common.POJO.OfflineRecordPO;
 import hrs.common.VO.HotelVO;
-import hrs.common.VO.OrderVO;
 import hrs.common.VO.StaffVO;
 
 import java.awt.Font;
 import java.awt.event.MouseEvent;
-import java.util.List;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -33,6 +28,10 @@ import javax.swing.SwingConstants;
 
 public class HotelFrame extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7856445850346641745L;
 	private CardLayout card;
 	private JPanel jpMenuList;
 	private JPanel jpCard;
@@ -118,11 +117,11 @@ public class HotelFrame extends JFrame {
 		jpCard = new JPanel(card);
 		jpCard.setBounds(273, 5, 1080, 722);
 		jpCard.setBackground(new Color(211, 237, 249));
-		jpCard.add(jpHotelUI, "1");
-		jpCard.add(jpHotelOrderUI, "2");
-		jpCard.add(jpRoomUI, "3");
-		jpCard.add(jpHotelDiscountUI, "4");
-		jpCard.add(jpOfflineRecordUI, "5");
+		jpCard.add(jpHotelUI, "HotelUI");
+		jpCard.add(jpHotelOrderUI, "HotelOrderUI");
+		jpCard.add(jpRoomUI, "RoomUI");
+		jpCard.add(jpHotelDiscountUI, "HotelDiscountUI");
+		jpCard.add(jpOfflineRecordUI, "OfflineRecordUI");
 		
 		jlZone = new JLabel();
 		jlZone.setBounds(0, 0, 263, 79);
@@ -205,25 +204,33 @@ public class HotelFrame extends JFrame {
 		this.getContentPane().add(jpCard);
 	}
 	
+	/**
+	 * 根据鼠标点击的标签展示相应界面
+	 * @param label
+	 */
 	public void show(String label){
 		if(label.equals("酒店信息")){
-			card.show(jpCard, "1");
+			card.show(jpCard, "HotelUI");
 		}
 		else if(label.equals("订单管理")){
-			card.show(jpCard, "2");
+			card.show(jpCard, "HotelOrderUI");
 			jpHotelOrderUI.refresh();
 		}
 		else if(label.equals("录入客房")){
-			card.show(jpCard, "3");
+			card.show(jpCard, "RoomUI");
 		}
 		else if(label.equals("促销策略")){
-			card.show(jpCard, "4");
+			card.show(jpCard, "HotelDiscountUI");
 		}
 		else if(label.equals("线下入住")){
-			card.show(jpCard, "5");
+			card.show(jpCard, "OfflineRecordUI");
 		}
 	}
 	
+	/**
+	 * 当光标置于标签上时，标签变色
+	 * @param e
+	 */
 	public void changeColorWhenEnter(MouseEvent e){
 		String label = ((JLabel) e.getSource()).getText();
 		
@@ -249,6 +256,10 @@ public class HotelFrame extends JFrame {
 		}
 	}
 	
+	/**
+	 * 当光标离开标签时，标签变色
+	 * @param e
+	 */
 	public void changeColorWhenExit(MouseEvent e){
 		String label = ((JLabel) e.getSource()).getText();
 		

@@ -4,7 +4,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import hrs.client.UI.HotelUI.HotelUI.HotelUIPanel;
-import hrs.common.VO.HotelVO;
 
 public class CancelListener implements MouseListener{
 	

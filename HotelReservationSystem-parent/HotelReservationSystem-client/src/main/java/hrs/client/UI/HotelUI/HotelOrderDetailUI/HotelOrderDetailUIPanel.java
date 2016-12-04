@@ -13,8 +13,6 @@ import java.awt.Insets;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import org.hibernate.type.descriptor.java.DataHelper;
-
 import hrs.client.UI.HotelUI.HotelOrderDetailUI.Listener.ReturnListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderMainPanel;
 import hrs.common.VO.OrderVO;
@@ -22,6 +20,10 @@ import hrs.common.util.DateHelper;
 
 public class HotelOrderDetailUIPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1880061535262342363L;
 	private JPanel jpDetail;
 	private JPanel jpButton;
 	
@@ -605,4 +607,17 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jtfFirm.setText(order.user.enterprise);
 		jtfCredit.setText(Double.toString(order.user.credit));
 	}
+	
+	public void checkin(){
+		jtfCheckin.setEditable(true);
+	}
+	
+	public void checkout(){
+		jtfCheckout.setEditable(true);
+	}
+	
+	public void delayCheckin(){
+		
+	}
+
 }

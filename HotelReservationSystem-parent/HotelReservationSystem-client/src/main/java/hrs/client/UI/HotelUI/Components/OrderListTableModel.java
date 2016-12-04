@@ -1,17 +1,13 @@
 package hrs.client.UI.HotelUI.Components;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
-import hrs.common.VO.CreditRecordVO;
 import hrs.common.VO.OrderVO;
 import hrs.common.util.DateHelper;
-import hrs.common.util.type.CreditRecordType;
-import hrs.common.util.type.OrderStatus;
 
 public class OrderListTableModel implements TableModel{
 

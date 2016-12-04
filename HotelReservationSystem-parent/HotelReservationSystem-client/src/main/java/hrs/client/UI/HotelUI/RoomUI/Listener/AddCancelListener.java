@@ -3,7 +3,8 @@ package hrs.client.UI.HotelUI.RoomUI.Listener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import hrs.client.UI.HotelUI.Components.AddRoomDialog;
+import hrs.client.UI.HotelUI.RoomUI.AddRoomDialog;
+
 
 public class AddCancelListener implements MouseListener{
 

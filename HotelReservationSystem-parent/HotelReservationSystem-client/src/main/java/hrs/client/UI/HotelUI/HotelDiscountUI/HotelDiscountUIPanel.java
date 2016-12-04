@@ -21,6 +21,10 @@ import hrs.common.VO.HotelVO;
 
 public class HotelDiscountUIPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6428074559081567803L;
 	private JPanel jpDiscount;
 	private JPanel jpButton;
 	private JTable jtDiscount;

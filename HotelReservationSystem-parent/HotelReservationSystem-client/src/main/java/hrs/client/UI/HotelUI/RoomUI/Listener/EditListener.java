@@ -5,19 +5,18 @@ import java.awt.event.MouseListener;
 
 import hrs.client.UI.HotelUI.RoomUI.RoomUIPanel;
 
-public class AddListener implements MouseListener{
-	
+public class EditListener implements MouseListener{
+
 	private RoomUIPanel jpRoom;
 	
-	public AddListener(RoomUIPanel jpRoom){
+	public EditListener(RoomUIPanel jpRoom){
 		this.jpRoom = jpRoom;
 	}
-	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-		jpRoom.add();
+		jpRoom.edit();
 	}
 
 	@Override
@@ -45,4 +44,3 @@ public class AddListener implements MouseListener{
 	}
 
 }
-

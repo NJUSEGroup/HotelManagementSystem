@@ -13,6 +13,10 @@ import hrs.common.VO.HotelVO;
 
 public class OfflineRecordUIPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2688792422499013247L;
 	private JPanel jpSearch;
 	private JPanel jpRecord;
 	private JPanel jpButton;
