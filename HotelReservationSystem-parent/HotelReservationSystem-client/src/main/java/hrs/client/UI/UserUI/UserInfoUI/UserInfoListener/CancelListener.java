@@ -15,7 +15,7 @@ public class CancelListener implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		panel.Init();
+		panel.init();
 		
 	}
 

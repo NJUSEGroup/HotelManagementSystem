@@ -21,6 +21,7 @@ import javax.swing.table.JTableHeader;
 
 import hrs.client.UI.HotelUI.Components.OrderListTableModel;
 import hrs.client.UI.HotelUI.HotelOrderUI.Listener.DetailListener;
+import hrs.client.UI.HotelUI.HotelOrderUI.Listener.OrderSelectedListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.Listener.SearchByIdOrUsernameListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.Listener.SearchByOrderTypeListener;
 import hrs.client.util.ControllerFactory;
@@ -57,6 +58,7 @@ public class HotelOrderUIPanel extends JPanel {
 	private IHotelOrderController hotelOrderController;
 	private SearchByOrderTypeListener searchListener1;
 	private SearchByIdOrUsernameListener searchListener2;
+	private OrderSelectedListener orderSelectedListener;
 	private DetailListener detailListener;
 	private HotelVO hotel;
 	
@@ -164,6 +166,8 @@ public class HotelOrderUIPanel extends JPanel {
 		jbDelay.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbDelay.setEnabled(false);
 		
+		orderSelectedListener = new OrderSelectedListener(this);
+		
 		List<OrderVO> orders = new ArrayList<OrderVO>();
 		List<OrderVO> unexecutedOrders = this.searchByOrderType("未执行");
 		List<OrderVO> executedOrders = this.searchByOrderType("已执行");
@@ -181,6 +185,7 @@ public class HotelOrderUIPanel extends JPanel {
 		jtOrderList.setFont(new Font("方正兰亭超细黑简体",Font.PLAIN,16));
 		jtOrderList.setRowHeight(40);
 		jtOrderList.setShowVerticalLines(false);
+		jtOrderList.addMouseListener(orderSelectedListener);
 		
 		jthOrderList = jtOrderList.getTableHeader(); 
 		jthOrderList.setPreferredSize(new Dimension(jtOrderList.getWidth(),40)); 
@@ -215,7 +220,6 @@ public class HotelOrderUIPanel extends JPanel {
 		this.add(jpOrder);
 		this.add(jpButton);
 		
-		buttonThread();
 	}
 	
 	/**
@@ -290,12 +294,15 @@ public class HotelOrderUIPanel extends JPanel {
 		return jtfSearch.getText();
 	}
 	
+	public int getSelectedRow(){
+		return jtOrderList.getSelectedRow();
+	}
+	
 	/**
 	 * 获取在表格中被选中的订单
 	 * @return
 	 */
-	public OrderVO getSelectedOrder(){
-		int row = jtOrderList.getSelectedRow();
+	public OrderVO getSelectedOrder(int row){
 		int id = Integer.valueOf((String) jtOrderList.getValueAt(row, 0));
 		OrderVO order = this.searchByOrderID(id).get(0);
 		
@@ -317,7 +324,7 @@ public class HotelOrderUIPanel extends JPanel {
 				orderList = hotelOrderController.findOrderByHotelAndStatus(hotel.id, OrderStatus.Unexecuted);
 			} catch (OrderNotFoundException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, "您的酒店尚无未执行订单！", "订单不存在", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		else if(orderType.equals("已执行")){
@@ -325,7 +332,7 @@ public class HotelOrderUIPanel extends JPanel {
 				orderList = hotelOrderController.findOrderByHotelAndStatus(hotel.id, OrderStatus.Executed);
 			} catch (OrderNotFoundException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, "您的酒店尚无已执行订单！", "订单不存在", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		else if(orderType.equals("异常")){
@@ -333,34 +340,23 @@ public class HotelOrderUIPanel extends JPanel {
 				orderList = hotelOrderController.findOrderByHotelAndStatus(hotel.id, OrderStatus.Abnormal);
 			} catch (OrderNotFoundException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, "您的酒店尚无异常订单！", "订单不存在", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		else if(orderType.equals("已撤销")){
 			try {
 				orderList = hotelOrderController.findOrderByHotelAndStatus(hotel.id, OrderStatus.RevokedFullValue);
-			} catch (OrderNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
 				orderList1 = hotelOrderController.findOrderByHotelAndStatus(hotel.id, OrderStatus.RevokedHalfValue);
-			} catch (OrderNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
 				orderList2 = hotelOrderController.findOrderByHotelAndStatus(hotel.id, OrderStatus.UserRevoked);
 			} catch (OrderNotFoundException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 			
-			if(orderList1.size()!=0){
-				orderList.addAll(orderList1);
-			}
-			if(orderList2.size()!=0){
-				orderList.addAll(orderList2);
+			orderList.addAll(orderList1);
+			orderList.addAll(orderList2);
+			
+			if(orderList.size()==0){
+				JOptionPane.showMessageDialog(this, "您的酒店尚无已撤销订单！", "订单不存在", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		
@@ -405,36 +401,12 @@ public class HotelOrderUIPanel extends JPanel {
 		return orderList;
 	}
 	
-	private void buttonThread() {
-		Thread thread = new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				while(true){
-					if(jtOrderList.getSelectedRowCount() == 0){
-						jbDetail.setEnabled(false);
-						jbCheckin.setEnabled(false);
-						jbCheckout.setEnabled(false);	
-						jbDelay.setEnabled(false);
-				}
-					else{
-						jbDetail.setEnabled(true);
-						jbCheckin.setEnabled(true);
-						jbCheckout.setEnabled(true);	
-						jbDelay.setEnabled(true);	
-					}
-					try {
-						Thread.sleep(200);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				}	
-		});
-		
-			thread.start();
-			
+	public void isOrderSelected(){
+		if(jtOrderList.getSelectedRow() != -1){
+			jbDetail.setEnabled(true);
+			jbCheckin.setEnabled(true);
+			jbCheckout.setEnabled(true);
+			jbDelay.setEnabled(true);
+		}
 	}
-
 }

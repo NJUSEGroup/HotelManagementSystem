@@ -10,7 +10,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import hrs.client.UI.UserUI.ComComponents.CommonPanel;
+import hrs.client.UI.UserUI.Components.CommonPanel;
 import hrs.client.UI.UserUI.UserInfoUI.UserInfoListener.CancelListener;
 import hrs.client.UI.UserUI.UserInfoUI.UserInfoListener.ConfirmListener;
 import hrs.client.util.ControllerFactory;
@@ -57,7 +57,7 @@ public class UserInfoPanel extends CommonPanel {
 		this.username = username;
 		
 		//初始化
-		Init();
+		init();
 
 //		setLayout(null);
 //		setBackground(new Color(211, 237, 249));
@@ -67,7 +67,7 @@ public class UserInfoPanel extends CommonPanel {
 	}
 
 	@Override
-	public void Init() {
+	public void init() {
 
 		// 从数据库获得用户信息
 		getInfo();
@@ -271,6 +271,6 @@ public class UserInfoPanel extends CommonPanel {
 		//更新左边面板的用户名信息
 		
 		controller.updateUser(user);
-		Init();
+		init();
 	}
 }

@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 
-import hrs.client.UI.UserUI.ComComponents.CommonPanel;
+import hrs.client.UI.UserUI.Components.CommonPanel;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.UserController.IUserController;
@@ -32,13 +32,13 @@ public class CreditInfoPanel extends CommonPanel {
 		
 		this.username = username;
 		
-		Init();
+		init();
 		
 		
 	}
 	
 	@Override
-	public void Init(){
+	public void init(){
 		//创建表格
 				JTable table = new JTable();
 				List<CreditRecordVO> creditList = getCreditList();//需要显示的数据

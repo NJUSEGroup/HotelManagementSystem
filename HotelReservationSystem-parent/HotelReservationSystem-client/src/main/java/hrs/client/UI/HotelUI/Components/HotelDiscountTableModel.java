@@ -112,7 +112,13 @@ public class HotelDiscountTableModel implements TableModel{
 		
 		//合作企业
 		else if (columnIndex == 4){
-			String firm = discount.enterprise.name;
+			String firm = "";
+			try {
+				firm = discount.enterprise.name;
+			} catch (NullPointerException e) {
+				// TODO Auto-generated catch block
+				firm = "";
+			}
 			
 			return firm;
 		}

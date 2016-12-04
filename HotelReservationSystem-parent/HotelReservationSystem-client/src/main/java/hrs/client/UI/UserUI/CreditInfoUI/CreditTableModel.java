@@ -24,34 +24,28 @@ public class CreditTableModel implements TableModel {
 	@Override
 	// 表格的行数（有几个对象就有几行）
 	public int getRowCount() {
-		// TODO Auto-generated method stub
+		
 		return creditList.size();
 	}
 
 	@Override
 	// 每个creditVO对象有5个值，所以有5列
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
+		
 		return 5;
 	}
 
 	// 取每一列的列名
 	@Override
 	public String getColumnName(int columnIndex) {
-		// TODO Auto-generated method stub
-		List<String> l = new ArrayList<>();
-		l.add("时间");
-		l.add("订单号");
-		l.add("动作");
-		l.add("信用值变化");
-		l.add("当前信用值");
-		return l.get(columnIndex);
+		String[] l = {"时间","订单号","动作","信用值变化","当前信用值"};
+		return l[columnIndex];
 	}
 
 	// 得到某列的数据类型
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
-		// TODO Auto-generated method stub
+		
 		return String.class;
 
 	}
@@ -59,7 +53,7 @@ public class CreditTableModel implements TableModel {
 	@Override
 	// 全部不可编辑
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
@@ -80,19 +74,19 @@ public class CreditTableModel implements TableModel {
 
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public void addTableModelListener(TableModelListener l) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public void removeTableModelListener(TableModelListener l) {
-		// TODO Auto-generated method stub
+		
 
 	}
 

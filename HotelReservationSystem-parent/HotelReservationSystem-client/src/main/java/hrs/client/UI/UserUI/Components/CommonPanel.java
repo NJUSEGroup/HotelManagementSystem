@@ -1,4 +1,4 @@
-package hrs.client.UI.UserUI.ComComponents;
+package hrs.client.UI.UserUI.Components;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -12,7 +12,7 @@ public abstract class CommonPanel extends JPanel {
 	* @Fields serialVersionUID : TODO
 	*/ 
 	private static final long serialVersionUID = -8514676097183408632L;
-	public abstract void Init();
+	public abstract void init();
 	Font font = UIConstants.jlabelChinese;
 	public CommonPanel(){
 		setLayout(null);
