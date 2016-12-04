@@ -3,11 +3,8 @@ package hrs.client.UI.HotelUI.HotelOrderUI.Listener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JOptionPane;
-
 import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderUIPanel;
 import hrs.common.VO.OrderVO;
-import hrs.common.util.type.OrderStatus;
 
 public class CheckoutListener implements MouseListener{
 
@@ -17,6 +14,9 @@ public class CheckoutListener implements MouseListener{
 		this.jpHotelOrder = jpHotelOrder;
 	}
 	
+	/**
+	 * 对未执行过退房操作的已执行订单执行退房操作
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub

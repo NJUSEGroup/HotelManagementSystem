@@ -18,7 +18,7 @@ public class DetailListener implements MouseListener{
 	}
 	
 	/**
-	 * 显示所选择的订单的详细信息
+	 * 从酒店订单管理界面跳转到酒店详细订单界面，显示所选择的订单的详细信息
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {

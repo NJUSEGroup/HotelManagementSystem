@@ -13,6 +13,9 @@ public class ReturnListener implements MouseListener{
 		this.jpMain = jpMain;
 	}
 	
+	/**
+	 * 从酒店详细订单界面返回酒店订单管理界面
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub

@@ -69,7 +69,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 	private ReturnListener returnListener;
 	
 	/**
-	 * Create the panel.
+	 * 初始化酒店详细订单界面
 	 */
 	public HotelOrderDetailUIPanel(HotelOrderMainPanel jpMain) {
 		init(jpMain);
@@ -543,7 +543,11 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jtfOrderStatus.setColumns(10);
 		this.add(jpButton);
 	}
-
+	
+	/**
+	 * 显示相应订单的详细信息
+	 * @param order
+	 */
 	public void showDetailInfo(OrderVO order){
 		jtfID.setText(Integer.toString(order.id));
 		jtfPlaceOrder.setText(DateHelper.format(order.placeTime));
@@ -607,17 +611,4 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jtfFirm.setText(order.user.enterprise);
 		jtfCredit.setText(Double.toString(order.user.credit));
 	}
-	
-	public void checkin(){
-		jtfCheckin.setEditable(true);
-	}
-	
-	public void checkout(){
-		jtfCheckout.setEditable(true);
-	}
-	
-	public void delayCheckin(){
-		
-	}
-
 }

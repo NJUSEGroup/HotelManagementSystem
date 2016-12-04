@@ -3,10 +3,7 @@ package hrs.client.UI.HotelUI.HotelOrderUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -488,7 +485,7 @@ public class HotelOrderUIPanel extends JPanel {
 	}
 	
 	/**
-	 * 对已执行订单进行退房操作
+	 * 对未执行过退房操作的已执行订单进行退房操作
 	 * @param order
 	 */
 	public void checkout(OrderVO order){

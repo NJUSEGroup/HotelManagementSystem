@@ -14,6 +14,9 @@ public class DelayCheckinListener implements MouseListener{
 		this.jpHotelOrder = jpHotelOrder;
 	}
 	
+	/**
+	 * 对异常订单执行延迟入住操作
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
