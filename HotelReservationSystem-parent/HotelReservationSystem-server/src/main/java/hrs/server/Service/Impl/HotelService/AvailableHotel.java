@@ -32,12 +32,11 @@ public class AvailableHotel {
 	 * Map<HotelVO,List<RoomVO>> @throws
 	 */
 	public Map<HotelVO, List<RoomVO>> filter(Map<HotelVO, List<RoomVO>> data,List<FilterCondition> conditions) {
-		// 拷贝一份，每次过滤都不修改原始的缓存
 		Map<HotelVO, List<RoomVO>> res = new HashMap<>();
 		res.putAll(data);
 		HotelFilter filter = null;
 		for (FilterCondition condition : conditions) {
-			filter = SpringUtils.getBean(condition.getType().toString()+"Filter");
+			filter = SpringUtils.getBean(condition.getType().toString() + "Filter");
 			filter.setFilterCondition(condition);
 			filter.doFilter(res);
 		}
