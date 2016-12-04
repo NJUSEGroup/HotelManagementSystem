@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import hrs.common.Exception.OrderService.OrderNotFoundException;
+import hrs.common.POJO.OrderPO;
 import hrs.common.VO.OrderVO;
 import hrs.common.util.type.OrderStatus;
 import hrs.server.Service.Interface.OrderService.OrderSearchService;
@@ -64,6 +65,16 @@ public class TestOrderSearchService {
 		for (OrderVO vo : list) {
 			System.out.println(vo);
 			assertEquals(vo.status, OrderStatus.Unexecuted);
+		}
+	}
+	
+	@Test
+	public void testFindByHotelID() throws OrderNotFoundException{
+		List<OrderVO> list = service.findByHotelID(1);
+		System.out.println(list.size());
+		for (OrderVO vo : list) {
+			System.out.println(vo);
+			assertEquals(vo.hotel.id,1);
 		}
 	}
 }

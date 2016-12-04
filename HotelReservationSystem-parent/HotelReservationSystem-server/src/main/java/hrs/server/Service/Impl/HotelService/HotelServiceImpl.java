@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import hrs.common.VO.RoomVO;
 import hrs.common.util.FilterCondition.FilterCondition;
 import hrs.common.util.type.OrderRule;
 import hrs.server.DAO.Interface.HotelDAO.HotelDAO;
+import hrs.server.Service.Impl.HotelService.HotelComparator.HotelComparator;
 import hrs.server.Service.Impl.HotelService.HotelFilter.HotelFilter;
 import hrs.server.Service.Interface.HotelService.HotelService;
 import hrs.server.Service.Interface.OrderService.OrderSearchService;
@@ -35,7 +37,6 @@ public class HotelServiceImpl implements HotelService {
 	@Autowired
 	private OrderSearchService orderSearchService;
 	
-	private AvailableHotel hotel = new AvailableHotel();
 	
 	@Transactional
 	@Override
@@ -132,15 +133,25 @@ public class HotelServiceImpl implements HotelService {
 	@Transactional
 	@Override
 	public Map<HotelVO, List<RoomVO>> filter(Map<HotelVO, List<RoomVO>> data, List<FilterCondition> conditions) {
-		return hotel.filter(data, conditions);
-		// 拷贝一份，每次过滤都不修改原始的缓存
-		
+		Map<HotelVO, List<RoomVO>> res = new HashMap<>();
+		res.putAll(data);
+		HotelFilter filter = null;
+		for (FilterCondition condition : conditions) {
+			filter = SpringUtils.getBean(condition.getType().toString() + "Filter");
+			filter.setFilterCondition(condition);
+			filter.doFilter(res);
+		}
+		return res;
 	}
-
+	
 	@Transactional
 	@Override
 	public Map<HotelVO, List<RoomVO>> order(Map<HotelVO, List<RoomVO>> data, OrderRule rule, boolean isDecrease) {
-		return hotel.order(data, rule, isDecrease);
+		HotelComparator comp = SpringUtils.getBean(rule.toString()+"Comparator");
+		comp.setDecrease(isDecrease);
+		Map<HotelVO, List<RoomVO>> res = new TreeMap<>(comp);
+		res.putAll(data);
+		return res;
 	}
 
 	@Transactional

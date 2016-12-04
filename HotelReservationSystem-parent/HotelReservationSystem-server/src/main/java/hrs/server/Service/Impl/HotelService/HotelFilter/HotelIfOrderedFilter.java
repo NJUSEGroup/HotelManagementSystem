@@ -16,6 +16,7 @@ import hrs.common.VO.RoomVO;
 * @date 2016年11月19日 下午10:05:33
 *
  */
+
 @Component("IfOrderedFilter")
 public class HotelIfOrderedFilter extends HotelFilter{
 	

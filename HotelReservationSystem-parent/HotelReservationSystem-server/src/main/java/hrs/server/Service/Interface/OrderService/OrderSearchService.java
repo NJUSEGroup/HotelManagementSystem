@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import hrs.common.Exception.OrderService.OrderNotFoundException;
+import hrs.common.POJO.OrderPO;
 import hrs.common.VO.OrderVO;
 import hrs.common.util.type.OrderStatus;
 
@@ -21,4 +22,6 @@ public interface OrderSearchService {
 	List<OrderVO> findByOrderStatus(OrderStatus status) throws OrderNotFoundException;
 
 	List<OrderVO> findByHotelAndTime(int hotelID, Date begin, Date end) throws OrderNotFoundException;
+
+	List<OrderVO> findByHotelID(int hotelID) throws OrderNotFoundException;
 }

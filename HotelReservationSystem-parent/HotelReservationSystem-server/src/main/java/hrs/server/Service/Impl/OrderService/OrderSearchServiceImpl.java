@@ -174,6 +174,16 @@ public class OrderSearchServiceImpl implements OrderSearchService {
 		}
 	}
 	
+	@Transactional
+	@Override
+	public List<OrderVO> findByHotelID(int hotelID) throws OrderNotFoundException {
+		List<OrderPO> pos = dao.findByHotelID(hotelID);
+		if(pos.size() == 0){
+			throw new OrderNotFoundException();
+		}else{
+			return tranfer(pos);
+		}
+	}
 	/**
 	 * 
 	 * @Title: tranfer
@@ -191,4 +201,6 @@ public class OrderSearchServiceImpl implements OrderSearchService {
 		}
 		return vos;
 	}
+
+	
 }
