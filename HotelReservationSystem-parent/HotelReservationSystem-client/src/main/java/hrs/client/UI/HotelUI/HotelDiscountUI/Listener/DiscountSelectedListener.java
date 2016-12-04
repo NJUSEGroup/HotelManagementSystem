@@ -1,26 +1,23 @@
-package hrs.client.UI.HotelUI.RoomUI.Listener;
+package hrs.client.UI.HotelUI.HotelDiscountUI.Listener;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import hrs.client.UI.HotelUI.RoomUI.AddRoomDialog;
+import hrs.client.UI.HotelUI.HotelDiscountUI.HotelDiscountUIPanel;
 
-public class AddConfirmListener implements MouseListener{
+public class DiscountSelectedListener implements MouseListener{
 
-	private AddRoomDialog addRoomDialog;
+	private HotelDiscountUIPanel jpDiscount;
 	
-	public AddConfirmListener(AddRoomDialog addRoomDialog){
-		this.addRoomDialog = addRoomDialog;
+	public DiscountSelectedListener(HotelDiscountUIPanel jpDiscount){
+		this.jpDiscount = jpDiscount;
 	}
 	
-	/**
-	 * 确认添加房间
-	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-		addRoomDialog.addConfirm();
+		jpDiscount.discountSelected();
 	}
 
 	@Override

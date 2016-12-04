@@ -11,17 +11,17 @@ import hrs.common.util.DateHelper;
 
 public class OfflineRecordTableModel implements TableModel{
 
-	private List<OfflineRecordVO> offlineRecords;
+	private OfflineRecordVO offlineRecord;
 	
-	public OfflineRecordTableModel(List<OfflineRecordVO> offlineRecords){
-		this.offlineRecords = offlineRecords;
+	public OfflineRecordTableModel(OfflineRecordVO offlineRecord){
+		this.offlineRecord = offlineRecord;
 	}
 	
 	@Override
 	public int getRowCount() {
 		// TODO Auto-generated method stub
 		
-		return offlineRecords.size();
+		return 1;
 	}
 
 	@Override
@@ -64,7 +64,6 @@ public class OfflineRecordTableModel implements TableModel{
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
-		OfflineRecordVO offlineRecord = offlineRecords.get(rowIndex);
 		
 		//ID
 		if (columnIndex == 0) {

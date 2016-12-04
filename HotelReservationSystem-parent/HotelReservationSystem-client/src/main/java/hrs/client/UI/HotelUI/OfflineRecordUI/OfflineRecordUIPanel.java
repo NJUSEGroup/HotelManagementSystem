@@ -19,8 +19,10 @@ import javax.swing.table.JTableHeader;
 
 import hrs.client.UI.HotelUI.Components.HotelDiscountTableModel;
 import hrs.client.UI.HotelUI.Components.OfflineRecordTableModel;
+import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.SearchListener;
 import hrs.client.util.ControllerFactory;
 import hrs.common.Controller.HotelController.IOfflineRecordController;
+import hrs.common.Exception.OfflineRecordService.OfflineRecordNotFoundException;
 import hrs.common.Exception.Promotion.HotelDiscountService.HotelDiscountNotFoundException;
 import hrs.common.VO.HotelDiscountVO;
 import hrs.common.VO.HotelVO;
@@ -45,6 +47,7 @@ public class OfflineRecordUIPanel extends JPanel {
 	private JButton jbCheckout;
 	private OfflineRecordTableModel model;
 	private IOfflineRecordController controller;
+	private SearchListener searchListener;
 	
 	/**
 	 * Create the panel.
@@ -83,16 +86,19 @@ public class OfflineRecordUIPanel extends JPanel {
 		jtfInput.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jtfInput.setEditable(true);
 		
+		searchListener = new SearchListener(this);
+		
 		jbConfirm = new JButton();
 		jbConfirm.setBounds(362, 15, 90, 40);
 		jbConfirm.setText("确认");
 		jbConfirm.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jbConfirm.addMouseListener(searchListener);
 		
 		controller = ControllerFactory.getOfflineRecordController();
 		
-		List<OfflineRecordVO> records = new ArrayList<OfflineRecordVO>();
+		OfflineRecordVO record = new OfflineRecordVO();
 		
-		model = new OfflineRecordTableModel(records);
+		model = new OfflineRecordTableModel(record);
 		
 		jtRecord = new JTable(model);
 		jtRecord.setBackground(new Color(211, 237, 249));
@@ -134,6 +140,25 @@ public class OfflineRecordUIPanel extends JPanel {
 		this.add(jpSearch);
 		this.add(jpRecord);
 		this.add(jpButton);
+	}
+	
+	public OfflineRecordVO search(){
+		int id = Integer.valueOf(jtfInput.getText());
+		OfflineRecordVO record = new OfflineRecordVO();
+		
+		try {
+			record = controller.findOfflineRecordByID(id);
+		} catch (OfflineRecordNotFoundException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "该记录不存在！", "错误", JOptionPane.WARNING_MESSAGE);
+		}
+		
+		return record;
+	}
+	
+	public void refresh(OfflineRecordVO record){
+		model = new OfflineRecordTableModel(record);
+		jtRecord.setModel(model);
 	}
 
 }

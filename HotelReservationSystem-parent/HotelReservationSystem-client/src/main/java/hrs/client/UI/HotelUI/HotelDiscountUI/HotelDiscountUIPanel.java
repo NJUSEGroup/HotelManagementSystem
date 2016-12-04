@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
 
 import hrs.client.UI.HotelUI.Components.HotelDiscountTableModel;
+import hrs.client.UI.HotelUI.HotelDiscountUI.Listener.DiscountSelectedListener;
 import hrs.client.util.ControllerFactory;
 import hrs.common.Controller.HotelController.IHotelDiscountController;
 import hrs.common.Exception.Promotion.HotelDiscountService.HotelDiscountNotFoundException;
@@ -38,6 +39,7 @@ public class HotelDiscountUIPanel extends JPanel {
 	private JButton jbDelete;
 	private HotelVO hotel;
 	private IHotelDiscountController controller;
+	private DiscountSelectedListener discountSelectedListener;
 	
 	/**
 	 * Create the panel.
@@ -74,6 +76,8 @@ public class HotelDiscountUIPanel extends JPanel {
 			JOptionPane.showMessageDialog(this, "您的酒店尚无促销策略", "促销策略不存在", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
+		discountSelectedListener = new DiscountSelectedListener(this);
+		
 		model = new HotelDiscountTableModel(discounts);
 		
 		jtDiscount = new JTable(model);
@@ -81,6 +85,7 @@ public class HotelDiscountUIPanel extends JPanel {
 		jtDiscount.setFont(new Font("宋体",Font.PLAIN,16));
 		jtDiscount.setRowHeight(40);
 		jtDiscount.setShowVerticalLines(false);
+		jtDiscount.addMouseListener(discountSelectedListener);
 		
 		jth = jtDiscount.getTableHeader(); 
 		jth.setPreferredSize(new Dimension(jtDiscount.getWidth(),40)); 
@@ -105,11 +110,13 @@ public class HotelDiscountUIPanel extends JPanel {
 		jbEdit.setBounds(710, 13, 90, 40);
 		jbEdit.setText("修改");
 		jbEdit.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jbEdit.setEnabled(false);
 		
 		jbDelete = new JButton();
 		jbDelete.setBounds(850, 13, 90, 40);
 		jbDelete.setText("删除");
 		jbDelete.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jbDelete.setEnabled(false);
 		
 		jpDiscount.add(jspDiscount);
 		
@@ -121,5 +128,26 @@ public class HotelDiscountUIPanel extends JPanel {
 		this.add(jpButton);
 	}
 	
-
+	public void discountSelected(){
+		if(jtDiscount.getSelectedRow() != -1){
+			jbEdit.setEnabled(true);
+		}
+	}
+	
+	public void getSelectedDiscount(){
+		int row = jtDiscount.getSelectedRow();
+		
+	}
+	
+	public void addDiscount(HotelDiscountVO discount){
+		controller.add(discount);
+	}
+	
+	public void editDiscount(HotelDiscountVO discount){
+		controller.update(discount);
+	}
+	
+	public void deleteDiscount(int id){
+		controller.delete(id);
+	}
 }

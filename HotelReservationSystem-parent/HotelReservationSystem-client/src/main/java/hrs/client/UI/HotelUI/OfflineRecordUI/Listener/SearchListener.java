@@ -1,26 +1,25 @@
-package hrs.client.UI.HotelUI.RoomUI.Listener;
+package hrs.client.UI.HotelUI.OfflineRecordUI.Listener;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import hrs.client.UI.HotelUI.RoomUI.AddRoomDialog;
+import hrs.client.UI.HotelUI.OfflineRecordUI.OfflineRecordUIPanel;
+import hrs.common.VO.OfflineRecordVO;
 
-public class AddConfirmListener implements MouseListener{
+public class SearchListener implements MouseListener{
 
-	private AddRoomDialog addRoomDialog;
+	private OfflineRecordUIPanel jpRecord;
 	
-	public AddConfirmListener(AddRoomDialog addRoomDialog){
-		this.addRoomDialog = addRoomDialog;
+	public SearchListener(OfflineRecordUIPanel jpRecord){
+		this.jpRecord = jpRecord;
 	}
 	
-	/**
-	 * 确认添加房间
-	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-		addRoomDialog.addConfirm();
+		OfflineRecordVO record = jpRecord.search();
+		jpRecord.refresh(record);
 	}
 
 	@Override
