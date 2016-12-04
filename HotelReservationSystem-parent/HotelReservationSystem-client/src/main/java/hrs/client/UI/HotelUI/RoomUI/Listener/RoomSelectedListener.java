@@ -3,25 +3,24 @@ package hrs.client.UI.HotelUI.RoomUI.Listener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import hrs.client.UI.HotelUI.RoomUI.EditRoomDialog;
+import hrs.client.UI.HotelUI.RoomUI.RoomUIPanel;
 
-
-public class EditCancelListener implements MouseListener{
-
-	private EditRoomDialog editRoomDialog;
+public class RoomSelectedListener implements MouseListener{
 	
-	public EditCancelListener(EditRoomDialog editRoomDialog){
-		this.editRoomDialog = editRoomDialog;
+	private RoomUIPanel jpRoom;
+	
+	public RoomSelectedListener(RoomUIPanel jpRoom){
+		this.jpRoom = jpRoom;
 	}
 	
 	/**
-	 * 取消修改房间信息
-	 */
+	 * 当表格中的某类房间被选中时，修改按钮可用
+	 */	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-		editRoomDialog.editCancel();
+		jpRoom.roomSelected();
 	}
 
 	@Override
@@ -47,4 +46,6 @@ public class EditCancelListener implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 }

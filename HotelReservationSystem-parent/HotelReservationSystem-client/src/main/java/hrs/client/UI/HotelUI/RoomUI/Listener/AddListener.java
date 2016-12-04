@@ -13,6 +13,9 @@ public class AddListener implements MouseListener{
 		this.jpRoom = jpRoom;
 	}
 	
+	/**
+	 * 添加按钮被点击，弹出添加房间对话框
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub

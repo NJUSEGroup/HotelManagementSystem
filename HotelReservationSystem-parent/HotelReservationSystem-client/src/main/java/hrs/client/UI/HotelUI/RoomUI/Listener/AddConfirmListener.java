@@ -14,6 +14,9 @@ public class AddConfirmListener implements MouseListener{
 		this.addRoomDialog = addRoomDialog;
 	}
 	
+	/**
+	 * 确认添加房间
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub

@@ -14,6 +14,9 @@ public class AddCancelListener implements MouseListener{
 		this.addRoomDialog = addRoomDialog;
 	}
 	
+	/**
+	 * 取消添加房间
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub

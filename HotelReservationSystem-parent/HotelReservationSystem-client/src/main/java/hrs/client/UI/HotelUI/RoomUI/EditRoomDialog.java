@@ -14,6 +14,8 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
 
 import hrs.client.UI.HotelUI.RoomUI.RoomUIPanel;
+import hrs.client.UI.HotelUI.RoomUI.Listener.EditCancelListener;
+import hrs.client.UI.HotelUI.RoomUI.Listener.EditConfirmListener;
 import hrs.common.VO.RoomVO;
 import hrs.common.util.type.RoomType;
 
@@ -36,9 +38,11 @@ public class EditRoomDialog extends JDialog {
 	private JButton jbConfirm;
 	private JButton jbCancel;
 	private RoomUIPanel jpRoomUI;
+	private EditConfirmListener editConfirmListener;
+	private EditCancelListener editCancelListener;
 
 	/**
-	 * Create the dialog.
+	 * 初始化修改房间对话框
 	 */
 	public EditRoomDialog(RoomUIPanel jpRoom) {
 		init(jpRoom);
@@ -94,17 +98,21 @@ public class EditRoomDialog extends JDialog {
 		jtfRoomMoney.setBounds(150, 131, 145, 30);
 		jtfRoomMoney.setEditable(true);
 		
+		editConfirmListener = new EditConfirmListener(this);
+		
 		jbConfirm = new JButton();
 		jbConfirm.setFont(new Font("宋体", Font.PLAIN, 16));
 		jbConfirm.setText("确定");
 		jbConfirm.setBounds(92, 13, 70, 40);
-	//	jbConfirm.addMouseListener();
+		jbConfirm.addMouseListener(editConfirmListener);
+		
+		editCancelListener = new EditCancelListener(this);
 		
 		jbCancel = new JButton();
 		jbCancel.setFont(new Font("宋体", Font.PLAIN, 16));
 		jbCancel.setText("取消");
 		jbCancel.setBounds(264, 13, 70, 40);
-	//	jbCancel.addMouseListener();
+		jbCancel.addMouseListener(editCancelListener);
 		
 		jpRoom.add(jlRoomType);
 		jpRoom.add(jlRoomNum);
@@ -125,6 +133,9 @@ public class EditRoomDialog extends JDialog {
 		this.setVisible(true);
 	}
 	
+	/**
+	 * 确认修改房间信息
+	 */
 	public void editConfirm(){
 		RoomVO editRoom = new RoomVO();
 		
@@ -173,6 +184,9 @@ public class EditRoomDialog extends JDialog {
 		}
 	}
 	
+	/**
+	 * 取消修改房间信息
+	 */
 	public void editCancel(){
 		this.dispose();
 	}

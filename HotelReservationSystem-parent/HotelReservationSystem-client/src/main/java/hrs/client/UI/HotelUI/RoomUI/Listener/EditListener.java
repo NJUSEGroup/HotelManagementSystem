@@ -12,11 +12,17 @@ public class EditListener implements MouseListener{
 	public EditListener(RoomUIPanel jpRoom){
 		this.jpRoom = jpRoom;
 	}
+	
+	/**
+	 * 点击修改按钮，弹出修改房间对话框
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-		jpRoom.edit();
+		if(jpRoom.isEditEnable()){
+			jpRoom.edit();
+		}
 	}
 
 	@Override

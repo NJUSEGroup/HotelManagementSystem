@@ -14,6 +14,9 @@ public class EditConfirmListener implements MouseListener{
 		this.editRoomDialog = editRoomDialog;
 	}
 	
+	/**
+	 * 确认修改房间信息
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
