@@ -1,15 +1,30 @@
 package hrs.client.UI.HotelUI.OfflineRecordUI;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.JTableHeader;
 
+import hrs.client.UI.HotelUI.Components.HotelDiscountTableModel;
+import hrs.client.UI.HotelUI.Components.OfflineRecordTableModel;
+import hrs.client.util.ControllerFactory;
+import hrs.common.Controller.HotelController.IOfflineRecordController;
+import hrs.common.Exception.Promotion.HotelDiscountService.HotelDiscountNotFoundException;
+import hrs.common.VO.HotelDiscountVO;
 import hrs.common.VO.HotelVO;
+import hrs.common.VO.OfflineRecordVO;
 
 public class OfflineRecordUIPanel extends JPanel {
 
@@ -20,11 +35,16 @@ public class OfflineRecordUIPanel extends JPanel {
 	private JPanel jpSearch;
 	private JPanel jpRecord;
 	private JPanel jpButton;
+	private JScrollPane jspRecord;
 	private JLabel jlInput;
 	private JTextField jtfInput;
 	private JButton jbConfirm;
+	private JTable jtRecord;
+	private JTableHeader jth;
 	private JButton jbCheckin;
 	private JButton jbCheckout;
+	private OfflineRecordTableModel model;
+	private IOfflineRecordController controller;
 	
 	/**
 	 * Create the panel.
@@ -67,6 +87,32 @@ public class OfflineRecordUIPanel extends JPanel {
 		jbConfirm.setBounds(362, 15, 90, 40);
 		jbConfirm.setText("确认");
 		jbConfirm.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		
+		controller = ControllerFactory.getOfflineRecordController();
+		
+		List<OfflineRecordVO> records = new ArrayList<OfflineRecordVO>();
+		
+		model = new OfflineRecordTableModel(records);
+		
+		jtRecord = new JTable(model);
+		jtRecord.setBackground(new Color(211, 237, 249));
+		jtRecord.setFont(new Font("宋体",Font.PLAIN,16));
+		jtRecord.setRowHeight(40);
+		jtRecord.setShowVerticalLines(false);
+		
+		jth = jtRecord.getTableHeader(); 
+		jth.setPreferredSize(new Dimension(jtRecord.getWidth(),40)); 
+		jth.setBackground(new Color(222, 237, 249));
+		jth.setEnabled(false);
+		jth.setBorder(new EmptyBorder(0,0,0,0));
+		jth.setFont(new Font("宋体", Font.PLAIN, 19));
+		
+		jspRecord = new JScrollPane(jtRecord);
+		jspRecord.setBounds(10, 10, 1060, 622);
+		jspRecord.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		jspRecord.setOpaque(false);
+		jspRecord.getViewport().setOpaque(false);
+		jspRecord.setBackground(Color.WHITE);
 		
 		jbCheckin = new JButton();
 		jbCheckin.setBounds(715, 13, 90, 40);

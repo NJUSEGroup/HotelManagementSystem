@@ -3,35 +3,21 @@ package hrs.client.UI.HotelUI.HotelOrderUI.Listener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderMainPanel;
 import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderUIPanel;
-import hrs.common.VO.OrderVO;
 
-public class DetailListener implements MouseListener{
+public class OrderSelectedListener implements MouseListener{
 	
-	private HotelOrderMainPanel jpMain;
 	private HotelOrderUIPanel jpOrderList;
 	
-	public DetailListener(HotelOrderMainPanel jpMain, HotelOrderUIPanel jpOrderList){
-		this.jpMain = jpMain;
+	public OrderSelectedListener(HotelOrderUIPanel jpOrderList){
 		this.jpOrderList = jpOrderList;
 	}
 	
-	/**
-	 * 显示所选择的订单的详细信息
-	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-		int row = jpOrderList.getSelectedRow();
-		
-		if(row != -1){
-			OrderVO order = jpOrderList.getSelectedOrder(row);
-			jpMain.showDetail(order);
-		}
-		
-		
+		jpOrderList.isOrderSelected();
 	}
 
 	@Override
