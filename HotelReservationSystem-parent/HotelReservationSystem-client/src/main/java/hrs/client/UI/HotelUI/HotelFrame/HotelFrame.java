@@ -7,6 +7,7 @@ import java.awt.EventQueue;
 
 import hrs.client.UI.HotelUI.HotelDiscountUI.HotelDiscountUIPanel;
 import hrs.client.UI.HotelUI.HotelFrame.Listener.MenuListListener;
+import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderMainPanel;
 import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderUIPanel;
 import hrs.client.UI.HotelUI.HotelUI.HotelUIPanel;
 import hrs.client.UI.HotelUI.OfflineRecordUI.OfflineRecordUIPanel;
@@ -14,13 +15,16 @@ import hrs.client.UI.HotelUI.RoomUI.RoomUIPanel;
 import hrs.client.util.ControllerFactory;
 import hrs.common.Controller.HotelController.IHotelController;
 import hrs.common.Exception.HotelService.HotelNotFoundException;
+import hrs.common.Exception.OrderService.OrderNotFoundException;
 import hrs.common.Exception.RoomService.RoomNotFoundException;
 import hrs.common.POJO.OfflineRecordPO;
 import hrs.common.VO.HotelVO;
+import hrs.common.VO.OrderVO;
 import hrs.common.VO.StaffVO;
 
 import java.awt.Font;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -41,7 +45,7 @@ public class HotelFrame extends JFrame {
 	private JLabel jlHotelDiscount;
 	private JLabel jlOfflineRecord;
 	private HotelUIPanel jpHotelUI;
-	private HotelOrderUIPanel jpHotelOrderUI;
+	private HotelOrderMainPanel jpHotelOrderUI;
 	private RoomUIPanel jpRoomUI;
 	private HotelDiscountUIPanel jpHotelDiscountUI;
 	private OfflineRecordUIPanel jpOfflineRecordUI;
@@ -69,12 +73,13 @@ public class HotelFrame extends JFrame {
 	/**
 	 * 初始化酒店管理中心界面主框架
 	 * @throws RoomNotFoundException 
+	 * @throws OrderNotFoundException 
 	 */
-	public HotelFrame(/**StaffVO staff**/)  throws HotelNotFoundException, RoomNotFoundException{
+	public HotelFrame(/**StaffVO staff**/)  throws RoomNotFoundException{
 		init(/**staff**/);
 	}
 	
-	public void init(/**StaffVO staff**/) throws HotelNotFoundException, RoomNotFoundException{
+	public void init(/**StaffVO staff**/)throws RoomNotFoundException{
 		//this.staff = staff;
 		//this.hotel = staff.hotel;
 		controller = ControllerFactory.getHotelController();
@@ -85,7 +90,7 @@ public class HotelFrame extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+	
 		this.setSize(1366, 768);
 		this.setLocationRelativeTo(null);
 		this.setTitle("酒店预订系统");
@@ -98,7 +103,7 @@ public class HotelFrame extends JFrame {
 		card = new CardLayout();
 		
 		jpHotelUI = new HotelUIPanel(hotel);
-		jpHotelOrderUI = new HotelOrderUIPanel(hotel);
+		jpHotelOrderUI = new HotelOrderMainPanel(hotel);
 		jpRoomUI = new RoomUIPanel(hotel);
 		jpHotelDiscountUI = new HotelDiscountUIPanel(hotel);
 		jpOfflineRecordUI = new OfflineRecordUIPanel(hotel);
@@ -203,26 +208,19 @@ public class HotelFrame extends JFrame {
 	public void show(String label){
 		if(label.equals("酒店信息")){
 			card.show(jpCard, "1");
-			jpHotelUI.showHotelInfo();
 		}
 		else if(label.equals("订单管理")){
 			card.show(jpCard, "2");
-			System.out.println("2");
-			//jpHotelOrderUI.show();
+			jpHotelOrderUI.refresh();
 		}
 		else if(label.equals("录入客房")){
 			card.show(jpCard, "3");
-			System.out.println("3");
-			//jpRoomUI.show();
 		}
 		else if(label.equals("促销策略")){
 			card.show(jpCard, "4");
-			System.out.println("4");
-			//jpHotelDiscountUI.show();
 		}
 		else if(label.equals("线下入住")){
 			card.show(jpCard, "5");
-			System.out.println("5");
 		}
 	}
 	
