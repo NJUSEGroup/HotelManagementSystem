@@ -24,6 +24,10 @@ import hrs.common.util.type.RoomType;
 
 public class RoomUIPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3459435356780911369L;
 	private JPanel jpRoom;
 	private JPanel jpButton;
 	private JScrollPane jspRoom;

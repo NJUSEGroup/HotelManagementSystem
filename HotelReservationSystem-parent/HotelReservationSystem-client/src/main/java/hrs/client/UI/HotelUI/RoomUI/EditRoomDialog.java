@@ -1,7 +1,6 @@
 package hrs.client.UI.HotelUI.RoomUI;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -20,6 +19,10 @@ import hrs.common.util.type.RoomType;
 
 public class EditRoomDialog extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2803056740619493737L;
 	private final JPanel contentPanel = new JPanel();
 	private JPanel jpRoom;
 	private JPanel jpButton;

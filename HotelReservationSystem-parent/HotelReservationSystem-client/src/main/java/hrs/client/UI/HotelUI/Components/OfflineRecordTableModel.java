@@ -7,7 +7,6 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 import hrs.common.VO.OfflineRecordVO;
-import hrs.common.VO.RoomVO;
 import hrs.common.util.DateHelper;
 
 public class OfflineRecordTableModel implements TableModel{

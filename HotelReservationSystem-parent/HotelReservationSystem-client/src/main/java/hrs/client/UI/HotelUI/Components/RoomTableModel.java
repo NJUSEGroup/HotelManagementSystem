@@ -6,9 +6,7 @@ import java.util.List;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
-import hrs.common.VO.OrderVO;
 import hrs.common.VO.RoomVO;
-import hrs.common.util.DateHelper;
 
 public class RoomTableModel implements TableModel{
 

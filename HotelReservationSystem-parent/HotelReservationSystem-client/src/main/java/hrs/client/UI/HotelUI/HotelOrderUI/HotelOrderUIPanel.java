@@ -1,6 +1,5 @@
 package hrs.client.UI.HotelUI.HotelOrderUI;
 
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -18,11 +17,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicSliderUI.ScrollListener;
 import javax.swing.table.JTableHeader;
 
 import hrs.client.UI.HotelUI.Components.OrderListTableModel;
-import hrs.client.UI.HotelUI.HotelOrderDetailUI.HotelOrderDetailUIPanel;
 import hrs.client.UI.HotelUI.HotelOrderUI.Listener.DetailListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.Listener.SearchByIdOrUsernameListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.Listener.SearchByOrderTypeListener;
@@ -35,14 +32,18 @@ import hrs.common.util.type.OrderStatus;
 
 public class HotelOrderUIPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -978383534264507721L;
 	private JPanel jpSearch;
 	private JPanel jpOrder;
 	private JPanel jpButton;
 	private JScrollPane jspOrderList;
 	private JLabel jlOrderType;
 	private JLabel jlSearch;
-	private JComboBox jcbOrderType;
-	private JComboBox jcbSearch;
+	private JComboBox<String> jcbOrderType;
+	private JComboBox<String> jcbSearch;
 	private JTextField jtfSearch;
 	private JButton jbConfirm1;
 	private JButton jbConfirm2;
@@ -107,14 +108,14 @@ public class HotelOrderUIPanel extends JPanel {
 		jlSearch.setHorizontalAlignment(SwingConstants.CENTER);
 		jlSearch.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		
-		jcbOrderType = new JComboBox(new DefaultComboBoxModel(new String[] {"未执行", "已执行", "异常", "已撤销"}));
+		jcbOrderType = new JComboBox<String>(new DefaultComboBoxModel<String>(new String[] {"未执行", "已执行", "异常", "已撤销"}));
 		jcbOrderType.setBounds(130, 20, 230, 30);
 		jcbOrderType.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jcbOrderType.setOpaque(true);
 		jcbOrderType.setBackground(Color.WHITE);
 		jcbOrderType.setEditable(false);
 		
-		jcbSearch = new JComboBox(new DefaultComboBoxModel(new String[] {"用户名", "订单号"}));
+		jcbSearch = new JComboBox<String>(new DefaultComboBoxModel<String>(new String[] {"用户名", "订单号"}));
 		jcbSearch.setBounds(130, 100, 230, 30);
 		jcbSearch.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jcbSearch.setOpaque(true);
@@ -163,19 +164,15 @@ public class HotelOrderUIPanel extends JPanel {
 		jbDelay.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbDelay.setEnabled(false);
 		
-		List<OrderVO> orders = this.searchByOrderType("未执行");
-		List<OrderVO> orders1 = this.searchByOrderType("已执行");
-		List<OrderVO> orders2 = this.searchByOrderType("异常");
-		List<OrderVO> orders3 = this.searchByOrderType("已撤销");
-		if(orders1.size()!=0){
-			orders.addAll(orders1);
-		}
-		if(orders2.size()!=0){
-			orders.addAll(orders2);
-		}
-		if(orders2.size()!=0){
-			orders.addAll(orders3);
-		}
+		List<OrderVO> orders = new ArrayList<OrderVO>();
+		List<OrderVO> unexecutedOrders = this.searchByOrderType("未执行");
+		List<OrderVO> executedOrders = this.searchByOrderType("已执行");
+		List<OrderVO> abnormalOrders = this.searchByOrderType("异常");
+		List<OrderVO> cancelOrders = this.searchByOrderType("已撤销");
+		orders.addAll(unexecutedOrders);
+		orders.addAll(executedOrders);
+		orders.addAll(abnormalOrders);
+		orders.addAll(cancelOrders);
 		
 		orderListTableModel = new OrderListTableModel(orders);
 		

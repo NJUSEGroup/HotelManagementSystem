@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderUIPanel;
-import hrs.common.Exception.OrderService.OrderNotFoundException;
 import hrs.common.VO.OrderVO;
 
 public class SearchByIdOrUsernameListener implements MouseListener{
@@ -25,8 +24,8 @@ public class SearchByIdOrUsernameListener implements MouseListener{
 		// TODO Auto-generated method stub
 		
 		List<OrderVO> orderList = new ArrayList<OrderVO>();
-		String username;
-		int id;
+		String username = null;
+		int id = 0;
 		
 		String searchInfo = jpHotelOrder.getSearchInfo();
 		

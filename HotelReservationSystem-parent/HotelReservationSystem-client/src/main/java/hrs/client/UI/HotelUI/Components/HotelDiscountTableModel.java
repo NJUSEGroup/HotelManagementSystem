@@ -8,7 +8,6 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 import hrs.common.VO.HotelDiscountVO;
-import hrs.common.VO.RoomVO;
 import hrs.common.util.DateHelper;
 
 public class HotelDiscountTableModel implements TableModel{

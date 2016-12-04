@@ -12,6 +12,10 @@ import hrs.common.VO.OrderVO;
 
 public class HotelOrderMainPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5549552621347857705L;
 	private CardLayout card;
 	private HotelOrderUIPanel jpOrderList;
 	private HotelOrderDetailUIPanel jpOrderDetail;
@@ -33,8 +37,8 @@ public class HotelOrderMainPanel extends JPanel {
 		this.setSize(1080, 722);
 		this.setBackground(new Color(211, 237, 249));
 		
-		this.add(jpOrderList, "1");
-		this.add(jpOrderDetail, "2");
+		this.add(jpOrderList, "jpOrderList");
+		this.add(jpOrderDetail, "jpOrderDetail");
 		
 	}
 	
@@ -42,7 +46,7 @@ public class HotelOrderMainPanel extends JPanel {
 	 * 显示酒店订单管理界面
 	 */
 	public void showList(){
-		card.show(this, "1");
+		card.show(this, "jpOrderList");
 	}
 	
 	/**
@@ -59,7 +63,7 @@ public class HotelOrderMainPanel extends JPanel {
 	 * @param order
 	 */
 	public void showDetail(OrderVO order){
-		card.show(this, "2");
+		card.show(this, "jpOrderDetail");
 		jpOrderDetail.showDetailInfo(order);
 	}
 	

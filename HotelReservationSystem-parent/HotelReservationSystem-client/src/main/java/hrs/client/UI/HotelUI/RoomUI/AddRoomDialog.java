@@ -1,10 +1,8 @@
 package hrs.client.UI.HotelUI.RoomUI;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Font;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -19,19 +17,18 @@ import javax.swing.border.EmptyBorder;
 import hrs.client.UI.HotelUI.RoomUI.RoomUIPanel;
 import hrs.client.UI.HotelUI.RoomUI.Listener.AddCancelListener;
 import hrs.client.UI.HotelUI.RoomUI.Listener.AddConfirmListener;
-import hrs.client.util.ControllerFactory;
-import hrs.common.Controller.HotelController.IRoomController;
 import hrs.common.Exception.RoomService.RoomNotFoundException;
-import hrs.common.VO.HotelVO;
 import hrs.common.VO.RoomVO;
 import hrs.common.util.type.RoomType;
 
-import java.awt.event.ActionListener;
 import java.util.List;
-import java.awt.event.ActionEvent;
 
 public class AddRoomDialog extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4148886207645624250L;
 	private final JPanel contentPanel = new JPanel();
 	private JPanel jpRoom;
 	private JPanel jpButton;
@@ -39,15 +36,13 @@ public class AddRoomDialog extends JDialog {
 	private JLabel jlRoomNum;
 	private JLabel jlRoomMoney;
 	private JLabel jlRMB;
-	private JComboBox jcbRoomType;
+	private JComboBox<String> jcbRoomType;
 	private JSpinner jsRoomNum;
 	private JTextField jtfMoney;
 	private JButton jbConfirm;
 	private JButton jbCancel;
-	private IRoomController roomController;
 	private AddCancelListener addCancelListener;
 	private AddConfirmListener addConfirmListener;
-	private HotelVO theHotel;
 	private RoomUIPanel jpRoomUI;
 
 	/**
@@ -90,7 +85,7 @@ public class AddRoomDialog extends JDialog {
 		jlRMB.setText("元");
 		jlRMB.setBounds(323, 129, 80, 30);
 		
-		jcbRoomType = new JComboBox();
+		jcbRoomType = new JComboBox<String>();
 		jcbRoomType.setBounds(150, 15, 145, 30);
 		jcbRoomType.setEditable(false);
 		
@@ -146,8 +141,6 @@ public class AddRoomDialog extends JDialog {
 		jbCancel.setText("取消");
 		jbCancel.setBounds(264, 13, 70, 40);
 		jbCancel.addMouseListener(addCancelListener);
-		
-		roomController = ControllerFactory.getRoomController();
 		
 		jpRoom.add(jlRoomType);
 		jpRoom.add(jlRoomNum);
