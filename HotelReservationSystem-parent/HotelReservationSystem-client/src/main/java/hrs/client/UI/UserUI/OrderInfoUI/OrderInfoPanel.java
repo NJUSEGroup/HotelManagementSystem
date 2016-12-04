@@ -4,7 +4,7 @@ import java.awt.CardLayout;
 
 import javax.swing.JPanel;
 
-import hrs.client.UI.UserUI.ComComponents.CommonPanel;
+import hrs.client.UI.UserUI.Components.CommonPanel;
 import hrs.common.VO.OrderVO;
 import hrs.common.VO.UserVO;
 
@@ -17,11 +17,11 @@ public class OrderInfoPanel extends CommonPanel {
 	public OrderInfoPanel(UserVO userVO){
 		
 		this.userVO = userVO;
-		Init();
+		init();
 		
 	}
 	@Override
-	public void Init() {
+	public void init() {
 		
 		//面板初始化
 		setPanel();

@@ -36,10 +36,12 @@ public class AvailableHotel {
 		res.putAll(data);
 		HotelFilter filter = null;
 		for (FilterCondition condition : conditions) {
+			System.out.println(condition);
 			filter = SpringUtils.getBean(condition.getType().toString() + "Filter");
 			filter.setFilterCondition(condition);
 			filter.doFilter(res);
 		}
+		System.out.println(res.size());
 		return res;
 	}
 

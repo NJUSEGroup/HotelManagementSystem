@@ -4,7 +4,7 @@ import java.awt.CardLayout;
 
 import javax.swing.JPanel;
 
-import hrs.client.UI.UserUI.ComComponents.CommonPanel;
+import hrs.client.UI.UserUI.Components.CommonPanel;
 import hrs.client.util.ControllerFactory;
 import hrs.common.Controller.UserController.IUserHotelController;
 import hrs.common.VO.UserVO;
@@ -21,10 +21,10 @@ public class HotelPanel extends CommonPanel {
 	private IUserHotelController controller = ControllerFactory.getUserHotelController();
 	public HotelPanel(UserVO user){
 		this.user = user;
-		Init();
+		init();
 	}
 	@Override
-	public void Init() {
+	public void init() {
 		setCard();
 		
 	}

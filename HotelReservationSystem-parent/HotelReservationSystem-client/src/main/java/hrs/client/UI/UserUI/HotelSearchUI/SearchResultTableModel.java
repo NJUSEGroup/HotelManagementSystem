@@ -1,7 +1,10 @@
 package hrs.client.UI.UserUI.HotelSearchUI;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
@@ -11,10 +14,21 @@ import hrs.common.VO.RoomVO;
 
 public class SearchResultTableModel implements TableModel {
 	private Map<HotelVO, List<RoomVO>> hotels;
+	List<HotelVO> allInfo;
 	
 	
 	public SearchResultTableModel(Map<HotelVO, List<RoomVO>> hotels) {
 		this.hotels = hotels;
+		
+		
+		allInfo = new ArrayList<>();
+		Iterator<Entry<HotelVO, List<RoomVO>>> iter = hotels.entrySet().iterator();
+		while (iter.hasNext()) {
+			@SuppressWarnings("rawtypes")
+			Map.Entry entry = (Map.Entry) iter.next();
+			HotelVO key = (HotelVO) entry.getKey();
+			allInfo.add(key);
+		}
 		
 	}
 	
@@ -32,7 +46,8 @@ public class SearchResultTableModel implements TableModel {
 	@Override
 	public String getColumnName(int columnIndex) {
 		// TODO Auto-generated method stub
-		return null;
+		String[] l = {"酒店名称","酒店地址","星级","评分"};
+		return l[columnIndex];
 	}
 
 	@Override
@@ -49,8 +64,14 @@ public class SearchResultTableModel implements TableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		HotelVO currentInfo = allInfo.get(rowIndex);
+		List<String> list = new ArrayList<>();
+		list.add(currentInfo.name);
+		list.add(currentInfo.location.name+currentInfo.street);
+		list.add(currentInfo.star+"");
+		list.add(currentInfo.score+"");
+		
+		return list.get(columnIndex);
 	}
 
 	@Override

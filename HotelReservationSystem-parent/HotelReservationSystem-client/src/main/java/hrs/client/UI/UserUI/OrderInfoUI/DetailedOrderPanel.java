@@ -4,8 +4,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import hrs.client.UI.UserUI.ComComponents.CommonLabel;
-import hrs.client.UI.UserUI.ComComponents.CommonPanel;
+import hrs.client.UI.UserUI.Components.CommonLabel;
+import hrs.client.UI.UserUI.Components.CommonPanel;
 import hrs.client.UI.UserUI.OrderInfoUI.Listener.BackJBListener;
 import hrs.client.util.EnumHelper;
 
@@ -29,7 +29,7 @@ public class DetailedOrderPanel extends CommonPanel {
 	public DetailedOrderPanel(OrderVO vo,OrderInfoPanel panel) {
 		this.vo = vo;
 		this.panel = panel;
-		Init();
+		init();
 
 	}
 
@@ -112,7 +112,7 @@ public class DetailedOrderPanel extends CommonPanel {
 	}
 
 	@Override
-	public void Init() {
+	public void init() {
 		
 		JLabel idLabel = new CommonLabel("订单号", JLabel.LEFT);// "订单号"
 		JLabel placeLabel = new CommonLabel("下单时间", JLabel.LEFT);// "下单时间"

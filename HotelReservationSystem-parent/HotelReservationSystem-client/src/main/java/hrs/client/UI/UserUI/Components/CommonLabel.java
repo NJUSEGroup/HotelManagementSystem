@@ -1,4 +1,4 @@
-package hrs.client.UI.UserUI.ComComponents;
+package hrs.client.UI.UserUI.Components;
 
 import java.awt.Font;
 

@@ -30,6 +30,7 @@ public class HotelNameFilter extends HotelFilter {
 		HotelVO vo = null;
 		while (it.hasNext()) {
 			vo = it.next();
+			System.out.println(vo);
 			if (!vo.name.matches(".*" + condition.getHotelName() +".*")) {
 				it.remove();
 			}

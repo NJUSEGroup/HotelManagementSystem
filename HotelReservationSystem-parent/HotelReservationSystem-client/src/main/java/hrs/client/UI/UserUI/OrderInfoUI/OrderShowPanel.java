@@ -15,11 +15,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-import hrs.client.UI.UserUI.ComComponents.CommonLabel;
-import hrs.client.UI.UserUI.ComComponents.CommonPanel;
+import org.junit.validator.PublicClassValidator;
+
+import hrs.client.UI.UserUI.Components.CommonLabel;
+import hrs.client.UI.UserUI.Components.CommonPanel;
 import hrs.client.UI.UserUI.OrderInfoUI.Listener.DetailButtonLisener;
 import hrs.client.UI.UserUI.OrderInfoUI.Listener.EvalueButtonListener;
 import hrs.client.UI.UserUI.OrderInfoUI.Listener.StatusBoxListener;
+import hrs.client.UI.UserUI.OrderInfoUI.Listener.TableListener;
 import hrs.client.UI.UserUI.OrderInfoUI.Listener.revokeListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.EnumHelper;
@@ -57,11 +60,11 @@ public class OrderShowPanel extends CommonPanel {
 		//选框设置
 		setCombox();
 		
-		Init();
+		init();
 	}
 	
 	@Override
-	public void Init() {
+	public void init() {
 		
 		
 		//标签设置
@@ -94,57 +97,15 @@ public class OrderShowPanel extends CommonPanel {
 		revokeButton.setBounds(880, 640, 120, 40);
 		revokeButton.addActionListener(new revokeListener(this));
 		
+		revokeButton.setEnabled(false);
+		evalueButton.setEnabled(false);
+		detailButton.setEnabled(false);
+		
 		add(revokeButton);
 		add(detailButton);
 		add(evalueButton);
 		
-//		evalueButton.setEnabled(false);
-//		revokeButton.setEnabled(false);
-//		detailButton.setEnabled(false);
 		
-		//当列表没有选中项时，按钮应不可点击
-		//用线程监测列表选中状态
-		buttonThread();
-		
-		
-	}
-
-	
-	
-
-	private void buttonThread() {
-		Thread thread = new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				while(true){
-					if(table.getSelectedRowCount() == 0){
-						evalueButton.setEnabled(false);
-						revokeButton.setEnabled(false);
-						detailButton.setEnabled(false);	
-				}
-					else{
-						evalueButton.setEnabled(true);
-						revokeButton.setEnabled(true);
-						detailButton.setEnabled(true);	
-					}
-					try {
-						Thread.sleep(200);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-					
-					
-					
-				}	
-			
-			
-		});
-		
-			thread.start();
-			
 	}
 
 	
@@ -158,6 +119,7 @@ public class OrderShowPanel extends CommonPanel {
 		scrollPane.setBorder(new EmptyBorder(0,0,0,0));
 		scrollPane.getViewport().setBackground(new Color(211, 237, 249));
 		scrollPane.setOpaque(true);
+		table.addMouseListener(new TableListener(this));
 		
 		add(scrollPane);
 		
@@ -279,5 +241,22 @@ public class OrderShowPanel extends CommonPanel {
 		controller.revoke(orderVO);
 		
 		table.setModel(getOrderList(EnumHelper.toStatus(status)));
+	}
+	
+	public void setRevokeFalse(){
+		revokeButton.setEnabled(false);
+	}
+
+	public void setButtonStatus() {
+		int i = table.getSelectedRow();
+		if(i != -1){
+			revokeButton.setEnabled(true);
+			evalueButton.setEnabled(true);
+			detailButton.setEnabled(true);
+		}
+		
+		if(statusBox.getSelectedItem().equals("已执行")||statusBox.getSelectedItem().equals("已撤销")){
+			revokeButton.setEnabled(false);
+		}
 	}
 }
