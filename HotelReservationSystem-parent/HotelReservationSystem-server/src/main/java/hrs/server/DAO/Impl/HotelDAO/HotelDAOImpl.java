@@ -2,6 +2,8 @@ package hrs.server.DAO.Impl.HotelDAO;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,6 +86,16 @@ public class HotelDAOImpl implements HotelDAO {
 									  + "where loc.id = :loc and circle.id = :circle";
 
 		return getSession().createQuery(hql).setCacheable(true).setParameter("loc", loc).setParameter("circle", circle).getResultList();
+	}
+	@Override
+	public HotelPO findByName(String name) {
+		String hql = "from HotelPO hotel where hotel.name = :name";
+		HotelPO po = null;
+		try{
+			po = (HotelPO) getSession().createQuery(hql).setParameter("name", name).getSingleResult();
+		}catch(NoResultException e){
+		}
+		return po;
 	}
 
 }

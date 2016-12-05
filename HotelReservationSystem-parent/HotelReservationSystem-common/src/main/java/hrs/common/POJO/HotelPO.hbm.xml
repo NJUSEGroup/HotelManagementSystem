@@ -8,7 +8,7 @@
 			<column name="HOTEL_ID" />
 			<generator class="native" />
 		</id>
-		<property name="name" type="java.lang.String">
+		<property name="name" type="java.lang.String" unique="true">
 			<column name="HOTEL_NAME" />
 		</property>
 		<property name="star" type="int">

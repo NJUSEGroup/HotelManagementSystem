@@ -39,5 +39,11 @@ public class OfflineRecordController implements IOfflineRecordController{
 	public List<RoomVO> findAvailableByHotelID(int hotelID, Date begin, Date end) {
 		return roomService.findAvailableByHotelID(hotelID, begin, end);
 	}
+
+
+	@Override
+	public List<OfflineRecordVO> findByHotelID(int hotelID) throws OfflineRecordNotFoundException {
+		return offlineRecordService.findByHotelID(hotelID);
+	}
 	
 }

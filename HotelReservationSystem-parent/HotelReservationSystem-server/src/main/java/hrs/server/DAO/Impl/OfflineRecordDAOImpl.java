@@ -1,5 +1,8 @@
 package hrs.server.DAO.Impl;
 
+
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,5 +67,14 @@ public class OfflineRecordDAOImpl implements OfflineRecordDAO {
 		getSession().update(offlinerecordpo);
 		return ResultMessage.SUCCESS;
 	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<OfflineRecordPO> findByHotelID(int hotelID) {
+		String hql = "from OfflineRecordPO offlineRecord inner join fetch offlineRecord.hotel h "
+				+ "where h.id = :hotelID";
+		
+		return getSession().createQuery(hql).setParameter("hotelID", hotelID).getResultList();
+	}
+	
 
 }

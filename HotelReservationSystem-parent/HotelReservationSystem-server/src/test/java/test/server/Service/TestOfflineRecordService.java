@@ -4,12 +4,14 @@ import static org.junit.Assert.assertEquals;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import hrs.common.Exception.OfflineRecordService.OfflineRecordNotFoundException;
 import hrs.common.VO.HotelVO;
@@ -51,5 +53,15 @@ public class TestOfflineRecordService {
 		OfflineRecordVO vo = service.findByID(5);
 //		service.checkout(vo);
 //		assertNotNull(service.findByID(5).checkoutTime);
+	}
+	
+	@Transactional
+	@Test
+	public void testFindByHotelID() throws OfflineRecordNotFoundException{
+		List<OfflineRecordVO> list = service.findByHotelID(1);
+		for(OfflineRecordVO vo:list){
+			System.out.println(vo);
+			assertEquals(vo.hotel.id,1);
+		}
 	}
 }

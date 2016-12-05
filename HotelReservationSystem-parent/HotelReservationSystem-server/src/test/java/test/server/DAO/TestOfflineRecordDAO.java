@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,5 +52,15 @@ public class TestOfflineRecordDAO {
 		po.setNum(2);
 		dao.update(po);
 		assertEquals(dao.findByID(5), po);
+	}
+	
+	@Transactional
+	@Test
+	public void testFindByHotelID(){
+		List<OfflineRecordPO> list = dao.findByHotelID(1);
+		for(OfflineRecordPO po:list){
+			System.out.println(po);
+			assertEquals(po.getHotel().getId(),1);
+		}
 	}
 }

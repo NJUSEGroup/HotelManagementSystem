@@ -12,4 +12,5 @@ public interface IOfflineRecordController {
 	void offlineCheckin(OfflineRecordVO offlinerecordvo);
 	void offlineCheckout(OfflineRecordVO offlinerecordvo);
 	List<RoomVO> findAvailableByHotelID(int hotelID,Date begin,Date end);
+	List<OfflineRecordVO> findByHotelID(int hotelID) throws OfflineRecordNotFoundException;
 }
