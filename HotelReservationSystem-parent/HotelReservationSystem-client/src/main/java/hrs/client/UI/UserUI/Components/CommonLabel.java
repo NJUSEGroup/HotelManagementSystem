@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import hrs.client.util.UIConstants;
 
 public class CommonLabel extends JLabel {
-	Font font = UIConstants.jlabelChinese;
+	Font font = UIConstants.JLABEL_FONT;
 	
 	public CommonLabel(){
 		init();

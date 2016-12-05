@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import hrs.client.util.UIConstants;
 
 public class UserInfoLabel extends JLabel {
-	Font font = UIConstants.jzoneChinese;
+	Font font = UIConstants.JZONE_FONT;
 	public UserInfoLabel(String s){
 		setFont(font);
 		

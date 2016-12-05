@@ -20,6 +20,11 @@ import hrs.common.VO.HotelVO;
  */
 public class HotelDetailInfoPanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4605076282300415151L;
+
 	private static int JL_HEIGHT = 30;//所有标签的高度均为40
 	
 	private static int LEFTJL_X = 10;//左侧一列标签的起始x位置
@@ -35,7 +40,7 @@ public class HotelDetailInfoPanel extends JPanel {
 	private void init(){
 		setSize(1020,290);
 		setLayout(null);
-		setBackground(UIConstants.jframe);
+		setBackground(UIConstants.JFRAME);
 		setBorder(BorderFactory.createLineBorder(new Color(145, 189, 214),3));
 		
 		JLabel detailJL = new CommonLabel("酒店详细信息", JLabel.LEFT);

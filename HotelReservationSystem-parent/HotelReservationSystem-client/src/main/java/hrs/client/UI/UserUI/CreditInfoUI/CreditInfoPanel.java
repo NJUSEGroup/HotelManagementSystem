@@ -26,7 +26,7 @@ public class CreditInfoPanel extends CommonPanel {
 	private String username;
 	private JScrollPane scrollPane;
 	
-	Font font = UIConstants.jlabelChinese;
+	Font font = UIConstants.JLABEL_FONT;
 	
 	public CreditInfoPanel(String username){
 		

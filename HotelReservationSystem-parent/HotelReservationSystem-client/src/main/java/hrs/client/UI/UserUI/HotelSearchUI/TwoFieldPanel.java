@@ -29,7 +29,7 @@ public class TwoFieldPanel extends JPanel {
 		Init();
 	}
 	private void Init() {
-		setBackground(UIConstants.jframe);
+		setBackground(UIConstants.JFRAME);
 		setLayout(null);
 		setSize(160,40);
 		
@@ -37,11 +37,11 @@ public class TwoFieldPanel extends JPanel {
 		jl.setBounds(65, 0, 30, 40);
 		add(jl);
 		
-		lowField.setFont(UIConstants.jlabelChinese);
+		lowField.setFont(UIConstants.JLABEL_FONT);
 		lowField.setBounds(0, 5, 65, 30);
 		add(lowField);
 		
-		highField.setFont(UIConstants.jlabelChinese);
+		highField.setFont(UIConstants.JLABEL_FONT);
 		highField.setBounds(95, 5, 65, 30);
 		add(highField);
 		

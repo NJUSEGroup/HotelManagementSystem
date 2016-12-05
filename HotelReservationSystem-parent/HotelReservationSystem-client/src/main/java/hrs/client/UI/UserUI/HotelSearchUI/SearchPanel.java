@@ -1,6 +1,7 @@
 package hrs.client.UI.UserUI.HotelSearchUI;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,7 +74,7 @@ public class SearchPanel extends JPanel {
 	private JComboBox<Integer> starBox;//星级选框
 	private JTextField hotelNameField;//酒店名称输入区
 	private JCheckBox hasOrderedBox;
-	
+	Font font = UIConstants.JLABEL_FONT;
 	private UserVO userVO;
 	
 	public SearchPanel(UserVO userVO){
@@ -85,7 +86,7 @@ public class SearchPanel extends JPanel {
 	private void Init() {
 		setSize(1020,286);
 		setLayout(null);
-		setBackground(UIConstants.jframe);
+		setBackground(UIConstants.JFRAME);
 		setBorder(BorderFactory.createLineBorder(new Color(145, 189, 214),3));
 		
 		JLabel conditionJL = new CommonLabel("查询条件", JLabel.LEFT);
@@ -104,7 +105,7 @@ public class SearchPanel extends JPanel {
 	private void setRightText() {
 		commercialBox = new JComboBox<>();
 		commercialBox.setBounds(RIGHTIN_X, JL_HEIGHT+GAP, 150, TEXT_H);
-		commercialBox.setFont(UIConstants.jlabelChinese);
+		commercialBox.setFont(font);
 		LocationVO defauleLoc = controller.findAllLocations().get(0);//将得到的位置列表中第一个设为默认位置
 		List<CommercialCircleVO> commercials = controller.findCircleByLoc(defauleLoc.id);
 		for(int i = 0;i<commercials.size();i++){
@@ -118,7 +119,7 @@ public class SearchPanel extends JPanel {
 		
 		roomNumField = new JTextField();
 		roomNumField.setBounds(RIGHTIN_X, JL_HEIGHT*3+GAP, 150, TEXT_H);
-		roomNumField.setFont(UIConstants.jlabelChinese);
+		roomNumField.setFont(font);
 		add(roomNumField);
 		
 		scoreField = new TwoFieldPanel();
@@ -126,8 +127,8 @@ public class SearchPanel extends JPanel {
 		add(scoreField);
 		
 		hasOrderedBox = new JCheckBox("我曾预订过的酒店");
-		hasOrderedBox.setFont(UIConstants.jlabelChinese);
-		hasOrderedBox.setBackground(UIConstants.jframe);
+		hasOrderedBox.setFont(font);
+		hasOrderedBox.setBackground(UIConstants.JFRAME);
 		hasOrderedBox.setSelected(false);//默认未选中
 		hasOrderedBox.setBounds(RIGHTJL_X, JL_HEIGHT*5, 200, 40);
 		add(hasOrderedBox);
@@ -139,7 +140,7 @@ public class SearchPanel extends JPanel {
 		for(int i = 0;i<locs.size();i++){
 			cityBox.addItem(locs.get(i).name);
 		}
-		cityBox.setFont(UIConstants.jlabelChinese);
+		cityBox.setFont(font);
 		cityBox.setBounds(LEFTIN_X, JL_HEIGHT+GAP, 150, TEXT_H);
 		cityBox.setSelectedItem(locs.get(0).name);
 		cityBox.addItemListener(new cityBoxListener(this));
@@ -155,7 +156,7 @@ public class SearchPanel extends JPanel {
 			roomTypeBox.addItem(l[i]);
 		}
 		roomTypeBox.setBounds(LEFTIN_X, JL_HEIGHT*3+GAP, 150, TEXT_H);
-		roomTypeBox.setFont(UIConstants.jlabelChinese);
+		roomTypeBox.setFont(font);
 		add(roomTypeBox);
 		
 		valueField = new TwoFieldPanel();
@@ -166,13 +167,13 @@ public class SearchPanel extends JPanel {
 		for(Integer i = 1;i<=5;i++){
 			starBox.addItem(i);
 		}
-		starBox.setFont(UIConstants.jlabelChinese);
+		starBox.setFont(font);
 		starBox.setBounds(LEFTIN_X, JL_HEIGHT*5+GAP, 60, TEXT_H);
 		add(starBox);
 		
 		hotelNameField = new JTextField();
 		hotelNameField.setBounds(LEFTIN_X, JL_HEIGHT*6+GAP, 300, TEXT_H);
-		hotelNameField.setFont(UIConstants.jlabelChinese);
+		hotelNameField.setFont(font);
 		add(hotelNameField);
 	}
 
@@ -308,6 +309,13 @@ public class SearchPanel extends JPanel {
 //		list.add(RoomTypeFilter);
 		
 		return list;
+	}
+
+	public RoomType getRoomType() {
+		if(roomTypeBox.getSelectedItem()!="无限制"){
+			return RoomType.getRoomType((String)roomTypeBox.getSelectedItem());
+		}
+		return null;
 	}
 	
 	

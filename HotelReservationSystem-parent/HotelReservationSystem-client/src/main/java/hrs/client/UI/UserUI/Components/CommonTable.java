@@ -22,7 +22,7 @@ public class CommonTable extends JTable {
 	 * 
 	 */
 	private static final long serialVersionUID = -731486404013187955L;
-	Font font = UIConstants.jlabelChinese;
+	Font font = UIConstants.JLABEL_FONT;
 
 	public CommonTable() {
 

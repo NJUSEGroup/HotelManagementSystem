@@ -37,7 +37,7 @@ public class DetailedOrderPanel extends CommonPanel {
 	private void infoInit() {
 		setButton();
 		infoPanel.setBounds(RIGHTP_X, RIGHTP_Y, this.getWidth(), this.getHeight()-RIGHTP_Y);
-		infoPanel.setBackground(UIConstants.jframe);
+		infoPanel.setBackground(UIConstants.JFRAME);
 		infoPanel.setLayout(null);
 		this.add(infoPanel);
 		
@@ -104,7 +104,7 @@ public class DetailedOrderPanel extends CommonPanel {
 
 	private void setButton() {
 		JButton backButton = new JButton("返回");
-		backButton.setFont(UIConstants.jlabelChinese);
+		backButton.setFont(UIConstants.JLABEL_FONT);
 		backButton.setBounds(this.getWidth()-RIGHTP_X-200,this.getHeight()-RIGHTP_Y-130, 100, 40);
 		infoPanel.add(backButton);
 		backButton.addActionListener(new BackJBListener(panel));

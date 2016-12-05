@@ -50,7 +50,7 @@ public class OrderShowPanel extends CommonPanel {
 	private JButton revokeButton;
 	
 	private OrderInfoPanel panel;
-	Font font = UIConstants.jlabelChinese;
+	Font font = UIConstants.JLABEL_FONT;
 	private JScrollPane scrollPane;
 	
 	private static int GAP_WIDTH = 30;
@@ -185,17 +185,17 @@ public class OrderShowPanel extends CommonPanel {
 		dialog.setSize(550, 360);
 		dialog.setLocationRelativeTo(null);//居于屏幕正中
 		dialog.setLayout(null);
-		dialog.getContentPane().setBackground(UIConstants.jframe);
+		dialog.getContentPane().setBackground(UIConstants.JFRAME);
 		
 		//评分标签
 		JLabel scoreJL = new JLabel("评分(0-10):");
-		scoreJL.setFont(UIConstants.jlabelChinese);
+		scoreJL.setFont(UIConstants.JLABEL_FONT);
 		scoreJL.setBounds(10, 20, 120, 40);
 		dialog.add(scoreJL);
 		
 		//评价标签
 		JLabel remarkJL = new JLabel("评价:");
-		remarkJL.setFont(UIConstants.jlabelChinese);
+		remarkJL.setFont(UIConstants.JLABEL_FONT);
 		remarkJL.setBounds(10, 70, 120, 30);
 		dialog.add(remarkJL);
 		
@@ -205,12 +205,12 @@ public class OrderShowPanel extends CommonPanel {
 			scoreBox.addItem(c);
 		}
 		scoreBox.setBounds(140, 20, 80, 40);
-		scoreBox.setFont(UIConstants.jlabelChinese);
+		scoreBox.setFont(UIConstants.JLABEL_FONT);
 		dialog.add(scoreBox);
 		
 		//评价的编辑域
 		JTextArea remarkArea = new JTextArea();
-		remarkArea.setFont(UIConstants.jlabelChinese);
+		remarkArea.setFont(UIConstants.JLABEL_FONT);
 		remarkArea.setLineWrap(true);
 		JScrollPane remarkJS = new JScrollPane(remarkArea);
 		remarkJS.setBounds(140, 70, 370, 150);
@@ -218,7 +218,7 @@ public class OrderShowPanel extends CommonPanel {
 		
 		//确认评价
 		JButton confirmJB = new JButton("确认");
-		confirmJB.setFont(UIConstants.jlabelChinese);
+		confirmJB.setFont(UIConstants.JLABEL_FONT);
 		confirmJB.setBounds(400, 250, 80, 30);
 		confirmJB.addActionListener(new ActionListener() {
 			

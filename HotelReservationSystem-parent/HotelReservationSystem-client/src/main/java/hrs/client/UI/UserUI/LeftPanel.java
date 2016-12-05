@@ -11,7 +11,11 @@ import javax.swing.JPanel;
 import hrs.client.util.UIConstants;
 
 public class LeftPanel extends JPanel {
-	Font font = UIConstants.jlabelChinese;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6861611151362941782L;
+	Font font = UIConstants.JLABEL_FONT;
 	Color color = new Color(83, 83, 214);
 	JPanel menuJP = new MenuPanel();
 	

@@ -1,6 +1,7 @@
 package hrs.client.UI.UserUI.HotelSearchUI;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -35,6 +36,7 @@ import hrs.common.util.FilterCondition.FilterCondition;
 import hrs.common.util.FilterCondition.NameFilterCondition;
 import hrs.common.util.FilterCondition.RoomTypeFilterCondition;
 import hrs.common.util.type.FilterType;
+import hrs.common.util.type.RoomType;
 
 public class HotelSearchPanel extends CommonPanel {
 	/**
@@ -50,7 +52,7 @@ public class HotelSearchPanel extends CommonPanel {
 	private JButton orderJB;
 	private JButton detailJB;
 	private HotelPanel panel;
-
+	Font font = UIConstants.JLABEL_FONT;
 	public HotelSearchPanel(UserVO user) {
 		this.user = user;
 		controller = ControllerFactory.getUserHotelController();
@@ -63,7 +65,7 @@ public class HotelSearchPanel extends CommonPanel {
 
 		contentPane = new JPanel();
 		contentPane.setBounds(0, 30, this.getWidth(), this.getHeight() - 30);
-		contentPane.setBackground(UIConstants.jframe);
+		contentPane.setBackground(UIConstants.JFRAME);
 		contentPane.setLayout(null);
 
 		add(contentPane);
@@ -87,7 +89,7 @@ public class HotelSearchPanel extends CommonPanel {
 	private void setdownButton() {
 
 		detailJB = new JButton("详细信息");
-		detailJB.setFont(UIConstants.jlabelChinese);
+		detailJB.setFont(font);
 		detailJB.setBounds(this.getWidth() - 330, 645, 120, 40);
 		detailJB.setEnabled(false);
 		detailJB.addActionListener(new detailListener(this));
@@ -95,7 +97,7 @@ public class HotelSearchPanel extends CommonPanel {
 
 		orderJB = new JButton("立即下单");
 		orderJB.setBounds(this.getWidth() - 180, 645, 120, 40);
-		orderJB.setFont(UIConstants.jlabelChinese);
+		orderJB.setFont(font);
 		orderJB.setEnabled(false);
 		contentPane.add(orderJB);
 
@@ -130,7 +132,7 @@ public class HotelSearchPanel extends CommonPanel {
 	private void setSearchButton() {
 		JButton searchJB = new JButton("搜索");
 		searchJB.setBounds(this.getWidth() - 160, 295, 100, 40);
-		searchJB.setFont(UIConstants.jlabelChinese);
+		searchJB.setFont(font);
 		contentPane.add(searchJB);
 		searchJB.addActionListener(new SearchListener(this));
 	}
@@ -140,11 +142,7 @@ public class HotelSearchPanel extends CommonPanel {
 		Map<HotelVO, List<RoomVO>> newmap = null;
 
 		List<FilterCondition> conditions = searchPanel.getFilters();// 从搜索条件面板中得到所有筛选条件
-		// List<FilterCondition> conditions = new ArrayList<>();
-		// NameFilterCondition nameFilter = new
-		// NameFilterCondition(FilterType.Name);
-		// nameFilter.setHotelName("22大酒店");
-		// conditions.add(nameFilter);
+		
 		if (conditions != null) {
 			newmap = controller.filterHotels(map, conditions);
 		}
@@ -187,7 +185,23 @@ public class HotelSearchPanel extends CommonPanel {
 			rooms = (List<RoomVO>) entry.getValue();
 		}
 		}
-		panel.showDetail(hotel,rooms);
+		
+		RoomType type = searchPanel.getRoomType();
+		
+		if(type == null){
+			panel.showDetail(hotel,rooms);
+		}
+		else if(type != null){
+			for(RoomVO vo:rooms){
+				if(vo.type.equals(type)){
+					List<RoomVO> result = new ArrayList<>();
+					result.add(vo);
+					panel.showDetail(hotel,result);
+				}
+			}
+		}
+		
+		
 		
 	}
 

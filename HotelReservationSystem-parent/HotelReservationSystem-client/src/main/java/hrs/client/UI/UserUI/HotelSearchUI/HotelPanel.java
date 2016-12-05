@@ -1,10 +1,12 @@
 package hrs.client.UI.UserUI.HotelSearchUI;
 
 import java.awt.CardLayout;
+import java.awt.Panel;
 import java.util.List;
 
 import javax.swing.JPanel;
 
+import hrs.client.UI.UserUI.Components.ComNeedBackPanel;
 import hrs.client.UI.UserUI.Components.CommonPanel;
 import hrs.client.util.ControllerFactory;
 import hrs.common.Controller.UserController.IUserHotelController;
@@ -12,13 +14,13 @@ import hrs.common.VO.HotelVO;
 import hrs.common.VO.RoomVO;
 import hrs.common.VO.UserVO;
 
-public class HotelPanel extends CommonPanel {
+public class HotelPanel extends ComNeedBackPanel {
 	private JPanel hotelCardPanel = new JPanel();
 	private CardLayout hotelCard = new CardLayout();
 	
 	private HotelSearchPanel hotelSearchPanel;
 	private PlaceOrderPanel placeOrderPanel;
-	private HotelDetailPanel hotelDetailInfoPanel;
+	private HotelDetailPanel hotelDetailPanel;
 	
 	private UserVO user;
 	private IUserHotelController controller = ControllerFactory.getUserHotelController();
@@ -44,9 +46,20 @@ public class HotelPanel extends CommonPanel {
 	}
 	
 	public void showDetail(HotelVO hotel,List<RoomVO> rooms){
-		hotelDetailInfoPanel = new HotelDetailPanel(hotel,rooms,user);
-		hotelCardPanel.add("hotelDetailInfo", hotelDetailInfoPanel);
-		hotelCard.show(hotelCardPanel, "hotelDetailInfo");
+		hotelDetailPanel = new HotelDetailPanel(hotel,rooms,user);
+		hotelDetailPanel.setHotelPanel(this);
+		hotelCardPanel.add("hotelDetail", hotelDetailPanel);
+		hotelCard.show(hotelCardPanel, "hotelDetail");
 	}
-
+	
+	@Override
+	public void back(){
+		hotelCard.show(hotelCardPanel, "hotelSearch");
+	}
+	@Override
+	public void placeOrder() {
+		
+	}
+	
+	
 }

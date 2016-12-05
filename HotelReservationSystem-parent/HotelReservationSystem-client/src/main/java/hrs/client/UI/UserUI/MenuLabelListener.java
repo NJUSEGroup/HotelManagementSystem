@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import hrs.client.util.UIConstants;
 
 public class MenuLabelListener extends MouseAdapter {
-	Color color = UIConstants.jlabel;
+	Color color = UIConstants.JLABEL;
 	private JLabel jl = new JLabel();
 	private static CardLayout card ;
 	private static JPanel panel ;

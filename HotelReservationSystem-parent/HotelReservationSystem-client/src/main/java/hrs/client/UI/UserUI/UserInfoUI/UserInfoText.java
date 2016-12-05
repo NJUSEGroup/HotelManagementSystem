@@ -8,7 +8,11 @@ import javax.swing.JTextField;
 import hrs.client.util.UIConstants;
 
 public class UserInfoText extends JTextField {
-	Font font = UIConstants.jlabelChinese;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2548607212487394410L;
+	Font font = UIConstants.JLABEL_FONT;
 	public UserInfoText(){
 		setFont(font);
 		setPreferredSize(new Dimension(180,40));
