@@ -1,6 +1,8 @@
 package hrs.server.Service.Impl.OfflineRecordService;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import hrs.common.Exception.OfflineRecordService.OfflineRecordNotFoundException;
 import hrs.common.POJO.OfflineRecordPO;
+import hrs.common.POJO.OrderPO;
 import hrs.common.VO.OfflineRecordVO;
+import hrs.common.VO.OrderVO;
 import hrs.server.DAO.Interface.OfflineRecordDAO;
 import hrs.server.Service.Interface.OfflineRecordService.OfflineRecordService;
 /**
@@ -71,5 +75,25 @@ public class OfflineRecordServiceImpl implements OfflineRecordService {
 		dao.update(new OfflineRecordPO(vo));
 	}
 	
+	@Transactional
+	@Override
+	public List<OfflineRecordVO> findByHotelID(int hotelID) throws OfflineRecordNotFoundException {
+		List<OfflineRecordPO> pos = dao.findByHotelID(hotelID);
+		if(pos.size() == 0){
+			throw new OfflineRecordNotFoundException();
+		}else{
+			return tranfer(pos);
+		}
+	}
+	
+	private List<OfflineRecordVO> tranfer(List<OfflineRecordPO> pos){
+		List<OfflineRecordVO> vos = new ArrayList<>();
+		OfflineRecordVO vo = null;
+		for(OfflineRecordPO po : pos){
+			vo = new OfflineRecordVO(po);
+			vos.add(vo);
+		}
+		return vos;
+	}
 
 }

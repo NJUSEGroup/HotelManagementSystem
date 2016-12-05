@@ -9,9 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import hrs.client.UI.WebStaffUI.HotelAndHotelstaffAddUI.HotelAddUIPanel;
-import hrs.client.UI.WebStaffUI.HotelAndHotelstaffAddUI.HotelStaffAddUIPanel;
+import hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddUIPanel;
+import hrs.client.UI.WebStaffUI.HotelAddUI.HotelStaffAddUIPanel;
 import hrs.client.UI.WebStaffUI.HotelStaffUI.HotelStaffUIPanel;
+import hrs.client.UI.WebStaffUI.WebMarketUI.AddWebMarketerDialog;
 import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketerUIPanel;
 import hrs.client.UI.WebStaffUI.WebStaffListener.WebStaffMenulistMouseListener;
 import hrs.client.UI.WebStaffUI.WebUserUI.ShowUserInfoPanel;
@@ -21,11 +22,16 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class WebStaffFrame extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6293618787121106494L;
 	private CardLayout cardLayout;
 	MenulistPanel menulistPanel;
 	private HotelAddUIPanel jpHotelAdd = new HotelAddUIPanel(this);
-	private HotelStaffAddUIPanel jpHotelStaffAdd= new HotelStaffAddUIPanel(this);
+	private HotelStaffAddUIPanel jpHotelStaffAdd= new HotelStaffAddUIPanel(this,jpHotelAdd);
 	private WebMarketerUIPanel jpWebMarketer= new WebMarketerUIPanel();
+//	private AddWebMarketerDialog addWebMarketerDialog=new AddWebMarketerDialog(jpWebMarketer);
 	private HotelStaffUIPanel jpHotelStaff= new HotelStaffUIPanel();
 	private WebUserUIPanel jpWebUser= new WebUserUIPanel(new ShowUserInfoPanel());
 	WebStaffMenulistMouseListener listener = new WebStaffMenulistMouseListener();

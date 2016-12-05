@@ -1,4 +1,4 @@
-package hrs.client.UI.WebStaffUI.HotelAndHotelstaffAddUI;
+package hrs.client.UI.WebStaffUI.HotelAddUI;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -7,10 +7,18 @@ import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import hrs.client.UI.WebStaffUI.WebStaffFrame;
-import hrs.client.UI.WebStaffUI.HotelAndHotelstaffAddUI.HotelAndHotelstaffAddListener.LastStepMouseListener;
+import hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddListener.ConfirmMouseListener;
+import hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddListener.LastStepMouseListener;
+import hrs.client.util.ControllerFactory;
+import hrs.common.Controller.WebStaffController.IWebStaffController;
+import hrs.common.Exception.StaffService.StaffExistedException;
+import hrs.common.VO.HotelVO;
+import hrs.common.VO.StaffVO;
+import hrs.common.util.type.StaffType;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -34,14 +42,19 @@ public class HotelStaffAddUIPanel extends JPanel {
 	private JTextField jtextRealName;
 	private LastStepMouseListener lastStepMouseListener;
 	private WebStaffFrame webStaffFrame;
+	private StaffVO staffVO;
+	private HotelVO hotelVO;
+	private HotelAddUIPanel hotelAddUIPanel;
+	private IWebStaffController controller;
+	private ConfirmMouseListener listener;
 
 	/**
 	 * Create the panel.
 	 */
-	public HotelStaffAddUIPanel(WebStaffFrame webStaffFrame) {
+	public HotelStaffAddUIPanel(WebStaffFrame webStaffFrame,HotelAddUIPanel hotelAddUIPanel) {
 		this.webStaffFrame=webStaffFrame;
+		this.hotelAddUIPanel=hotelAddUIPanel;
 		init();
-
 	}
 	public void init(){
 		this.setSize(1080, 722);
@@ -70,15 +83,13 @@ public class HotelStaffAddUIPanel extends JPanel {
 		jbLastStep.addMouseListener(lastStepMouseListener);
 		
 		jbConfirm = new JButton("确认");
-		jbConfirm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		jbConfirm.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
 		jbConfirm.setBackground(new Color(0, 160, 233));
 		jbConfirm.setForeground(Color.WHITE);
 		jbConfirm.setBorderPainted(false);
 		jbConfirm.setOpaque(true);
+		listener=new ConfirmMouseListener(this);
+		jbConfirm.addMouseListener(listener);
 		
 		jlPassword = new JLabel("密码");
 		jlPassword.setHorizontalAlignment(SwingConstants.LEFT);
@@ -210,6 +221,36 @@ public class HotelStaffAddUIPanel extends JPanel {
 	}
 	public void showHotelAddUIPanel(){
 		webStaffFrame.showHotelAddUIPanel();
+	}
+	public int passwordValid(){
+		if(jtextPassword.getText().equals(jtextPasswordConfirm.getText())){
+			return 1;
+		}else
+			return 0;
+	}
+	public void addHotel(){
+		controller=ControllerFactory.getWebStaffController();
+		hotelVO=this.hotelAddUIPanel.getHotelVO();
+		controller.addHotel(hotelVO);
+	}
+	public void addHotelStaff(){
+		String username=jtextHotelStaffUsrname.getText();
+		String password=jtextPassword.getText();
+//		String doublePassword=jtextPasswordConfirm.getText();
+		String realName=jtextRealName.getText();
+//		HotelVO hotelVO=this.hotelAddUIPanel.getHotelVO();
+		addHotel();
+		controller=ControllerFactory.getWebStaffController();
+//		HotelVO newHotelVO=
+		staffVO=new StaffVO(username, password, realName, StaffType.HotelStaff,hotelVO);
+//		System.out.println(staffVO);
+		try {
+			controller.addStaff(staffVO);
+			JOptionPane.showMessageDialog(null, "添加酒店成功！");
+		} catch (StaffExistedException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(hotelAddUIPanel, "此酒店已存在！", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 }

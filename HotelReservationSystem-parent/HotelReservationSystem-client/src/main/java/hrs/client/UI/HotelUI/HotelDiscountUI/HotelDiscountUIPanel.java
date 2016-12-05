@@ -89,7 +89,7 @@ public class HotelDiscountUIPanel extends JPanel {
 		
 		jth = jtDiscount.getTableHeader(); 
 		jth.setPreferredSize(new Dimension(jtDiscount.getWidth(),40)); 
-		jth.setBackground(new Color(222, 237, 249));
+		jth.setBackground(new Color(188, 226, 236));
 		jth.setEnabled(false);
 		jth.setBorder(new EmptyBorder(0,0,0,0));
 		jth.setFont(new Font("宋体", Font.PLAIN, 19));

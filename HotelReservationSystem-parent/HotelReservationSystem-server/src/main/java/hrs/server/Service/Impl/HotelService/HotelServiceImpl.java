@@ -49,6 +49,7 @@ public class HotelServiceImpl implements HotelService {
 		}
 	}
 
+	
 	@Transactional
 	@Override
 	public void update(HotelVO hotelvo) {
@@ -161,4 +162,24 @@ public class HotelServiceImpl implements HotelService {
 		update(hotel);
 	}
 
+	/**
+	 * 
+	 * @Title: findByName
+	 * @Description: TODO
+	 * @param name
+	 * @return
+	 * @throws HotelNotFoundException  
+	 * @see hrs.server.Service.Interface.HotelService.HotelService#findByName(java.lang.String)
+	 */
+	@Transactional
+	@Override
+	public HotelVO findByName(String name) throws HotelNotFoundException {
+		HotelPO po = dao.findByName(name);
+		if(po == null){
+			throw new HotelNotFoundException();
+		}else{
+			return new HotelVO(po);
+		}
+	}
+	
 }

@@ -10,4 +10,6 @@ public interface HotelDAO {
 	 ResultMessage update(HotelPO hotelpo);
 	 ResultMessage add(HotelPO hotelpo);
 	 List<HotelPO> find (int loc,int circle);
+	 HotelPO findByName(String name);
+	 
 }

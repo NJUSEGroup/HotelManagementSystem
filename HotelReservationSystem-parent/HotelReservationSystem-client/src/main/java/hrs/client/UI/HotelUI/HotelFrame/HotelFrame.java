@@ -94,7 +94,7 @@ public class HotelFrame extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setTitle("酒店预订系统");
 		getContentPane().setLayout(null);
-		this.getContentPane().setBackground(new Color(211, 237, 249));
+		this.getContentPane().setBackground(new Color(188, 226, 236));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.setVisible(true);
@@ -128,6 +128,9 @@ public class HotelFrame extends JFrame {
 		jlZone.setText("酒店管理中心");
 		jlZone.setHorizontalAlignment(SwingConstants.CENTER);
 		jlZone.setFont(new Font("方正兰亭超细黑简体", Font.BOLD, 25));
+		jlZone.setOpaque(false);
+		jlZone.setBackground(new Color(188, 226, 236));
+		jlZone.setForeground(new Color(0, 158, 157));
 		
 		jlIdentity = new JLabel();
 		jlIdentity.setBounds(0, 79, 263, 29);

@@ -28,4 +28,6 @@ public interface HotelService {
 	Map<HotelVO, List<RoomVO>> order(Map<HotelVO, List<RoomVO>> data,OrderRule rule, boolean isDecrease);
 
 	void  addRemark(HotelVO hotel, int score);
+	
+	HotelVO findByName(String name) throws HotelNotFoundException;
 }

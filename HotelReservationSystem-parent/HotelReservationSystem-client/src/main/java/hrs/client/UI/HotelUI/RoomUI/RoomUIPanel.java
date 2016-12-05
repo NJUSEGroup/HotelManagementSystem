@@ -87,7 +87,7 @@ public class RoomUIPanel extends JPanel {
 		
 		jthOrderList = jtRoom.getTableHeader(); 
 		jthOrderList.setPreferredSize(new Dimension(jtRoom.getWidth(),40)); 
-		jthOrderList.setBackground(new Color(222, 237, 249));
+		jthOrderList.setBackground(new Color(188, 226, 236));
 		jthOrderList.setEnabled(false);
 		jthOrderList.setBorder(new EmptyBorder(0,0,0,0));
 		jthOrderList.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 16));

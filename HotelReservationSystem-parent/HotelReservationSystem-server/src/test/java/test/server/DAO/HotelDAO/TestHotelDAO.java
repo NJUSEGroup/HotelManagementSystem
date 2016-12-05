@@ -1,6 +1,6 @@
 package test.server.DAO.HotelDAO;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -62,5 +62,21 @@ public class TestHotelDAO {
 		HotelPO po = new HotelPO("wuli韬韬",5,3, loc, circle, "good", "good",staff,"街道",1);
 		dao.add(po);
 		assertEquals(po, dao.findByID(po.getId()));
+	}
+	
+	@Transactional
+	@Test
+	public void testFindByName1(){
+		HotelPO po = dao.findByName("呼呼呼酒店");
+		System.out.println(po);
+		assertEquals(po.getName(),"呼呼呼酒店");
+	}
+	
+	@Transactional
+	@Test
+	public void testFindByName2(){
+		HotelPO po = dao.findByName("呼呼sd 大酒店");
+		System.out.println(po);
+		assertNull(po);
 	}
 }

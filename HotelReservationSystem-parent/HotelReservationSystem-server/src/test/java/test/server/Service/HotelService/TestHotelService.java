@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import hrs.common.Exception.HotelService.HotelNotFoundException;
 import hrs.common.Exception.OrderService.OrderNotFoundException;
@@ -403,6 +404,14 @@ public class TestHotelService {
 		list.add(c2);
 		Map<HotelVO, List<RoomVO>> res = service.filter(map,list);
 		assertEquals(res.size(),0);
+	}
+	
+	@Transactional
+	@Test
+	public void testFindByName() throws HotelNotFoundException{
+		HotelVO vo = service.findByName("呼呼呼酒店");
+		assertEquals(vo.name,"呼呼呼酒店");
+		System.out.println(vo);
 	}
 	
 	

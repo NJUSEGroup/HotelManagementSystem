@@ -59,7 +59,7 @@ public class ModifyUserInfoMouseListener implements MouseListener {
 		// TODO Auto-generated method stub
 		jbButton = (JButton) e.getSource();
 		// 鼠标离开标签时更换背景及字体色
-		jbButton.setBackground(UIConstants.jlabel);
+		jbButton.setBackground(UIConstants.JLABEL);
 		jbButton.setForeground(Color.white);
 	}
 

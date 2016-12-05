@@ -1,4 +1,4 @@
-package hrs.client.UI.WebMarketUI.CreditChargeUI.CreditChargeListener;
+package hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddListener;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
@@ -6,28 +6,32 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import hrs.client.UI.WebMarketUI.CreditChargeUI.CreditChargePanel;
+
+import hrs.client.UI.WebStaffUI.WebStaffFrame;
+import hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddUIPanel;
 import hrs.client.util.UIConstants;
 
-public class ChargeMouseListener implements MouseListener{
+public class NextStepMouseListener implements MouseListener{
 	private JButton jbButton;
-	private CreditChargePanel creditChargePanel;
-	private JTextField jtChargeValue;
-	public ChargeMouseListener(CreditChargePanel creditChargePanel,JTextField jtChargeValue) {
+	private HotelAddUIPanel hotelAddUIPanel;
+
+	public NextStepMouseListener(HotelAddUIPanel hotelAddUIPanel) {
 		// TODO Auto-generated constructor stub
-		this.jtChargeValue=jtChargeValue;
-		this.creditChargePanel=creditChargePanel;
+		this.hotelAddUIPanel=hotelAddUIPanel;
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(jtChargeValue.getText()==null||Integer.parseInt(jtChargeValue.getText())<0){
-			JOptionPane.showMessageDialog(creditChargePanel, "充值大于0的整数", "Error!", JOptionPane.ERROR_MESSAGE);
+//		System.out.println(hotelAddUIPanel.getHotelName());
+		if(hotelAddUIPanel.getHotelName().equals("")){
+			JOptionPane.showMessageDialog(hotelAddUIPanel, "请填写酒店名称！", "Error", JOptionPane.ERROR_MESSAGE);
 		}
-		creditChargePanel.charge(Integer.parseInt(jtChargeValue.getText()));
-	}
+		if(hotelAddUIPanel.getHotelName().equals("")==false){
+			hotelAddUIPanel.showHotalStaffAddUIPanel();
+		}
+		
+	}//!!!!!!!!!!!
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -55,8 +59,7 @@ public class ChargeMouseListener implements MouseListener{
 		// TODO Auto-generated method stub
 		jbButton = (JButton)e.getSource(); 
 		//鼠标离开标签时更换背景及字体色
-		jbButton.setBackground(UIConstants.JLABEL);
+		 jbButton.setBackground(UIConstants.JLABEL);
 		 jbButton.setForeground(Color.white);
 	}
-
 }

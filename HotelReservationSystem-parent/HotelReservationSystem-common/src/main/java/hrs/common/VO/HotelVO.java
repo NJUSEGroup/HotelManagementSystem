@@ -26,9 +26,7 @@ public class HotelVO implements Serializable {
 	public double lowValue;
 	public double highValue;
 	public Set<OrderStatus> status = new HashSet<>();
-	
-	
-	
+
 	public HotelVO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -64,7 +62,7 @@ public class HotelVO implements Serializable {
 	}
 
 	public HotelVO(String name, int star, double score, LocationVO location, CommercialCircleVO commercialCircle,
-			String profile, String service, String street,int remarkNum) {
+			String profile, String service, String street, int remarkNum) {
 		super();
 		this.name = name;
 		this.star = star;
@@ -76,6 +74,11 @@ public class HotelVO implements Serializable {
 		this.street = street;
 		this.remarkNum = remarkNum;
 	}
+
+//	public HotelVO(String name) {
+//		super();
+//		this.name = name;
+//	}
 
 	@Override
 	public int hashCode() {
@@ -165,7 +168,5 @@ public class HotelVO implements Serializable {
 				+ ", street=" + street + ", remarkNum=" + remarkNum + ", lowValue=" + lowValue + ", highValue="
 				+ highValue + "]";
 	}
-
-	
 
 }
