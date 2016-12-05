@@ -49,7 +49,7 @@ public class SearchPanel extends JPanel {
 	
 	
 	private static int JL_HEIGHT = 40;//所有标签的高度均为40
-	private static int JL_WIDTH = 105;//标签的高度均为40
+	private static int JL_WIDTH = 105;//标签的宽度均为105
 	private static int TEXT_H = 30;//输入域高度为30
 	private static int GAP = (JL_HEIGHT-TEXT_H)/2;//输入域保持对齐的位置偏移
 	
@@ -291,24 +291,22 @@ public class SearchPanel extends JPanel {
 		StarFilterCondition starFilter = new StarFilterCondition(FilterType.Star);
 //		ValueFilterCondition valueFilter = new ValueFilterCondition(FilterType.)
 		
-//		if(roomTypeBox.getSelectedItem()!="无限制"){
-//			RoomTypeFilter.setRoomType(RoomType.getRoomType((String)roomTypeBox.getSelectedItem()));;
-//			list.add(RoomTypeFilter);
-//		}
-//		if(hotelNameField.getText()!=null){
-//			nameFilter.setHotelName(hotelNameField.getText());
-//			list.add(nameFilter);
-//		}
-//		if(scoreField.getLow()!= null&&scoreField.getHigh()!=null){
-//			scoreFilter.setLow(scoreField.getLow());
-//			scoreFilter.setHigh(scoreField.getHigh());
-//			list.add(nameFilter);
-//		}
+		if(roomTypeBox.getSelectedItem()!="无限制"){
+			RoomTypeFilter.setRoomType(RoomType.getRoomType((String)roomTypeBox.getSelectedItem()));;
+			list.add(RoomTypeFilter);
+		}
+		if(hotelNameField.getText()!=null){
+			nameFilter.setHotelName(hotelNameField.getText());
+			list.add(nameFilter);
+		}
+		if(scoreField.getLow()!= null&&scoreField.getHigh()!=null){
+			scoreFilter.setLow(scoreField.getLow());
+			scoreFilter.setHigh(scoreField.getHigh());
+			list.add(nameFilter);
+		}
 //		RoomTypeFilter.setRoomType(RoomType.Standard);
 //		list.add(RoomTypeFilter);
 		
-		nameFilter.setHotelName("呼呼呼酒店");
-		list.add(nameFilter);
 		return list;
 	}
 	

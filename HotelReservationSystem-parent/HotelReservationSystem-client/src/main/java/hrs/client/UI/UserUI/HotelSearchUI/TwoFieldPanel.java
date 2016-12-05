@@ -48,12 +48,18 @@ public class TwoFieldPanel extends JPanel {
 	}
 	
 	public Integer getLow(){
-		int x = Integer.parseInt(lowField.getText());
-		return x;
+		if(lowField.getText()==""){
+			int x = Integer.parseInt(lowField.getText());
+			return x;
+		}
+		return null;
 	}
 	
 	public Integer getHigh(){
-		int x = Integer.parseInt(highField.getText());
-		return x;
+		if(highField.getText()==""){
+			int x = Integer.parseInt(highField.getText());
+			return x;
+		}
+		return null;
 	}
 }
