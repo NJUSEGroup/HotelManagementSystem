@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -20,8 +21,11 @@ import javax.swing.JTextField;
 import hrs.client.UI.WebStaffUI.HotelStaffUI.HotelStaffListener.SearchConfirmMouseListener;
 import hrs.client.util.ControllerFactory;
 import hrs.common.Controller.WebStaffController.IWebStaffController;
+import hrs.common.Exception.HotelService.HotelNotFoundException;
 import hrs.common.Exception.StaffService.StaffNotFoundExceptioon;
+import hrs.common.VO.HotelVO;
 import hrs.common.VO.StaffVO;
+import hrs.common.util.type.StaffType;
 import hrs.client.UI.WebStaffUI.HotelStaffUI.HotelStaffListener.ModifyHotelStaffMouseListener;
 
 import javax.swing.JButton;
@@ -41,8 +45,9 @@ public class HotelStaffUIPanel extends JPanel {
 	private JButton jbModifyHotelStaff;
 	private SearchConfirmMouseListener confirmMouseListener;
 	private ModifyHotelStaffMouseListener modifyHotelStaffMouseListener;
-	private List<StaffVO> staffVOs = null;
+//	private List<StaffVO> staffVOs = new ArrayList<>();
 	private IWebStaffController controller = ControllerFactory.getWebStaffController();
+	private StaffVO selection=new StaffVO();
 
 	/**
 	 * Create the panel.
@@ -104,7 +109,7 @@ public class HotelStaffUIPanel extends JPanel {
 		jbModifyHotelStaff.setForeground(Color.WHITE);
 		jbModifyHotelStaff.setBorderPainted(false);
 		jbModifyHotelStaff.setOpaque(true);
-		modifyHotelStaffMouseListener = new ModifyHotelStaffMouseListener();
+		modifyHotelStaffMouseListener = new ModifyHotelStaffMouseListener(this);
 		jbModifyHotelStaff.addMouseListener(modifyHotelStaffMouseListener);
 
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -174,62 +179,93 @@ public class HotelStaffUIPanel extends JPanel {
 	}
 
 	public List<StaffVO> search() {
-		String findTypeText=getSearchInput();
-		Object findTypeComboBox=jcomboBoxType.getSelectedItem();
+		List<StaffVO>staffVOs=new ArrayList<>();
+		String findTypeText = getSearchInput();
+		Object findTypeComboBox = jcomboBoxType.getSelectedItem();
 		if (getSearchInput().equals("")) {
+			clear();
 			JOptionPane.showMessageDialog(null, "请输入酒店名称或酒店工作人员名称", "Error！", JOptionPane.ERROR_MESSAGE);
 		} else {
-			if(findTypeComboBox.equals("酒店名称")){
+			if (findTypeComboBox.equals("酒店名称")) {
 				try {
 					staffVOs = controller.findStaffByHotelName(findTypeText);
-					// System.out.println(staffVOs);
-				} catch (StaffNotFoundExceptioon e1) {
+				} catch (StaffNotFoundExceptioon e) {
 					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(null, "酒店及工作人员不存在！", "No Such HotelStaff",
-							JOptionPane.ERROR_MESSAGE);
+					clear();
+					JOptionPane.showMessageDialog(null, "酒店及工作人员不存在！", "No Such HotelStaff", JOptionPane.ERROR_MESSAGE);
 				}
 			}
-			if(findTypeComboBox.equals("酒店工作人员名")){
+			if (findTypeComboBox.equals("酒店工作人员名")) {
 				try {
 					staffVOs.add(controller.findStaffByUsername(findTypeText));
 				} catch (StaffNotFoundExceptioon e1) {
 					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(null, "此酒店工作人员不存在！", "No Such HotelStaff",
-							JOptionPane.ERROR_MESSAGE);
+					clear();
+					JOptionPane.showMessageDialog(null, "此酒店工作人员不存在！", "No Such HotelStaff", JOptionPane.ERROR_MESSAGE);
 				}
-			}			
+			}
 		}
-		System.out.println(staffVOs);
+		// System.out.println(staffVOs);
 		return staffVOs;
 	}
 
 	// list按顺序加到joptionpane里面
 	public void selectHotelAndShow() {
 		List<StaffVO> toAddStaffVOs = search();
-		if (toAddStaffVOs.size() == 1) {
-			StaffVO vo = toAddStaffVOs.get(0);
-			jtextHotelStaffUsername.setText(vo.username);
-			jtextPassword.setText(vo.password);
-			jtextRealName.setText(vo.name);
-			jtextHotelName.setText(vo.hotel.name);
+		// System.out.println(toAddStaffVOs);
+		// System.out.println(toAddStaffVOs.size());
+		if (toAddStaffVOs.size() ==1) {
+			selection = toAddStaffVOs.get(0);
+			jtextHotelStaffUsername.setText(selection.username);
+			jtextPassword.setText(selection.password);
+			jtextRealName.setText(selection.name);
+			jtextHotelName.setText(selection.hotel.name);
 		}
 		if (toAddStaffVOs.size() > 1) {
-			StaffVO[] vos = new StaffVO[toAddStaffVOs.size()];
-			for (int i = 0; i < toAddStaffVOs.size(); i++) {
-				vos[i] = toAddStaffVOs.get(i);
+//			StaffVO[] vos = new StaffVO[toAddStaffVOs.size()];
+//			for (int i = 0; i < toAddStaffVOs.size(); i++) {
+//				vos[i] = toAddStaffVOs.get(i);
+//			}
+			String[]vos=new String[toAddStaffVOs.size()];
+			for(int i=0;i<toAddStaffVOs.size();i++){
+				vos[i]=toAddStaffVOs.get(i).hotel.name;
+				
 			}
-			StaffVO selection = (StaffVO) JOptionPane.showInputDialog(null, "搜索到多家酒店，请选择一家：\n", "酒店选择",
+ 			selection = (StaffVO) JOptionPane.showInputDialog(null, "搜索到多家酒店，请选择一家：\n", "酒店选择",
 					JOptionPane.PLAIN_MESSAGE, null, vos, toAddStaffVOs.get(0));
 			jtextHotelStaffUsername.setText(selection.username);
 			jtextPassword.setText(selection.password);
 			jtextRealName.setText(selection.name);
 			jtextHotelName.setText(selection.hotel.name);
 		}
-
+		toAddStaffVOs=new ArrayList<>();
 	}
 
 	public String getSearchInput() {
 		return jtextInput.getText();
+	}
+
+	public void modify() {
+		String newUsername=jtextHotelStaffUsername.getText();
+		String newPassword=jtextPassword.getText();
+		String newRealName=jtextRealName.getText();
+		String newHotelName=jtextHotelName.getText();
+//		HotelVO hotelVO=new HotelVO(newHotelName, selection.hotel.star, selection.hotel.score, selection.hotel.location, selection.hotel.commercialCircle, selection.hotel.profile, selection.hotel.service, selection.hotel.street, selection.hotel.remarkNum);
+		HotelVO hotelVO=new HotelVO();
+		try {
+			controller=ControllerFactory.getWebStaffController();
+			hotelVO = controller.findHotelByHotelName(newHotelName);
+		} catch (HotelNotFoundException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "此酒店不存在！", "No Such Hotel", JOptionPane.ERROR_MESSAGE);
+		}
+		controller.updateStaff(new StaffVO(newUsername, newPassword, newRealName, StaffType.HotelStaff, hotelVO));
+	}
+	public void clear(){
+		jtextHotelStaffUsername.setText("");
+		jtextPassword.setText("");
+		jtextRealName.setText("");
+		jtextHotelName.setText("");
 	}
 
 }
