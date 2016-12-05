@@ -154,10 +154,12 @@ public class ShowUserInfoPanel extends JPanel {
 		return jtextPassword.getText();
 	}
 	public String getRealName(){
+//		System.out.println(jtextRealName.getText());
 		return jtextRealName.getText();
 	}
 	public java.util.Date getBirthday(){
 		String string=jtextBirthday.getText();
+//		System.out.println(jtextBirthday.getText());
 		java.util.Date date = null;
 		try {
 		   date=DateHelper.parse(string);
@@ -169,9 +171,11 @@ public class ShowUserInfoPanel extends JPanel {
 		return date;
 	}
 	public String getPhone(){
+//		System.out.println(jtextPhone.getText());
 		return jtextPhone.getText();
 	}
 	public String getEnterpriseName(){
+//		System.out.println(jtextEnterpriseName.getText());
 		return jtextEnterpriseName.getText();
 	}
 //	public int getCreditValue(){

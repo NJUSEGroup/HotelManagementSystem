@@ -19,6 +19,9 @@ import javax.swing.table.JTableHeader;
 
 import hrs.client.UI.HotelUI.Components.HotelDiscountTableModel;
 import hrs.client.UI.HotelUI.Components.OfflineRecordTableModel;
+import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.CheckinListener;
+import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.CheckoutListener;
+import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.RecordSelectedListener;
 import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.SearchListener;
 import hrs.client.util.ControllerFactory;
 import hrs.common.Controller.HotelController.IOfflineRecordController;
@@ -48,6 +51,9 @@ public class OfflineRecordUIPanel extends JPanel {
 	private OfflineRecordTableModel model;
 	private IOfflineRecordController controller;
 	private SearchListener searchListener;
+	private RecordSelectedListener recordSelectedListener;
+	private CheckinListener checkinListener;
+	private CheckoutListener checkoutListener;
 	
 	/**
 	 * Create the panel.
@@ -94,9 +100,11 @@ public class OfflineRecordUIPanel extends JPanel {
 		jbConfirm.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbConfirm.addMouseListener(searchListener);
 		
+		recordSelectedListener = new RecordSelectedListener(this);
+		
 		controller = ControllerFactory.getOfflineRecordController();
 		
-		OfflineRecordVO record = new OfflineRecordVO();
+		List<OfflineRecordVO> record = new ArrayList<OfflineRecordVO>();
 		
 		model = new OfflineRecordTableModel(record);
 		
@@ -105,10 +113,11 @@ public class OfflineRecordUIPanel extends JPanel {
 		jtRecord.setFont(new Font("宋体",Font.PLAIN,16));
 		jtRecord.setRowHeight(40);
 		jtRecord.setShowVerticalLines(false);
+		jtRecord.addMouseListener(recordSelectedListener);
 		
 		jth = jtRecord.getTableHeader(); 
 		jth.setPreferredSize(new Dimension(jtRecord.getWidth(),40)); 
-		jth.setBackground(new Color(222, 237, 249));
+		jth.setBackground(new Color(188, 226, 236));
 		jth.setEnabled(false);
 		jth.setBorder(new EmptyBorder(0,0,0,0));
 		jth.setFont(new Font("宋体", Font.PLAIN, 19));
@@ -120,19 +129,29 @@ public class OfflineRecordUIPanel extends JPanel {
 		jspRecord.getViewport().setOpaque(false);
 		jspRecord.setBackground(Color.WHITE);
 		
+		checkinListener = new CheckinListener(this);
+		
 		jbCheckin = new JButton();
 		jbCheckin.setBounds(715, 13, 90, 40);
 		jbCheckin.setText("入住");
 		jbCheckin.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jbCheckin.setEnabled(false);
+		jbCheckin.addMouseListener(checkinListener);
+		
+		checkoutListener = new CheckoutListener(this);
 		
 		jbCheckout = new JButton();
 		jbCheckout.setBounds(869, 13, 90, 40);
 		jbCheckout.setText("退房");
 		jbCheckout.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jbCheckout.setEnabled(false);
+		jbCheckout.addMouseListener(checkoutListener);
 		
 		jpSearch.add(jlInput);
 		jpSearch.add(jtfInput);
 		jpSearch.add(jbConfirm);
+		
+		jpRecord.add(jspRecord);
 		
 		jpButton.add(jbCheckin);
 		jpButton.add(jbCheckout);
@@ -142,23 +161,68 @@ public class OfflineRecordUIPanel extends JPanel {
 		this.add(jpButton);
 	}
 	
-	public OfflineRecordVO search(){
-		int id = Integer.valueOf(jtfInput.getText());
+	public int getID(){
+		return Integer.valueOf(jtfInput.getText());
+	}
+	
+	public List<OfflineRecordVO> searchRecordByID(int id){
 		OfflineRecordVO record = new OfflineRecordVO();
+		List<OfflineRecordVO> records = new ArrayList<OfflineRecordVO>();
 		
 		try {
 			record = controller.findOfflineRecordByID(id);
+			records.add(record);
 		} catch (OfflineRecordNotFoundException e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, "该记录不存在！", "错误", JOptionPane.WARNING_MESSAGE);
 		}
 		
-		return record;
+		return records;
 	}
 	
-	public void refresh(OfflineRecordVO record){
+	public void refresh(List<OfflineRecordVO> record){
 		model = new OfflineRecordTableModel(record);
 		jtRecord.setModel(model);
 	}
+	
+	public void recordSelected(){
+		if(jtRecord.getSelectedRow() != -1){
+			jbCheckin.setEnabled(true);
+			jbCheckout.setEnabled(true);
+		}
+	}
+	
+	public void recordNotSelected(){
+		jbCheckin.setEnabled(false);
+		jbCheckout.setEnabled(false);
+	}
+	
+	public OfflineRecordVO getSelectedRecord(){
+		int row = jtRecord.getSelectedRow();
+		int id = Integer.valueOf((String) jtRecord.getValueAt(row, 0));
+		OfflineRecordVO record = searchRecordByID(id).get(0);
+		return record;
+	}
+	
+	public void checkin(OfflineRecordVO theRecord){
+		controller.offlineCheckin(theRecord);
+		JOptionPane.showMessageDialog(null, "线下入住记录已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);
+	}
 
+	public void checkout(OfflineRecordVO theRecord){
+		controller.offlineCheckout(theRecord);
+		JOptionPane.showMessageDialog(null, "线下入住记录已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	/**
+	 * 获得相应按钮的可用状态
+	 */
+	public boolean isButtonEnable(String buttonName){
+		if(buttonName.equals("入住")){
+			return jbCheckin.isEnabled();
+		}
+		else{
+			return jbCheckout.isEnabled();
+		}
+	}
 }

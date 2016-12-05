@@ -1,4 +1,4 @@
-package hrs.client.UI.WebStaffUI.HotelAndHotelstaffAddUI;
+package hrs.client.UI.WebStaffUI.HotelAddUI;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -10,7 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import hrs.client.UI.WebStaffUI.WebStaffFrame;
-import hrs.client.UI.WebStaffUI.HotelAndHotelstaffAddUI.HotelAndHotelstaffAddListener.NextStepMouseListener;
+import hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddListener.NextStepMouseListener;
+import hrs.common.VO.HotelVO;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -144,6 +145,11 @@ public class HotelAddUIPanel extends JPanel {
 	}
 	public void showHotalStaffAddUIPanel(){
 		webStaffFrame.showHotelStaffAddUIPanel();
+	}
+	public HotelVO getHotelVO(){
+		HotelVO hotelVO=new HotelVO(getHotelName(), 0, 0, null, null,null, null, null, 0);
+//		HotelVO hotelVO=new HotelVO(getHotelName());
+		return hotelVO;
 	}
 
 }

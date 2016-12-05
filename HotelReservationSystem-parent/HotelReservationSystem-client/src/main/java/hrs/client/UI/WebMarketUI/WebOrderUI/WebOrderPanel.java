@@ -42,7 +42,7 @@ import javax.swing.DefaultComboBoxModel;
 public class WebOrderPanel extends JPanel {
 	private WebOrderModel model;
 	private List<OrderVO> webOrderList;
-	private IWebOrderController orderController;
+	private IWebOrderController orderController = ControllerFactory.getWebOrderController();
 	private JTextField textField;
 	private JTable jTable;
 	private JTableHeader jTableHeader;
@@ -59,6 +59,7 @@ public class WebOrderPanel extends JPanel {
 	public WebOrderPanel() {
 		orderController = ControllerFactory.getWebOrderController();
 		orderList = getAbnormalOrder();
+		// System.out.println(orderList);
 		setSize(1067, 714);
 		setBackground(new Color(211, 237, 249));
 		// setBorder(BorderFactory.createLineBorder(new Color(145, 189, 214),
@@ -79,7 +80,7 @@ public class WebOrderPanel extends JPanel {
 		jlSearch.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
 
 		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] { "用户名", "订单号", "酒店名称" }));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "用户名", "订单号" }));
 		// comboBox.getSelectedItem();
 
 		textField = new JTextField();
@@ -150,6 +151,7 @@ public class WebOrderPanel extends JPanel {
 
 		try {
 			list = orderController.findOrderByOrderStatus(OrderStatus.Abnormal);
+			// System.out.println(list.get(0).user.username);
 		} catch (OrderNotFoundException e) {
 			JOptionPane.showMessageDialog(this, "此时异常订单为空！", "NullAbnormalOrder", JOptionPane.INFORMATION_MESSAGE);
 
@@ -179,52 +181,47 @@ public class WebOrderPanel extends JPanel {
 		jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
 	}
 
-	public void search(){
-		String input=textField.getText();
-//		System.out.println(input);
-		WebOrderModel searchModel;
-		switch(comboBox.getSelectedIndex()){
-		case 0:try {
-				orderController.findOrderByUsername(input);
+	public void search() {
+		String input = textField.getText();
+		switch (comboBox.getSelectedIndex()) {
+		case 0:
+			WebOrderModel searchModel;
+			try {
+				List<OrderVO> orderVoList = orderController.findOrderByUsernameAndStatus(input, OrderStatus.Abnormal);
+				searchModel = new WebOrderModel(orderVoList);
+				jTable.setModel(searchModel);
+				jlNumberOfPO.setText("共 " + orderVoList.size() + " 条记录");
+				jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
 			} catch (OrderNotFoundException e) {
 				// TODO Auto-generated catch block
-				searchModel=new WebOrderModel(null);
-				jTable.setModel(searchModel);
-				JOptionPane.showMessageDialog(this, "不存在该用户的异常订单！","Error",JOptionPane.ERROR_MESSAGE);
+//				searchModel = new WebOrderModel(null);
+//				jTable.setModel(searchModel);
+				JOptionPane.showMessageDialog(this, "不存在该用户的异常订单！", "Error", JOptionPane.ERROR_MESSAGE);
 			}
-		
+
 			break;
-		case 1:try {
-			orderController.findOrderByID(Integer.parseInt(input));
-		} catch (OrderNotFoundException e) {
-			// TODO Auto-generated catch block
-			searchModel=new WebOrderModel(null);
-			jTable.setModel(searchModel);
-			JOptionPane.showMessageDialog(this, "不存在该异常订单！","Error",JOptionPane.ERROR_MESSAGE);
-		}
-			break;
-		case 2:try {
-			orderController.findOrderByUsername(input);
-		} catch (OrderNotFoundException e) {
-			// TODO Auto-generated catch block
-			searchModel=new WebOrderModel(null);
-			jTable.setModel(searchModel);
-			JOptionPane.showMessageDialog(this, "不存在该酒店的异常订单！","Error",JOptionPane.ERROR_MESSAGE);
-		}
+		case 1:
+			WebOrderModel searchByIDModel;
+			try {
+				OrderVO orderVO = orderController.findOrderByID(Integer.parseInt(input));
+				List<OrderVO> list = new ArrayList<>();
+				list.add(orderVO);
+				searchByIDModel = new WebOrderModel(list);
+				jTable.setModel(searchByIDModel);
+				jlNumberOfPO.setText("共 " + list.size() + " 条记录");
+				jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
+			} catch (OrderNotFoundException e) {
+				// TODO Auto-generated catch block
+//				searchByIDModel = new WebOrderModel(null);
+//				jTable.setModel(searchByIDModel);
+				JOptionPane.showMessageDialog(this, "不存在该异常订单！", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 			break;
 		default:
 			break;
 		}
-		orderController = ControllerFactory.getWebOrderController();
-		webOrderList = getAbnormalOrder();
-		searchModel = new WebOrderModel(webOrderList);
-		jTable.setModel(searchModel);
-		jlNumberOfPO.setText("共 " + webOrderList.size() + " 条记录");
-		jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
-	
-		
 	}
-	
+
 	public OrderVO getSelected() {
 		if (jTable.getSelectedRow() != -1) {
 			return model.getValue(jTable.getSelectedRow());
@@ -232,11 +229,11 @@ public class WebOrderPanel extends JPanel {
 			return null;
 	}
 
-//	public static void main(String[] args) {
-//		JFrame frame = new JFrame();
-//		frame.setSize(1000, 700);
-//		WebOrderPanel p = new WebOrderPanel();
-//		frame.add(p);
-//		frame.setVisible(true);
-//	}
+	// public static void main(String[] args) {
+	// JFrame frame = new JFrame();
+	// frame.setSize(1000, 700);
+	// WebOrderPanel p = new WebOrderPanel();
+	// frame.add(p);
+	// frame.setVisible(true);
+	// }
 }

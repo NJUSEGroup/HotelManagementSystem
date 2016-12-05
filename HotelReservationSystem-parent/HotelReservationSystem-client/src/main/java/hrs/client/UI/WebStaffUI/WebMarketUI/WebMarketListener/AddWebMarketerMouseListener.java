@@ -9,17 +9,17 @@ import javax.swing.JButton;
 import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketerUIPanel;
 import hrs.client.util.UIConstants;
 
-public class jbSearchWebMarketerConfirmMouseListener implements MouseListener{
+public class AddWebMarketerMouseListener implements MouseListener{
 	private JButton jbButton = new JButton();
 	private WebMarketerUIPanel WebMarketerUIPanel;
-	public jbSearchWebMarketerConfirmMouseListener(WebMarketerUIPanel webMarketerUIPanel) {
+	public AddWebMarketerMouseListener(WebMarketerUIPanel webMarketerUIPanel) {
 		// TODO Auto-generated constructor stub
 		this.WebMarketerUIPanel=webMarketerUIPanel;
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		WebMarketerUIPanel.searchAndShow();
+		WebMarketerUIPanel.showDialog();
 	}
 
 	@Override
@@ -48,10 +48,9 @@ public class jbSearchWebMarketerConfirmMouseListener implements MouseListener{
 		// TODO Auto-generated method stub
 		jbButton = (JButton) e.getSource();
 		// 鼠标离开标签时更换背景及字体色
-		jbButton.setBackground(UIConstants.jlabel);
+		jbButton.setBackground(UIConstants.JLABEL);
 		jbButton.setForeground(Color.white);
 	}
 
-	
 
 }
