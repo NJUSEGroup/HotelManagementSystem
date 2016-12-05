@@ -3,23 +3,23 @@ package hrs.client.UI.HotelUI.OfflineRecordUI.Listener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import hrs.client.UI.HotelUI.OfflineRecordUI.OfflineRecordUIPanel;
+import hrs.client.UI.HotelUI.OfflineRecordUI.CheckinDialog;
 
-public class CheckinListener implements MouseListener{
+public class CheckinConfirmListener implements MouseListener{
 
-	private OfflineRecordUIPanel jpRecord;
+	private CheckinDialog checkinDialog;
 	
-	public CheckinListener(OfflineRecordUIPanel jpRecord){
-		this.jpRecord = jpRecord;
+	public CheckinConfirmListener(CheckinDialog checkinDialog){
+		this.checkinDialog = checkinDialog;
 	}
 	
 	/**
-	 * 点击入住按钮，弹出入住对话框
+	 * 确认执行入住操作
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-			jpRecord.checkin();
+		checkinDialog.checkinConfirm();
 	}
 
 	@Override

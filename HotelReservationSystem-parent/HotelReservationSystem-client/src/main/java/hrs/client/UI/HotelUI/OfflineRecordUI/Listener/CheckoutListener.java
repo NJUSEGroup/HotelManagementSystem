@@ -13,11 +13,15 @@ public class CheckoutListener implements MouseListener{
 		this.jpRecord = jpRecord;
 	}
 	
+	/**
+	 * 执行退房操作
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(jpRecord.isButtonEnable("退房")){
+		if(jpRecord.isCheckoutEnable()){
 			jpRecord.checkout(jpRecord.getSelectedRecord());
+			jpRecord.refresh(jpRecord.getAllRecords());
 		}
 	}
 

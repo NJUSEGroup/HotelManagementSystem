@@ -16,6 +16,9 @@ public class SearchListener implements MouseListener{
 		this.jpRecord = jpRecord;
 	}
 	
+	/**
+	 * 通过线下入住记录编号查询相应的线下入住记录
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -23,7 +26,8 @@ public class SearchListener implements MouseListener{
 		jpRecord.recordNotSelected();
 		
 		int id = jpRecord.getID();
-		List<OfflineRecordVO> record = jpRecord.searchRecordByID(id);
+		List<OfflineRecordVO> record = new ArrayList<OfflineRecordVO>();
+		record = jpRecord.searchRecordByID(id);
 		jpRecord.refresh(record);
 	}
 
