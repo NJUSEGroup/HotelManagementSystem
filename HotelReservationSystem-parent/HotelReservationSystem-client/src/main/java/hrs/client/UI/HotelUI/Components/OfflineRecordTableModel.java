@@ -11,9 +11,9 @@ import hrs.common.util.DateHelper;
 
 public class OfflineRecordTableModel implements TableModel{
 
-	private OfflineRecordVO offlineRecord;
+	private List<OfflineRecordVO> offlineRecord;
 	
-	public OfflineRecordTableModel(OfflineRecordVO offlineRecord){
+	public OfflineRecordTableModel(List<OfflineRecordVO> offlineRecord){
 		this.offlineRecord = offlineRecord;
 	}
 	
@@ -21,7 +21,7 @@ public class OfflineRecordTableModel implements TableModel{
 	public int getRowCount() {
 		// TODO Auto-generated method stub
 		
-		return 1;
+		return offlineRecord.size();
 	}
 
 	@Override
@@ -65,66 +65,85 @@ public class OfflineRecordTableModel implements TableModel{
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
 		
+		OfflineRecordVO record = offlineRecord.get(rowIndex);
+		
 		//ID
 		if (columnIndex == 0) {
-			String id = Integer.toString(offlineRecord.id);
+			String id = Integer.toString(record.id);
 			
-			return id;
+			if(id.equals("0")){
+				return "";
+			}
+			else{
+				return id;
+			}
 		}
 		
 		//入住时间
 		else if (columnIndex == 1){
-			String checkinDate = DateHelper.format(offlineRecord.checkinTime);
+			String checkinDate = DateHelper.format(record.checkinTime);
 			
 			return checkinDate;
 		}
 		
 		//预计离开时间
 		else if (columnIndex == 2) {
-			String expectedCheckoutDate = DateHelper.format(offlineRecord.expectedCheckoutTime);
+			String expectedCheckoutDate = DateHelper.format(record.expectedCheckoutTime);
 			
 			return expectedCheckoutDate;
 		}
 		
 		//退房时间
 		else if (columnIndex == 3){
-			String checkoutDate = DateHelper.format(offlineRecord.checkoutTime);
+			String checkoutDate = DateHelper.format(record.checkoutTime);
 			
 			return checkoutDate;
 		}
 		
 		//房间类型
 		else if (columnIndex == 4){
-			String roomType = offlineRecord.type.toString();
+			String roomType = "";
 			
-			if(roomType.equals("Single")){
-				return "单人房";
+			try {
+				roomType = record.type.toString();
+				if(roomType.equals("Single")){
+					return "单人房";
+				}
+				else if(roomType.equals("Double")){
+					return "双人房";
+				}
+				else if(roomType.equals("KingSize")){
+					return "大床间";
+				}
+				else if(roomType.equals("Standard")){
+					return "标准间";
+				}
+				else if(roomType.equals("Deluxe")){
+					return "豪华间";
+				}
+				else if(roomType.equals("Business")){
+					return "商务标间";
+				}
+				else{
+					return "行政标间";
+				}
+			} catch (NullPointerException e) {
+				// TODO Auto-generated catch block
+				return "";
 			}
-			else if(roomType.equals("Double")){
-				return "双人房";
-			}
-			else if(roomType.equals("KingSize")){
-				return "大床间";
-			}
-			else if(roomType.equals("Standard")){
-				return "标准间";
-			}
-			else if(roomType.equals("Deluxe")){
-				return "豪华间";
-			}
-			else if(roomType.equals("Business")){
-				return "商务标间";
-			}
-			else{
-				return "行政标间";
-			}
+		
 		}
 		
 		//房间数量
 		else if (columnIndex == 5){
-			String roomNum = Integer.toString(offlineRecord.num);
+			String roomNum = Integer.toString(record.num);
 			
-			return roomNum;
+			if(roomNum.equals("0")){
+				return "";
+			}
+			else{
+				return roomNum;
+			}
 		}
 		
 		return null;

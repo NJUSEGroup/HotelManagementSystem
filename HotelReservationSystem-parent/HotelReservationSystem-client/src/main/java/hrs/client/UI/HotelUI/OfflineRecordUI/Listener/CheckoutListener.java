@@ -2,29 +2,23 @@ package hrs.client.UI.HotelUI.OfflineRecordUI.Listener;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import hrs.client.UI.HotelUI.OfflineRecordUI.OfflineRecordUIPanel;
-import hrs.common.VO.OfflineRecordVO;
 
-public class SearchListener implements MouseListener{
+public class CheckoutListener implements MouseListener{
 
 	private OfflineRecordUIPanel jpRecord;
 	
-	public SearchListener(OfflineRecordUIPanel jpRecord){
+	public CheckoutListener(OfflineRecordUIPanel jpRecord){
 		this.jpRecord = jpRecord;
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
-		jpRecord.recordNotSelected();
-		
-		int id = jpRecord.getID();
-		List<OfflineRecordVO> record = jpRecord.searchRecordByID(id);
-		jpRecord.refresh(record);
+		if(jpRecord.isButtonEnable("退房")){
+			jpRecord.checkout(jpRecord.getSelectedRecord());
+		}
 	}
 
 	@Override
