@@ -38,7 +38,7 @@ public class ConfirmListener implements ActionListener {
 				JOptionPane.INFORMATION_MESSAGE);
 		
 		if(result == JOptionPane.NO_OPTION){
-			panel.Init();
+			panel.init();
 			
 			
 		}
@@ -48,7 +48,7 @@ public class ConfirmListener implements ActionListener {
 					"信息修改成功", "成功", JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE);
 		}
 		else{
-			panel.Init();
+			panel.init();
 		}
 	}
 

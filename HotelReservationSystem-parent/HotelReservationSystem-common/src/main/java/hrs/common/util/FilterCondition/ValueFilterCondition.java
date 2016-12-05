@@ -3,6 +3,10 @@ package hrs.common.util.FilterCondition;
 import hrs.common.util.type.FilterType;
 
 public class ValueFilterCondition extends FilterCondition {
+	/**
+	* @Fields serialVersionUID : TODO
+	*/ 
+	private static final long serialVersionUID = -7560764407419939000L;
 	private double low;
 	private double high;
 

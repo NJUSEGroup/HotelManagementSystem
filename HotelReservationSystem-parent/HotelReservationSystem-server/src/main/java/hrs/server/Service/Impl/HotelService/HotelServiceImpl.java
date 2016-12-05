@@ -6,13 +6,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import hrs.common.Exception.HotelService.HotelNotFoundException;
-import hrs.common.Exception.HotelService.HotelQueryNotExecutedException;
 import hrs.common.Exception.OrderService.OrderNotFoundException;
 import hrs.common.POJO.HotelPO;
 import hrs.common.VO.HotelVO;
@@ -21,9 +21,13 @@ import hrs.common.VO.RoomVO;
 import hrs.common.util.FilterCondition.FilterCondition;
 import hrs.common.util.type.OrderRule;
 import hrs.server.DAO.Interface.HotelDAO.HotelDAO;
+import hrs.server.Service.Impl.HotelService.HotelComparator.HotelComparator;
+import hrs.server.Service.Impl.HotelService.HotelFilter.HotelFilter;
 import hrs.server.Service.Interface.HotelService.HotelService;
 import hrs.server.Service.Interface.OrderService.OrderSearchService;
 import hrs.server.Service.Interface.RoomService.RoomService;
+import hrs.server.util.SpringUtils;
+
 @Service
 public class HotelServiceImpl implements HotelService {
 	@Autowired
@@ -33,19 +37,19 @@ public class HotelServiceImpl implements HotelService {
 	@Autowired
 	private OrderSearchService orderSearchService;
 	
-	private AvailableHotel hotel = new AvailableHotel();
 	
 	@Transactional
 	@Override
 	public HotelVO findByID(int hotelID) throws HotelNotFoundException {
 		HotelPO po = dao.findByID(hotelID);
-		if(po == null){
+		if (po == null) {
 			throw new HotelNotFoundException();
-		}else{
+		} else {
 			return new HotelVO(po);
 		}
 	}
 
+	
 	@Transactional
 	@Override
 	public void update(HotelVO hotelvo) {
@@ -59,14 +63,10 @@ public class HotelServiceImpl implements HotelService {
 	}
 
 	/**
-	 * @throws OrderNotFoundException 
+	 * @throws OrderNotFoundException
 	 * 
-	 * @Title: findOrderedHotelAndOrder 
-	 * @Description 查找已预订的酒店和订单列表
-	 * @param @param username
-	 * @param @return     
-	 * @return Map<HotelVO,List<OrderVO>>     
-	 * @throws
+	 * @Title: findOrderedHotelAndOrder @Description 查找已预订的酒店和订单列表 @param @param
+	 * username @param @return @return Map<HotelVO,List<OrderVO>> @throws
 	 */
 	@Transactional
 	@Override
@@ -85,23 +85,18 @@ public class HotelServiceImpl implements HotelService {
 		}
 		return map;
 	}
-	
+
 	/**
-	 * @throws HotelNotFoundException 
+	 * @throws HotelNotFoundException
 	 * 
-	 * @Title: find 
-	 * @Description 按照城市、商圈、开始结束时间进行查询
-	 * @param @param loc
-	 * @param @param circle
-	 * @param @param begin
-	 * @param @param end
-	 * @param @return     
-	 * @return Map<HotelVO,List<RoomVO>>     
-	 * @throws
+	 * @Title: find @Description 按照城市、商圈、开始结束时间进行查询 @param @param
+	 * loc @param @param circle @param @param begin @param @param
+	 * end @param @return @return Map<HotelVO,List<RoomVO>> @throws
 	 */
 	@Transactional
 	@Override
-	public Map<HotelVO, List<RoomVO>> find(int loc, int circle, Date begin, Date end,String username) throws HotelNotFoundException {
+	public Map<HotelVO, List<RoomVO>> find(int loc, int circle, Date begin, Date end, String username)
+			throws HotelNotFoundException {
 		List<HotelPO> pos = dao.find(loc, circle);
 		if (pos.size() == 0) {
 			throw new HotelNotFoundException();
@@ -109,76 +104,81 @@ public class HotelServiceImpl implements HotelService {
 		Map<HotelVO, List<RoomVO>> map = new HashMap<>();
 		HotelVO vo = null;
 		List<RoomVO> rooms = null;
-		
+
 		for (HotelPO po : pos) {
-			//获得酒店所对应的房间列表
+			// 获得酒店所对应的房间列表
 			rooms = roomService.findAvailableByHotelID(po.getId(), begin, end);
-			if(rooms == null){
-				//如果没有可用房间，那么不将该酒店加入到结果集
+			if (rooms == null) {
+				// 如果没有可用房间，那么不将该酒店加入到结果集
 				System.out.println("退出当前循环");
 				continue;
 			}
-			System.out.println("DEBUG:"+rooms.size());
+			System.out.println("DEBUG:" + rooms.size());
 			vo = new HotelVO(po);
-			//设置该酒店对应房间的价格区间
+			// 设置该酒店对应房间的价格区间
 			vo.lowValue = Collections.min(rooms).roomValue;
 			vo.highValue = Collections.max(rooms).roomValue;
-			
-			//获得酒店的相关订单类型的集合
+
+			// 获得酒店的相关订单类型的集合
 			try {
-				for(OrderVO order:orderSearchService.findByHotelAndUsername(vo.id, username)){
+				for (OrderVO order : orderSearchService.findByHotelAndUsername(vo.id, username)) {
 					vo.status.add(order.status);
 				}
 			} catch (OrderNotFoundException e) {
 			}
 			map.put(vo, rooms);
 		}
-		hotel.setData(map);
 		return map;
 	}
 
 	@Transactional
 	@Override
-	public Map<HotelVO, List<RoomVO>> filter(List<FilterCondition> conditions) {
-		return hotel.filter(conditions);
+	public Map<HotelVO, List<RoomVO>> filter(Map<HotelVO, List<RoomVO>> data, List<FilterCondition> conditions) {
+		Map<HotelVO, List<RoomVO>> res = new HashMap<>();
+		res.putAll(data);
+		HotelFilter filter = null;
+		for (FilterCondition condition : conditions) {
+			filter = SpringUtils.getBean(condition.getType().toString() + "Filter");
+			filter.setFilterCondition(condition);
+			filter.doFilter(res);
+		}
+		return res;
 	}
 	
-	/**
-	 * 
-	 * @Title: getRoomDetail 
-	 * @Description 获得某个酒店的房间详细信息
-	 * @param hotelID
-	 * @return 
-	 * @throws HotelNotFoundException 
-	 * @see hrs.server.Service.Interface.HotelService.HotelService#getRoomDetail(int)
-	 */
 	@Transactional
 	@Override
-	public List<RoomVO> getRoomDetail(int hotelID) throws HotelNotFoundException {
-		if(hotel.getData() == null){
-			throw new HotelQueryNotExecutedException();
-		}
-		Map<HotelVO,List<RoomVO>> map = hotel.getData();
-		for (HotelVO vo : map.keySet()) {
-			if (vo.id == hotelID) {
-				return map.get(vo);
-			}
-		}
-		throw new HotelNotFoundException();
+	public Map<HotelVO, List<RoomVO>> order(Map<HotelVO, List<RoomVO>> data, OrderRule rule, boolean isDecrease) {
+		HotelComparator comp = SpringUtils.getBean(rule.toString()+"Comparator");
+		comp.setDecrease(isDecrease);
+		Map<HotelVO, List<RoomVO>> res = new TreeMap<>(comp);
+		res.putAll(data);
+		return res;
 	}
 
-	
-	@Transactional
-	@Override
-	public Map<HotelVO, List<RoomVO>> order(OrderRule rule, boolean isDecrease) {
-		return hotel.order(rule, isDecrease);
-	}
-	
 	@Transactional
 	@Override
 	public void addRemark(HotelVO hotel, int score) {
-		hotel.score = (hotel.score*hotel.remarkNum+score)/(hotel.remarkNum+1);
+		hotel.score = (hotel.score * hotel.remarkNum + score) / (hotel.remarkNum + 1);
 		update(hotel);
 	}
 
+	/**
+	 * 
+	 * @Title: findByName
+	 * @Description: TODO
+	 * @param name
+	 * @return
+	 * @throws HotelNotFoundException  
+	 * @see hrs.server.Service.Interface.HotelService.HotelService#findByName(java.lang.String)
+	 */
+	@Override
+	public HotelVO findByName(String name) throws HotelNotFoundException {
+		HotelPO po = dao.findByName(name);
+		if(po == null){
+			throw new HotelNotFoundException();
+		}else{
+			return new HotelVO(po);
+		}
+	}
+	
 }

@@ -17,6 +17,10 @@ import hrs.client.UI.UserUI.OrderInfoUI.OrderShowPanel;
 import hrs.client.UI.UserUI.UserInfoUI.UserInfoPanel;
 
 public class MainFrame extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2942323300288708231L;
 	Color frameColor = new Color(211, 237, 249);
 	private int height, width;
 	private JPanel leftPanel = new LeftPanel();

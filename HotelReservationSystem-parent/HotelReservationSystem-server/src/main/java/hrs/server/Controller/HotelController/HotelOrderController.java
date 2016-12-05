@@ -49,4 +49,9 @@ public class HotelOrderController implements IHotelOrderController {
 	public OrderVO findOrderByID(int id) throws OrderNotFoundException {
 		return orderSearchService.findByID(id);
 	}
+	
+	@Override
+	public List<OrderVO> findOrderByHotelID(int hotelID) throws OrderNotFoundException{
+		return orderSearchService.findByHotelID(hotelID);
+	}
 }

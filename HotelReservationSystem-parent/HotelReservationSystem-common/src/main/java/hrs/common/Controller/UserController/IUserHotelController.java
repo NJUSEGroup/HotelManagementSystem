@@ -26,15 +26,13 @@ public interface IUserHotelController {
 	 */
 	List<OrderVO> findOrderByHotelAndUsername(int hotelID, String username) throws OrderNotFoundException;
 
-	List<RoomVO> getRoomDetail(int hotelID) throws HotelNotFoundException;
-
 	Map<HotelVO, List<OrderVO>> findOrderedHotelAndOrder(String username) throws OrderNotFoundException;
 
 	Map<HotelVO, List<RoomVO>> findHotels(int loc, int circle, Date begin, Date end,String username) throws HotelNotFoundException;
 
-	Map<HotelVO, List<RoomVO>> filterHotels(List<FilterCondition> conditions);
+	Map<HotelVO, List<RoomVO>> filterHotels(Map<HotelVO, List<RoomVO>> data, List<FilterCondition> conditions);
 
-	Map<HotelVO, List<RoomVO>> orderHotels(OrderRule rule, boolean isDecrease);
+	Map<HotelVO, List<RoomVO>> orderHotels(Map<HotelVO, List<RoomVO>> data,OrderRule rule, boolean isDecrease);
 
 	List<LocationVO> findAllLocations();
 

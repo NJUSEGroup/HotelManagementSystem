@@ -17,12 +17,20 @@ public class DetailListener implements MouseListener{
 		this.jpOrderList = jpOrderList;
 	}
 	
+	/**
+	 * 从酒店订单管理界面跳转到酒店详细订单界面，显示所选择的订单的详细信息
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-		OrderVO order = jpOrderList.getSelectedOrder();
-		jpMain.showDetail(order);
+		int row = jpOrderList.getSelectedRow();
+		
+		if(row != -1){
+			OrderVO order = jpOrderList.getSelectedOrder(row);
+			jpMain.showDetail(order);
+		}
+		
 		
 	}
 

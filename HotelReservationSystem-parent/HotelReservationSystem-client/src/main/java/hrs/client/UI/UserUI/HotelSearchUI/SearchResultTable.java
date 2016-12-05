@@ -13,6 +13,10 @@ import javax.swing.table.JTableHeader;
 import hrs.client.util.UIConstants;
 
 public class SearchResultTable extends JTable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -731486404013187955L;
 	Font font = UIConstants.jlabelChinese;
 
 	public SearchResultTable() {

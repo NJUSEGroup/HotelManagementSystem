@@ -14,5 +14,6 @@ public interface IHotelOrderController {
 	List<OrderVO> findOrderByHotelAndStatus(int hotelID, OrderStatus type) throws OrderNotFoundException;//根据类型查
 	List<OrderVO> findOrderByHotelAndUsername(int hotelID,String username) throws OrderNotFoundException;//根据用户名和酒店查
 	OrderVO findOrderByID(int id) throws OrderNotFoundException;
+	List<OrderVO> findOrderByHotelID(int hotelID) throws OrderNotFoundException;
 	
 }

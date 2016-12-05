@@ -12,9 +12,10 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
 
-import hrs.client.UI.HotelUI.Components.AddRoomDialog;
 import hrs.client.UI.HotelUI.Components.RoomTableModel;
 import hrs.client.UI.HotelUI.RoomUI.Listener.AddListener;
+import hrs.client.UI.HotelUI.RoomUI.Listener.EditListener;
+import hrs.client.UI.HotelUI.RoomUI.Listener.RoomSelectedListener;
 import hrs.client.util.ControllerFactory;
 import hrs.common.Controller.HotelController.IRoomController;
 import hrs.common.Exception.RoomService.RoomNotFoundException;
@@ -24,6 +25,10 @@ import hrs.common.util.type.RoomType;
 
 public class RoomUIPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3459435356780911369L;
 	private JPanel jpRoom;
 	private JPanel jpButton;
 	private JScrollPane jspRoom;
@@ -35,17 +40,18 @@ public class RoomUIPanel extends JPanel {
 	private HotelVO theHotel;
 	private IRoomController roomController;
 	private AddListener addListener;
+	private EditListener editListener;
+	private RoomSelectedListener roomSelectedListener;
 	List<RoomVO> rooms;
 	
 	/**
-	 * Create the panel.
-	 * @throws RoomNotFoundException 
+	 * 初始化录入客房界面面板
 	 */
-	public RoomUIPanel(HotelVO theHotel) throws RoomNotFoundException{
+	public RoomUIPanel(HotelVO theHotel){
 		init(theHotel);
 	}
 	
-	public void init(HotelVO theHotel) throws RoomNotFoundException{
+	public void init(HotelVO theHotel){
 		this.theHotel = theHotel;
 		this.setSize(1080, 722);
 		this.setLayout(null);
@@ -61,7 +67,14 @@ public class RoomUIPanel extends JPanel {
 		jpButton.setLayout(null);
 		
 		roomController = ControllerFactory.getRoomController();
-		rooms= roomController.findByHotelID(theHotel.id);
+		try {
+			rooms= roomController.findByHotelID(theHotel.id);
+		} catch (RoomNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		roomSelectedListener = new RoomSelectedListener(this);
 		
 		roomTableModel = new RoomTableModel(rooms);
 		
@@ -70,10 +83,11 @@ public class RoomUIPanel extends JPanel {
 		jtRoom.setFont(new Font("方正兰亭超细黑简体",Font.PLAIN,16));
 		jtRoom.setRowHeight(40);
 		jtRoom.setShowVerticalLines(false);
+		jtRoom.addMouseListener(roomSelectedListener);
 		
 		jthOrderList = jtRoom.getTableHeader(); 
 		jthOrderList.setPreferredSize(new Dimension(jtRoom.getWidth(),40)); 
-		jthOrderList.setBackground(new Color(222, 237, 249));
+		jthOrderList.setBackground(new Color(188, 226, 236));
 		jthOrderList.setEnabled(false);
 		jthOrderList.setBorder(new EmptyBorder(0,0,0,0));
 		jthOrderList.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 16));
@@ -93,10 +107,14 @@ public class RoomUIPanel extends JPanel {
 		jbAdd.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbAdd.addMouseListener(addListener);
 		
+		editListener = new EditListener(this);
+		
 		jbEdit = new JButton();
 		jbEdit.setBounds(905, 13, 90, 40);
 		jbEdit.setText("修改");
 		jbEdit.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jbEdit.setEnabled(false);
+		jbEdit.addMouseListener(editListener);
 		
 		jpRoom.add(jspRoom);
 		
@@ -107,18 +125,81 @@ public class RoomUIPanel extends JPanel {
 		this.add(jpButton);
 	}
 	
-	public void addRoom(){
+	/**
+	 * 点击添加按钮，弹出添加房间对话框
+	 */
+	public void add(){
 		List<RoomType> notAddedRoom = roomController.findNotAddedRoomType(theHotel.id);
 		
 		AddRoomDialog addRoomDialog = new AddRoomDialog(notAddedRoom, this);
 	}
 	
-	public void refreshRoomList(RoomVO newRoom) throws RoomNotFoundException{
+	/**
+	 * 添加房间
+	 * @param newRoom
+	 */
+	public void addRoom(RoomVO newRoom) {
 		newRoom.hotel = theHotel;
 		roomController.addRoom(newRoom);
+	}
+	
+	/**
+	 * 点击修改按钮，弹出修改房间对话框
+	 */
+	public void edit(){
+		EditRoomDialog editRoomDialog = new EditRoomDialog(this);
+	}
+	
+	/**
+	 * 修改房间
+	 * @param editRoom
+	 */
+	public void editRoom(RoomVO editRoom){
+		editRoom.hotel = theHotel;
+		roomController.updateRoom(editRoom);
+	}
+	
+	/**
+	 * 获取在表格中被选中需要修改的房间类型
+	 * @return
+	 */
+	public String getSelectedRoomType(){
+		int row = jtRoom.getSelectedRow();
+		String roomType = (String) jtRoom.getValueAt(row, 0);
 		
-		rooms= roomController.findByHotelID(theHotel.id);
+		return roomType;
+	}
+	
+	/**
+	 * 刷新房间列表
+	 */
+	public void refreshRoomList(){
+		jbEdit.setEnabled(false);
+		try {
+			rooms= roomController.findByHotelID(theHotel.id);
+		} catch (RoomNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		roomTableModel = new RoomTableModel(rooms);
 		jtRoom.setModel(roomTableModel);
 	}
+	
+	/**
+	 * 当表格中的某类房间被选中时，修改按钮可用
+	 */
+	public void roomSelected(){
+		if(jtRoom.getSelectedRow() != -1){
+			jbEdit.setEnabled(true);
+		}
+	}
+	
+	/**
+	 * 获取修改按钮的可用状态
+	 * @return
+	 */
+	public boolean isEditEnable(){
+		return jbEdit.isEnabled();
+	}
+
 }

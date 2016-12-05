@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import android.R.integer;
-import hrs.client.UI.UserUI.ComComponents.CommonLabel;
+import hrs.client.UI.UserUI.Components.CommonLabel;
 import hrs.client.UI.UserUI.HotelSearchUI.Listener.cityBoxListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.DateChoosePanel;
@@ -30,6 +30,14 @@ import hrs.common.VO.HotelVO;
 import hrs.common.VO.LocationVO;
 import hrs.common.VO.RoomVO;
 import hrs.common.VO.UserVO;
+import hrs.common.util.FilterCondition.FilterCondition;
+import hrs.common.util.FilterCondition.NameFilterCondition;
+import hrs.common.util.FilterCondition.RoomTypeFilterCondition;
+import hrs.common.util.FilterCondition.ScoreFilterCondition;
+import hrs.common.util.FilterCondition.StarFilterCondition;
+import hrs.common.util.FilterCondition.ValueFilterCondition;
+import hrs.common.util.type.FilterType;
+import hrs.common.util.type.RoomType;
 /**
  * 查询条件 面板
  * 大小为1000*280
@@ -142,13 +150,10 @@ public class SearchPanel extends JPanel {
 		add(checkInDate);
 		
 		roomTypeBox = new JComboBox<>();
-		roomTypeBox.addItem("商务标间");
-		roomTypeBox.addItem("豪华房");
-		roomTypeBox.addItem("双人房");
-		roomTypeBox.addItem("单人房");
-		roomTypeBox.addItem("标准房");
-		roomTypeBox.addItem("大床房");
-		roomTypeBox.addItem("行政标间");
+		String[] l = {"无限制","商务标间","豪华房","双人房","单人房","标准房","大床房","行政标间"};
+		for(int i = 0;i<=6;i++){
+			roomTypeBox.addItem(l[i]);
+		}
 		roomTypeBox.setBounds(LEFTIN_X, JL_HEIGHT*3+GAP, 150, TEXT_H);
 		roomTypeBox.setFont(UIConstants.jlabelChinese);
 		add(roomTypeBox);
@@ -248,14 +253,12 @@ public class SearchPanel extends JPanel {
 		try {
 			hotels = controller.findHotels(locID, circleID, begin, end, userVO.username);
 		} catch (HotelNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println("未找到酒店");
 			JOptionPane.showMessageDialog(null, "未找到酒店!", "提示", JOptionPane.INFORMATION_MESSAGE);
-			e.printStackTrace();
 		}
 		return hotels;
 	}
 
+	//城市选择改变时，改变商圈
 	public void changeCity() {
 		commercialBox.removeAllItems();
 		int locID = getLocID();
@@ -267,6 +270,7 @@ public class SearchPanel extends JPanel {
 		
 	}
 	
+	//根据城市名得到ID
 	private int getLocID(){
 		int locID = 1;
 		for(LocationVO vo:locs){
@@ -277,6 +281,35 @@ public class SearchPanel extends JPanel {
 			
 		}
 		return locID;
+	}
+
+	public List<FilterCondition> getFilters() {
+		List<FilterCondition> list = new ArrayList<>();
+		RoomTypeFilterCondition RoomTypeFilter = new RoomTypeFilterCondition(FilterType.RoomType);
+		NameFilterCondition nameFilter = new NameFilterCondition(FilterType.Name);
+		ScoreFilterCondition scoreFilter = new ScoreFilterCondition(FilterType.Score);
+		StarFilterCondition starFilter = new StarFilterCondition(FilterType.Star);
+//		ValueFilterCondition valueFilter = new ValueFilterCondition(FilterType.)
+		
+//		if(roomTypeBox.getSelectedItem()!="无限制"){
+//			RoomTypeFilter.setRoomType(RoomType.getRoomType((String)roomTypeBox.getSelectedItem()));;
+//			list.add(RoomTypeFilter);
+//		}
+//		if(hotelNameField.getText()!=null){
+//			nameFilter.setHotelName(hotelNameField.getText());
+//			list.add(nameFilter);
+//		}
+//		if(scoreField.getLow()!= null&&scoreField.getHigh()!=null){
+//			scoreFilter.setLow(scoreField.getLow());
+//			scoreFilter.setHigh(scoreField.getHigh());
+//			list.add(nameFilter);
+//		}
+//		RoomTypeFilter.setRoomType(RoomType.Standard);
+//		list.add(RoomTypeFilter);
+		
+		nameFilter.setHotelName("呼呼呼酒店");
+		list.add(nameFilter);
+		return list;
 	}
 	
 	

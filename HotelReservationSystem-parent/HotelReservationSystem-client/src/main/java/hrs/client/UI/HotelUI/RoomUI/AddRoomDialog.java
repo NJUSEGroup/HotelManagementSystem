@@ -1,10 +1,8 @@
-package hrs.client.UI.HotelUI.Components;
+package hrs.client.UI.HotelUI.RoomUI;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Font;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -19,19 +17,18 @@ import javax.swing.border.EmptyBorder;
 import hrs.client.UI.HotelUI.RoomUI.RoomUIPanel;
 import hrs.client.UI.HotelUI.RoomUI.Listener.AddCancelListener;
 import hrs.client.UI.HotelUI.RoomUI.Listener.AddConfirmListener;
-import hrs.client.util.ControllerFactory;
-import hrs.common.Controller.HotelController.IRoomController;
 import hrs.common.Exception.RoomService.RoomNotFoundException;
-import hrs.common.VO.HotelVO;
 import hrs.common.VO.RoomVO;
 import hrs.common.util.type.RoomType;
 
-import java.awt.event.ActionListener;
 import java.util.List;
-import java.awt.event.ActionEvent;
 
 public class AddRoomDialog extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4148886207645624250L;
 	private final JPanel contentPanel = new JPanel();
 	private JPanel jpRoom;
 	private JPanel jpButton;
@@ -39,24 +36,22 @@ public class AddRoomDialog extends JDialog {
 	private JLabel jlRoomNum;
 	private JLabel jlRoomMoney;
 	private JLabel jlRMB;
-	private JComboBox jcbRoomType;
+	private JComboBox<String> jcbRoomType;
 	private JSpinner jsRoomNum;
 	private JTextField jtfMoney;
 	private JButton jbConfirm;
 	private JButton jbCancel;
-	private IRoomController roomController;
 	private AddCancelListener addCancelListener;
 	private AddConfirmListener addConfirmListener;
-	private HotelVO theHotel;
 	private RoomUIPanel jpRoomUI;
 
 	/**
 	 * 初始化添加房间对话框
 	 */
-	public AddRoomDialog(List<RoomType> roomType, RoomUIPanel jRroomUI) {
+	public AddRoomDialog(List<RoomType> roomType, RoomUIPanel jpRoomUI) {
 		this.jpRoomUI = jpRoomUI;
+		setSize(450, 300);
 		setLocationRelativeTo(null);
-		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(null);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -90,7 +85,7 @@ public class AddRoomDialog extends JDialog {
 		jlRMB.setText("元");
 		jlRMB.setBounds(323, 129, 80, 30);
 		
-		jcbRoomType = new JComboBox();
+		jcbRoomType = new JComboBox<String>();
 		jcbRoomType.setBounds(150, 15, 145, 30);
 		jcbRoomType.setEditable(false);
 		
@@ -139,13 +134,13 @@ public class AddRoomDialog extends JDialog {
 		jbConfirm.setBounds(92, 13, 70, 40);
 		jbConfirm.addMouseListener(addConfirmListener);
 		
+		addCancelListener = new AddCancelListener(this);
+		
 		jbCancel = new JButton();
 		jbCancel.setFont(new Font("宋体", Font.PLAIN, 16));
 		jbCancel.setText("取消");
 		jbCancel.setBounds(264, 13, 70, 40);
 		jbCancel.addMouseListener(addCancelListener);
-		
-		roomController = ControllerFactory.getRoomController();
 		
 		jpRoom.add(jlRoomType);
 		jpRoom.add(jlRoomNum);
@@ -170,7 +165,7 @@ public class AddRoomDialog extends JDialog {
 	 * 确认添加房间
 	 * @throws RoomNotFoundException 
 	 */
-	public void addConfirm() throws RoomNotFoundException{
+	public void addConfirm(){
 		RoomVO newRoom = new RoomVO();
 		
 		String newType = (String) jcbRoomType.getSelectedItem();
@@ -209,9 +204,12 @@ public class AddRoomDialog extends JDialog {
 			newRoom.roomNum = ((Integer) jsRoomNum.getValue()).intValue();
 			newRoom.roomValue = Double.valueOf(jtfMoney.getText());
 			
-			jpRoomUI.refreshRoomList(newRoom);
+			jpRoomUI.addRoom(newRoom);
+			jpRoomUI.refreshRoomList();
 			
 			this.dispose();
+			
+			JOptionPane.showMessageDialog(this, "房间信息已更新", "更新成功", JOptionPane.INFORMATION_MESSAGE);
 		}
 
 	}

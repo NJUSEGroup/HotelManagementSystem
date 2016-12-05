@@ -9,6 +9,10 @@ import javax.swing.JLabel;
 import hrs.client.util.UIConstants;
 
 public class MenuLabel extends JLabel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4397173187642793077L;
 	Color color = UIConstants.jlabel;
 	private MenuLabelListener listener = MenuLabelListenerFactory.getListener();
 	

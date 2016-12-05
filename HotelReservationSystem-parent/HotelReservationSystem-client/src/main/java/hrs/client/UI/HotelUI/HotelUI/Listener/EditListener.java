@@ -4,9 +4,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import hrs.client.UI.HotelUI.HotelUI.HotelUIPanel;
-import hrs.client.util.ControllerFactory;
-import hrs.common.Controller.HotelController.IHotelController;
-import hrs.common.VO.HotelVO;
 
 public class EditListener implements MouseListener{
 	

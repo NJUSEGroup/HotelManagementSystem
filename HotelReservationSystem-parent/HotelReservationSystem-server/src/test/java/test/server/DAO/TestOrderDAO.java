@@ -126,5 +126,15 @@ public class TestOrderDAO {
 		assertEquals(dao.findByID(10).getNum(), 10);
 	}
 	
+	@Transactional
+	@Test
+	public void testFindByHotelID(){
+		List<OrderPO> list = dao.findByHotelID(1);
+		System.out.println(list.size());
+		for (OrderPO po : list) {
+			System.out.println(po);
+			assertEquals(po.getHotel().getId(),1);
+		}
+	}
 	
 }

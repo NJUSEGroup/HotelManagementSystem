@@ -3,8 +3,7 @@ package hrs.client.UI.HotelUI.RoomUI.Listener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import hrs.client.UI.HotelUI.Components.AddRoomDialog;
-import hrs.common.Exception.RoomService.RoomNotFoundException;
+import hrs.client.UI.HotelUI.RoomUI.AddRoomDialog;
 
 public class AddConfirmListener implements MouseListener{
 
@@ -14,16 +13,14 @@ public class AddConfirmListener implements MouseListener{
 		this.addRoomDialog = addRoomDialog;
 	}
 	
+	/**
+	 * 确认添加房间
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-		try {
-			addRoomDialog.addConfirm();
-		} catch (RoomNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		addRoomDialog.addConfirm();
 	}
 
 	@Override

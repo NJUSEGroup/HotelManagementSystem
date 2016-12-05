@@ -37,10 +37,6 @@ public class UserHotelController implements IUserHotelController{
 		return orderSearchService.findByHotelAndUsername(hotelID, username);
 	}
 
-	@Override
-	public List<RoomVO> getRoomDetail(int hotelID) throws HotelNotFoundException {
-		return hotelService.getRoomDetail(hotelID);
-	}
 
 	@Override
 	public Map<HotelVO, List<OrderVO>> findOrderedHotelAndOrder(String username) throws OrderNotFoundException {
@@ -53,13 +49,13 @@ public class UserHotelController implements IUserHotelController{
 	}
 
 	@Override
-	public Map<HotelVO, List<RoomVO>> filterHotels(List<FilterCondition> conditions) {
-		return hotelService.filter(conditions);
+	public Map<HotelVO, List<RoomVO>> filterHotels(Map<HotelVO, List<RoomVO>> data,List<FilterCondition> conditions) {
+		return hotelService.filter(data, conditions);
 	}
 
 	@Override
-	public Map<HotelVO, List<RoomVO>> orderHotels(OrderRule rule, boolean isDecrease) {
-		return hotelService.order(rule, isDecrease);
+	public Map<HotelVO, List<RoomVO>> orderHotels(Map<HotelVO, List<RoomVO>> data,OrderRule rule, boolean isDecrease) {
+		return hotelService.order(data, rule, isDecrease);
 	}
 
 	@Override

@@ -7,16 +7,20 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import antlr.collections.List;
-import hrs.client.UI.UserUI.ComComponents.CommonLabel;
+import hrs.client.UI.UserUI.Components.CommonLabel;
 import hrs.client.util.UIConstants;
 /**
  * 带有两个输入域
- * 可通过getValue()得到带有两个Integer的ArrayList，第一个为小值，第二个为大值
+ * 可通过getLow得到小值,getHigh得到大值
  * 大小为160*40
  * @author 涵
  *
  */
 public class TwoFieldPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8874311645731410760L;
 	private JTextField lowField;
 	private JTextField highField;
 	public TwoFieldPanel(){
@@ -43,10 +47,13 @@ public class TwoFieldPanel extends JPanel {
 		
 	}
 	
-	public ArrayList<Integer> getValue(){
-		ArrayList<Integer> list = new ArrayList<>();
-		list.add(Integer.parseInt(lowField.getText()));
-		list.add(Integer.parseInt(highField.getText()));
-		return list;
+	public Integer getLow(){
+		int x = Integer.parseInt(lowField.getText());
+		return x;
+	}
+	
+	public Integer getHigh(){
+		int x = Integer.parseInt(highField.getText());
+		return x;
 	}
 }

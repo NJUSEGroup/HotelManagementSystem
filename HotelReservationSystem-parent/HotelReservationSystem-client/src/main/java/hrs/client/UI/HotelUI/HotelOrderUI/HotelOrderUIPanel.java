@@ -1,6 +1,5 @@
 package hrs.client.UI.HotelUI.HotelOrderUI;
 
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -18,12 +17,14 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicSliderUI.ScrollListener;
 import javax.swing.table.JTableHeader;
 
 import hrs.client.UI.HotelUI.Components.OrderListTableModel;
-import hrs.client.UI.HotelUI.HotelOrderDetailUI.HotelOrderDetailUIPanel;
+import hrs.client.UI.HotelUI.HotelOrderUI.Listener.CheckinListener;
+import hrs.client.UI.HotelUI.HotelOrderUI.Listener.CheckoutListener;
+import hrs.client.UI.HotelUI.HotelOrderUI.Listener.DelayCheckinListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.Listener.DetailListener;
+import hrs.client.UI.HotelUI.HotelOrderUI.Listener.OrderSelectedListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.Listener.SearchByIdOrUsernameListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.Listener.SearchByOrderTypeListener;
 import hrs.client.util.ControllerFactory;
@@ -35,14 +36,18 @@ import hrs.common.util.type.OrderStatus;
 
 public class HotelOrderUIPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -978383534264507721L;
 	private JPanel jpSearch;
 	private JPanel jpOrder;
 	private JPanel jpButton;
 	private JScrollPane jspOrderList;
 	private JLabel jlOrderType;
 	private JLabel jlSearch;
-	private JComboBox jcbOrderType;
-	private JComboBox jcbSearch;
+	private JComboBox<String> jcbOrderType;
+	private JComboBox<String> jcbSearch;
 	private JTextField jtfSearch;
 	private JButton jbConfirm1;
 	private JButton jbConfirm2;
@@ -56,147 +61,154 @@ public class HotelOrderUIPanel extends JPanel {
 	private IHotelOrderController hotelOrderController;
 	private SearchByOrderTypeListener searchListener1;
 	private SearchByIdOrUsernameListener searchListener2;
+	private OrderSelectedListener orderSelectedListener;
 	private DetailListener detailListener;
+	private CheckinListener checkinListener;
+	private CheckoutListener checkoutListener;
+	private DelayCheckinListener delayListener;
 	private HotelVO hotel;
-
+	
 	/**
-	 * Create the panel.
+	 * 初始化酒店订单管理界面面板
+	 * @param jpMain
+	 * @param hotel
 	 */
-	public HotelOrderUIPanel(HotelOrderMainPanel jpMain, HotelVO hotel) {
+	public HotelOrderUIPanel(HotelOrderMainPanel jpMain, HotelVO hotel){
 		init(jpMain, hotel);
 	}
-
-	public void init(HotelOrderMainPanel jpMain, HotelVO hotel) {
+	
+	public void init(HotelOrderMainPanel jpMain, HotelVO hotel){
 		this.setSize(1080, 722);
 		this.setLayout(null);
-
+		
 		this.hotel = hotel;
-
+		
 		hotelOrderController = ControllerFactory.getHotelOrderController();
-
+		
 		searchListener1 = new SearchByOrderTypeListener(this);
 		searchListener2 = new SearchByIdOrUsernameListener(this);
 		detailListener = new DetailListener(jpMain, this);
-
+		
 		jpSearch = new JPanel();
 		jpSearch.setBounds(0, 0, 1080, 170);
 		jpSearch.setBackground(new Color(211, 237, 249));
 		jpSearch.setLayout(null);
-
+		
 		jpOrder = new JPanel();
 		jpOrder.setBounds(0, 170, 1080, 472);
 		jpOrder.setBackground(new Color(211, 237, 249));
 		jpOrder.setLayout(null);
-
+		
 		jpButton = new JPanel();
 		jpButton.setBounds(0, 642, 1080, 80);
 		jpButton.setBackground(new Color(211, 237, 249));
 		jpButton.setLayout(null);
-
+		
 		jlOrderType = new JLabel();
 		jlOrderType.setBounds(20, 20, 90, 30);
 		jlOrderType.setText("订单类型");
 		jlOrderType.setHorizontalAlignment(SwingConstants.CENTER);
 		jlOrderType.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
-
+		
 		jlSearch = new JLabel();
 		jlSearch.setBounds(20, 100, 90, 30);
 		jlSearch.setText("搜索");
 		jlSearch.setHorizontalAlignment(SwingConstants.CENTER);
 		jlSearch.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
-
-		jcbOrderType = new JComboBox(new DefaultComboBoxModel(new String[] { "未执行", "已执行", "异常", "已撤销" }));
+		
+		jcbOrderType = new JComboBox<String>(new DefaultComboBoxModel<String>(new String[] {"未执行", "已执行", "异常", "已撤销"}));
 		jcbOrderType.setBounds(130, 20, 230, 30);
 		jcbOrderType.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jcbOrderType.setOpaque(true);
 		jcbOrderType.setBackground(Color.WHITE);
 		jcbOrderType.setEditable(false);
-
-		jcbSearch = new JComboBox(new DefaultComboBoxModel(new String[] { "用户名", "订单号" }));
+		
+		jcbSearch = new JComboBox<String>(new DefaultComboBoxModel<String>(new String[] {"用户名", "订单号"}));
 		jcbSearch.setBounds(130, 100, 230, 30);
 		jcbSearch.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jcbSearch.setOpaque(true);
 		jcbSearch.setBackground(Color.WHITE);
 		jcbSearch.setEditable(false);
-
+		
 		jtfSearch = new JTextField();
 		jtfSearch.setBounds(400, 100, 230, 30);
 		jcbSearch.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jcbSearch.setEditable(true);
-
+		
 		jbConfirm1 = new JButton();
 		jbConfirm1.setBounds(681, 15, 90, 40);
 		jbConfirm1.setText("确认");
 		jbConfirm1.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbConfirm1.addMouseListener(searchListener1);
-
+		
 		jbConfirm2 = new JButton();
 		jbConfirm2.setBounds(681, 95, 90, 40);
 		jbConfirm2.setText("确认");
 		jbConfirm2.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbConfirm2.addMouseListener(searchListener2);
-
+		
 		jbDetail = new JButton();
 		jbDetail.setBounds(410, 13, 110, 40);
 		jbDetail.setText("查看详细");
 		jbDetail.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbDetail.addMouseListener(detailListener);
 		jbDetail.setEnabled(false);
-
+		
+		checkinListener = new CheckinListener(this);
+		
 		jbCheckin = new JButton();
 		jbCheckin.setBounds(550, 13, 110, 40);
 		jbCheckin.setText("入住");
 		jbCheckin.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbCheckin.setEnabled(false);
-
+		jbCheckin.addMouseListener(checkinListener);
+		
+		checkoutListener = new CheckoutListener(this);
+		
 		jbCheckout = new JButton();
 		jbCheckout.setBounds(690, 13, 110, 40);
 		jbCheckout.setText("退房");
 		jbCheckout.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbCheckout.setEnabled(false);
-
+		jbCheckout.addMouseListener(checkoutListener);
+		
+		delayListener = new DelayCheckinListener(this);
+		
 		jbDelay = new JButton();
 		jbDelay.setBounds(830, 13, 110, 40);
 		jbDelay.setText("延迟入住");
 		jbDelay.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbDelay.setEnabled(false);
-
-		List<OrderVO> orders = this.searchByOrderType("未执行");
-		List<OrderVO> orders1 = this.searchByOrderType("已执行");
-		List<OrderVO> orders2 = this.searchByOrderType("异常");
-		List<OrderVO> orders3 = this.searchByOrderType("已撤销");
-		if (orders1.size() != 0) {
-			orders.addAll(orders1);
-		}
-		if (orders2.size() != 0) {
-			orders.addAll(orders2);
-		}
-		if (orders2.size() != 0) {
-			orders.addAll(orders3);
-		}
-
-		orderListTableModel = new OrderListTableModel(orders);
-
+		jbDelay.addMouseListener(delayListener);
+		
+		orderSelectedListener = new OrderSelectedListener(this);
+		
+		List<OrderVO> orderList = new ArrayList<OrderVO>();
+		orderList = this.getAllOrders();
+		
+		orderListTableModel = new OrderListTableModel(orderList);
+		
 		jtOrderList = new JTable(orderListTableModel);
 		jtOrderList.setBackground(new Color(211, 237, 249));
-		jtOrderList.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 16));
+		jtOrderList.setFont(new Font("方正兰亭超细黑简体",Font.PLAIN,16));
 		jtOrderList.setRowHeight(40);
 		jtOrderList.setShowVerticalLines(false);
-
-		jthOrderList = jtOrderList.getTableHeader();
-		jthOrderList.setPreferredSize(new Dimension(jtOrderList.getWidth(), 40));
-		jthOrderList.setBackground(new Color(222, 237, 249));
+		jtOrderList.addMouseListener(orderSelectedListener);
+		
+		jthOrderList = jtOrderList.getTableHeader(); 
+		jthOrderList.setPreferredSize(new Dimension(jtOrderList.getWidth(),40)); 
+		jthOrderList.setBackground(new Color(188, 226, 236));
 		jthOrderList.setEnabled(false);
-		jthOrderList.setBorder(new EmptyBorder(0, 0, 0, 0));
+		jthOrderList.setBorder(new EmptyBorder(0,0,0,0));
 		jthOrderList.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 16));
-
+		
 		jspOrderList = new JScrollPane(jtOrderList);
 		jspOrderList.setBounds(10, 10, 1060, 452);
 		jspOrderList.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		jspOrderList.setOpaque(false);
 		jspOrderList.getViewport().setOpaque(false);
 		jspOrderList.setBackground(Color.WHITE);
-
+		
 		jpSearch.add(jlOrderType);
 		jpSearch.add(jlSearch);
 		jpSearch.add(jcbOrderType);
@@ -204,188 +216,304 @@ public class HotelOrderUIPanel extends JPanel {
 		jpSearch.add(jtfSearch);
 		jpSearch.add(jbConfirm1);
 		jpSearch.add(jbConfirm2);
-
+		
 		jpOrder.add(jspOrderList);
-
+		
 		jpButton.add(jbDetail);
 		jpButton.add(jbCheckin);
 		jpButton.add(jbCheckout);
 		jpButton.add(jbDelay);
-
+		
 		this.add(jpSearch);
 		this.add(jpOrder);
 		this.add(jpButton);
-
-		buttonThread();
+		
 	}
-
-	public List<OrderVO> getAllOrders() {
-		List<OrderVO> orders = this.searchByOrderType("未执行");
-		List<OrderVO> orders1 = this.searchByOrderType("已执行");
-		List<OrderVO> orders2 = this.searchByOrderType("异常");
-		List<OrderVO> orders3 = this.searchByOrderType("已撤销");
-		if (orders1.size() != 0) {
-			orders.addAll(orders1);
+	
+	/**
+	 * 获取该酒店的所有订单
+	 * @return
+	 */
+	public List<OrderVO> getAllOrders(){
+		List<OrderVO> orderList = new ArrayList<OrderVO>();
+		
+		try {
+			orderList = hotelOrderController.findOrderByHotelID(hotel.id);
+		} catch (OrderNotFoundException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(this, "您的酒店尚无订单！", "订单不存在", JOptionPane.INFORMATION_MESSAGE);
 		}
-		if (orders2.size() != 0) {
-			orders.addAll(orders2);
-		}
-		if (orders2.size() != 0) {
-			orders.addAll(orders3);
-		}
-
-		return orders;
+		
+		return orderList;
 	}
-
-	public void refreshOrderList(List<OrderVO> orderList) {
+	
+	/**
+	 * 刷新订单列表
+	 * @param orderList
+	 */
+	public void refreshOrderList(List<OrderVO> orderList){
 		orderListTableModel = new OrderListTableModel(orderList);
 		jtOrderList.setModel(orderListTableModel);
 	}
-
-	public void refreshSearchTerms() {
+	
+	/**
+	 * 刷新搜索条件面板
+	 */
+	public void refreshSearchTerms(){
 		jcbOrderType.setSelectedIndex(0);
 		jcbSearch.setSelectedIndex(0);
 		jtfSearch.setText("");
 	}
-
-	public String getOrderType() {
+	
+	/**
+	 * 获取当前选择的订单类型
+	 * @return
+	 */
+	public String getOrderType(){
 		return (String) jcbOrderType.getSelectedItem();
 	}
-
-	public String getSearchInfo() {
+	
+	/**
+	 * 获取当前选择的搜索条件（用户名或订单号）
+	 * @return
+	 */
+	public String getSearchInfo(){
 		return (String) jcbSearch.getSelectedItem();
 	}
-
-	public String getUsername() {
+	
+	/**
+	 * 获取输入的用户名
+	 * @return
+	 */
+	public String getUsername(){
 		return jtfSearch.getText();
 	}
-
-	public String getOrderID() {
+	
+	/**
+	 * 获取输入的订单号
+	 * @return
+	 */
+	public String getOrderID(){
 		return jtfSearch.getText();
 	}
-
-	public OrderVO getSelectedOrder() {
-		int row = jtOrderList.getSelectedRow();
+	
+	/**
+	 * 获取在表格中被选中的行数
+	 * @return
+	 */
+	public int getSelectedRow(){
+		return jtOrderList.getSelectedRow();
+	}
+	
+	/**
+	 * 获取在表格中被选中的订单
+	 * @return
+	 */
+	public OrderVO getSelectedOrder(int row){
 		int id = Integer.valueOf((String) jtOrderList.getValueAt(row, 0));
-		OrderVO order = this.searchByOrderID(id).get(0);
-
+		List<OrderVO> orderList = this.searchByOrderID(id);
+		OrderVO order = orderList.get(0);
+		
 		return order;
 	}
-
-	public List<OrderVO> searchByOrderType(String orderType) {
+	
+	/**
+	 * 通过订单类型搜索订单
+	 * @param orderType
+	 * @return
+	 */
+	public List<OrderVO> searchByOrderType(String orderType){
 		List<OrderVO> orderList = new ArrayList<OrderVO>();
 		List<OrderVO> orderList1 = new ArrayList<OrderVO>();
 		List<OrderVO> orderList2 = new ArrayList<OrderVO>();
-
-		if (orderType.equals("未执行")) {
+		
+		if(orderType.equals("未执行")){
 			try {
 				orderList = hotelOrderController.findOrderByHotelAndStatus(hotel.id, OrderStatus.Unexecuted);
 			} catch (OrderNotFoundException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, "您的酒店尚无未执行订单！", "订单不存在", JOptionPane.INFORMATION_MESSAGE);
 			}
-		} else if (orderType.equals("已执行")) {
+		}
+		else if(orderType.equals("已执行")){
 			try {
 				orderList = hotelOrderController.findOrderByHotelAndStatus(hotel.id, OrderStatus.Executed);
 			} catch (OrderNotFoundException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, "您的酒店尚无已执行订单！", "订单不存在", JOptionPane.INFORMATION_MESSAGE);
 			}
-		} else if (orderType.equals("异常")) {
+		}
+		else if(orderType.equals("异常")){
 			try {
 				orderList = hotelOrderController.findOrderByHotelAndStatus(hotel.id, OrderStatus.Abnormal);
 			} catch (OrderNotFoundException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, "您的酒店尚无异常订单！", "订单不存在", JOptionPane.INFORMATION_MESSAGE);
 			}
-		} else if (orderType.equals("已撤销")) {
+		}
+		else if(orderType.equals("已撤销")){
 			try {
 				orderList = hotelOrderController.findOrderByHotelAndStatus(hotel.id, OrderStatus.RevokedFullValue);
-			} catch (OrderNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
 				orderList1 = hotelOrderController.findOrderByHotelAndStatus(hotel.id, OrderStatus.RevokedHalfValue);
-			} catch (OrderNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
 				orderList2 = hotelOrderController.findOrderByHotelAndStatus(hotel.id, OrderStatus.UserRevoked);
 			} catch (OrderNotFoundException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-
-			if (orderList1.size() != 0) {
-				orderList.addAll(orderList1);
-			}
-			if (orderList2.size() != 0) {
-				orderList.addAll(orderList2);
+			
+			orderList.addAll(orderList1);
+			orderList.addAll(orderList2);
+			
+			if(orderList.size()==0){
+				JOptionPane.showMessageDialog(this, "您的酒店尚无已撤销订单！", "订单不存在", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
-
+		
 		return orderList;
 	}
-
-	public List<OrderVO> searchByUsername(String username) {
+	
+	/**
+	 * 通过用户名搜索订单
+	 * @param username
+	 * @return
+	 */
+	public List<OrderVO> searchByUsername(String username){
 		List<OrderVO> orderList = new ArrayList<OrderVO>();
-
+		
 		try {
 			orderList = hotelOrderController.findOrderByHotelAndUsername(hotel.id, username);
 		} catch (OrderNotFoundException e) {
-			// TODO Auto-generated catch block
+			 //TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(this, "该用户不存在！", "错误", JOptionPane.WARNING_MESSAGE);
 		}
-
+		
 		return orderList;
 	}
-
-	public List<OrderVO> searchByOrderID(int id) {
+	
+	/**
+	 * 通过订单id搜索订单
+	 * @param id
+	 * @return
+	 */
+	public List<OrderVO> searchByOrderID(int id){
 		List<OrderVO> orderList = new ArrayList<OrderVO>();
 		OrderVO order;
-
+		
 		try {
-			order = hotelOrderController.findOrderByID(id);
+			order =  hotelOrderController.findOrderByID(id);
 			orderList.add(order);
 		} catch (OrderNotFoundException e) {
-			// TODO Auto-generated catch block
+			 //TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(this, "该订单不存在！", "错误", JOptionPane.WARNING_MESSAGE);
 		}
-
+		
 		return orderList;
 	}
-
-	private void buttonThread() {
-		Thread thread = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				while (true) {
-					if (jtOrderList.getSelectedRowCount() == 0) {
-						jbDetail.setEnabled(false);
-						jbCheckin.setEnabled(false);
-						jbCheckout.setEnabled(false);
-						jbDelay.setEnabled(false);
-					} else {
-						jbDetail.setEnabled(true);
-						jbCheckin.setEnabled(true);
-						jbCheckout.setEnabled(true);
-						jbDelay.setEnabled(true);
-					}
-					try {
-						Thread.sleep(200);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+	
+	/**
+	 * 当表格中的某个订单被选中时，根据该订单的状态将按钮面板的相应按钮设置为可用，并在不可用按钮上设置提示信息
+	 */
+	public void OrderSelected(){
+		int row = getSelectedRow();
+		OrderVO order = null;
+		if(row != -1){
+			order = this.getSelectedOrder(row);
+			jbDetail.setEnabled(true);
+			if(order.status==OrderStatus.Unexecuted){
+				jbCheckin.setEnabled(true);
+				jbCheckout.setEnabled(false);
+				jbCheckout.setToolTipText("您只能对未进行过退房操作的已执行订单进行退房操作");
+				jbDelay.setEnabled(false);
+				jbDelay.setToolTipText("您只能对异常订单进行延迟入住操作");
+			}
+			else if(order.status==OrderStatus.Executed){
+				jbCheckin.setEnabled(false);
+				jbCheckin.setToolTipText("您只能对未执行订单进行入住操作");
+				jbDelay.setEnabled(false);
+				jbDelay.setToolTipText("您只能对异常订单进行延迟入住操作");
+				
+				String checkoutTime = "";
+				try {
+					checkoutTime = order.checkoutTime.toString();
+				} catch (NullPointerException e) {
+					// TODO Auto-generated catch block
+					checkoutTime = "";
+				}
+				if(checkoutTime.equals("")){
+					jbCheckout.setEnabled(true);
+				}
+				else{
+					jbCheckout.setEnabled(false);
+					jbCheckout.setToolTipText("您只能对未进行过退房操作的已执行订单进行退房操作");
 				}
 			}
-		});
-
-		thread.start();
-
+			else if(order.status==OrderStatus.Abnormal){
+				jbCheckin.setEnabled(false);
+				jbCheckin.setToolTipText("您只能对未执行订单进行入住操作");
+				jbCheckout.setEnabled(false);
+				jbCheckout.setToolTipText("您只能对未进行过退房操作的已执行订单进行退房操作");
+				jbDelay.setEnabled(true);
+			}
+			else if((order.status==OrderStatus.RevokedFullValue)||(order.status==OrderStatus.RevokedHalfValue)
+					||(order.status==OrderStatus.UserRevoked)){
+				jbCheckin.setEnabled(false);
+				jbCheckin.setToolTipText("您只能对未执行订单进行入住操作");
+				jbCheckout.setEnabled(false);
+				jbCheckout.setToolTipText("您只能对未进行过退房操作的已执行订单进行退房操作");
+				jbDelay.setEnabled(false);
+				jbDelay.setToolTipText("您只能对异常订单进行延迟入住操作");
+			}
+		}
 	}
-
+	
+	/**
+	 * 当表格中没有订单被选中时，按钮面板的四个按钮皆不可用
+	 */
+	public void OrderNotSelected(){
+		jbDetail.setEnabled(false);
+		jbCheckin.setEnabled(false);
+		jbCheckout.setEnabled(false);
+		jbDelay.setEnabled(false);
+	}
+	
+	/**
+	 * 对未执行订单进行入住操作
+	 * @param order
+	 */
+	public void checkin(OrderVO order){
+		hotelOrderController.checkin(order);
+		JOptionPane.showMessageDialog(null, "订单信息已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	/**
+	 * 对未执行过退房操作的已执行订单进行退房操作
+	 * @param order
+	 */
+	public void checkout(OrderVO order){
+		hotelOrderController.checkout(order);
+		JOptionPane.showMessageDialog(null, "订单信息已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	/**
+	 * 对异常订单进行延迟入住操作
+	 * @param order
+	 */
+	public void delayCheckin(OrderVO order){
+		hotelOrderController.delayCheckin(order);
+		JOptionPane.showMessageDialog(null, "订单信息已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	/**
+	 * 获得相应按钮的可用状态
+	 */
+	public boolean isButtonEnable(String buttonName){
+		if(buttonName.equals("入住")){
+			return jbCheckin.isEnabled();
+		}
+		else if(buttonName.equals("退房")){
+			return jbCheckout.isEnabled();
+		}
+		else{
+			return jbDelay.isEnabled();
+		}
+	}
 }

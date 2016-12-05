@@ -12,12 +12,17 @@ import hrs.common.VO.OrderVO;
 
 public class HotelOrderMainPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5549552621347857705L;
 	private CardLayout card;
 	private HotelOrderUIPanel jpOrderList;
 	private HotelOrderDetailUIPanel jpOrderDetail;
 	
 	/**
-	 * Create the panel.
+	 * 初始化酒店订单管理主界面面板
+	 * @param hotel
 	 */
 	public HotelOrderMainPanel(HotelVO hotel) {
 		init(hotel);
@@ -32,23 +37,34 @@ public class HotelOrderMainPanel extends JPanel {
 		this.setSize(1080, 722);
 		this.setBackground(new Color(211, 237, 249));
 		
-		this.add(jpOrderList, "1");
-		this.add(jpOrderDetail, "2");
+		this.add(jpOrderList, "jpOrderList");
+		this.add(jpOrderDetail, "jpOrderDetail");
 		
 	}
 	
+	/**
+	 * 显示酒店订单管理界面
+	 */
 	public void showList(){
-		card.show(this, "1");
+		card.show(this, "jpOrderList");
 	}
 	
+	/**
+	 * 刷新酒店订单管理界面
+	 */
 	public void refresh(){
 		jpOrderList.refreshSearchTerms();
-		List<OrderVO> orders= jpOrderList.getAllOrders();
-		jpOrderList.refreshOrderList(orders);
+		List<OrderVO> orderList = jpOrderList.getAllOrders();
+		jpOrderList.refreshOrderList(orderList);
+		jpOrderList.OrderNotSelected();
 	}
 	
+	/**
+	 * 显示酒店订单详细界面
+	 * @param order
+	 */
 	public void showDetail(OrderVO order){
-		card.show(this, "2");
+		card.show(this, "jpOrderDetail");
 		jpOrderDetail.showDetailInfo(order);
 	}
 	

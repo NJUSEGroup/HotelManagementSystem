@@ -1,5 +1,5 @@
 package hrs.client.UI.HotelUI.HotelDiscountUI.Listener;
 
-public class Listener {
+public class EditListener {
 
 }

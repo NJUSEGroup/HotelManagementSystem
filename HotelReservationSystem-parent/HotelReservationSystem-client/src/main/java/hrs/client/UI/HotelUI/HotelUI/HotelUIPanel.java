@@ -3,7 +3,6 @@ package hrs.client.UI.HotelUI.HotelUI;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ItemListener;
-import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -23,13 +22,16 @@ import hrs.client.UI.HotelUI.HotelUI.Listener.CityListener;
 import hrs.client.UI.HotelUI.HotelUI.Listener.EditListener;
 import hrs.client.util.ControllerFactory;
 import hrs.common.Controller.HotelController.IHotelController;
-import hrs.common.Controller.UserController.IUserHotelController;
 import hrs.common.VO.CommercialCircleVO;
 import hrs.common.VO.HotelVO;
 import hrs.common.VO.LocationVO;
 
 public class HotelUIPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel jpHotelInfo;
 	private JPanel jpButton;
 	private JScrollPane jspIntro;
@@ -49,7 +51,7 @@ public class HotelUIPanel extends JPanel {
 	private JComboBox<String> jcbCircle;
 	private JTextArea jtaIntro;
 	private JTextArea jtaService;
-	private JComboBox jcbStar;
+	private JComboBox<String> jcbStar;
 	private JButton jbEdit;
 	private JButton jbCancel;
 	private EditListener editListener;
@@ -140,7 +142,7 @@ public class HotelUIPanel extends JPanel {
 		
 		cityListener = new CityListener(this);
 		
-		jcbCity = new JComboBox();
+		jcbCity = new JComboBox<String>();
 		jcbCity.setBounds(150, 70, 172, 30);
 		jcbCity.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jcbCity.setOpaque(true);
@@ -148,7 +150,7 @@ public class HotelUIPanel extends JPanel {
 		jcbCity.setEditable(false);
 		jcbCity.addItemListener((ItemListener) cityListener);
 		
-		jcbCircle = new JComboBox();
+		jcbCircle = new JComboBox<String>();
 		jcbCircle.setBounds(150, 120, 172, 30);
 		jcbCircle.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jcbCircle.setOpaque(true);
@@ -194,7 +196,7 @@ public class HotelUIPanel extends JPanel {
 		jspService.setBounds(150, 420, 853, 110);
 		jspService.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
-		jcbStar = new JComboBox(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5"}));
+		jcbStar = new JComboBox<String>(new DefaultComboBoxModel<String>(new String[] {"1", "2", "3", "4", "5"}));
 		jcbStar.setBounds(150, 550, 105, 30);
 		jcbStar.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jcbStar.setOpaque(true);

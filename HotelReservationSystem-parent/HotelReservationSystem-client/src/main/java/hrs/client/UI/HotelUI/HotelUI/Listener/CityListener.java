@@ -1,12 +1,7 @@
 package hrs.client.UI.HotelUI.HotelUI.Listener;
 
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import hrs.client.UI.HotelUI.HotelUI.HotelUIPanel;
 
 public class CityListener implements ItemListener{

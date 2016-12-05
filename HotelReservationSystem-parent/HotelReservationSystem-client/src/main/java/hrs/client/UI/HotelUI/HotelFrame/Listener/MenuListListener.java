@@ -15,6 +15,9 @@ public class MenuListListener implements MouseListener{
 			this.frame = frame;
 		}
 		
+		/**
+		 * 根据鼠标点击的标签展示相应界面
+		 */
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
@@ -35,6 +38,9 @@ public class MenuListListener implements MouseListener{
 			
 		}
 
+		/**
+		 * 当光标置于标签上时，标签变色
+		 */
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
@@ -42,6 +48,9 @@ public class MenuListListener implements MouseListener{
 			frame.changeColorWhenEnter(e);
 		}
 
+		/**
+		 * 当光标离开标签时，标签变色
+		 */
 		@Override
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub

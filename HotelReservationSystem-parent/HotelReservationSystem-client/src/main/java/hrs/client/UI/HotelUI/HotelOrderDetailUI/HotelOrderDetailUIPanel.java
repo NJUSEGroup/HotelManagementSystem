@@ -13,8 +13,6 @@ import java.awt.Insets;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import org.hibernate.type.descriptor.java.DataHelper;
-
 import hrs.client.UI.HotelUI.HotelOrderDetailUI.Listener.ReturnListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderMainPanel;
 import hrs.common.VO.OrderVO;
@@ -22,6 +20,10 @@ import hrs.common.util.DateHelper;
 
 public class HotelOrderDetailUIPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1880061535262342363L;
 	private JPanel jpDetail;
 	private JPanel jpButton;
 	
@@ -67,7 +69,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 	private ReturnListener returnListener;
 	
 	/**
-	 * Create the panel.
+	 * 初始化酒店详细订单界面
 	 */
 	public HotelOrderDetailUIPanel(HotelOrderMainPanel jpMain) {
 		init(jpMain);
@@ -541,7 +543,11 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jtfOrderStatus.setColumns(10);
 		this.add(jpButton);
 	}
-
+	
+	/**
+	 * 显示相应订单的详细信息
+	 * @param order
+	 */
 	public void showDetailInfo(OrderVO order){
 		jtfID.setText(Integer.toString(order.id));
 		jtfPlaceOrder.setText(DateHelper.format(order.placeTime));

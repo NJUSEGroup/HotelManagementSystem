@@ -14,19 +14,19 @@ public enum RoomType {
 	Single, Double, KingSize, Standard, Deluxe, Business, Executive;
 	public static RoomType getRoomType(String type) {
 		switch (type) {
-		case "Single":
+		case "单人房":
 			return Single;
-		case "Double":
+		case "双人房":
 			return Double;
-		case "KingSize":
+		case "大床房":
 			return KingSize;
-		case "Standard":
+		case "标准房":
 			return Standard;
-		case "Deluxe":
+		case "豪华房":
 			return Deluxe;
-		case "Business":
+		case "商务标间":
 			return Business;
-		case "Executive":
+		case "行政标间":
 			return Executive;
 		default:
 			return null;

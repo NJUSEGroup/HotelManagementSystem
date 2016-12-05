@@ -1,16 +1,16 @@
 package hrs.client.UI.UserUI.HotelSearchUI;
 
-import hrs.client.UI.UserUI.ComComponents.CommonPanel;
+import hrs.client.UI.UserUI.Components.CommonPanel;
 import hrs.common.VO.OrderVO;
 
 public class PlaceOrderPanel extends CommonPanel {
 	private OrderVO order;
 	public PlaceOrderPanel(OrderVO order){
 		this.order = order;
-		Init();
+		init();
 	}
 	@Override
-	public void Init() {
+	public void init() {
 		// TODO Auto-generated method stub
 
 	}

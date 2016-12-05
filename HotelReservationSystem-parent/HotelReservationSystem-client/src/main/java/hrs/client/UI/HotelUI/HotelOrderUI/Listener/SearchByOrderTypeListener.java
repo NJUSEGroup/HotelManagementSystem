@@ -5,7 +5,6 @@ import java.awt.event.MouseListener;
 import java.util.List;
 
 import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderUIPanel;
-import hrs.common.Exception.OrderService.OrderNotFoundException;
 import hrs.common.VO.OrderVO;
 
 public class SearchByOrderTypeListener implements MouseListener{
@@ -16,9 +15,14 @@ public class SearchByOrderTypeListener implements MouseListener{
 		this.jpHotelOrder = jpHotelOrder;
 	}
 	
+	/**
+	 * 根据所选择的订单类型搜索订单
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
+		jpHotelOrder.OrderNotSelected();
 		
 		String orderType = jpHotelOrder.getOrderType();
 		List<OrderVO> orderList = null;

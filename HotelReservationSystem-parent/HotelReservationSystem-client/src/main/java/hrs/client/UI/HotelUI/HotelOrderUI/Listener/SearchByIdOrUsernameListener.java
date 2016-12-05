@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderUIPanel;
-import hrs.common.Exception.OrderService.OrderNotFoundException;
 import hrs.common.VO.OrderVO;
 
 public class SearchByIdOrUsernameListener implements MouseListener{
@@ -17,14 +16,18 @@ public class SearchByIdOrUsernameListener implements MouseListener{
 		this.jpHotelOrder = jpHotelOrder;
 	}
 	
+	/**
+	 * 根据所选择的搜索条件（用户名或订单号）搜索订单
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+		jpHotelOrder.OrderNotSelected();
+		
 		List<OrderVO> orderList = new ArrayList<OrderVO>();
-		OrderVO order;
-		String username;
-		int id;
+		String username = null;
+		int id = 0;
 		
 		String searchInfo = jpHotelOrder.getSearchInfo();
 		
