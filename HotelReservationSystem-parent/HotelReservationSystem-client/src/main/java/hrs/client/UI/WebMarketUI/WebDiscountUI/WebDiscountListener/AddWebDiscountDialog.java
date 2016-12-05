@@ -32,6 +32,7 @@ import hrs.common.util.type.HotelDiscountType;
 import hrs.common.util.type.WebsiteDiscountType;
 
 import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JComboBox;
@@ -74,9 +75,10 @@ public class AddWebDiscountDialog extends JDialog {
 	private JComboBox jcomboBoxVIPLevel = new JComboBox<>();
 
 	private LocationVO location;
+	private CommercialCircleVO commercialCircle;
 	private IWebDiscountController controller = ControllerFactory.getWebDiscountController();
 	private List<LocationVO> locs;
-	private List<CommercialCircleVO> commercialCircles;
+	private List<CommercialCircleVO> commercialCircleList;
 	private int locationIndex;
 
 	/**
@@ -120,11 +122,12 @@ public class AddWebDiscountDialog extends JDialog {
 		switch (jcomboBoxType.getSelectedItem().toString()) {
 		case "特定商圈专属折扣":
 			double commercialCircleDiscount = Double.parseDouble(jtextDiscount.getText());
-			System.out.println(jcomboBoxLocation);
+//			System.out.println(jcomboBoxLocation);
 			locationIndex = jcomboBoxLocation.getSelectedIndex();
 			location = locs.get(locationIndex);
 			int commercialCircleIndex = jcomboBoxCommercialCircle.getSelectedIndex();
-			CommercialCircleVO commercialCircle = commercialCircles.get(commercialCircleIndex);
+			commercialCircle = commercialCircleList.get(commercialCircleIndex);
+//			System.out.println(commercialCircle);
 			addVO = new WebDiscountVO(commercialCircleDiscount, WebsiteDiscountType.SpecialCommercialCircle, location,
 					commercialCircle, null, null, 0);
 
@@ -163,7 +166,7 @@ public class AddWebDiscountDialog extends JDialog {
 
 		getContentPane().setLayout(new BorderLayout());
 		jpAdd.setBorder(new EmptyBorder(5, 5, 5, 5));
-		jpAdd.setBackground(UIConstants.jframe);
+		jpAdd.setBackground(UIConstants.JFRAME);
 		getContentPane().add(jpAdd, BorderLayout.CENTER);
 
 		// setUnableAndCombox();
@@ -295,21 +298,24 @@ public class AddWebDiscountDialog extends JDialog {
 			public void itemStateChanged(ItemEvent e) {			
 				if( jcomboBoxType.getSelectedItem().toString().equals("特定商圈专属折扣")) {
 //					locationIndex = jcomboBoxLocation.getSelectedIndex();
-//					System.out.println(locationIndex);
 //					location = locs.get(locationIndex);
-					location=locs.get(0);
-//					jcomboBoxLocation.addItemListener(new ItemListener() {
-//						@Override
-//						public void itemStateChanged(ItemEvent e) {
-//							// TODO Auto-generated method stub
-							List<CommercialCircleVO> commercialCircleList = controller.findCircleByLoc(location.id);
+					
+					jcomboBoxLocation.addItemListener(new ItemListener() {
+						@Override
+						public void itemStateChanged(ItemEvent e) {
+							// TODO Auto-generated method stub
+							locationIndex = jcomboBoxLocation.getSelectedIndex();
+							location = locs.get(locationIndex);
+							commercialCircleList = controller.findCircleByLoc(location.id);
+							System.out.println(commercialCircleList);
 							Object[] circleName = new Object[commercialCircleList.size()];
 							for (int i = 0; i != commercialCircleList.size(); ++i) {
 								circleName[i] = commercialCircleList.get(i).name;
 							}
-							jcomboBoxCommercialCircle = new JComboBox<>(circleName);
-//						}
-//					});						
+							DefaultComboBoxModel<Object> model=new DefaultComboBoxModel<>(circleName);
+							jcomboBoxCommercialCircle.setModel(model);
+						}
+					});						
 				}				
 			}					
 		});				

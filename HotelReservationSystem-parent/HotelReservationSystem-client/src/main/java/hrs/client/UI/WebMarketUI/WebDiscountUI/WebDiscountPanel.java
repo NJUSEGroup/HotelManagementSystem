@@ -141,7 +141,7 @@ public class WebDiscountPanel extends JPanel {
 
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(jTable);
-		scrollPane.setBounds(3, 20, 1000, 600);
+		scrollPane.setBounds(3, 20, 1000, 530);
 		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		scrollPane.getViewport().setBackground(new Color(211, 237, 249));
 		scrollPane.setOpaque(true);
@@ -162,11 +162,9 @@ public class WebDiscountPanel extends JPanel {
 	
     
 	public void addWebDiscount() {
-//		System.out.println("AAAAAAA");
 		addVo = jdAddWebDiscount.jdaddWebDiscount();
 //		System.out.println(addVo);
 		webDiscountController.add(addVo);
-		//!!!!!!!!!!!!!!!!!!!		
 		webDiscountController = ControllerFactory.getWebDiscountController();
 		webDiscountList = getWebDiscountList();
 		addModel = new WebDiscountModel(webDiscountList);

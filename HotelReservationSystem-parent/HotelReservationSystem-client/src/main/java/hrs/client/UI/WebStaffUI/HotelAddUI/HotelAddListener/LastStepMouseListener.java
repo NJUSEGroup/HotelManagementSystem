@@ -1,4 +1,4 @@
-package hrs.client.UI.WebStaffUI.HotelAndHotelstaffAddUI.HotelAndHotelstaffAddListener;
+package hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddListener;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
@@ -6,8 +6,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 
-import hrs.client.UI.WebStaffUI.HotelAndHotelstaffAddUI.HotelAddUIPanel;
-import hrs.client.UI.WebStaffUI.HotelAndHotelstaffAddUI.HotelStaffAddUIPanel;
+import hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddUIPanel;
+import hrs.client.UI.WebStaffUI.HotelAddUI.HotelStaffAddUIPanel;
 import hrs.client.util.UIConstants;
 
 public class LastStepMouseListener implements MouseListener{
@@ -49,7 +49,7 @@ public class LastStepMouseListener implements MouseListener{
 		// TODO Auto-generated method stub
 		jbButton = (JButton)e.getSource(); 
 		//鼠标离开标签时更换背景及字体色
-		 jbButton.setBackground(UIConstants.jlabel);
+		 jbButton.setBackground(UIConstants.JLABEL);
 		 jbButton.setForeground(Color.white);
 	}
 

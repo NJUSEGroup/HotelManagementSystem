@@ -123,36 +123,19 @@ public class WebUserUIPanel extends JPanel {
 	public void modify(){     
 	     userVO.username=showUserInfoPanel.getUsername();
 	     userVO.password=showUserInfoPanel.getPassword();
-	     
-//	    userVO.name=showUserInfoPanel.getName();
-	     userVO.name="songxinjian";
+	     userVO.name=showUserInfoPanel.getRealName();
+//	     userVO.name="songxinjian";
 	     //这边数据库存在问题！！
 	     //修改联系方式为什么生日会跟着变啊！！
-	     
 	     userVO.birthDate=showUserInfoPanel.getBirthday();
 //	     System.out.println(userVO.birthDate);
-	     
 	     userVO.phone=showUserInfoPanel.getPhone();
 	     userVO.enterprise=showUserInfoPanel.getEnterpriseName();
-//	     UserVO userVO=new UserVO(username, password, phone, realName, creditValue, searchUserByUsername().VIPLevel, searchUserByUsername().type, enterprise);
-//	     System.out.println(userVO);
 	     controller.updateUser(userVO);	     
 }
 	
 
 	public void showUserinfo() {
-		// System.out.println(searchUserByUsername());
 		showUserInfoPanel.inputInfo(searchUserByUsername());
-		// this.add(showUserInfoPanel);
-		// showUserInfoPanel.setBounds(5, 80, 1068, 623);
 	}
-	// public static void main(String[]args){
-	// JFrame frame=new JFrame();
-	// WebUserUIPanel panel=new WebUserUIPanel(new ShowUserInfoPanel());
-	// frame.setSize(1200, 800);
-	// frame.add(panel);
-	// frame.setVisible(true);
-	//
-	// }
-
 }
