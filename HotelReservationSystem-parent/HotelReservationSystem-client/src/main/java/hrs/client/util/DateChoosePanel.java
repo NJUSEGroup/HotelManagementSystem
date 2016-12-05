@@ -1,5 +1,6 @@
 package hrs.client.util;
 
+import java.awt.Font;
 import java.sql.Date;
 import java.util.Calendar;
 
@@ -26,7 +27,7 @@ public class DateChoosePanel extends JPanel {
 	private DateChooseListener listener;
 	
 	private Calendar currentTm ;
-	
+	Font font = UIConstants.JLABEL_FONT;
 	public DateChoosePanel(){
 		currentTm = Calendar.getInstance();
 		listener = new DateChooseListener(this);
@@ -36,7 +37,7 @@ public class DateChoosePanel extends JPanel {
 	private void Init() {
 		setSize(330,40);
 		setLayout(null);
-		setBackground(UIConstants.jframe);
+		setBackground(UIConstants.JFRAME);
 		
 		setLabel();
 		setBox();
@@ -47,7 +48,7 @@ public class DateChoosePanel extends JPanel {
 		yearBox.addItem(currentTm.get(Calendar.YEAR));
 		yearBox.addItem(currentTm.get(Calendar.YEAR)+1);
 		yearBox.addItemListener(listener);
-		yearBox.setFont(UIConstants.jlabelChinese);
+		yearBox.setFont(font);
 		yearBox.setBounds(0,5,100,30);
 		yearBox.setSelectedItem(currentTm.get(Calendar.YEAR));
 		add(yearBox);
@@ -56,7 +57,7 @@ public class DateChoosePanel extends JPanel {
 		for(Integer i = 1;i<=12;i++){
 			monthBox.addItem(i);
 		}
-		monthBox.setFont(UIConstants.jlabelChinese);
+		monthBox.setFont(font);
 		monthBox.setBounds(130,5,70,30);
 		monthBox.setSelectedItem(currentTm.get(Calendar.MONTH)+1);
 		monthBox.addItemListener(listener);
@@ -67,7 +68,7 @@ public class DateChoosePanel extends JPanel {
 		for(Integer i = 1;i<=MaxDay;i++){
 			dayBox.addItem(i);
 		}
-		dayBox.setFont(UIConstants.jlabelChinese);
+		dayBox.setFont(font);
 		dayBox.setBounds(230,5,70,30);
 		dayBox.setSelectedItem(currentTm.get(Calendar.DATE));
 		add(dayBox);
@@ -76,17 +77,17 @@ public class DateChoosePanel extends JPanel {
 
 	private void setLabel() {
 		JLabel yearJL = new JLabel("年");
-		yearJL.setFont(UIConstants.jlabelChinese);
+		yearJL.setFont(font);
 		yearJL.setBounds(100,0,30,40);
 		add(yearJL);
 		
 		JLabel monthJL = new JLabel("月");
-		monthJL.setFont(UIConstants.jlabelChinese);
+		monthJL.setFont(font);
 		monthJL.setBounds(200,0,30,40);
 		add(monthJL);
 		
 		JLabel dayJL = new JLabel("日");
-		dayJL.setFont(UIConstants.jlabelChinese);
+		dayJL.setFont(font);
 		dayJL.setBounds(300,0,30,40);
 		add(dayJL);
 		

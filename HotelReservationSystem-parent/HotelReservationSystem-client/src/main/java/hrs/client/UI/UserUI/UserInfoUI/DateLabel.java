@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import hrs.client.util.UIConstants;
 
 public class DateLabel extends JLabel {
-	Font font = UIConstants.jzoneChinese;
+	Font font = UIConstants.JLABEL_FONT;
 	public DateLabel(String s){
 		setFont(font);
 	

@@ -1,21 +1,26 @@
 package hrs.client.UI.UserUI.HotelSearchUI;
 
 import java.awt.CardLayout;
+import java.awt.Panel;
+import java.util.List;
 
 import javax.swing.JPanel;
 
+import hrs.client.UI.UserUI.Components.ComNeedBackPanel;
 import hrs.client.UI.UserUI.Components.CommonPanel;
 import hrs.client.util.ControllerFactory;
 import hrs.common.Controller.UserController.IUserHotelController;
+import hrs.common.VO.HotelVO;
+import hrs.common.VO.RoomVO;
 import hrs.common.VO.UserVO;
 
-public class HotelPanel extends CommonPanel {
+public class HotelPanel extends ComNeedBackPanel {
 	private JPanel hotelCardPanel = new JPanel();
 	private CardLayout hotelCard = new CardLayout();
 	
 	private HotelSearchPanel hotelSearchPanel;
 	private PlaceOrderPanel placeOrderPanel;
-	private HotelDetailPanel hotelDetailInfoPanel;
+	private HotelDetailPanel hotelDetailPanel;
 	
 	private UserVO user;
 	private IUserHotelController controller = ControllerFactory.getUserHotelController();
@@ -30,6 +35,7 @@ public class HotelPanel extends CommonPanel {
 	}
 	private void setCard() {
 		hotelSearchPanel = new HotelSearchPanel(user);
+		hotelSearchPanel.setPanel(this);
 		hotelCardPanel.setLayout(hotelCard);
 		hotelCardPanel.add("hotelSearch", hotelSearchPanel);
 		hotelCardPanel.setBounds(0,0,1103,768);
@@ -38,5 +44,22 @@ public class HotelPanel extends CommonPanel {
 		add(hotelCardPanel);
 		
 	}
-
+	
+	public void showDetail(HotelVO hotel,List<RoomVO> rooms){
+		hotelDetailPanel = new HotelDetailPanel(hotel,rooms,user);
+		hotelDetailPanel.setHotelPanel(this);
+		hotelCardPanel.add("hotelDetail", hotelDetailPanel);
+		hotelCard.show(hotelCardPanel, "hotelDetail");
+	}
+	
+	@Override
+	public void back(){
+		hotelCard.show(hotelCardPanel, "hotelSearch");
+	}
+	@Override
+	public void placeOrder() {
+		
+	}
+	
+	
 }

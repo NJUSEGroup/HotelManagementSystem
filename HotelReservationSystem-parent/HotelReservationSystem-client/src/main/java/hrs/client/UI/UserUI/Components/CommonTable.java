@@ -1,4 +1,4 @@
-package hrs.client.UI.UserUI.HotelSearchUI;
+package hrs.client.UI.UserUI.Components;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,14 +12,19 @@ import javax.swing.table.JTableHeader;
 
 import hrs.client.util.UIConstants;
 
-public class SearchResultTable extends JTable {
+/**
+ * 显示酒店搜索结果的面板
+ * @author 涵
+ *
+ */
+public class CommonTable extends JTable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -731486404013187955L;
-	Font font = UIConstants.jlabelChinese;
+	Font font = UIConstants.JLABEL_FONT;
 
-	public SearchResultTable() {
+	public CommonTable() {
 
 		setBackground(new Color(211, 237, 249));// 背景色
 		setFont(font);// 字体

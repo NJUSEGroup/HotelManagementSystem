@@ -18,7 +18,7 @@ public class OrderTable extends JTable {
 	* @Fields serialVersionUID : TODO
 	*/ 
 	private static final long serialVersionUID = -257035589122720015L;
-	Font font = UIConstants.jlabelChinese;
+	Font font = UIConstants.JLABEL_FONT;
 	private OrderTableModel model;
 	public OrderTable(List<OrderVO> orders){
 		

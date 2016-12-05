@@ -50,7 +50,7 @@ public class UserInfoPanel extends CommonPanel {
 
 	private UserVO user;
 	
-	Font font = UIConstants.jlabelChinese;
+	Font font = UIConstants.JLABEL_FONT;
 
 	public UserInfoPanel(String username) {
 //		setFont(font);

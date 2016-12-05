@@ -74,7 +74,8 @@ public class OfflineRecordServiceImpl implements OfflineRecordService {
 		vo.checkoutTime = new Date();
 		dao.update(new OfflineRecordPO(vo));
 	}
-
+	
+	@Transactional
 	@Override
 	public List<OfflineRecordVO> findByHotelID(int hotelID) throws OfflineRecordNotFoundException {
 		List<OfflineRecordPO> pos = dao.findByHotelID(hotelID);

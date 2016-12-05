@@ -171,6 +171,7 @@ public class HotelServiceImpl implements HotelService {
 	 * @throws HotelNotFoundException  
 	 * @see hrs.server.Service.Interface.HotelService.HotelService#findByName(java.lang.String)
 	 */
+	@Transactional
 	@Override
 	public HotelVO findByName(String name) throws HotelNotFoundException {
 		HotelPO po = dao.findByName(name);
