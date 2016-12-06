@@ -13,6 +13,9 @@ public class RecordSelectedListener implements MouseListener{
 		this.jpRecord = jpRecord;
 	}
 	
+	/**
+	 * 当表格中的某项线下记录被选中时，根据线下记录状态判断退房按钮是否可用
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub

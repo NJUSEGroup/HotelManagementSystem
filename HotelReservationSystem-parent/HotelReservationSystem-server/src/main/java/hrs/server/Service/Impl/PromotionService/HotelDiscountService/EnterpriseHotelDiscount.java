@@ -1,5 +1,7 @@
 package hrs.server.Service.Impl.PromotionService.HotelDiscountService;
 
+import org.springframework.stereotype.Component;
+
 import hrs.common.VO.OrderVO;
 /**
  * 
@@ -9,6 +11,7 @@ import hrs.common.VO.OrderVO;
 * @date 2016年11月19日 下午9:54:15
 *
  */
+@Component("EnterpriseHotelDiscount")
 public class EnterpriseHotelDiscount extends HotelDiscount{
 	
 	

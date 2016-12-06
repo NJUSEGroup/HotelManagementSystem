@@ -163,6 +163,7 @@ public class RoomServiceImpl implements RoomService {
 	 * @throws RoomNotFoundException  
 	 * @see hrs.server.Service.Interface.RoomService.RoomService#findByHotelAndType(int, hrs.common.util.type.RoomType)
 	 */
+	@Transactional
 	@Override
 	public RoomVO findByHotelAndType(int hotelID, RoomType type) throws RoomNotFoundException {
 		RoomPO po = dao.findByHotelAndType(hotelID, type);

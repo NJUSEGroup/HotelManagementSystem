@@ -17,7 +17,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
 
-import hrs.client.UI.HotelUI.Components.HotelDiscountTableModel;
 import hrs.client.UI.HotelUI.Components.OfflineRecordTableModel;
 import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.CheckinListener;
 import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.CheckoutListener;
@@ -26,8 +25,6 @@ import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.SearchListener;
 import hrs.client.util.ControllerFactory;
 import hrs.common.Controller.HotelController.IOfflineRecordController;
 import hrs.common.Exception.OfflineRecordService.OfflineRecordNotFoundException;
-import hrs.common.Exception.Promotion.HotelDiscountService.HotelDiscountNotFoundException;
-import hrs.common.VO.HotelDiscountVO;
 import hrs.common.VO.HotelVO;
 import hrs.common.VO.OfflineRecordVO;
 
@@ -54,15 +51,17 @@ public class OfflineRecordUIPanel extends JPanel {
 	private RecordSelectedListener recordSelectedListener;
 	private CheckinListener checkinListener;
 	private CheckoutListener checkoutListener;
+	private HotelVO hotel;
 	
 	/**
-	 * Create the panel.
+	 * 初始化线下记录界面面板
 	 */
 	public OfflineRecordUIPanel(HotelVO hotel) {
 		init(hotel);
 	}
 	
 	public void init(HotelVO hotel){
+		this.hotel = hotel;
 		this.setSize(1080, 722);
 		this.setLayout(null);
 		
@@ -105,6 +104,7 @@ public class OfflineRecordUIPanel extends JPanel {
 		controller = ControllerFactory.getOfflineRecordController();
 		
 		List<OfflineRecordVO> record = new ArrayList<OfflineRecordVO>();
+		record = this.getAllRecords();
 		
 		model = new OfflineRecordTableModel(record);
 		
@@ -135,7 +135,6 @@ public class OfflineRecordUIPanel extends JPanel {
 		jbCheckin.setBounds(715, 13, 90, 40);
 		jbCheckin.setText("入住");
 		jbCheckin.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
-		jbCheckin.setEnabled(false);
 		jbCheckin.addMouseListener(checkinListener);
 		
 		checkoutListener = new CheckoutListener(this);
@@ -161,10 +160,36 @@ public class OfflineRecordUIPanel extends JPanel {
 		this.add(jpButton);
 	}
 	
+	/**
+	 * 获得当前输入的线下记录编号
+	 * @return
+	 */
 	public int getID(){
 		return Integer.valueOf(jtfInput.getText());
 	}
 	
+	/**
+	 * 获得该酒店的所有线下记录
+	 * @return
+	 */
+	public List<OfflineRecordVO> getAllRecords(){
+		List<OfflineRecordVO> allRecords = new ArrayList<OfflineRecordVO>();
+		
+		try {
+			allRecords = controller.findByHotelID(hotel.id);
+		} catch (OfflineRecordNotFoundException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "您的酒店尚无线下入住记录！", "提示", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+		return allRecords;
+	}
+	
+	/**
+	 * 通过线下记录编号查询相应的线下记录
+	 * @param id
+	 * @return
+	 */
 	public List<OfflineRecordVO> searchRecordByID(int id){
 		OfflineRecordVO record = new OfflineRecordVO();
 		List<OfflineRecordVO> records = new ArrayList<OfflineRecordVO>();
@@ -180,23 +205,50 @@ public class OfflineRecordUIPanel extends JPanel {
 		return records;
 	}
 	
+	/**
+	 * 刷新线下记录列表
+	 * @param record
+	 */
 	public void refresh(List<OfflineRecordVO> record){
 		model = new OfflineRecordTableModel(record);
 		jtRecord.setModel(model);
 	}
 	
+	/**
+	 * 当表格中的某项线下记录被选中时，根据线下记录状态判断退房按钮是否可用
+	 */
 	public void recordSelected(){
+		String checkoutTime = "";
+		OfflineRecordVO record = null;
 		if(jtRecord.getSelectedRow() != -1){
-			jbCheckin.setEnabled(true);
-			jbCheckout.setEnabled(true);
+			record = this.getSelectedRecord();
+			
+			try {
+				checkoutTime = record.checkoutTime.toString();
+			} catch (NullPointerException e) {
+				// TODO Auto-generated catch block
+				checkoutTime = "";
+			}if(checkoutTime.equals("")){
+				jbCheckout.setEnabled(true);
+			}
+			else{
+				jbCheckout.setEnabled(false);
+				jbCheckout.setToolTipText("该记录已执行过退房操作，无法再次执行！");
+			}
 		}
 	}
 	
+	/**
+	 * 当表格中没有记录被选中时，退房按钮不可用
+	 */
 	public void recordNotSelected(){
-		jbCheckin.setEnabled(false);
 		jbCheckout.setEnabled(false);
 	}
 	
+	/**
+	 * 获得被选中的线下记录
+	 * @return
+	 */
 	public OfflineRecordVO getSelectedRecord(){
 		int row = jtRecord.getSelectedRow();
 		int id = Integer.valueOf((String) jtRecord.getValueAt(row, 0));
@@ -204,25 +256,26 @@ public class OfflineRecordUIPanel extends JPanel {
 		return record;
 	}
 	
-	public void checkin(OfflineRecordVO theRecord){
-		controller.offlineCheckin(theRecord);
-		JOptionPane.showMessageDialog(null, "线下入住记录已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);
+	/**
+	 * 点击入住按钮，弹出入住对话框
+	 */
+	public void checkin(){
+		CheckinDialog checkinDialog = new CheckinDialog(hotel, this);
 	}
 
+	/**
+	 * 执行退房操作
+	 * @param theRecord
+	 */
 	public void checkout(OfflineRecordVO theRecord){
 		controller.offlineCheckout(theRecord);
 		JOptionPane.showMessageDialog(null, "线下入住记录已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	/**
-	 * 获得相应按钮的可用状态
+	 * 获得退房按钮的可用状态
 	 */
-	public boolean isButtonEnable(String buttonName){
-		if(buttonName.equals("入住")){
-			return jbCheckin.isEnabled();
-		}
-		else{
+	public boolean isCheckoutEnable(){
 			return jbCheckout.isEnabled();
-		}
 	}
 }
