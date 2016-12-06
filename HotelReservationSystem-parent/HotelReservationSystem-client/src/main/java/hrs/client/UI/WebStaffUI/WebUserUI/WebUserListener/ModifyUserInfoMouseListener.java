@@ -24,7 +24,6 @@ public class ModifyUserInfoMouseListener implements MouseListener {
 		// TODO Auto-generated method stub
 		int result = JOptionPane.showConfirmDialog(null, "是否确定修改？", "提示", JOptionPane.YES_NO_OPTION,
 				JOptionPane.INFORMATION_MESSAGE);
-//		System.out.println(result);
 		if (result == 0) {
 			WebUserUIPanel.modify();
 			JOptionPane.showConfirmDialog(null, "信息修改成功", "修改成功", JOptionPane.PLAIN_MESSAGE,

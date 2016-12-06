@@ -57,17 +57,21 @@ public class AddWebDiscountDialog extends JDialog {
 	private JTextField jtextBegintime;
 	private JTextField jtextEndtime;
 	private JTextField jtextDiscount;
-	private JLabel jlBeginTime;
 
+	private JLabel jlBeginTime;
 	private JLabel jlEndTime;
-	private JButton jbOK;
-	private JButton jbCancel;
 	private JLabel jlLocation;
 	private JLabel jlCommercialCircle;
+	private JLabel jlPromotionType;
+	private JLabel jlVIPLevel;
+	private JLabel jlDiscount;
+	private JButton jbOK;
+	private JButton jbCancel;
+
 	private WebDiscountPanel jpWebDiscount;
-	WebDiscountVO addVO;
-	OKListener listener;
-	CancelAddListener cancelAddListener;
+	private WebDiscountVO addVO;
+	private OKListener listener;
+	private CancelAddListener cancelAddListener;
 
 	private JComboBox jcomboBoxType = new JComboBox<>();
 	private JComboBox jcomboBoxCommercialCircle = new JComboBox<>();
@@ -99,7 +103,6 @@ public class AddWebDiscountDialog extends JDialog {
 		for (int i = 0; i < locToName().length; i++) {
 			jcomboBoxLocation.addItem(locToName()[i]);
 		}
-//		System.out.println(jcomboBoxLocation);
 		jcomboBoxLocation.setSelectedIndex(-1);
 
 		jcomboBoxVIPLevel.addItem("1");
@@ -110,24 +113,18 @@ public class AddWebDiscountDialog extends JDialog {
 		jcomboBoxVIPLevel.setSelectedIndex(-1);
 
 		init();
-		
-
 	}
-	// public AddWebDiscountDialog(WebDiscountPanel jpWebDiscount) {
-	// this.jpWebDiscount = jpWebDiscount;
-	// init();
-	// }
 
 	public WebDiscountVO jdaddWebDiscount() {
 		switch (jcomboBoxType.getSelectedItem().toString()) {
 		case "特定商圈专属折扣":
 			double commercialCircleDiscount = Double.parseDouble(jtextDiscount.getText());
-//			System.out.println(jcomboBoxLocation);
+			// System.out.println(jcomboBoxLocation);
 			locationIndex = jcomboBoxLocation.getSelectedIndex();
 			location = locs.get(locationIndex);
 			int commercialCircleIndex = jcomboBoxCommercialCircle.getSelectedIndex();
 			commercialCircle = commercialCircleList.get(commercialCircleIndex);
-//			System.out.println(commercialCircle);
+			// System.out.println(commercialCircle);
 			addVO = new WebDiscountVO(commercialCircleDiscount, WebsiteDiscountType.SpecialCommercialCircle, location,
 					commercialCircle, null, null, 0);
 
@@ -143,13 +140,11 @@ public class AddWebDiscountDialog extends JDialog {
 			} catch (ParseException exception) {
 				// TODO Auto-generated catch block
 				JOptionPane.showMessageDialog(null, "请输入正确的日期格式", "Error", JOptionPane.ERROR_MESSAGE);
-				exception.printStackTrace();
 			}
 			addVO = new WebDiscountVO(specialPeriodDiscount, WebsiteDiscountType.SpecialPeriod, null, null,
 					discountBeginTime, discountEndTime, 0);
 			break;
 		case "会员等级折扣":
-//			System.out.println("asdasd");
 			int VIPLevel = Integer.parseInt(jcomboBoxVIPLevel.getSelectedItem().toString());
 			double vipDiscount = Double.parseDouble(jtextDiscount.getText());
 			addVO = new WebDiscountVO(vipDiscount, WebsiteDiscountType.VIP, null, null, null, null, VIPLevel);
@@ -169,25 +164,20 @@ public class AddWebDiscountDialog extends JDialog {
 		jpAdd.setBackground(UIConstants.JFRAME);
 		getContentPane().add(jpAdd, BorderLayout.CENTER);
 
-		// setUnableAndCombox();
-
-		JLabel jlPromotionType = new JLabel("折扣类型");
-
+		jlPromotionType = new JLabel("折扣类型");
 		jlBeginTime = new JLabel("开始时间");
+		jlEndTime = new JLabel("结束时间");
+		jlCommercialCircle = new JLabel("商圈");
+		jlVIPLevel = new JLabel("VIP等级");
+		jlDiscount = new JLabel("折扣信息");
 
 		jtextBegintime = new JTextField();
 		jtextBegintime.setColumns(10);
 		jtextBegintime.setText("");
-		jlEndTime = new JLabel("结束时间");
 
 		jtextEndtime = new JTextField();
 		jtextEndtime.setColumns(10);
 		jtextEndtime.setText("");
-		jlCommercialCircle = new JLabel("商圈");
-
-		JLabel jlVIPLevel = new JLabel("VIP等级");
-
-		JLabel jlDiscount = new JLabel("折扣信息");
 
 		jtextDiscount = new JTextField();
 		jtextDiscount.setColumns(10);
@@ -213,9 +203,9 @@ public class AddWebDiscountDialog extends JDialog {
 
 		// jcomboBoxCommercialCircle.setSelectedIndex(-1);
 		setUnableAndCombox();
-		
+
 		initWebDiscountDialog();
-		
+
 		GroupLayout gl_jpAdd = new GroupLayout(jpAdd);
 		gl_jpAdd.setHorizontalGroup(
 				gl_jpAdd.createParallelGroup(Alignment.LEADING)
@@ -291,15 +281,14 @@ public class AddWebDiscountDialog extends JDialog {
 		jpAdd.setLayout(gl_jpAdd);
 	}
 
-	public void initWebDiscountDialog(){
+	public void initWebDiscountDialog() {
 		jcomboBoxType.addItemListener(new ItemListener() {
 			@SuppressWarnings("unchecked")
 			@Override
-			public void itemStateChanged(ItemEvent e) {			
-				if( jcomboBoxType.getSelectedItem().toString().equals("特定商圈专属折扣")) {
-//					locationIndex = jcomboBoxLocation.getSelectedIndex();
-//					location = locs.get(locationIndex);
-					
+			public void itemStateChanged(ItemEvent e) {
+				if (jcomboBoxType.getSelectedItem().toString().equals("特定商圈专属折扣")) {
+					// locationIndex = jcomboBoxLocation.getSelectedIndex();
+					// location = locs.get(locationIndex);
 					jcomboBoxLocation.addItemListener(new ItemListener() {
 						@Override
 						public void itemStateChanged(ItemEvent e) {
@@ -307,19 +296,19 @@ public class AddWebDiscountDialog extends JDialog {
 							locationIndex = jcomboBoxLocation.getSelectedIndex();
 							location = locs.get(locationIndex);
 							commercialCircleList = controller.findCircleByLoc(location.id);
-							System.out.println(commercialCircleList);
+//							System.out.println(commercialCircleList);
 							Object[] circleName = new Object[commercialCircleList.size()];
 							for (int i = 0; i != commercialCircleList.size(); ++i) {
 								circleName[i] = commercialCircleList.get(i).name;
 							}
-							DefaultComboBoxModel<Object> model=new DefaultComboBoxModel<>(circleName);
+							DefaultComboBoxModel<Object> model = new DefaultComboBoxModel<>(circleName);
 							jcomboBoxCommercialCircle.setModel(model);
 						}
-					});						
-				}				
-			}					
-		});				
-		}
+					});
+				}
+			}
+		});
+	}
 
 	public void setUnableAndCombox() {
 		jcomboBoxType.addItemListener(new ItemListener() {
@@ -381,7 +370,7 @@ public class AddWebDiscountDialog extends JDialog {
 				default:
 					break;
 				}
-				
+
 			}
 		});
 

@@ -13,6 +13,4 @@ public class UIConstants {
 	
 	final public static Font JZONE_FONT=new Font("Arial Unicode MS", Font.PLAIN, 25);
 	final public static Font JLABEL_FONT=new Font("Arial Unicode MS", Font.PLAIN, 21);
-	
-
 }

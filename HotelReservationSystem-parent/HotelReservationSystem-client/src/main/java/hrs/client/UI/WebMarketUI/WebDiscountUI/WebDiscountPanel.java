@@ -3,6 +3,7 @@ package hrs.client.UI.WebMarketUI.WebDiscountUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,29 +40,28 @@ public class WebDiscountPanel extends JPanel {
 	private IWebDiscountController webDiscountController;
 	private List<WebDiscountVO> webDiscountList;
 	private WebDiscountModel model;
-	private WebDiscountModel addModel;
+	private WebDiscountModel addModel, modifyModel;
 	private JButton jbAdd, jbModify, jbDelete;
+
 	private DeleteMouseListener listener;
 	private AddMouseListener addMouseListener;
+	private ModifyMouseListener modifyMouseListener;
+
 	private JLabel jlNumberOfPO;
 	private JTable jTable;
 	private JTableHeader jTableHeader;
 	private JScrollPane scrollPane;
 	private AddWebDiscountDialog jdAddWebDiscount;
-    private WebDiscountVO addVo ;
+	private WebDiscountVO addVo;
+	private SpecialCommercialCircleDialog jdSpecialCommercialCircle;
+	private SpecialPeriodDialog jdSpecialPeriod;
+	private VIPDiaog jdVIP;
 
 	/**
 	 * Create the panel.
 	 */
 	public WebDiscountPanel() {
 		init();
-	}
-
-	public WebDiscountVO getSelected() {
-		if (jTable.getSelectedRow() != -1) {
-			return model.getValue(jTable.getSelectedRow());
-		} else
-			return null;
 	}
 
 	public void init() {
@@ -78,9 +78,7 @@ public class WebDiscountPanel extends JPanel {
 		jbAdd.setForeground(Color.WHITE);
 		jbAdd.setBorderPainted(false);
 		jbAdd.setOpaque(true);
-		
-		jdAddWebDiscount=new AddWebDiscountDialog(this);//this
-		
+		jdAddWebDiscount = new AddWebDiscountDialog(this);// this
 		addMouseListener = new AddMouseListener(this);
 		jbAdd.addMouseListener(addMouseListener);
 
@@ -90,6 +88,8 @@ public class WebDiscountPanel extends JPanel {
 		jbModify.setForeground(Color.WHITE);
 		jbModify.setBorderPainted(false);
 		jbModify.setOpaque(true);
+		modifyMouseListener = new ModifyMouseListener(this);
+		jbModify.addMouseListener(modifyMouseListener);
 
 		jbDelete = new JButton("删除");
 		jbDelete.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
@@ -123,7 +123,7 @@ public class WebDiscountPanel extends JPanel {
 
 		jTable = new JTable();
 		jTable.setModel(model);
-//		jTable.setEnabled(false);
+		// jTable.setEnabled(false);
 
 		jTable.setBackground(new Color(211, 237, 249));
 		jTable.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
@@ -159,11 +159,10 @@ public class WebDiscountPanel extends JPanel {
 		}
 		return list;
 	}
-	
-    
+
 	public void addWebDiscount() {
 		addVo = jdAddWebDiscount.jdaddWebDiscount();
-//		System.out.println(addVo);
+		// System.out.println(addVo);
 		webDiscountController.add(addVo);
 		webDiscountController = ControllerFactory.getWebDiscountController();
 		webDiscountList = getWebDiscountList();
@@ -183,19 +182,64 @@ public class WebDiscountPanel extends JPanel {
 		jlNumberOfPO.setText("共 " + webDiscountList.size() + " 条记录");
 		jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
 	}
-	// public void modifyWebDiscount(WebDiscountVO vo){
-	// webDiscountController.update(vo);
-	// }
 
-//	public static void main(String[] args) {
-//		JFrame frame = new JFrame();
-//		frame.setSize(1000, 700);
-//		WebDiscountPanel p = new WebDiscountPanel();
-//		frame.add(p);
-//		frame.setVisible(true);
-//	}
-	
-	public void showAddDialog(){
+	public void showModifyDialog() {
+		if (getSelected() == null) {
+			JOptionPane.showMessageDialog(this, "请选中要修改的促销策略！", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			switch (getSelected().type) {
+			case SpecialCommercialCircle:
+				jdSpecialCommercialCircle = new SpecialCommercialCircleDialog(this);
+				jdSpecialCommercialCircle.setVisible(true);
+				jdSpecialCommercialCircle.setLocationRelativeTo(null);
+				break;
+			case SpecialPeriod:
+				// System.out.println("选中了");
+				jdSpecialPeriod = new SpecialPeriodDialog(this);
+				jdSpecialPeriod.setVisible(true);
+				jdSpecialPeriod.setLocationRelativeTo(null);
+				break;
+			case VIP:
+				jdVIP = new VIPDiaog(this);
+				jdVIP.setVisible(true);
+				jdVIP.setLocationRelativeTo(null);
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
+	public void modifyWebDiscount() {
+		WebDiscountVO modifyVO = new WebDiscountVO();
+		switch (getSelected().type) {
+		case SpecialCommercialCircle:
+			modifyVO=jdSpecialCommercialCircle.getModifyVO();
+			break;
+		case SpecialPeriod:
+			modifyVO = jdSpecialPeriod.getModifyVO();
+			break;
+		case VIP:
+			modifyVO = jdVIP.getModifyVO();
+			break;
+		default:
+			break;
+		}
+		webDiscountController.update(modifyVO);
+		webDiscountController = ControllerFactory.getWebDiscountController();
+		webDiscountList = getWebDiscountList();
+		modifyModel = new WebDiscountModel(webDiscountList);
+		jTable.setModel(modifyModel);
+	}
+
+	public WebDiscountVO getSelected() {
+		if (jTable.getSelectedRow() != -1) {
+			return model.getValue(jTable.getSelectedRow());
+		} else
+			return null;
+	}
+
+	public void showAddDialog() {
 		jdAddWebDiscount.setVisible(true);
 		jdAddWebDiscount.setLocationRelativeTo(null);
 	}

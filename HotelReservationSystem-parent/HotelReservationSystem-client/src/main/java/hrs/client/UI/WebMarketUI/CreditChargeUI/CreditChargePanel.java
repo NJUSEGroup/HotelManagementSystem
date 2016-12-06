@@ -42,42 +42,48 @@ public class CreditChargePanel extends JPanel {
 	private JTextField jtChargeValue;
 	private CreditChargeModel model;
 	private JScrollPane scrollPane;
+	private JLabel jlFindUser;
+	private JButton jbConfirm;
+	private JButton jbChargeValue;
+	private JLabel jlChargeValue;
 	private JTable jTable;
-	UserVO userVO;
+	private UserVO userVO;
+	private String username;
 
 	/**
 	 * Create the panel.
 	 */
 	public CreditChargePanel() {
-
-		// this.username =username;//???
-
+		init();
+	}
+	
+	public void init(){
 		setSize(1067, 714);
 		setBackground(new Color(211, 237, 249));
 
-		JLabel jlFindUser = new JLabel("搜索用户");
+		jlFindUser = new JLabel("搜索用户");
 		jlFindUser.setHorizontalAlignment(SwingConstants.CENTER);
 		jlFindUser.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
 
 		jtUsername = new JTextField();
 		jtUsername.setColumns(10);
 
-		JButton jbConfirm = new JButton("确认");
+		jbConfirm = new JButton("确认");
 		jbConfirm.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
 		jbConfirm.setBackground(new Color(0, 160, 233));
 		jbConfirm.setForeground(Color.WHITE);
 		jbConfirm.setBorderPainted(false);
 		jbConfirm.setOpaque(true);
-		jbConfirm.addMouseListener(new ConfirmMouseListener(this, jtUsername));
+		jbConfirm.addMouseListener(new ConfirmMouseListener(this));
 
-		JLabel jlChargeValue = new JLabel("充值额度");
+		jlChargeValue = new JLabel("充值额度");
 		jlChargeValue.setHorizontalAlignment(SwingConstants.CENTER);
 		jlChargeValue.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
 
 		jtChargeValue = new JTextField();
 		jtChargeValue.setColumns(10);
 
-		JButton jbChargeValue = new JButton("充值");
+		jbChargeValue = new JButton("充值");
 		jbChargeValue.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
 		jbChargeValue.setBackground(new Color(0, 160, 233));
 		jbChargeValue.setForeground(Color.WHITE);
@@ -140,15 +146,8 @@ public class CreditChargePanel extends JPanel {
 		scrollPane.getViewport().setBackground(new Color(211, 237, 249));
 		scrollPane.setOpaque(true);
 		add(scrollPane);
-
 	}
-	// public void showInfo(){
-	// model=new
-	// CreditChargeModel(getUserVOCreditChargeList(jtUsername.getText()));
-	// jTable.setModel(model);
-	// }
-
-	public UserVO getUserVOAndShow(String username) throws UserNotFoundException {
+	public UserVO getUserVOAndShow() throws UserNotFoundException {
 		username = jtUsername.getText();
 //		System.out.println(username);
 		userVO = null;
@@ -166,10 +165,16 @@ public class CreditChargePanel extends JPanel {
 	}
 	public void charge(int value){
 		value=Integer.parseInt(jtChargeValue.getText());
-		UserVO userVO = null;
 		CreditChargeModel creditChargeModel;
-		webCreditController=ControllerFactory.getWebCreditController();
 		webCreditController.charge(userVO,value);
+//		webCreditController=ControllerFactory.getWebCreditController();
+		try {
+			userVO=webCreditController.findUserByUsername(username);
+		} catch (UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		creditChargeModel=new CreditChargeModel(userVO);
 		jTable.setModel(creditChargeModel);		
 	}

@@ -22,6 +22,7 @@ public class CancelAddListener implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 //		jdAddWebDiscount.clear();
+		jdAddWebDiscount.init();
 		jdAddWebDiscount.dispose();
 	}
 
