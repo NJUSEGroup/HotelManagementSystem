@@ -1,5 +1,7 @@
 package hrs.server.Service.Impl.PromotionService.WebDiscountService;
 
+import org.springframework.stereotype.Component;
+
 import hrs.common.VO.OrderVO;
 /**
  * 
@@ -9,6 +11,7 @@ import hrs.common.VO.OrderVO;
 * @date 2016年11月19日 下午9:56:29
 *
  */
+@Component("SpecialPeriodWebDiscount")
 public class SpecialPeriodWebDiscount extends WebDiscount{
 
 	@Override

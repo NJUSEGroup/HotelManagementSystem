@@ -37,7 +37,15 @@ public class HotelServiceImpl implements HotelService {
 	@Autowired
 	private OrderSearchService orderSearchService;
 	
-	
+	/**
+	 * 
+	 * @Title: findByID
+	 * @Description: TODO
+	 * @param hotelID
+	 * @return
+	 * @throws HotelNotFoundException  
+	 * @see hrs.server.Service.Interface.HotelService.HotelService#findByID(int)
+	 */
 	@Transactional
 	@Override
 	public HotelVO findByID(int hotelID) throws HotelNotFoundException {
@@ -48,14 +56,26 @@ public class HotelServiceImpl implements HotelService {
 			return new HotelVO(po);
 		}
 	}
-
 	
+	/**
+	 * 
+	 * @Title: update
+	 * @Description: TODO
+	 * @param hotelvo  
+	 * @see hrs.server.Service.Interface.HotelService.HotelService#update(hrs.common.VO.HotelVO)
+	 */
 	@Transactional
 	@Override
 	public void update(HotelVO hotelvo) {
 		dao.update(new HotelPO(hotelvo));
 	}
-
+	/**
+	 * 
+	 * @Title: add
+	 * @Description: TODO
+	 * @param hotelvo  
+	 * @see hrs.server.Service.Interface.HotelService.HotelService#add(hrs.common.VO.HotelVO)
+	 */
 	@Transactional
 	@Override
 	public void add(HotelVO hotelvo) {
@@ -165,9 +185,9 @@ public class HotelServiceImpl implements HotelService {
 	/**
 	 * 
 	 * @Title: findByName
-	 * @Description: TODO
+	 * @Description: 按姓名查询Hotel
 	 * @param name
-	 * @return
+	 * @return HotelVO
 	 * @throws HotelNotFoundException  
 	 * @see hrs.server.Service.Interface.HotelService.HotelService#findByName(java.lang.String)
 	 */

@@ -14,11 +14,12 @@ import hrs.common.VO.HotelDiscountVO;
 import hrs.common.util.DateHelper;
 import hrs.server.DAO.Interface.PromotionDAO.HotelDiscountDAO;
 import hrs.server.Service.Interface.PromotionService.HotelDiscountService;
+import hrs.server.util.SpringUtils;
 
 /**
  * 
  * @ClassName: HotelDiscountServiceImpl
- * @Description: 
+ * @Description:
  * @author NewSong
  * @date 2016年11月19日 下午9:50:28
  *
@@ -107,7 +108,7 @@ public class HotelDiscountServiceImpl implements HotelDiscountService {
 	 * @Title: createAllStrategies
 	 * @Description: 创建对应酒店的优惠策略的领域类
 	 * @param hotelID
-	 * @return  
+	 * @return
 	 * @see hrs.server.Service.Interface.PromotionService.HotelDiscountService#createAllStrategies(int)
 	 */
 	@Transactional
@@ -120,18 +121,11 @@ public class HotelDiscountServiceImpl implements HotelDiscountService {
 			return new ArrayList<>();
 		}
 		List<HotelDiscount> strategies = new ArrayList<>();
-		Class<?> clazz = null;
 		HotelDiscount strategy = null;
-		try {
-			for (HotelDiscountVO vo : vos) {
-				clazz = Class.forName("hrs.server.Service.Impl.PromotionService.HotelDiscountService."
-						+ vo.type.toString() + "HotelDiscount");
-				strategy = (HotelDiscount) clazz.newInstance();
-				strategy.setHotelDiscount(vo);
-				strategies.add(strategy);
-			} 
-		} catch (Exception e) {
-			e.printStackTrace();
+		for (HotelDiscountVO vo : vos) {
+			strategy = SpringUtils.getBean(vo.type.toString() + "HotelDiscount");
+			strategy.setHotelDiscount(vo);
+			strategies.add(strategy);
 		}
 		return strategies;
 	}

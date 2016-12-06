@@ -15,6 +15,7 @@ import hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddListener.ConfirmMouseListener
 import hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddListener.LastStepMouseListener;
 import hrs.client.util.ControllerFactory;
 import hrs.common.Controller.WebStaffController.IWebStaffController;
+import hrs.common.Exception.HotelService.HotelNotFoundException;
 import hrs.common.Exception.StaffService.StaffExistedException;
 import hrs.common.VO.HotelVO;
 import hrs.common.VO.StaffVO;
@@ -45,7 +46,7 @@ public class HotelStaffAddUIPanel extends JPanel {
 	private StaffVO staffVO;
 	private HotelVO hotelVO;
 	private HotelAddUIPanel hotelAddUIPanel;
-	private IWebStaffController controller;
+	private IWebStaffController controller=ControllerFactory.getWebStaffController();
 	private ConfirmMouseListener listener;
 
 	/**
@@ -229,8 +230,8 @@ public class HotelStaffAddUIPanel extends JPanel {
 			return 0;
 	}
 	public void addHotel(){
-		controller=ControllerFactory.getWebStaffController();
 		hotelVO=this.hotelAddUIPanel.getHotelVO();
+//		System.out.println(hotelVO);
 		controller.addHotel(hotelVO);
 	}
 	public void addHotelStaff(){
@@ -240,9 +241,14 @@ public class HotelStaffAddUIPanel extends JPanel {
 		String realName=jtextRealName.getText();
 //		HotelVO hotelVO=this.hotelAddUIPanel.getHotelVO();
 		addHotel();
-		controller=ControllerFactory.getWebStaffController();
-//		HotelVO newHotelVO=
-		staffVO=new StaffVO(username, password, realName, StaffType.HotelStaff,hotelVO);
+		HotelVO newHotelVO=null;
+		try {
+			newHotelVO=controller.findHotelByHotelName(hotelAddUIPanel.getHotelName());
+		} catch (HotelNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		staffVO=new StaffVO(username, password, realName, StaffType.HotelStaff,newHotelVO);
 //		System.out.println(staffVO);
 		try {
 			controller.addStaff(staffVO);

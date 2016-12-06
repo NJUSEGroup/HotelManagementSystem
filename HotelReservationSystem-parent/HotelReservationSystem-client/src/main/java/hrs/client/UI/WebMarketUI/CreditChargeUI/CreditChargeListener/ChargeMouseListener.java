@@ -23,10 +23,11 @@ public class ChargeMouseListener implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(jtChargeValue.getText()==null||Integer.parseInt(jtChargeValue.getText())<0){
+		if(jtChargeValue.getText()==null||Integer.parseInt(jtChargeValue.getText())<=0){
 			JOptionPane.showMessageDialog(creditChargePanel, "充值大于0的整数", "Error!", JOptionPane.ERROR_MESSAGE);
 		}
 		creditChargePanel.charge(Integer.parseInt(jtChargeValue.getText()));
+		
 	}
 
 	@Override

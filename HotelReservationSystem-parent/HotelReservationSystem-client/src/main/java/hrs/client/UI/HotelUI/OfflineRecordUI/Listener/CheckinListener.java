@@ -13,12 +13,13 @@ public class CheckinListener implements MouseListener{
 		this.jpRecord = jpRecord;
 	}
 	
+	/**
+	 * 点击入住按钮，弹出入住对话框
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(jpRecord.isButtonEnable("入住")){
-			jpRecord.checkin(jpRecord.getSelectedRecord());
-		}
+			jpRecord.checkin();
 	}
 
 	@Override

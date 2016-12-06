@@ -21,7 +21,9 @@ public class SearchConfirmMouseListener implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		HotelStaffUIPanel.search();
+//		HotelStaffUIPanel.search();
+		HotelStaffUIPanel.selectHotelAndShow();
+		
 	}
 
 	@Override

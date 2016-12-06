@@ -227,6 +227,7 @@ public class HotelFrame extends JFrame {
 		}
 		else if(label.equals("线下入住")){
 			card.show(jpCard, "OfflineRecordUI");
+			jpOfflineRecordUI.refresh(jpOfflineRecordUI.getAllRecords());
 		}
 	}
 	

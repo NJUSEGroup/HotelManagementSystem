@@ -364,7 +364,7 @@ public class HotelOrderUIPanel extends JPanel {
 			orderList.addAll(orderList2);
 			
 			if(orderList.size()==0){
-				JOptionPane.showMessageDialog(this, "您的酒店尚无已撤销订单！", "订单不存在", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, "您的酒店尚无已撤销订单！", "提示", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		

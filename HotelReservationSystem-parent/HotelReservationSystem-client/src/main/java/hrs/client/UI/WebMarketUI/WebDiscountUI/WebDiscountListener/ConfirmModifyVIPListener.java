@@ -1,36 +1,31 @@
-package hrs.client.UI.WebMarketUI.CreditChargeUI.CreditChargeListener;
+package hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
-import com.android.internal.util.Predicate;
-
-import hrs.client.UI.WebMarketUI.CreditChargeUI.CreditChargePanel;
+import hrs.client.UI.WebMarketUI.WebDiscountUI.SpecialPeriodDialog;
+import hrs.client.UI.WebMarketUI.WebDiscountUI.VIPDiaog;
+import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountPanel;
 import hrs.client.util.UIConstants;
-import hrs.common.Exception.UserService.UserNotFoundException;
 
-public class ConfirmMouseListener implements MouseListener{
+public class ConfirmModifyVIPListener implements MouseListener{
 	private JButton jbButton;
-	private CreditChargePanel creditChargePanel;
-	public ConfirmMouseListener(CreditChargePanel creditChargePanel) {
+	private WebDiscountPanel WebDiscountPanel;
+	private VIPDiaog vipDiaog;
+	
+	public ConfirmModifyVIPListener(WebDiscountPanel webDiscountPanel,VIPDiaog vipDiaog) {
 		// TODO Auto-generated constructor stub
-		this.creditChargePanel=creditChargePanel;
+		this.WebDiscountPanel=webDiscountPanel;
+		this.vipDiaog=vipDiaog;
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		try {
-			creditChargePanel.getUserVOAndShow();
-		} catch (UserNotFoundException e2) {
-			// TODO: handle exception
-			JOptionPane.showMessageDialog(creditChargePanel, "用户名不存在", "No Such Username", JOptionPane.ERROR_MESSAGE);
-		}
-		
+		WebDiscountPanel.modifyWebDiscount();
+		vipDiaog.dispose();
 	}
 
 	@Override
@@ -59,9 +54,8 @@ public class ConfirmMouseListener implements MouseListener{
 		// TODO Auto-generated method stub
 		jbButton = (JButton)e.getSource(); 
 		//鼠标离开标签时更换背景及字体色
-		jbButton.setBackground(UIConstants.JLABEL);
+		 jbButton.setBackground(UIConstants.JLABEL);
 		 jbButton.setForeground(Color.white);
 	}
 	
-
 }
