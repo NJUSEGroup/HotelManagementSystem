@@ -69,9 +69,23 @@ public class CheckinDialog extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		
+		this.setPanel();
+		this.setDatePanel();
+		this.setRoomPanel();
+		this.setButtonPanel();
+		
 		rooms = new ArrayList<RoomVO>();
 		recordController = ControllerFactory.getOfflineRecordController();
 		
+		this.setTitle("请输入线下入住的信息");
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setVisible(true);
+	}
+	
+	/**
+	 * 设置面板
+	 */
+	public void setPanel(){
 		jpDate = new JPanel();
 		jpDate.setBounds(0, 0, 513, 201);
 		jpDate.setLayout(null);
@@ -87,6 +101,15 @@ public class CheckinDialog extends JDialog {
 		jpButton.setLayout(null);
 		jpButton.setBackground(UIConstants.JFRAME);
 		
+		contentPanel.add(jpDate);
+		contentPanel.add(jpRoom);
+		contentPanel.add(jpButton);
+	}
+	
+	/**
+	 * 设置日期信息面板
+	 */
+	public void setDatePanel(){
 		checkRoomTypeListener = new CheckRoomTypeListener(this);
 		
 		jbCheckRoom = new JButton();
@@ -107,6 +130,17 @@ public class CheckinDialog extends JDialog {
 		jlExpectedCheckoutTime.setText("预计离开时间");
 		jlExpectedCheckoutTime.setBounds(15, 78, 135, 40);
 		
+		jpDate.add(jlCheckinTime);
+		jpDate.add(jlExpectedCheckoutTime);
+		jpDate.add(dcpCheckin);
+		jpDate.add(dcpCheckout);
+		jpDate.add(jbCheckRoom);
+	}
+	
+	/**
+	 * 设置房间信息面板
+	 */
+	public void setRoomPanel(){
 		jlRoomType = new JLabel();
 		jlRoomType.setFont(new Font("宋体", Font.PLAIN, 21));
 		jlRoomType.setText("房间类型");
@@ -134,6 +168,13 @@ public class CheckinDialog extends JDialog {
 		jcbRoomNum.setFont(new Font("宋体", Font.PLAIN, 18));
 		jcbRoomNum.setBounds(169, 100, 200, 40);
 		
+		jpRoom.add(jlRoomType);
+		jpRoom.add(jlRoomNum);
+		jpRoom.add(jcbRoomType);
+		jpRoom.add(jcbRoomNum);
+	}
+	
+	public void setButtonPanel(){
 		confirmListener = new CheckinConfirmListener(this);
 		
 		jbConfirm = new JButton();
@@ -150,29 +191,10 @@ public class CheckinDialog extends JDialog {
 		jbCancel.setBounds(323, 13, 70, 40);
 		jbCancel.addMouseListener(cancelListener);
 		
-		jpDate.add(jlCheckinTime);
-		jpDate.add(jlExpectedCheckoutTime);
-		jpDate.add(dcpCheckin);
-		jpDate.add(dcpCheckout);
-		jpDate.add(jbCheckRoom);
-		
-		jpRoom.add(jlRoomType);
-		jpRoom.add(jlRoomNum);
-		jpRoom.add(jcbRoomType);
-		jpRoom.add(jcbRoomNum);
-		
 		jpButton.add(jbConfirm);
 		jpButton.add(jbCancel);
-		
-		contentPanel.add(jpDate);
-		contentPanel.add(jpRoom);
-		contentPanel.add(jpButton);
-		
-		this.setTitle("请输入线下入住的信息");
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.setVisible(true);
 	}
-
+	
 	/**
 	 * 查找此时酒店的可用客房类型
 	 */

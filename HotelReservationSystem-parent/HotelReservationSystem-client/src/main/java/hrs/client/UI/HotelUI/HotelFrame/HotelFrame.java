@@ -242,6 +242,7 @@ public class HotelFrame extends JFrame {
 		}
 		else if(label.equals("录入客房")){
 			card.show(jpCard, "RoomUI");
+			jpRoomUI.refreshRoomList();
 		}
 		else if(label.equals("促销策略")){
 			card.show(jpCard, "HotelDiscountUI");

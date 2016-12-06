@@ -65,6 +65,18 @@ public class OfflineRecordUIPanel extends JPanel {
 		this.setSize(1080, 722);
 		this.setLayout(null);
 		
+		controller = ControllerFactory.getOfflineRecordController();
+		
+		this.setPanel();
+		this.setSearchPanel();
+		this.setRecordPanel();
+		this.setButtonPanel();
+	}
+	
+	/**
+	 * 设置面板
+	 */
+	public void setPanel(){
 		jpSearch = new JPanel();
 		jpSearch.setBounds(0, 0, 1080, 80);
 		jpSearch.setBackground(new Color(211, 237, 249));
@@ -80,6 +92,15 @@ public class OfflineRecordUIPanel extends JPanel {
 		jpButton.setBackground(new Color(211, 237, 249));
 		jpButton.setLayout(null);
 		
+		this.add(jpSearch);
+		this.add(jpRecord);
+		this.add(jpButton);
+	}
+	
+	/**
+	 * 设置搜索面板
+	 */
+	public void setSearchPanel(){
 		jlInput = new JLabel();
 		jlInput.setBounds(30, 20, 120, 30);
 		jlInput.setText("请输入编号");
@@ -99,9 +120,16 @@ public class OfflineRecordUIPanel extends JPanel {
 		jbConfirm.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbConfirm.addMouseListener(searchListener);
 		
+		jpSearch.add(jlInput);
+		jpSearch.add(jtfInput);
+		jpSearch.add(jbConfirm);
+	}
+	
+	/**
+	 * 设置线下记录信息面板
+	 */
+	public void setRecordPanel(){
 		recordSelectedListener = new RecordSelectedListener(this);
-		
-		controller = ControllerFactory.getOfflineRecordController();
 		
 		List<OfflineRecordVO> record = new ArrayList<OfflineRecordVO>();
 		record = this.getAllRecords();
@@ -129,6 +157,13 @@ public class OfflineRecordUIPanel extends JPanel {
 		jspRecord.getViewport().setOpaque(false);
 		jspRecord.setBackground(Color.WHITE);
 		
+		jpRecord.add(jspRecord);
+	}
+	
+	/**
+	 * 设置按钮面板
+	 */
+	public void setButtonPanel(){
 		checkinListener = new CheckinListener(this);
 		
 		jbCheckin = new JButton();
@@ -146,18 +181,8 @@ public class OfflineRecordUIPanel extends JPanel {
 		jbCheckout.setEnabled(false);
 		jbCheckout.addMouseListener(checkoutListener);
 		
-		jpSearch.add(jlInput);
-		jpSearch.add(jtfInput);
-		jpSearch.add(jbConfirm);
-		
-		jpRecord.add(jspRecord);
-		
 		jpButton.add(jbCheckin);
 		jpButton.add(jbCheckout);
-		
-		this.add(jpSearch);
-		this.add(jpRecord);
-		this.add(jpButton);
 	}
 	
 	/**

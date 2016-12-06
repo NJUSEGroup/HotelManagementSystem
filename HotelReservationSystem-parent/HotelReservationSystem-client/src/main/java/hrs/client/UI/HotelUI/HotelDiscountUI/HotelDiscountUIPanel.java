@@ -58,22 +58,12 @@ public class HotelDiscountUIPanel extends JPanel {
 	}
 
 	public void init(HotelVO hotel){
+		this.hotel = hotel;
 		this.setSize(1080, 722);
 		this.setLayout(null);
 		
-		this.hotel = hotel;
-		
+		this.setPanel();
 		controller = ControllerFactory.getHotelDiscountController();
-		
-		jpDiscount = new JPanel();
-		jpDiscount.setBounds(0, 0, 1080, 642);
-		jpDiscount.setBackground(new Color(211, 237, 249));
-		jpDiscount.setLayout(null);
-		
-		jpButton = new JPanel();
-		jpButton.setBounds(0, 642, 1080, 80);
-		jpButton.setBackground(new Color(211, 237, 249));
-		jpButton.setLayout(null);
 		
 		discounts = new ArrayList<HotelDiscountVO>();
 		
@@ -141,6 +131,21 @@ public class HotelDiscountUIPanel extends JPanel {
 		jpButton.add(jbAdd);
 		jpButton.add(jbEdit);
 		jpButton.add(jbDelete);
+	}
+	
+	/**
+	 * 设置面板
+	 */
+	public void setPanel(){
+		jpDiscount = new JPanel();
+		jpDiscount.setBounds(0, 0, 1080, 642);
+		jpDiscount.setBackground(new Color(211, 237, 249));
+		jpDiscount.setLayout(null);
+		
+		jpButton = new JPanel();
+		jpButton.setBounds(0, 642, 1080, 80);
+		jpButton.setBackground(new Color(211, 237, 249));
+		jpButton.setLayout(null);
 		
 		this.add(jpDiscount);
 		this.add(jpButton);

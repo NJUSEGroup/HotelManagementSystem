@@ -159,12 +159,16 @@ public class HotelOrderUIPanel extends JPanel {
 		jbConfirm1.setText("确认");
 		jbConfirm1.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbConfirm1.addMouseListener(searchListener1);
+		jbConfirm1.setBackground(UIConstants.JBUTTON_BLUE);
+		jbConfirm1.setForeground(Color.WHITE);
 		
 		jbConfirm2 = new JButton();
 		jbConfirm2.setBounds(681, 95, 90, 40);
 		jbConfirm2.setText("确认");
 		jbConfirm2.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbConfirm2.addMouseListener(searchListener2);
+		jbConfirm2.setBackground(UIConstants.JBUTTON_BLUE);
+		jbConfirm2.setForeground(Color.WHITE);
 		
 		jpSearch.add(jlOrderType);
 		jpSearch.add(jlSearch);
@@ -220,6 +224,8 @@ public class HotelOrderUIPanel extends JPanel {
 		jbDetail.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbDetail.addMouseListener(detailListener);
 		jbDetail.setEnabled(false);
+		jbDetail.setBackground(UIConstants.JBUTTON_BLUE);
+		jbDetail.setForeground(Color.WHITE);
 		
 		checkinListener = new CheckinListener(this);
 		
@@ -229,6 +235,8 @@ public class HotelOrderUIPanel extends JPanel {
 		jbCheckin.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbCheckin.setEnabled(false);
 		jbCheckin.addMouseListener(checkinListener);
+		jbCheckin.setBackground(UIConstants.JBUTTON_BLUE);
+		jbCheckin.setForeground(Color.WHITE);
 		
 		checkoutListener = new CheckoutListener(this);
 		
@@ -238,6 +246,8 @@ public class HotelOrderUIPanel extends JPanel {
 		jbCheckout.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbCheckout.setEnabled(false);
 		jbCheckout.addMouseListener(checkoutListener);
+		jbCheckout.setBackground(UIConstants.JBUTTON_BLUE);
+		jbCheckout.setForeground(Color.WHITE);
 		
 		delayListener = new DelayCheckinListener(this);
 		
@@ -247,6 +257,8 @@ public class HotelOrderUIPanel extends JPanel {
 		jbDelay.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbDelay.setEnabled(false);
 		jbDelay.addMouseListener(delayListener);
+		jbDelay.setBackground(UIConstants.JBUTTON_BLUE);
+		jbDelay.setForeground(Color.WHITE);
 		
 		jpButton.add(jbDetail);
 		jpButton.add(jbCheckin);
