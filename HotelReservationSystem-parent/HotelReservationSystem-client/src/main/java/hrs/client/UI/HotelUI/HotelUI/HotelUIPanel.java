@@ -2,7 +2,6 @@ package hrs.client.UI.HotelUI.HotelUI;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ItemListener;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;

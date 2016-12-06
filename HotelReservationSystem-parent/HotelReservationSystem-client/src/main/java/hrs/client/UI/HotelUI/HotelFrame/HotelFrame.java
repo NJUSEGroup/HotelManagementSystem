@@ -20,7 +20,6 @@ import hrs.common.Exception.RoomService.RoomNotFoundException;
 import hrs.common.VO.HotelVO;
 import hrs.common.VO.StaffVO;
 
-import java.awt.Font;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;

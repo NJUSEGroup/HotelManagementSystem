@@ -28,6 +28,7 @@ import hrs.client.UI.HotelUI.HotelOrderUI.Listener.OrderSelectedListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.Listener.SearchByIdOrUsernameListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.Listener.SearchByOrderTypeListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.UIConstants;
 import hrs.common.Controller.HotelController.IHotelOrderController;
 import hrs.common.Exception.OrderService.OrderNotFoundException;
 import hrs.common.VO.HotelVO;
@@ -78,32 +79,47 @@ public class HotelOrderUIPanel extends JPanel {
 	}
 	
 	public void init(HotelOrderMainPanel jpMain, HotelVO hotel){
+		this.hotel = hotel;
 		this.setSize(1080, 722);
 		this.setLayout(null);
 		
-		this.hotel = hotel;
-		
+		detailListener = new DetailListener(jpMain, this);
 		hotelOrderController = ControllerFactory.getHotelOrderController();
 		
-		searchListener1 = new SearchByOrderTypeListener(this);
-		searchListener2 = new SearchByIdOrUsernameListener(this);
-		detailListener = new DetailListener(jpMain, this);
-		
+		this.setPanel();
+		this.setSearchPanel();
+		this.setOrderPanel();
+		this.setButtonPanel();
+	}
+	
+	/**
+	 * 设置面板
+	 */
+	public void setPanel(){
 		jpSearch = new JPanel();
 		jpSearch.setBounds(0, 0, 1080, 170);
-		jpSearch.setBackground(new Color(211, 237, 249));
+		jpSearch.setBackground(UIConstants.JFRAME);
 		jpSearch.setLayout(null);
 		
 		jpOrder = new JPanel();
 		jpOrder.setBounds(0, 170, 1080, 472);
-		jpOrder.setBackground(new Color(211, 237, 249));
+		jpOrder.setBackground(UIConstants.JFRAME);
 		jpOrder.setLayout(null);
 		
 		jpButton = new JPanel();
 		jpButton.setBounds(0, 642, 1080, 80);
-		jpButton.setBackground(new Color(211, 237, 249));
+		jpButton.setBackground(UIConstants.JFRAME);
 		jpButton.setLayout(null);
 		
+		this.add(jpSearch);
+		this.add(jpOrder);
+		this.add(jpButton);
+	}
+	
+	/**
+	 * 设置搜索面板
+	 */
+	public void setSearchPanel(){
 		jlOrderType = new JLabel();
 		jlOrderType.setBounds(20, 20, 90, 30);
 		jlOrderType.setText("订单类型");
@@ -135,6 +151,9 @@ public class HotelOrderUIPanel extends JPanel {
 		jcbSearch.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jcbSearch.setEditable(true);
 		
+		searchListener1 = new SearchByOrderTypeListener(this);
+		searchListener2 = new SearchByIdOrUsernameListener(this);
+		
 		jbConfirm1 = new JButton();
 		jbConfirm1.setBounds(681, 15, 90, 40);
 		jbConfirm1.setText("确认");
@@ -147,6 +166,54 @@ public class HotelOrderUIPanel extends JPanel {
 		jbConfirm2.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbConfirm2.addMouseListener(searchListener2);
 		
+		jpSearch.add(jlOrderType);
+		jpSearch.add(jlSearch);
+		jpSearch.add(jcbOrderType);
+		jpSearch.add(jcbSearch);
+		jpSearch.add(jtfSearch);
+		jpSearch.add(jbConfirm1);
+		jpSearch.add(jbConfirm2);
+	}
+	
+	/**
+	 * 设置订单面板
+	 */
+	public void setOrderPanel(){
+		orderSelectedListener = new OrderSelectedListener(this);
+		
+		List<OrderVO> orderList = new ArrayList<OrderVO>();
+		orderList = this.getAllOrders();
+		
+		orderListTableModel = new OrderListTableModel(orderList);
+		
+		jtOrderList = new JTable(orderListTableModel);
+		jtOrderList.setBackground(UIConstants.JFRAME);
+		jtOrderList.setFont(new Font("方正兰亭超细黑简体",Font.PLAIN,16));
+		jtOrderList.setRowHeight(40);
+		jtOrderList.setShowVerticalLines(false);
+		jtOrderList.addMouseListener(orderSelectedListener);
+		
+		jthOrderList = jtOrderList.getTableHeader(); 
+		jthOrderList.setPreferredSize(new Dimension(jtOrderList.getWidth(),40)); 
+		jthOrderList.setBackground(UIConstants.JZONE);
+		jthOrderList.setEnabled(false);
+		jthOrderList.setBorder(new EmptyBorder(0,0,0,0));
+		jthOrderList.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 16));
+		
+		jspOrderList = new JScrollPane(jtOrderList);
+		jspOrderList.setBounds(10, 10, 1060, 452);
+		jspOrderList.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		jspOrderList.setOpaque(false);
+		jspOrderList.getViewport().setOpaque(false);
+		jspOrderList.setBackground(Color.WHITE);
+		
+		jpOrder.add(jspOrderList);
+	}
+	
+	/**
+	 * 设置按钮面板
+	 */
+	public void setButtonPanel(){
 		jbDetail = new JButton();
 		jbDetail.setBounds(410, 13, 110, 40);
 		jbDetail.setText("查看详细");
@@ -181,53 +248,10 @@ public class HotelOrderUIPanel extends JPanel {
 		jbDelay.setEnabled(false);
 		jbDelay.addMouseListener(delayListener);
 		
-		orderSelectedListener = new OrderSelectedListener(this);
-		
-		List<OrderVO> orderList = new ArrayList<OrderVO>();
-		orderList = this.getAllOrders();
-		
-		orderListTableModel = new OrderListTableModel(orderList);
-		
-		jtOrderList = new JTable(orderListTableModel);
-		jtOrderList.setBackground(new Color(211, 237, 249));
-		jtOrderList.setFont(new Font("方正兰亭超细黑简体",Font.PLAIN,16));
-		jtOrderList.setRowHeight(40);
-		jtOrderList.setShowVerticalLines(false);
-		jtOrderList.addMouseListener(orderSelectedListener);
-		
-		jthOrderList = jtOrderList.getTableHeader(); 
-		jthOrderList.setPreferredSize(new Dimension(jtOrderList.getWidth(),40)); 
-		jthOrderList.setBackground(new Color(188, 226, 236));
-		jthOrderList.setEnabled(false);
-		jthOrderList.setBorder(new EmptyBorder(0,0,0,0));
-		jthOrderList.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 16));
-		
-		jspOrderList = new JScrollPane(jtOrderList);
-		jspOrderList.setBounds(10, 10, 1060, 452);
-		jspOrderList.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		jspOrderList.setOpaque(false);
-		jspOrderList.getViewport().setOpaque(false);
-		jspOrderList.setBackground(Color.WHITE);
-		
-		jpSearch.add(jlOrderType);
-		jpSearch.add(jlSearch);
-		jpSearch.add(jcbOrderType);
-		jpSearch.add(jcbSearch);
-		jpSearch.add(jtfSearch);
-		jpSearch.add(jbConfirm1);
-		jpSearch.add(jbConfirm2);
-		
-		jpOrder.add(jspOrderList);
-		
 		jpButton.add(jbDetail);
 		jpButton.add(jbCheckin);
 		jpButton.add(jbCheckout);
 		jpButton.add(jbDelay);
-		
-		this.add(jpSearch);
-		this.add(jpOrder);
-		this.add(jpButton);
-		
 	}
 	
 	/**
@@ -241,7 +265,7 @@ public class HotelOrderUIPanel extends JPanel {
 			orderList = hotelOrderController.findOrderByHotelID(hotel.id);
 		} catch (OrderNotFoundException e) {
 			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(this, "您的酒店尚无订单！", "订单不存在", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(this, "您的酒店尚无订单！", "提示", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		return orderList;
@@ -332,7 +356,7 @@ public class HotelOrderUIPanel extends JPanel {
 				orderList = hotelOrderController.findOrderByHotelAndStatus(hotel.id, OrderStatus.Unexecuted);
 			} catch (OrderNotFoundException e) {
 				// TODO Auto-generated catch block
-				JOptionPane.showMessageDialog(this, "您的酒店尚无未执行订单！", "订单不存在", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, "您的酒店尚无未执行订单！", "提示", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		else if(orderType.equals("已执行")){
@@ -340,7 +364,7 @@ public class HotelOrderUIPanel extends JPanel {
 				orderList = hotelOrderController.findOrderByHotelAndStatus(hotel.id, OrderStatus.Executed);
 			} catch (OrderNotFoundException e) {
 				// TODO Auto-generated catch block
-				JOptionPane.showMessageDialog(this, "您的酒店尚无已执行订单！", "订单不存在", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, "您的酒店尚无已执行订单！", "提示", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		else if(orderType.equals("异常")){
@@ -348,7 +372,7 @@ public class HotelOrderUIPanel extends JPanel {
 				orderList = hotelOrderController.findOrderByHotelAndStatus(hotel.id, OrderStatus.Abnormal);
 			} catch (OrderNotFoundException e) {
 				// TODO Auto-generated catch block
-				JOptionPane.showMessageDialog(this, "您的酒店尚无异常订单！", "订单不存在", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, "您的酒店尚无异常订单！", "提示", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		else if(orderType.equals("已撤销")){
