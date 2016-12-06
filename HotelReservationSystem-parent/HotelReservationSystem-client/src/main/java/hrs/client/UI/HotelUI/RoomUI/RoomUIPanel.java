@@ -17,6 +17,7 @@ import hrs.client.UI.HotelUI.RoomUI.Listener.AddListener;
 import hrs.client.UI.HotelUI.RoomUI.Listener.EditListener;
 import hrs.client.UI.HotelUI.RoomUI.Listener.RoomSelectedListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.UIConstants;
 import hrs.common.Controller.HotelController.IRoomController;
 import hrs.common.Exception.RoomService.RoomNotFoundException;
 import hrs.common.VO.HotelVO;
@@ -56,16 +57,33 @@ public class RoomUIPanel extends JPanel {
 		this.setSize(1080, 722);
 		this.setLayout(null);
 		
+		this.setPanel();
+		this.setRoomPanel();
+		this.setButtonPanel();
+	}
+	
+	/**
+	 * 设置面板
+	 */
+	public void setPanel(){
 		jpRoom = new JPanel();
 		jpRoom.setBounds(0, 0, 1080, 642);
-		jpRoom.setBackground(new Color(211, 237, 249));
+		jpRoom.setBackground(UIConstants.JFRAME);
 		jpRoom.setLayout(null);
 		
 		jpButton = new JPanel();
 		jpButton.setBounds(0, 642, 1080, 80);
-		jpButton.setBackground(new Color(211, 237, 249));
+		jpButton.setBackground(UIConstants.JFRAME);
 		jpButton.setLayout(null);
 		
+		this.add(jpRoom);
+		this.add(jpButton);
+	}
+	
+	/**
+	 * 设置房间信息面板
+	 */
+	public void setRoomPanel(){
 		roomController = ControllerFactory.getRoomController();
 		try {
 			rooms= roomController.findByHotelID(theHotel.id);
@@ -79,7 +97,7 @@ public class RoomUIPanel extends JPanel {
 		roomTableModel = new RoomTableModel(rooms);
 		
 		jtRoom = new JTable(roomTableModel);
-		jtRoom.setBackground(new Color(211, 237, 249));
+		jtRoom.setBackground(UIConstants.JFRAME);
 		jtRoom.setFont(new Font("方正兰亭超细黑简体",Font.PLAIN,16));
 		jtRoom.setRowHeight(40);
 		jtRoom.setShowVerticalLines(false);
@@ -87,7 +105,7 @@ public class RoomUIPanel extends JPanel {
 		
 		jthOrderList = jtRoom.getTableHeader(); 
 		jthOrderList.setPreferredSize(new Dimension(jtRoom.getWidth(),40)); 
-		jthOrderList.setBackground(new Color(188, 226, 236));
+		jthOrderList.setBackground(UIConstants.JZONE);
 		jthOrderList.setEnabled(false);
 		jthOrderList.setBorder(new EmptyBorder(0,0,0,0));
 		jthOrderList.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 16));
@@ -99,6 +117,13 @@ public class RoomUIPanel extends JPanel {
 		jspRoom.getViewport().setOpaque(false);
 		jspRoom.setBackground(Color.WHITE);
 		
+		jpRoom.add(jspRoom);
+	}
+	
+	/**
+	 * 设置按钮面板
+	 */
+	public void setButtonPanel(){
 		addListener = new AddListener(this);
 		
 		jbAdd = new JButton();
@@ -116,13 +141,8 @@ public class RoomUIPanel extends JPanel {
 		jbEdit.setEnabled(false);
 		jbEdit.addMouseListener(editListener);
 		
-		jpRoom.add(jspRoom);
-		
 		jpButton.add(jbAdd);
 		jpButton.add(jbEdit);
-		
-		this.add(jpRoom);
-		this.add(jpButton);
 	}
 	
 	/**

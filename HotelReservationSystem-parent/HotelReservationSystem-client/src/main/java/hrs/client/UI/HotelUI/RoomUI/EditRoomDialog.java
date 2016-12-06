@@ -57,6 +57,19 @@ public class EditRoomDialog extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		
+		this.setPanel();
+		this.setRoomPanel();
+		this.setButtonPanel();
+		
+		this.setTitle("请输入修改房间的信息");
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setVisible(true);
+	}
+	
+	/**
+	 * 设置面板
+	 */
+	public void setPanel(){
 		jpRoom = new JPanel();
 		jpRoom.setBounds(0, 0, 432, 181);
 		jpRoom.setLayout(null);
@@ -65,6 +78,14 @@ public class EditRoomDialog extends JDialog {
 		jpButton.setBounds(0, 181, 432, 69);
 		jpButton.setLayout(null);
 		
+		contentPanel.add(jpRoom);
+		contentPanel.add(jpButton);
+	}
+	
+	/**
+	 * 设置房间信息面板
+	 */
+	public void setRoomPanel(){
 		jlRoomType = new JLabel();
 		jlRoomType.setFont(new Font("宋体", Font.PLAIN, 18));
 		jlRoomType.setText("房间类型");
@@ -98,6 +119,19 @@ public class EditRoomDialog extends JDialog {
 		jtfRoomMoney.setBounds(150, 131, 145, 30);
 		jtfRoomMoney.setEditable(true);
 		
+		jpRoom.add(jlRoomType);
+		jpRoom.add(jlRoomNum);
+		jpRoom.add(jlRoomMoney);
+		jpRoom.add(jlRMB);
+		jpRoom.add(jtfRoomType);
+		jpRoom.add(jsRoomNum);
+		jpRoom.add(jtfRoomMoney);
+	}
+	
+	/**
+	 * 设置按钮面板
+	 */
+	public void setButtonPanel(){
 		editConfirmListener = new EditConfirmListener(this);
 		
 		jbConfirm = new JButton();
@@ -114,23 +148,8 @@ public class EditRoomDialog extends JDialog {
 		jbCancel.setBounds(264, 13, 70, 40);
 		jbCancel.addMouseListener(editCancelListener);
 		
-		jpRoom.add(jlRoomType);
-		jpRoom.add(jlRoomNum);
-		jpRoom.add(jlRoomMoney);
-		jpRoom.add(jlRMB);
-		jpRoom.add(jtfRoomType);
-		jpRoom.add(jsRoomNum);
-		jpRoom.add(jtfRoomMoney);
-		
 		jpButton.add(jbConfirm);
 		jpButton.add(jbCancel);
-		
-		contentPanel.add(jpRoom);
-		contentPanel.add(jpButton);
-		
-		this.setTitle("请输入修改房间的信息");
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.setVisible(true);
 	}
 	
 	/**
@@ -140,27 +159,7 @@ public class EditRoomDialog extends JDialog {
 		RoomVO editRoom = new RoomVO();
 		
 		String editRoomType = jtfRoomType.getText();
-		if(editRoomType.equals("单人房")){
-			editRoom.type = RoomType.Single;
-		}
-		else if(editRoomType.equals("双人房")){
-			editRoom.type = RoomType.Double;
-		}
-		else if(editRoomType.equals("大床间")){
-			editRoom.type = RoomType.KingSize;
-		}
-		else if(editRoomType.equals("标准间")){
-			editRoom.type = RoomType.Standard;
-		}
-		else if(editRoomType.equals("豪华间")){
-			editRoom.type = RoomType.Deluxe;
-		}
-		else if(editRoomType.equals("商务标间")){
-			editRoom.type = RoomType.Business;
-		}
-		else if(editRoomType.equals("行政标间")){
-			editRoom.type = RoomType.Executive;
-		}
+		editRoom.type = RoomType.getRoomType(editRoomType);
 		
 		if(((Integer) jsRoomNum.getValue()).intValue()<0){
 			JOptionPane.showMessageDialog(this, "房间数量不能为负数！", "错误", JOptionPane.ERROR_MESSAGE);

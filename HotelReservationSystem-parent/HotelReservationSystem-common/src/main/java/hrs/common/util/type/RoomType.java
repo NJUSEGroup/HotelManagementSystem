@@ -18,7 +18,7 @@ public enum RoomType {
 			return Single;
 		case "双人房":
 			return Double;
-		case "大床房":
+		case "大床间":
 			return KingSize;
 		case "标准房":
 			return Standard;
