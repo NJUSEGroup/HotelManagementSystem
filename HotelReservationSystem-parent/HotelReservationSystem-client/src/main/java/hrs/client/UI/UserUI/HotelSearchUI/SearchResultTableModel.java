@@ -9,26 +9,27 @@ import java.util.Map.Entry;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
+import org.springframework.beans.factory.support.ManagedList;
+
 import hrs.common.VO.HotelVO;
 import hrs.common.VO.RoomVO;
 
 public class SearchResultTableModel implements TableModel {
-	private Map<HotelVO, List<RoomVO>> hotels;
-	List<HotelVO> allInfo;
+	private List<HotelVO> hotels;
 	
 	
-	public SearchResultTableModel(Map<HotelVO, List<RoomVO>> hotels) {
+	public SearchResultTableModel(List<HotelVO> hotels) {
 		this.hotels = hotels;
 		
 		
-		allInfo = new ArrayList<>();
-		Iterator<Entry<HotelVO, List<RoomVO>>> iter = hotels.entrySet().iterator();
-		while (iter.hasNext()) {
-			@SuppressWarnings("rawtypes")
-			Map.Entry entry = (Map.Entry) iter.next();
-			HotelVO key = (HotelVO) entry.getKey();
-			allInfo.add(key);
-		}
+//		allInfo = new ArrayList<>();
+//		Iterator<Entry<HotelVO, List<RoomVO>>> iter = hotels.entrySet().iterator();
+//		while (iter.hasNext()) {
+//			@SuppressWarnings("rawtypes")
+//			Map.Entry entry = (Map.Entry) iter.next();
+//			HotelVO key = (HotelVO) entry.getKey();
+//			allInfo.add(key);
+//		}
 		
 	}
 	
@@ -64,7 +65,7 @@ public class SearchResultTableModel implements TableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		HotelVO currentInfo = allInfo.get(rowIndex);
+		HotelVO currentInfo = hotels.get(rowIndex);
 		List<String> list = new ArrayList<>();
 		list.add(currentInfo.name);
 		list.add(currentInfo.location.name+currentInfo.street);

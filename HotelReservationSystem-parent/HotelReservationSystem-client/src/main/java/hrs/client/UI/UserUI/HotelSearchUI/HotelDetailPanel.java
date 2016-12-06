@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import hrs.client.UI.UserUI.Components.ComHotelDetail;
 import hrs.client.UI.UserUI.Components.ComNeedBackPanel;
 import hrs.client.UI.UserUI.Components.CommonPanel;
 import hrs.client.UI.UserUI.Components.CommonTable;
@@ -32,7 +33,7 @@ import hrs.common.VO.UserVO;
  * @author 涵
  *
  */
-public class HotelDetailPanel extends CommonPanel {
+public class HotelDetailPanel extends ComHotelDetail {
 	private static final long serialVersionUID = 7566236145344049160L;
 	private HotelVO hotel;
 	private List<RoomVO> rooms;
@@ -42,15 +43,16 @@ public class HotelDetailPanel extends CommonPanel {
 	private ComNeedBackPanel panel;
 	Font font = UIConstants.JLABEL_FONT;
 	public HotelDetailPanel(HotelVO hotel,List<RoomVO> rooms,UserVO user){
-		controller = ControllerFactory.getUserHotelController();
+		super(hotel, rooms, user);
 		this.hotel = hotel;
-		this.rooms = rooms;
 		this.user = user;
+		this.rooms = rooms;
+		controller = ControllerFactory.getUserHotelController();
 		init();
 	}
-	public void setHotelPanel(HotelPanel panel){
-		this.panel = panel;
-	}
+	
+	
+	
 	@Override
 	public void init() {
 		setDetailInfo();
@@ -60,60 +62,24 @@ public class HotelDetailPanel extends CommonPanel {
 
 	}
 	
-	private void setBackButton() {
-		
-		JButton backJB = new JButton("返回");
-		backJB.setFont(font);
-		backJB.setBounds(this.getWidth() - 150, detailInfoPanel.getHeight()+300, 100, 40);
-		backJB.addActionListener(new BackListener(this));
-		add(backJB);	
-		
-	}
 	
 	public void setOrderButton(){
-		JButton orderJB = new JButton("返回");
+		JButton orderJB = new JButton("立即下单");
 		orderJB.setFont(font);
-		orderJB.setBounds(this.getWidth() - 280, detailInfoPanel.getHeight()+300, 100, 40);
+		orderJB.setBounds(this.getWidth() - 300, 650, 120, 40);
 		orderJB.addActionListener(new PlaceOrderListener(this));
 		add(orderJB);	
 	}
-	private void setOrderTable() {
-		CommonTable orderTable = new CommonTable();
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setViewportView(orderTable);
-		scrollPane.setBounds(30,detailInfoPanel.getHeight()+160, detailInfoPanel.getWidth(), 120);
-		 scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
-//		scrollPane.setBorder(BorderFactory.createLineBorder(new Color(145, 189, 214), 2));
-		scrollPane.getViewport().setBackground(new Color(211, 237, 249));
-		scrollPane.setOpaque(true);
-		
-		List<OrderVO> list = null;
-		try {
-			list = controller.findOrderByHotelAndUsername(hotel.id, user.username);
-		} catch (OrderNotFoundException e) {
-			System.out.println("无历史订单");
-		}
-		OrderTableModel model = new OrderTableModel(list);
-		orderTable.setModel(model);
-		add(scrollPane);
-		
-		
-	}
 
-	private void setDetailInfo() {
-		detailInfoPanel = new HotelDetailInfoPanel(hotel);
-		detailInfoPanel.setBounds(30, 30, detailInfoPanel.getWidth(), detailInfoPanel.getHeight());
-		add(detailInfoPanel);
-	}
+
 	
 	private void setRoomTable(){
 		CommonTable roomTable = new CommonTable();
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportView(roomTable);
-		scrollPane.setBounds(30,detailInfoPanel.getHeight()+40, detailInfoPanel.getWidth(), 120);
-		 scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+		scrollPane.setBounds(30,340, 1020, 120);
+		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 //		scrollPane.setBorder(BorderFactory.createLineBorder(new Color(145, 189, 214), 2));
 		scrollPane.getViewport().setBackground(new Color(211, 237, 249));
 		scrollPane.setOpaque(true);
@@ -122,10 +88,7 @@ public class HotelDetailPanel extends CommonPanel {
 		roomTable.setModel(model);
 		add(scrollPane);
 	}
-	public void back() {
-		panel.back();
-		
-	}
+	
 	public void placeOrder() {
 		panel.placeOrder();
 		

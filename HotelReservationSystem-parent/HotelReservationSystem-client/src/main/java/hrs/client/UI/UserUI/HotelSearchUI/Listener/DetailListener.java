@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 
 import hrs.client.UI.UserUI.HotelSearchUI.HotelSearchPanel;
 
-public class detailListener implements ActionListener {
+public class DetailListener implements ActionListener {
 	private HotelSearchPanel panel;
-	public detailListener(HotelSearchPanel panel) {
+	public DetailListener(HotelSearchPanel panel) {
 		this.panel = panel;
 	}
 	@Override

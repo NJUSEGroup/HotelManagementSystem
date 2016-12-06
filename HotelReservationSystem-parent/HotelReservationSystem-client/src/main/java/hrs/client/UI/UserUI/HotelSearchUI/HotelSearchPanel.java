@@ -24,7 +24,7 @@ import hrs.client.UI.UserUI.Components.CommonPanel;
 import hrs.client.UI.UserUI.Components.CommonTable;
 import hrs.client.UI.UserUI.HotelSearchUI.Listener.SearchListener;
 import hrs.client.UI.UserUI.HotelSearchUI.Listener.SearchTableListener;
-import hrs.client.UI.UserUI.HotelSearchUI.Listener.detailListener;
+import hrs.client.UI.UserUI.HotelSearchUI.Listener.DetailListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.UserController.IUserHotelController;
@@ -38,6 +38,12 @@ import hrs.common.util.FilterCondition.RoomTypeFilterCondition;
 import hrs.common.util.type.FilterType;
 import hrs.common.util.type.RoomType;
 
+/**
+ * 酒店搜索面板
+ * 含有显示搜索结果的表格
+ * @author 涵
+ *
+ */
 public class HotelSearchPanel extends CommonPanel {
 	/**
 	 * 
@@ -92,7 +98,7 @@ public class HotelSearchPanel extends CommonPanel {
 		detailJB.setFont(font);
 		detailJB.setBounds(this.getWidth() - 330, 645, 120, 40);
 		detailJB.setEnabled(false);
-		detailJB.addActionListener(new detailListener(this));
+		detailJB.addActionListener(new DetailListener(this));
 		contentPane.add(detailJB);
 
 		orderJB = new JButton("立即下单");
@@ -115,8 +121,11 @@ public class HotelSearchPanel extends CommonPanel {
 		scrollPane.getViewport().setBackground(new Color(211, 237, 249));
 		scrollPane.setOpaque(true);
 
-		Map<HotelVO, List<RoomVO>> map = new HashMap<>();
-		table.setModel(new SearchResultTableModel(map));
+		
+		
+		List<HotelVO> hotels = new ArrayList<>();
+		
+		table.setModel(new SearchResultTableModel(hotels));
 		table.addMouseListener(new SearchTableListener(this));
 
 		contentPane.add(scrollPane);
@@ -146,7 +155,18 @@ public class HotelSearchPanel extends CommonPanel {
 		if (conditions != null) {
 			newmap = controller.filterHotels(map, conditions);
 		}
-		table.setModel(new SearchResultTableModel(newmap));
+		
+		List<HotelVO> hotels = new ArrayList<>();
+		Iterator<Entry<HotelVO, List<RoomVO>>> iter = ((Map<HotelVO, List<RoomVO>>) newmap).entrySet().iterator();
+		while (iter.hasNext()) {
+			@SuppressWarnings("rawtypes")
+			Map.Entry entry = (Map.Entry) iter.next();
+			HotelVO key = (HotelVO) entry.getKey();
+			hotels.add(key);
+		}
+		
+		
+		table.setModel(new SearchResultTableModel(hotels));
 		if(newmap.size() == 0){
 			JOptionPane.showMessageDialog(null, "未找到酒店!", "提示", JOptionPane.INFORMATION_MESSAGE);
 		}
@@ -160,8 +180,12 @@ public class HotelSearchPanel extends CommonPanel {
 	}
 
 	public void setButtonStatus() {
-		detailJB.setEnabled(true);
-		orderJB.setEnabled(true);
+		int i = table.getSelectedRow();
+		if(i != -1){
+			detailJB.setEnabled(true);
+			orderJB.setEnabled(true);
+		}
+		
 
 	}
 

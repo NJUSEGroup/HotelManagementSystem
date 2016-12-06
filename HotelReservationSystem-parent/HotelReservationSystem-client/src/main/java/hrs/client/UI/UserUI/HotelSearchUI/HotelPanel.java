@@ -14,7 +14,17 @@ import hrs.common.VO.HotelVO;
 import hrs.common.VO.RoomVO;
 import hrs.common.VO.UserVO;
 
+/**
+ * 搜索酒店主界面
+ * 由CardLayout布局的JPanel组成
+ * @author 涵
+ *
+ */
 public class HotelPanel extends ComNeedBackPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1513105401650788833L;
 	private JPanel hotelCardPanel = new JPanel();
 	private CardLayout hotelCard = new CardLayout();
 	
@@ -47,7 +57,8 @@ public class HotelPanel extends ComNeedBackPanel {
 	
 	public void showDetail(HotelVO hotel,List<RoomVO> rooms){
 		hotelDetailPanel = new HotelDetailPanel(hotel,rooms,user);
-		hotelDetailPanel.setHotelPanel(this);
+		hotelDetailPanel.setPanel(this);
+		hotelDetailPanel.setOrderButton();
 		hotelCardPanel.add("hotelDetail", hotelDetailPanel);
 		hotelCard.show(hotelCardPanel, "hotelDetail");
 	}

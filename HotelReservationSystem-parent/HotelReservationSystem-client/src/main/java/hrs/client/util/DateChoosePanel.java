@@ -1,7 +1,7 @@
 package hrs.client.util;
 
 import java.awt.Font;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Calendar;
 
 import javax.swing.JComboBox;
@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import android.R.integer;
 import hrs.client.UI.UserUI.HotelSearchUI.SearchPanel;
+import hrs.common.util.DateHelper;
 /**
  * 日期选择框
  * 年份选项为当年和今年
@@ -21,6 +22,10 @@ import hrs.client.UI.UserUI.HotelSearchUI.SearchPanel;
  *
  */
 public class DateChoosePanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6602630442272640265L;
 	private JComboBox<Integer> yearBox;
 	private JComboBox<Integer> monthBox;
 	private JComboBox<Integer> dayBox;
@@ -111,10 +116,12 @@ public class DateChoosePanel extends JPanel {
 	 */
 	public Date getDate(){
 		int year = (Integer)yearBox.getSelectedItem();
-		int month = (Integer)monthBox.getSelectedItem();
+		int month = (Integer)monthBox.getSelectedItem()-1;
 		int day = (Integer)dayBox.getSelectedItem();
-		Date date = new Date(year, month, day);
-		return date;
+		Calendar calendar =	Calendar.getInstance();
+		calendar.set(year, month, day, 0, 0, 0);
+		System.out.println(DateHelper.format(calendar.getTime()));
+		return calendar.getTime();
 	}
 	
 }
