@@ -13,6 +13,7 @@ import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.CheckRoomNumListener;
 import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.CheckRoomTypeListener;
 import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.CheckinCancelListener;
 import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.CheckinConfirmListener;
+import hrs.client.util.ControllerFactory;
 import hrs.client.util.DateChoosePanel;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.HotelController.IOfflineRecordController;
@@ -20,6 +21,7 @@ import hrs.common.VO.HotelVO;
 import hrs.common.VO.OfflineRecordVO;
 import hrs.common.VO.RoomVO;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.awt.Color;
@@ -66,6 +68,9 @@ public class CheckinDialog extends JDialog {
 		contentPanel.setLayout(null);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		
+		rooms = new ArrayList<RoomVO>();
+		recordController = ControllerFactory.getOfflineRecordController();
 		
 		jpDate = new JPanel();
 		jpDate.setBounds(0, 0, 513, 201);
@@ -213,6 +218,8 @@ public class CheckinDialog extends JDialog {
 	public void checkRoomNum(){
 		int typeIndex =  jcbRoomType.getSelectedIndex();
 		int roomNum = rooms.get(typeIndex).availableRoomNum;
+		
+		jcbRoomNum.removeAllItems();
 		for(int i=1;i<=roomNum;i++){
 			jcbRoomNum.addItem(Integer.toString(i));
 		}
@@ -224,6 +231,7 @@ public class CheckinDialog extends JDialog {
 	public void checkinConfirm(){
 		OfflineRecordVO newRecord = new OfflineRecordVO();
 		
+		newRecord.hotel = hotel;
 		newRecord.checkinTime = dcpCheckin.getDate();
 		newRecord.expectedCheckoutTime = dcpCheckout.getDate();
 		int typeIndex =  jcbRoomType.getSelectedIndex();
