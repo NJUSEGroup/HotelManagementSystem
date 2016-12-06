@@ -9,17 +9,19 @@ import org.springframework.stereotype.Repository;
 
 import hrs.common.POJO.HotelDiscountPO;
 import hrs.common.util.ResultMessage;
+import hrs.common.util.type.HotelDiscountType;
 import hrs.server.DAO.Interface.PromotionDAO.HotelDiscountDAO;
+
 @SuppressWarnings("all")
 @Repository
 public class HotelDiscountDAOImpl implements HotelDiscountDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	private Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	@Override
 	public ResultMessage add(HotelDiscountPO hoteldiscountpo) {
 		getSession().save(hoteldiscountpo);
@@ -42,9 +44,17 @@ public class HotelDiscountDAOImpl implements HotelDiscountDAO {
 
 	@Override
 	public List<HotelDiscountPO> findAllByHotelID(int hotelID) {
-		String hql = "from HotelDiscountPO disc inner join fetch disc.hotel hotel "
-												+ "where hotel.id = :hotelID";
+		String hql = "from HotelDiscountPO disc inner join fetch disc.hotel hotel " + "where hotel.id = :hotelID";
 		return getSession().createQuery(hql).setParameter("hotelID", hotelID).getResultList();
+	}
+
+	@Override
+	public List<HotelDiscountPO> findByHotelIDAndType(int hotelID, HotelDiscountType type) {
+		String hql = "from HotelDiscountPO disc inner join fetch disc.hotel hotel " 
+					 + "where hotel.id = :hotelID and disc.type = :type";
+		return getSession().createQuery(hql).setParameter("hotelID", hotelID)
+										    .setParameter("type", type)
+										    .getResultList();
 	}
 
 }

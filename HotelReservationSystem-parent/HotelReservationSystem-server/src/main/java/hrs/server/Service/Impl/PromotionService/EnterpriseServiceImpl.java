@@ -10,8 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import hrs.common.Exception.PromotionService.EnterpriseNotFoundException;
 import hrs.common.POJO.EnterprisePO;
 import hrs.common.VO.EnterpriseVO;
+import hrs.common.VO.HotelDiscountVO;
+import hrs.common.util.type.HotelDiscountType;
 import hrs.server.DAO.Interface.PromotionDAO.EnterpriseDAO;
 import hrs.server.Service.Interface.PromotionService.EnterpriseService;
+import hrs.server.Service.Interface.PromotionService.HotelDiscountService;
 /**
  * 
 * @ClassName: EnterpriseServiceImpl
@@ -22,10 +25,11 @@ import hrs.server.Service.Interface.PromotionService.EnterpriseService;
  */
 @Service
 public class EnterpriseServiceImpl implements EnterpriseService {
-	
 	@Autowired
-	
+	private HotelDiscountService hotelDiscountService;
+	@Autowired
 	private EnterpriseDAO dao;
+	
 	/**
 	 * 
 	 * @Title: getAllEnterprises
@@ -36,7 +40,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 	 */
 	@Transactional
 	@Override
-	public List<EnterpriseVO> getAllEnterprises() throws EnterpriseNotFoundException {
+	public List<EnterpriseVO> findNotAddedEnterpriseByHotelID(int hotelID) throws EnterpriseNotFoundException {
 		List<EnterprisePO> pos = dao.findAll();
 		List<EnterpriseVO> vos = null;
 		if(pos.size() == 0){
@@ -49,6 +53,8 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 				vos.add(vo);
 			}
 		}
+		List<EnterpriseVO> addedEnteprise = getEnterpriseFromHotelDiscount(hotelDiscountService.findByHotelIDAndType(hotelID, HotelDiscountType.Enterprise));
+		vos.removeAll(addedEnteprise);
 		return vos;
 	}
 	/**
@@ -63,5 +69,12 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 	public void add(EnterpriseVO vo) {
 		dao.add(new EnterprisePO(vo));
 	}
-
+	
+	private List<EnterpriseVO> getEnterpriseFromHotelDiscount(List<HotelDiscountVO> list){
+		List<EnterpriseVO> enterprises = new ArrayList<>();
+		for(HotelDiscountVO vo:list){
+			enterprises.add(vo.enterprise);
+		}
+		return enterprises;
+	}
 }

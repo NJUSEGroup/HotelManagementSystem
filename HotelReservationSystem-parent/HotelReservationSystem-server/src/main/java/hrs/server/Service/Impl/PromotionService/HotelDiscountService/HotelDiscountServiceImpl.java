@@ -12,6 +12,7 @@ import hrs.common.Exception.Promotion.HotelDiscountService.HotelDiscountNotFound
 import hrs.common.POJO.HotelDiscountPO;
 import hrs.common.VO.HotelDiscountVO;
 import hrs.common.util.DateHelper;
+import hrs.common.util.type.HotelDiscountType;
 import hrs.server.DAO.Interface.PromotionDAO.HotelDiscountDAO;
 import hrs.server.Service.Interface.PromotionService.HotelDiscountService;
 import hrs.server.util.SpringUtils;
@@ -89,20 +90,13 @@ public class HotelDiscountServiceImpl implements HotelDiscountService {
 	@Override
 	public List<HotelDiscountVO> findAllByHotelID(int hotelID) throws HotelDiscountNotFoundException {
 		List<HotelDiscountPO> pos = dao.findAllByHotelID(hotelID);
-		List<HotelDiscountVO> vos = null;
 		if (pos.size() == 0) {
 			throw new HotelDiscountNotFoundException();
 		} else {
-			vos = new ArrayList<>();
-			HotelDiscountVO vo = null;
-			for (HotelDiscountPO po : pos) {
-				vo = new HotelDiscountVO(po);
-				vos.add(vo);
-			}
+			return transfer(pos);
 		}
-		return vos;
 	}
-
+	
 	/**
 	 * 
 	 * @Title: createAllStrategies
@@ -128,6 +122,24 @@ public class HotelDiscountServiceImpl implements HotelDiscountService {
 			strategies.add(strategy);
 		}
 		return strategies;
+	}
+	
+	@Transactional
+	@Override
+	public List<HotelDiscountVO> findByHotelIDAndType(int hotelID, HotelDiscountType type) {
+		List<HotelDiscountPO> pos = dao.findByHotelIDAndType(hotelID, type);
+		return transfer(pos);
+	}
+	
+	
+	private List<HotelDiscountVO> transfer(List<HotelDiscountPO> pos){
+		List<HotelDiscountVO> vos = new ArrayList<>();
+		HotelDiscountVO vo = null;
+		for (HotelDiscountPO po : pos) {
+			vo = new HotelDiscountVO(po);
+			vos.add(vo);
+		}
+		return vos;
 	}
 
 }

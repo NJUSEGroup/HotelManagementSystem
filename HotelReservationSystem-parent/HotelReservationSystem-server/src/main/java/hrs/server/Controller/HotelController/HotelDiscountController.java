@@ -21,8 +21,8 @@ public class HotelDiscountController implements IHotelDiscountController{
 	
 	
 	@Override
-	public List<EnterpriseVO> getAllEnterprises() throws EnterpriseNotFoundException {
-		return enterpriseService.getAllEnterprises();
+	public List<EnterpriseVO> findNotAddedEnterpriseByHotelID(int hotelID) throws EnterpriseNotFoundException {
+		return enterpriseService.findNotAddedEnterpriseByHotelID(hotelID);
 	}
 
 	@Override

@@ -8,9 +8,9 @@ import hrs.common.VO.EnterpriseVO;
 import hrs.common.VO.HotelDiscountVO;
 
 public interface IHotelDiscountController {
-	List<EnterpriseVO> getAllEnterprises() throws EnterpriseNotFoundException;
 	void add(HotelDiscountVO hoteldiscountvo);
 	void update(HotelDiscountVO hoteldiscountvo);
 	void delete(int id);
 	List<HotelDiscountVO> findAllByHotelID(int hotelID) throws HotelDiscountNotFoundException;
+	List<EnterpriseVO> findNotAddedEnterpriseByHotelID(int hotelID) throws EnterpriseNotFoundException;
 }

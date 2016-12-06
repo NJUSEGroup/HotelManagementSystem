@@ -98,4 +98,14 @@ public class TestHotelDiscountService {
 		}
 		assertNotNull(strategies);
 	}
+	
+	@Test
+	public void testFindByHotelIDAndType(){
+		List<HotelDiscountVO> list = service.findByHotelIDAndType(1, HotelDiscountType.LargeQty);
+		System.out.println(list.size());
+		for (HotelDiscountVO vo : list) {
+			System.out.println(vo);
+			assertEquals(vo.hotel.id, 1);
+		}
+	}
 }

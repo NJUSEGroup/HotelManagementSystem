@@ -66,4 +66,15 @@ public class TestHotelDiscountDAO {
 			assertEquals(po.getHotel().getId(), 4);
 		}
 	}
+	
+	@Transactional
+	@Test
+	public void testFindByHotelIDAndType(){
+		List<HotelDiscountPO> list = dao.findByHotelIDAndType(1	, HotelDiscountType.Enterprise);
+		for (HotelDiscountPO po : list) {
+			System.out.println(po);
+			assertEquals(po.getHotel().getId(), 1);
+			assertEquals(po.getType(),HotelDiscountType.Enterprise);
+		}
+	}
 }
