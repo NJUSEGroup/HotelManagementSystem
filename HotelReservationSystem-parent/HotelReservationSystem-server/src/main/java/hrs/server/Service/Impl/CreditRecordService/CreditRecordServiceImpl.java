@@ -86,6 +86,7 @@ public class CreditRecordServiceImpl implements CreditRecordService {
 	 * @param value  
 	 * @see hrs.server.Service.Interface.CreditRecordService.CreditRecordService#recharge(hrs.common.VO.UserVO, int)
 	 */
+	@Transactional
 	@Override
 	public void charge(UserVO user, int value) {
 		CreditRecordVO vo = new CreditRecordVO(null, user, CreditRecordType.Recharge, value*100);

@@ -14,6 +14,7 @@ import hrs.common.VO.WebDiscountVO;
 import hrs.common.util.DateHelper;
 import hrs.server.DAO.Interface.PromotionDAO.WebDiscountDAO;
 import hrs.server.Service.Interface.PromotionService.WebDiscountService;
+import hrs.server.util.SpringUtils;
 /**
  * 
 * @ClassName: WebDiscountServiceImpl
@@ -112,19 +113,12 @@ public class WebDiscountServiceImpl implements WebDiscountService {
 			return new ArrayList<>();
 		}
 		List<WebDiscount> strategies = new ArrayList<>();
-		Class<?> clazz = null;
 		WebDiscount strategy = null;
-		try {
-			for (WebDiscountVO vo : vos) {
-				clazz = Class.forName("hrs.server.Service.Impl.PromotionService.WebDiscountService."
-						+ vo.type.toString() + "WebDiscount");
-				strategy = (WebDiscount) clazz.newInstance();
-				strategy.setWebDiscountVO(vo);
-				strategies.add(strategy);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
+		for (WebDiscountVO vo : vos) {
+			strategy = SpringUtils.getBean(vo.type.toString()+"WebDiscount");
+			strategy.setWebDiscountVO(vo);
+			strategies.add(strategy);
+		}
 		return strategies;
 	}
 }
