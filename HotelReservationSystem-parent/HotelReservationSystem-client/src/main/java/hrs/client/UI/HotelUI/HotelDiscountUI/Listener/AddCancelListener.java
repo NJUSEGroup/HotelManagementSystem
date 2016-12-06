@@ -3,22 +3,20 @@ package hrs.client.UI.HotelUI.HotelDiscountUI.Listener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import hrs.client.UI.HotelUI.HotelDiscountUI.HotelDiscountUIPanel;
+import hrs.client.UI.HotelUI.HotelDiscountUI.AddDiscountDialog;
 
-public class EditListener implements MouseListener{
+public class AddCancelListener implements MouseListener{
 
-	private HotelDiscountUIPanel jpDiscount;
+	private AddDiscountDialog addDialog;
 	
-	public EditListener(HotelDiscountUIPanel jpDiscount){
-		this.jpDiscount = jpDiscount;
+	public AddCancelListener(AddDiscountDialog addDialog){
+		this.addDialog = addDialog;
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(jpDiscount.isButtonEnable("修改")){
-			jpDiscount.editDiscount();
-		}
+		addDialog.cancel();
 	}
 
 	@Override
@@ -44,5 +42,7 @@ public class EditListener implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 
 }

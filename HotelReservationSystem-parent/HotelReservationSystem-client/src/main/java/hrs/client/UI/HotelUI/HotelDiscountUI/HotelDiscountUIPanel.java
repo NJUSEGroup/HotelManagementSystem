@@ -117,11 +117,15 @@ public class HotelDiscountUIPanel extends JPanel {
 		jbAdd.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbAdd.addMouseListener(addListener);
 		
+		editListener = new EditListener(this);
+		
 		jbEdit = new JButton();
 		jbEdit.setBounds(710, 13, 90, 40);
 		jbEdit.setText("修改");
 		jbEdit.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbEdit.setEnabled(false);
+		jbEdit.addMouseListener(editListener);
+		
 		
 		deleteListener = new DeleteListener(this);
 		
@@ -207,8 +211,8 @@ public class HotelDiscountUIPanel extends JPanel {
 		AddDiscountDialog addDialog = new AddDiscountDialog(hotel, this);
 	}
 	
-	public void editDiscount(HotelDiscountVO discount){
-		controller.update(discount);
+	public void editDiscount(){
+		EditDiscountDialog editDialog = new EditDiscountDialog(hotel, this);
 	}
 	
 	/**

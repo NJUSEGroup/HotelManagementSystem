@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
 
+import hrs.client.UI.HotelUI.HotelDiscountUI.Listener.AddCancelListener;
 import hrs.client.UI.HotelUI.HotelDiscountUI.Listener.AddConfirmListener;
 import hrs.client.UI.HotelUI.HotelDiscountUI.Listener.TypeSelectedListener;
 import hrs.client.util.ControllerFactory;
@@ -54,6 +55,7 @@ public class AddDiscountDialog extends JDialog {
 	private IHotelDiscountController controller;
 	private TypeSelectedListener typeSelectedListener;
 	private AddConfirmListener addListener;
+	private AddCancelListener cancelListener;
 	private HotelVO hotel;
 	private List<EnterpriseVO> allFirms;
 	private HotelDiscountUIPanel jpDiscountUI;
@@ -116,6 +118,7 @@ public class AddDiscountDialog extends JDialog {
 		jcbType.setBounds(200, 10, 330, 40);
 		this.getAllTypes();
 		jcbType.addItemListener(typeSelectedListener);
+		jcbType.setFont(new Font("宋体", Font.PLAIN, 21));
 		
 		dcpBegin = new DateChoosePanel();
 		dcpBegin.setBounds(200, 70, 330, 40);
@@ -127,14 +130,17 @@ public class AddDiscountDialog extends JDialog {
 		jsRoomNum.setBounds(200, 190, 100, 40);
 		jsRoomNum.setModel(new SpinnerNumberModel());
 		jsRoomNum.setEnabled(false);
+		jsRoomNum.setFont(new Font("宋体", Font.PLAIN, 21));
 		
 		jcbFirm = new JComboBox<String>();
 		jcbFirm.setBounds(200, 250, 330, 40);
 		jcbFirm.setEnabled(false);
+		jcbFirm.setFont(new Font("宋体", Font.PLAIN, 21));
 		
 		jtfDiscount = new JTextField();
 		jtfDiscount.setBounds(200, 310, 330, 40);
 		jtfDiscount.setEnabled(true);
+		jtfDiscount.setFont(new Font("宋体", Font.PLAIN, 21));
 		
 		addListener = new AddConfirmListener(this);
 		
@@ -144,10 +150,13 @@ public class AddDiscountDialog extends JDialog {
 		jbConfirm.setBounds(141, 13, 70, 40);
 		jbConfirm.addMouseListener(addListener);
 		
+		cancelListener = new AddCancelListener(this);
+		
 		jbCancel = new JButton();
 		jbCancel.setFont(new Font("宋体", Font.PLAIN, 16));
 		jbCancel.setText("取消");
 		jbCancel.setBounds(321, 13, 70, 40);
+		jbCancel.addMouseListener(cancelListener);
 		
 		jpDiscount.add(jlType);
 		jpDiscount.add(jlBegin);
@@ -323,6 +332,10 @@ public class AddDiscountDialog extends JDialog {
 				JOptionPane.showMessageDialog(null, "促销策略已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);	
 			}
 		}
+	}
+	
+	public void cancel(){
+		this.dispose();
 	}
 	
 }
