@@ -271,33 +271,40 @@ public class HotelUIPanel extends JPanel {
 		int i;
 		int citySize = city.size();
 		int circleSize = circle.size();
+		String name = "";
 		int value = JOptionPane.showConfirmDialog(this, "您确定要修改酒店信息吗？", "请确认修改", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 		
 		if(value == JOptionPane.OK_OPTION){
-			hotel.name = jtfHotelName.getText();
-			
-			for(i=0;i<citySize;i++){
-				if(city.get(i).name.equals(jcbCity.getSelectedItem())){
-					hotel.location = city.get(i);
-					break;
-				}
+			name = jtfHotelName.getText();
+			if(name.length()>20){
+				JOptionPane.showMessageDialog(null, "酒店名称长度不可超过20！", "错误", JOptionPane.INFORMATION_MESSAGE);
 			}
+			else{
+				hotel.name = jtfHotelName.getText();
 			
-			for(i=0;i<circleSize;i++){
-				if(circle.get(i).name.equals(jcbCircle.getSelectedItem())){
-					hotel.commercialCircle = circle.get(i);
-					break;
+				for(i=0;i<citySize;i++){
+					if(city.get(i).name.equals(jcbCity.getSelectedItem())){
+						hotel.location = city.get(i);
+						break;
+					}
 				}
+			
+				for(i=0;i<circleSize;i++){
+					if(circle.get(i).name.equals(jcbCircle.getSelectedItem())){
+						hotel.commercialCircle = circle.get(i);
+						break;
+					}
+				}
+			
+				hotel.street = jtfAddress.getText();
+				hotel.profile = jtaIntro.getText();
+				hotel.service = jtaService.getText();
+				hotel.star = Integer.valueOf((String) jcbStar.getSelectedItem());
+			
+				hotelController.updateHotel(hotel);
+			
+				JOptionPane.showMessageDialog(this, "酒店信息已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);
 			}
-			
-			hotel.street = jtfAddress.getText();
-			hotel.profile = jtaIntro.getText();
-			hotel.service = jtaService.getText();
-			hotel.star = Integer.valueOf((String) jcbStar.getSelectedItem());
-			
-			hotelController.updateHotel(hotel);
-			
-			JOptionPane.showMessageDialog(this, "酒店信息已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if(value == JOptionPane.CANCEL_OPTION){
 			this.showHotelInfo();

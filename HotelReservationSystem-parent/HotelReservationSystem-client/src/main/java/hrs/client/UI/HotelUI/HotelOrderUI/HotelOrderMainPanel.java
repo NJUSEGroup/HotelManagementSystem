@@ -53,6 +53,7 @@ public class HotelOrderMainPanel extends JPanel {
 	 * 刷新酒店订单管理界面
 	 */
 	public void refresh(){
+		this.showList();
 		jpOrderList.refreshSearchTerms();
 		List<OrderVO> orderList = jpOrderList.getAllOrders();
 		jpOrderList.refreshOrderList(orderList);
