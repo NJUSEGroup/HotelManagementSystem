@@ -20,6 +20,7 @@ import hrs.client.UI.HotelUI.HotelUI.Listener.CancelListener;
 import hrs.client.UI.HotelUI.HotelUI.Listener.CityListener;
 import hrs.client.UI.HotelUI.HotelUI.Listener.EditListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.RegExpHelper;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.HotelController.IHotelController;
 import hrs.common.VO.CommercialCircleVO;
@@ -250,6 +251,8 @@ public class HotelUIPanel extends JPanel {
 		jbEdit.setText("修改");
 		jbEdit.setFont(hotelUIFont);
 		jbEdit.addMouseListener(editListener);
+		jbEdit.setBackground(UIConstants.JBUTTON_BLUE);
+		jbEdit.setForeground(Color.WHITE);
 		
 		jbCancel = new JButton();
 		jbCancel.setBounds(606, 17, 110, 50);
@@ -312,14 +315,23 @@ public class HotelUIPanel extends JPanel {
 		if(value == JOptionPane.OK_OPTION){
 			name = jtfHotelName.getText();
 			address = jtfAddress.getText();
-			if(name.length()>20){
+			if(name.equals("")){
+				JOptionPane.showMessageDialog(null, "酒店名称不可为空！", "错误", JOptionPane.WARNING_MESSAGE);
+			}
+			else if(name.length()>20){
 				JOptionPane.showMessageDialog(null, "酒店名称长度不可超过20！", "错误", JOptionPane.WARNING_MESSAGE);
 			}
-			else if(name.equals("")){
-				JOptionPane.showMessageDialog(null, "酒店名称不可为空！", "错误", JOptionPane.WARNING_MESSAGE);
+			else if(!RegExpHelper.matchCHNNumAndLetter(name)){
+				JOptionPane.showMessageDialog(null, "酒店名称不可包含符号！", "错误", JOptionPane.WARNING_MESSAGE);
 			}
 			else if(address.equals("")){
 				JOptionPane.showMessageDialog(null, "酒店地址不可为空！", "错误", JOptionPane.WARNING_MESSAGE);
+			}
+			else if(address.length()>40){
+				JOptionPane.showMessageDialog(null, "酒店名称长度不可超过40！", "错误", JOptionPane.WARNING_MESSAGE);
+			}
+			else if(!RegExpHelper.matchCHNNumAndLetter(address)){
+				JOptionPane.showMessageDialog(null, "酒店地址不可包含符号！", "错误", JOptionPane.WARNING_MESSAGE);
 			}
 			else{
 				hotel.name = name;
