@@ -35,19 +35,9 @@ import hrs.common.VO.UserVO;
  */
 public class HotelDetailPanel extends ComHotelDetail {
 	private static final long serialVersionUID = 7566236145344049160L;
-	private HotelVO hotel;
-	private List<RoomVO> rooms;
-	private HotelDetailInfoPanel detailInfoPanel;
-	private UserVO user;
-	private IUserHotelController controller;
-	private ComNeedBackPanel panel;
 	Font font = UIConstants.JLABEL_FONT;
 	public HotelDetailPanel(HotelVO hotel,List<RoomVO> rooms,UserVO user){
 		super(hotel, rooms, user);
-		this.hotel = hotel;
-		this.user = user;
-		this.rooms = rooms;
-		controller = ControllerFactory.getUserHotelController();
 		init();
 	}
 	
@@ -59,6 +49,7 @@ public class HotelDetailPanel extends ComHotelDetail {
 		setRoomTable();
 		setOrderTable();
 		setBackButton();
+		setOrderButton();
 
 	}
 	

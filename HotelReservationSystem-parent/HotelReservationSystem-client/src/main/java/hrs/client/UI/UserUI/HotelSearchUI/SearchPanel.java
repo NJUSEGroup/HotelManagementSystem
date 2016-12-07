@@ -46,6 +46,12 @@ import hrs.common.util.type.RoomType;
  *
  */
 public class SearchPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3831127469024773580L;
+
+
 	private IUserHotelController controller ;
 	
 	
@@ -316,6 +322,10 @@ public class SearchPanel extends JPanel {
 			return RoomType.getRoomType((String)roomTypeBox.getSelectedItem());
 		}
 		return null;
+	}
+
+	public BeginAndLeaveTime getOrderTime() {
+		return new BeginAndLeaveTime(checkInDate.getDate(), checkOutDate.getDate());
 	}
 	
 	

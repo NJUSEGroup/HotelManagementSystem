@@ -20,4 +20,8 @@ public abstract class CommonPanel extends JPanel {
 		setSize(1103, 768);
 		setFont(font);
 	}
+	public void back() {
+		
+		
+	}
 }

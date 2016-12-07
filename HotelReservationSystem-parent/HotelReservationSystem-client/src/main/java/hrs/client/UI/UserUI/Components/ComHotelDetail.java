@@ -8,11 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import org.dom4j.tree.BackedList;
-
 import hrs.client.UI.UserUI.HotelInfoUI.HotelDetailInfoPanel;
-import hrs.client.UI.UserUI.HotelInfoUI.Listener.DetailInfoListener;
-import hrs.client.UI.UserUI.HotelInfoUI.Listener.HotelBackListener;
+import hrs.client.UI.UserUI.HotelSearchUI.Listener.BackListener;
 import hrs.client.UI.UserUI.OrderInfoUI.OrderTableModel;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.UIConstants;
@@ -34,17 +31,20 @@ public class ComHotelDetail extends CommonPanel {
 	Font font = UIConstants.JLABEL_FONT;
 
 	public ComHotelDetail(HotelVO hotel, UserVO user) {
+		controller = ControllerFactory.getUserHotelController();
 		this.user = user;
 		this.hotel = hotel;
 	}
 
 	public ComHotelDetail(HotelVO hotel, List<RoomVO> rooms, UserVO user) {
+		controller = ControllerFactory.getUserHotelController();
 		this.hotel = hotel;
 		this.rooms = rooms;
 		this.user = user;
 	}
 
 	public void setPanel(ComNeedBackPanel panel) {
+		
 		this.panel = panel;
 	}
 
@@ -58,7 +58,7 @@ public class ComHotelDetail extends CommonPanel {
 		JButton backJB = new JButton("返回");
 		backJB.setFont(font);
 		backJB.setBounds(this.getWidth() - 150, detailInfoPanel.getHeight() + 360, 100, 40);
-		backJB.addActionListener(new HotelBackListener(this));
+		backJB.addActionListener(new BackListener(this));
 		add(backJB);
 
 	}
@@ -77,7 +77,7 @@ public class ComHotelDetail extends CommonPanel {
 
 	protected void setOrderTable() {
 		CommonTable orderTable = new CommonTable();
-		controller = ControllerFactory.getUserHotelController();
+		
 
 		orderScrollPane = new JScrollPane();
 		orderScrollPane.setViewportView(orderTable);

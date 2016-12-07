@@ -5,35 +5,42 @@ import java.util.List;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
-import hrs.client.util.EnumHelper;
-import hrs.common.VO.RoomVO;
+import hrs.common.VO.HotelDiscountVO;
+import hrs.common.VO.WebDiscountVO;
 
-public class RoomTableModel implements TableModel {
-	private List<RoomVO> rooms;
-	
-	public RoomTableModel(List<RoomVO> rooms) {
-		this.rooms = rooms;
+public class DiscountTableModel implements TableModel {
+	List<WebDiscountVO> webDiscounts;
+	List<HotelDiscountVO> hotelDiscounts;
+	private int webSize ;
+	private int hotelSize ;
+	public DiscountTableModel(List<WebDiscountVO> webDiscounts,List<HotelDiscountVO> hotelDiscounts) {
+		this.webDiscounts = webDiscounts;
+		this.hotelDiscounts = hotelDiscounts;
+		
+		webSize = webDiscounts.size();
+		hotelSize = hotelDiscounts.size();
 	}
+	
 	@Override
 	public int getRowCount() {
-		return rooms.size();
+		// TODO Auto-generated method stub
+		return webDiscounts.size()+hotelDiscounts.size();
 	}
 
 	@Override
 	public int getColumnCount() {
-		
-		return 6;
+		// TODO Auto-generated method stub
+		return 5;
 	}
 
 	@Override
 	public String getColumnName(int columnIndex) {
-		String[] l = {"房间类型","价格(元/间)","","","",""};
+		String[] l = {"该订单享受优惠","优惠策略","折扣金额","",""};
 		return l[columnIndex];
 	}
 
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
-		
 		return String.class;
 	}
 
@@ -45,9 +52,11 @@ public class RoomTableModel implements TableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		RoomVO room = rooms.get(rowIndex);
-		String[] l = {EnumHelper.RoomFormat(room.type),room.roomValue+"","","","",""};
-		return l[columnIndex];
+		if(rowIndex<=webSize){
+			WebDiscountVO webDiscount = webDiscounts.get(rowIndex);
+			String[] result = {"网站促销",webDiscount.type};
+		}
+		return null;
 	}
 
 	@Override

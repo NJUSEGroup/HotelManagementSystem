@@ -2,6 +2,8 @@ package hrs.client.UI.UserUI.HotelSearchUI;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -25,6 +27,8 @@ import hrs.client.UI.UserUI.Components.CommonTable;
 import hrs.client.UI.UserUI.HotelSearchUI.Listener.SearchListener;
 import hrs.client.UI.UserUI.HotelSearchUI.Listener.SearchTableListener;
 import hrs.client.UI.UserUI.HotelSearchUI.Listener.DetailListener;
+import hrs.client.UI.UserUI.HotelSearchUI.Listener.OrderListener;
+import hrs.client.UI.UserUI.HotelSearchUI.Listener.PlaceOrderListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.UserController.IUserHotelController;
@@ -105,6 +109,7 @@ public class HotelSearchPanel extends CommonPanel {
 		orderJB.setBounds(this.getWidth() - 180, 645, 120, 40);
 		orderJB.setFont(font);
 		orderJB.setEnabled(false);
+		orderJB.addActionListener(new OrderListener(this));
 		contentPane.add(orderJB);
 
 	}
@@ -191,6 +196,47 @@ public class HotelSearchPanel extends CommonPanel {
 
 	@SuppressWarnings("unchecked")
 	public void showDetail() {
+		Map<HotelVO, List<RoomVO>> map = getChooseOne();
+		
+		HotelVO hotel = null;
+		List<RoomVO> rooms = null;
+		
+		Iterator<Entry<HotelVO, List<RoomVO>>> iter = map.entrySet().iterator();
+		while (iter.hasNext()) {
+		@SuppressWarnings("rawtypes")
+		Map.Entry entry = (Map.Entry) iter.next();
+		HotelVO key = (HotelVO) entry.getKey();
+		hotel = key;
+        rooms = (List<RoomVO>) entry.getValue();
+		break;
+		}
+		
+		RoomType type = searchPanel.getRoomType();
+		
+		List<RoomVO> resultRoom = new ArrayList<>();
+		if(type != null){
+			for(RoomVO vo:rooms){
+				if(vo.type.equals(type)){
+					resultRoom.add(vo);
+					break;
+				}
+			}
+		}
+		else{
+			resultRoom = rooms;
+		}
+		panel.showDetail(hotel,resultRoom);
+				
+	}
+	
+	
+	/**
+	 * 返回需要显示的酒店详细信息
+	 * map里只有一个元素
+	 * @return
+	 */
+	@SuppressWarnings({ "unchecked" })
+	private Map<HotelVO, List<RoomVO>> getChooseOne(){
 		int i = table.getSelectedRow();
 		String name = (String)table.getValueAt(i, 0);
 		HotelVO hotel = null;
@@ -210,20 +256,37 @@ public class HotelSearchPanel extends CommonPanel {
 		}
 		}
 		
-		RoomType type = searchPanel.getRoomType();
+		Map<HotelVO, List<RoomVO>> result = new HashMap<>();
+		result.put(hotel,rooms);
+		return result;
 		
-		if(type == null){
-			panel.showDetail(hotel,rooms);
+		
+	}
+
+	private BeginAndLeaveTime getOrderTime(){
+		return searchPanel.getOrderTime();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void placeOrder() {
+		Map<HotelVO, List<RoomVO>> map = getChooseOne();
+		
+		HotelVO hotel = null;
+		List<RoomVO> rooms = null;
+		
+		Iterator<Entry<HotelVO, List<RoomVO>>> iter = map.entrySet().iterator();
+		while (iter.hasNext()) {
+		@SuppressWarnings("rawtypes")
+		Map.Entry entry = (Map.Entry) iter.next();
+		HotelVO key = (HotelVO) entry.getKey();
+		hotel = key;
+        rooms = (List<RoomVO>) entry.getValue();
+		break;
 		}
-		else if(type != null){
-			for(RoomVO vo:rooms){
-				if(vo.type.equals(type)){
-					List<RoomVO> result = new ArrayList<>();
-					result.add(vo);
-					panel.showDetail(hotel,result);
-				}
-			}
-		}
+		
+		BeginAndLeaveTime orderTime = getOrderTime();
+		
+		panel.showOrderPanel(hotel,rooms,orderTime);
 		
 		
 		
