@@ -16,4 +16,18 @@ public enum HotelDiscountType {
 			return null;
 		}
 	}
+	public static String toDiscountName(HotelDiscountType type){
+		switch (type) {
+		case Birthday:
+			return "生日优惠";
+		case LargeQty:
+			return "订房数量优惠";
+		case Enterprise:
+			return "合作企业优惠";
+		case SpecialPeriod:
+			return "特定期间优惠";
+		default:
+			return null;
+		}
+	}
 }

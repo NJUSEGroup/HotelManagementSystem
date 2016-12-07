@@ -12,7 +12,9 @@ import javax.swing.JPanel;
 import hrs.client.UI.UserUI.Components.CommonLabel;
 import hrs.client.UI.UserUI.Components.CommonPanel;
 import hrs.client.UI.UserUI.HotelSearchUI.Listener.BackListener;
+import hrs.client.util.ControllerFactory;
 import hrs.client.util.UIConstants;
+import hrs.common.Controller.UserController.IUserOrderController;
 import hrs.common.VO.HotelVO;
 import hrs.common.VO.OrderVO;
 import hrs.common.VO.RoomVO;
@@ -46,8 +48,11 @@ public class PlaceOrderPanel extends CommonPanel {
 	private BeginAndLeaveTime orderTime;
 	private HotelPanel hotelPanel;
 	private JPanel infoPanel;
+	private IUserOrderController controller;
 	
 	public PlaceOrderPanel(HotelVO hotel,List<RoomVO> rooms,BeginAndLeaveTime orderTime){
+		controller = ControllerFactory.getUserOrderController();
+		
 		this.hotel = hotel;
 		this.rooms = rooms;
 		this.orderTime = orderTime;
@@ -77,6 +82,26 @@ public class PlaceOrderPanel extends CommonPanel {
 	private void setInfoPanel() {
 		setLeftLabel();
 		setRigthLabel();
+		
+		setDiscountTable();
+		setValueLabel();
+		
+	}
+
+	/**
+	 * 显示原价格和折扣后价格
+	 */
+	private void setValueLabel() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * 显示折扣信息4
+	 * 以初始信息生成订单信息
+	 */
+	private void setDiscountTable() {
+		// TODO Auto-generated method stub
 		
 	}
 

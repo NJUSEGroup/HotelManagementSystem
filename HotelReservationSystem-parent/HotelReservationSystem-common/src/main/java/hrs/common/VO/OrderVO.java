@@ -41,7 +41,7 @@ public class OrderVO implements Serializable,Cloneable {
 	
 	
 	public OrderVO() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public OrderVO(OrderPO po){
