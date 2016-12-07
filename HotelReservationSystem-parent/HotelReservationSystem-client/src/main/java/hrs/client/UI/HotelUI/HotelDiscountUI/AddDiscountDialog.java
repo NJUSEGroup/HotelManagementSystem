@@ -226,7 +226,7 @@ public class AddDiscountDialog extends JDialog {
 	}
 	
 	/**
-	 * 获取酒店的所有合作企业名称并将它们放入合作企业下拉框中
+	 * 获取酒店的所有未添加过的合作企业名称并将它们放入合作企业下拉框中
 	 */
 	public void getAllFirms(){
 		jcbFirm.removeAllItems();
@@ -234,7 +234,7 @@ public class AddDiscountDialog extends JDialog {
 		allFirms = new ArrayList<EnterpriseVO>();
 		
 		try {
-			allFirms = controller.getAllEnterprises();
+			allFirms = controller.findNotAddedEnterpriseByHotelID(hotel.id);
 		} catch (EnterpriseNotFoundException e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, "您的酒店尚无合作企业！", "提示", JOptionPane.INFORMATION_MESSAGE);

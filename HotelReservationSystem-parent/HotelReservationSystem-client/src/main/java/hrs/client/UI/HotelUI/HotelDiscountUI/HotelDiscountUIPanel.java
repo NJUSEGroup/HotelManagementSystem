@@ -20,6 +20,7 @@ import hrs.client.UI.HotelUI.HotelDiscountUI.Listener.DeleteListener;
 import hrs.client.UI.HotelUI.HotelDiscountUI.Listener.DiscountSelectedListener;
 import hrs.client.UI.HotelUI.HotelDiscountUI.Listener.EditListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.UIConstants;
 import hrs.common.Controller.HotelController.IHotelDiscountController;
 import hrs.common.Exception.Promotion.HotelDiscountService.HotelDiscountNotFoundException;
 import hrs.common.VO.HotelDiscountVO;
@@ -63,23 +64,43 @@ public class HotelDiscountUIPanel extends JPanel {
 		this.setLayout(null);
 		
 		this.setPanel();
+		this.setDiscountPanel();
+		this.setButtonPanel();
+	}
+	
+	/**
+	 * 设置面板
+	 */
+	public void setPanel(){
+		jpDiscount = new JPanel();
+		jpDiscount.setBounds(0, 0, 1080, 642);
+		jpDiscount.setBackground(new Color(211, 237, 249));
+		jpDiscount.setLayout(null);
+		
+		jpButton = new JPanel();
+		jpButton.setBounds(0, 642, 1080, 80);
+		jpButton.setBackground(new Color(211, 237, 249));
+		jpButton.setLayout(null);
+		
+		this.add(jpDiscount);
+		this.add(jpButton);
+	}
+	
+	/**
+	 * 设置促销策略信息面板
+	 */
+	public void setDiscountPanel(){
 		controller = ControllerFactory.getHotelDiscountController();
 		
 		discounts = new ArrayList<HotelDiscountVO>();
-		
-		try {
-			discounts = controller.findAllByHotelID(hotel.id);
-		} catch (HotelDiscountNotFoundException e) {
-			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(this, "您的酒店尚无促销策略", "提示", JOptionPane.INFORMATION_MESSAGE);
-		}
+		this.getAllDiscounts();
 		
 		discountSelectedListener = new DiscountSelectedListener(this);
 		
 		model = new HotelDiscountTableModel(discounts);
 		
 		jtDiscount = new JTable(model);
-		jtDiscount.setBackground(new Color(211, 237, 249));
+		jtDiscount.setBackground(UIConstants.JFRAME);
 		jtDiscount.setFont(new Font("宋体",Font.PLAIN,16));
 		jtDiscount.setRowHeight(40);
 		jtDiscount.setShowVerticalLines(false);
@@ -87,7 +108,7 @@ public class HotelDiscountUIPanel extends JPanel {
 		
 		jth = jtDiscount.getTableHeader(); 
 		jth.setPreferredSize(new Dimension(jtDiscount.getWidth(),40)); 
-		jth.setBackground(new Color(188, 226, 236));
+		jth.setBackground(UIConstants.JZONE);
 		jth.setEnabled(false);
 		jth.setBorder(new EmptyBorder(0,0,0,0));
 		jth.setFont(new Font("宋体", Font.PLAIN, 19));
@@ -99,6 +120,13 @@ public class HotelDiscountUIPanel extends JPanel {
 		jspDiscount.getViewport().setOpaque(false);
 		jspDiscount.setBackground(Color.WHITE);
 		
+		jpDiscount.add(jspDiscount);
+	}
+	
+	/**
+	 * 设置按钮面板
+	 */
+	public void setButtonPanel(){
 		addListener = new AddListener(this);
 		
 		jbAdd = new JButton();
@@ -126,29 +154,9 @@ public class HotelDiscountUIPanel extends JPanel {
 		jbDelete.setEnabled(false);
 		jbDelete.addMouseListener(deleteListener);
 		
-		jpDiscount.add(jspDiscount);
-		
 		jpButton.add(jbAdd);
 		jpButton.add(jbEdit);
 		jpButton.add(jbDelete);
-	}
-	
-	/**
-	 * 设置面板
-	 */
-	public void setPanel(){
-		jpDiscount = new JPanel();
-		jpDiscount.setBounds(0, 0, 1080, 642);
-		jpDiscount.setBackground(new Color(211, 237, 249));
-		jpDiscount.setLayout(null);
-		
-		jpButton = new JPanel();
-		jpButton.setBounds(0, 642, 1080, 80);
-		jpButton.setBackground(new Color(211, 237, 249));
-		jpButton.setLayout(null);
-		
-		this.add(jpDiscount);
-		this.add(jpButton);
 	}
 	
 	/**

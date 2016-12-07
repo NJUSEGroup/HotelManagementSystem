@@ -249,7 +249,7 @@ public class EditDiscountDialog extends JDialog {
 		allFirms = new ArrayList<EnterpriseVO>();
 		
 		try {
-			allFirms = controller.getAllEnterprises();
+			allFirms = controller.findNotAddedEnterpriseByHotelID(hotel.id);
 		} catch (EnterpriseNotFoundException e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, "您的酒店尚无合作企业！", "提示", JOptionPane.INFORMATION_MESSAGE);

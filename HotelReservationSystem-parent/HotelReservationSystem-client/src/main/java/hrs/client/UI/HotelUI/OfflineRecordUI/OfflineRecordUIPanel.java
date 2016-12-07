@@ -23,6 +23,7 @@ import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.CheckoutListener;
 import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.RecordSelectedListener;
 import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.SearchListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.UIConstants;
 import hrs.common.Controller.HotelController.IOfflineRecordController;
 import hrs.common.Exception.OfflineRecordService.OfflineRecordNotFoundException;
 import hrs.common.VO.HotelVO;
@@ -79,17 +80,17 @@ public class OfflineRecordUIPanel extends JPanel {
 	public void setPanel(){
 		jpSearch = new JPanel();
 		jpSearch.setBounds(0, 0, 1080, 80);
-		jpSearch.setBackground(new Color(211, 237, 249));
+		jpSearch.setBackground(UIConstants.JFRAME);
 		jpSearch.setLayout(null);
 		
 		jpRecord = new JPanel();
 		jpRecord.setBounds(0, 80, 1080, 562);
-		jpRecord.setBackground(new Color(211, 237, 249));
+		jpRecord.setBackground(UIConstants.JFRAME);
 		jpRecord.setLayout(null);
 		
 		jpButton = new JPanel();
 		jpButton.setBounds(0, 642, 1080, 80);
-		jpButton.setBackground(new Color(211, 237, 249));
+		jpButton.setBackground(UIConstants.JFRAME);
 		jpButton.setLayout(null);
 		
 		this.add(jpSearch);
@@ -137,7 +138,7 @@ public class OfflineRecordUIPanel extends JPanel {
 		model = new OfflineRecordTableModel(record);
 		
 		jtRecord = new JTable(model);
-		jtRecord.setBackground(new Color(211, 237, 249));
+		jtRecord.setBackground(UIConstants.JFRAME);
 		jtRecord.setFont(new Font("宋体",Font.PLAIN,16));
 		jtRecord.setRowHeight(40);
 		jtRecord.setShowVerticalLines(false);
@@ -145,13 +146,13 @@ public class OfflineRecordUIPanel extends JPanel {
 		
 		jth = jtRecord.getTableHeader(); 
 		jth.setPreferredSize(new Dimension(jtRecord.getWidth(),40)); 
-		jth.setBackground(new Color(188, 226, 236));
+		jth.setBackground(UIConstants.JZONE);
 		jth.setEnabled(false);
 		jth.setBorder(new EmptyBorder(0,0,0,0));
 		jth.setFont(new Font("宋体", Font.PLAIN, 19));
 		
 		jspRecord = new JScrollPane(jtRecord);
-		jspRecord.setBounds(10, 10, 1060, 622);
+		jspRecord.setBounds(10, 10, 1060, 542);
 		jspRecord.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		jspRecord.setOpaque(false);
 		jspRecord.getViewport().setOpaque(false);
