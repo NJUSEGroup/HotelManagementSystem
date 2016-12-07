@@ -5,7 +5,10 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderUIPanel;
+import hrs.client.util.RegExpHelper;
 import hrs.common.VO.OrderVO;
 
 public class SearchByIdOrUsernameListener implements MouseListener{
@@ -34,13 +37,18 @@ public class SearchByIdOrUsernameListener implements MouseListener{
 		if(searchInfo.equals("用户名")){
 			username = jpHotelOrder.getUsername();
 			orderList = jpHotelOrder.searchByUsername(username);
+			jpHotelOrder.refreshOrderList(orderList);
 		}
 		else{
-			id = Integer.valueOf(jpHotelOrder.getOrderID());
-			orderList = jpHotelOrder.searchByOrderID(id);
+			if(RegExpHelper.matchOnlyNum(searchInfo)){
+				id = Integer.valueOf(jpHotelOrder.getOrderID());
+				orderList = jpHotelOrder.searchByOrderID(id);
+				jpHotelOrder.refreshOrderList(orderList);
+			}
+			else{
+				JOptionPane.showMessageDialog(null, "订单号中不能包含非数字字符！", "错误", JOptionPane.WARNING_MESSAGE);
+			}
 		}
-		
-		jpHotelOrder.refreshOrderList(orderList);
 	}
 
 	@Override

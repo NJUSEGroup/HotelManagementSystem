@@ -17,6 +17,7 @@ import hrs.client.UI.HotelUI.RoomUI.Listener.AddListener;
 import hrs.client.UI.HotelUI.RoomUI.Listener.EditListener;
 import hrs.client.UI.HotelUI.RoomUI.Listener.RoomSelectedListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.HotelController.IRoomController;
 import hrs.common.Exception.RoomService.RoomNotFoundException;
@@ -36,8 +37,8 @@ public class RoomUIPanel extends JPanel {
 	private JTable jtRoom;
 	private JTableHeader jthOrderList;
 	private RoomTableModel roomTableModel;
-	private JButton jbAdd;
-	private JButton jbEdit;
+	private HRSButton jbAdd;
+	private HRSButton jbEdit;
 	private HotelVO theHotel;
 	private IRoomController roomController;
 	private AddListener addListener;
@@ -126,18 +127,14 @@ public class RoomUIPanel extends JPanel {
 	public void setButtonPanel(){
 		addListener = new AddListener(this);
 		
-		jbAdd = new JButton();
+		jbAdd = new HRSButton("添加");
 		jbAdd.setBounds(736, 13, 90, 40);
-		jbAdd.setText("添加");
-		jbAdd.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbAdd.addMouseListener(addListener);
 		
 		editListener = new EditListener(this);
 		
-		jbEdit = new JButton();
+		jbEdit = new HRSButton("修改");
 		jbEdit.setBounds(905, 13, 90, 40);
-		jbEdit.setText("修改");
-		jbEdit.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbEdit.setEnabled(false);
 		jbEdit.addMouseListener(editListener);
 		

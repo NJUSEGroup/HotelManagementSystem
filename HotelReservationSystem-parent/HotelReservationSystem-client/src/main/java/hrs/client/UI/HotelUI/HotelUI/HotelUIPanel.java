@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,6 +19,7 @@ import hrs.client.UI.HotelUI.HotelUI.Listener.CancelListener;
 import hrs.client.UI.HotelUI.HotelUI.Listener.CityListener;
 import hrs.client.UI.HotelUI.HotelUI.Listener.EditListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.HRSButton;
 import hrs.client.util.RegExpHelper;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.HotelController.IHotelController;
@@ -53,8 +53,8 @@ public class HotelUIPanel extends JPanel {
 	private JTextArea jtaIntro;
 	private JTextArea jtaService;
 	private JComboBox<String> jcbStar;
-	private JButton jbEdit;
-	private JButton jbCancel;
+	private HRSButton jbEdit;
+	private HRSButton jbCancel;
 	private EditListener editListener;
 	private CancelListener cancelListener;
 	private CityListener cityListener;
@@ -246,18 +246,12 @@ public class HotelUIPanel extends JPanel {
 		editListener = new EditListener(this);
 		cancelListener = new CancelListener(this);
 		
-		jbEdit = new JButton();
+		jbEdit = new HRSButton("修改");
 		jbEdit.setBounds(251, 17, 110, 50);
-		jbEdit.setText("修改");
-		jbEdit.setFont(hotelUIFont);
 		jbEdit.addMouseListener(editListener);
-		jbEdit.setBackground(UIConstants.JBUTTON_BLUE);
-		jbEdit.setForeground(Color.WHITE);
 		
-		jbCancel = new JButton();
+		jbCancel = new HRSButton("取消",1);
 		jbCancel.setBounds(606, 17, 110, 50);
-		jbCancel.setText("取消");
-		jbCancel.setFont(hotelUIFont);
 		jbCancel.addMouseListener(cancelListener);
 		
 		jpButton.add(jbEdit);
@@ -328,7 +322,7 @@ public class HotelUIPanel extends JPanel {
 				JOptionPane.showMessageDialog(null, "酒店地址不可为空！", "错误", JOptionPane.WARNING_MESSAGE);
 			}
 			else if(address.length()>40){
-				JOptionPane.showMessageDialog(null, "酒店名称长度不可超过40！", "错误", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "酒店地址长度不可超过40！", "错误", JOptionPane.WARNING_MESSAGE);
 			}
 			else if(!RegExpHelper.matchCHNNumAndLetter(address)){
 				JOptionPane.showMessageDialog(null, "酒店地址不可包含符号！", "错误", JOptionPane.WARNING_MESSAGE);

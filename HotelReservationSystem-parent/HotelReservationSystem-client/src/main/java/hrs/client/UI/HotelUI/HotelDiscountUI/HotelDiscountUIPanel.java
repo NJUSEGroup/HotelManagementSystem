@@ -20,6 +20,7 @@ import hrs.client.UI.HotelUI.HotelDiscountUI.Listener.DeleteListener;
 import hrs.client.UI.HotelUI.HotelDiscountUI.Listener.DiscountSelectedListener;
 import hrs.client.UI.HotelUI.HotelDiscountUI.Listener.EditListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.HotelController.IHotelDiscountController;
 import hrs.common.Exception.Promotion.HotelDiscountService.HotelDiscountNotFoundException;
@@ -38,9 +39,9 @@ public class HotelDiscountUIPanel extends JPanel {
 	private JTable jtDiscount;
 	private HotelDiscountTableModel model;
 	private JTableHeader jth;
-	private JButton jbAdd;
-	private JButton jbEdit;
-	private JButton jbDelete;
+	private HRSButton jbAdd;
+	private HRSButton jbEdit;
+	private HRSButton jbDelete;
 	private HotelVO hotel;
 	private IHotelDiscountController controller;
 	private DiscountSelectedListener discountSelectedListener;
@@ -129,28 +130,22 @@ public class HotelDiscountUIPanel extends JPanel {
 	public void setButtonPanel(){
 		addListener = new AddListener(this);
 		
-		jbAdd = new JButton();
+		jbAdd = new HRSButton("添加");
 		jbAdd.setBounds(570, 13, 90, 40);
-		jbAdd.setText("添加");
-		jbAdd.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbAdd.addMouseListener(addListener);
 		
 		editListener = new EditListener(this);
 		
-		jbEdit = new JButton();
+		jbEdit = new HRSButton("修改");
 		jbEdit.setBounds(710, 13, 90, 40);
-		jbEdit.setText("修改");
-		jbEdit.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbEdit.setEnabled(false);
 		jbEdit.addMouseListener(editListener);
 		
 		
 		deleteListener = new DeleteListener(this);
 		
-		jbDelete = new JButton();
+		jbDelete = new HRSButton("删除");
 		jbDelete.setBounds(850, 13, 90, 40);
-		jbDelete.setText("删除");
-		jbDelete.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbDelete.setEnabled(false);
 		jbDelete.addMouseListener(deleteListener);
 		

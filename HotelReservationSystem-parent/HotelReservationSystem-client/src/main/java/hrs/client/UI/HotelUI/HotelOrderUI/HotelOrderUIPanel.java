@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,6 +27,7 @@ import hrs.client.UI.HotelUI.HotelOrderUI.Listener.OrderSelectedListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.Listener.SearchByIdOrUsernameListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.Listener.SearchByOrderTypeListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.HotelController.IHotelOrderController;
 import hrs.common.Exception.OrderService.OrderNotFoundException;
@@ -50,12 +50,12 @@ public class HotelOrderUIPanel extends JPanel {
 	private JComboBox<String> jcbOrderType;
 	private JComboBox<String> jcbSearch;
 	private JTextField jtfSearch;
-	private JButton jbConfirm1;
-	private JButton jbConfirm2;
-	private JButton jbDetail;
-	private JButton jbCheckin;
-	private JButton jbCheckout;
-	private JButton jbDelay;
+	private HRSButton jbConfirm1;
+	private HRSButton jbConfirm2;
+	private HRSButton jbDetail;
+	private HRSButton jbCheckin;
+	private HRSButton jbCheckout;
+	private HRSButton jbDelay;
 	private JTable jtOrderList;
 	private JTableHeader jthOrderList;
 	private OrderListTableModel orderListTableModel;
@@ -68,6 +68,8 @@ public class HotelOrderUIPanel extends JPanel {
 	private CheckoutListener checkoutListener;
 	private DelayCheckinListener delayListener;
 	private HotelVO hotel;
+	private Font orderFont;
+	private Font tableFont;
 	
 	/**
 	 * 初始化酒店订单管理界面面板
@@ -83,6 +85,8 @@ public class HotelOrderUIPanel extends JPanel {
 		this.setSize(1080, 722);
 		this.setLayout(null);
 		
+		this.orderFont = new Font("宋体", Font.PLAIN, 19);
+		this.tableFont = new Font("宋体", Font.PLAIN, 16);
 		detailListener = new DetailListener(jpMain, this);
 		hotelOrderController = ControllerFactory.getHotelOrderController();
 		
@@ -124,51 +128,43 @@ public class HotelOrderUIPanel extends JPanel {
 		jlOrderType.setBounds(20, 20, 90, 30);
 		jlOrderType.setText("订单类型");
 		jlOrderType.setHorizontalAlignment(SwingConstants.CENTER);
-		jlOrderType.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlOrderType.setFont(orderFont);
 		
 		jlSearch = new JLabel();
 		jlSearch.setBounds(20, 100, 90, 30);
 		jlSearch.setText("搜索");
 		jlSearch.setHorizontalAlignment(SwingConstants.CENTER);
-		jlSearch.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlSearch.setFont(orderFont);
 		
 		jcbOrderType = new JComboBox<String>(new DefaultComboBoxModel<String>(new String[] {"未执行", "已执行", "异常", "已撤销"}));
 		jcbOrderType.setBounds(130, 20, 230, 30);
-		jcbOrderType.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jcbOrderType.setFont(orderFont);
 		jcbOrderType.setOpaque(true);
 		jcbOrderType.setBackground(Color.WHITE);
 		jcbOrderType.setEditable(false);
 		
 		jcbSearch = new JComboBox<String>(new DefaultComboBoxModel<String>(new String[] {"用户名", "订单号"}));
 		jcbSearch.setBounds(130, 100, 230, 30);
-		jcbSearch.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jcbSearch.setFont(orderFont);
 		jcbSearch.setOpaque(true);
 		jcbSearch.setBackground(Color.WHITE);
 		jcbSearch.setEditable(false);
 		
 		jtfSearch = new JTextField();
 		jtfSearch.setBounds(400, 100, 230, 30);
-		jcbSearch.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jcbSearch.setFont(orderFont);
 		jcbSearch.setEditable(true);
 		
 		searchListener1 = new SearchByOrderTypeListener(this);
 		searchListener2 = new SearchByIdOrUsernameListener(this);
 		
-		jbConfirm1 = new JButton();
+		jbConfirm1 = new HRSButton("确认");
 		jbConfirm1.setBounds(681, 15, 90, 40);
-		jbConfirm1.setText("确认");
-		jbConfirm1.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbConfirm1.addMouseListener(searchListener1);
-		jbConfirm1.setBackground(UIConstants.JBUTTON_BLUE);
-		jbConfirm1.setForeground(Color.WHITE);
 		
-		jbConfirm2 = new JButton();
+		jbConfirm2 = new HRSButton("确认");
 		jbConfirm2.setBounds(681, 95, 90, 40);
-		jbConfirm2.setText("确认");
-		jbConfirm2.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbConfirm2.addMouseListener(searchListener2);
-		jbConfirm2.setBackground(UIConstants.JBUTTON_BLUE);
-		jbConfirm2.setForeground(Color.WHITE);
 		
 		jpSearch.add(jlOrderType);
 		jpSearch.add(jlSearch);
@@ -192,7 +188,7 @@ public class HotelOrderUIPanel extends JPanel {
 		
 		jtOrderList = new JTable(orderListTableModel);
 		jtOrderList.setBackground(UIConstants.JFRAME);
-		jtOrderList.setFont(new Font("方正兰亭超细黑简体",Font.PLAIN,16));
+		jtOrderList.setFont(tableFont);
 		jtOrderList.setRowHeight(40);
 		jtOrderList.setShowVerticalLines(false);
 		jtOrderList.addMouseListener(orderSelectedListener);
@@ -202,7 +198,7 @@ public class HotelOrderUIPanel extends JPanel {
 		jthOrderList.setBackground(UIConstants.JZONE);
 		jthOrderList.setEnabled(false);
 		jthOrderList.setBorder(new EmptyBorder(0,0,0,0));
-		jthOrderList.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 16));
+		jthOrderList.setFont(tableFont);
 		
 		jspOrderList = new JScrollPane(jtOrderList);
 		jspOrderList.setBounds(10, 10, 1060, 452);
@@ -218,47 +214,31 @@ public class HotelOrderUIPanel extends JPanel {
 	 * 设置按钮面板
 	 */
 	public void setButtonPanel(){
-		jbDetail = new JButton();
+		jbDetail = new HRSButton("查看详细", 0);
 		jbDetail.setBounds(410, 13, 110, 40);
-		jbDetail.setText("查看详细");
-		jbDetail.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbDetail.addMouseListener(detailListener);
 		jbDetail.setEnabled(false);
-		jbDetail.setBackground(UIConstants.JBUTTON_BLUE);
-		jbDetail.setForeground(Color.WHITE);
 		
 		checkinListener = new CheckinListener(this);
 		
-		jbCheckin = new JButton();
+		jbCheckin = new HRSButton("入住");
 		jbCheckin.setBounds(550, 13, 110, 40);
-		jbCheckin.setText("入住");
-		jbCheckin.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbCheckin.setEnabled(false);
 		jbCheckin.addMouseListener(checkinListener);
-		jbCheckin.setBackground(UIConstants.JBUTTON_BLUE);
-		jbCheckin.setForeground(Color.WHITE);
 		
 		checkoutListener = new CheckoutListener(this);
 		
-		jbCheckout = new JButton();
+		jbCheckout = new HRSButton("退房");
 		jbCheckout.setBounds(690, 13, 110, 40);
-		jbCheckout.setText("退房");
-		jbCheckout.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbCheckout.setEnabled(false);
 		jbCheckout.addMouseListener(checkoutListener);
-		jbCheckout.setBackground(UIConstants.JBUTTON_BLUE);
-		jbCheckout.setForeground(Color.WHITE);
 		
 		delayListener = new DelayCheckinListener(this);
 		
-		jbDelay = new JButton();
+		jbDelay = new HRSButton("延迟入住");
 		jbDelay.setBounds(830, 13, 110, 40);
-		jbDelay.setText("延迟入住");
-		jbDelay.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbDelay.setEnabled(false);
 		jbDelay.addMouseListener(delayListener);
-		jbDelay.setBackground(UIConstants.JBUTTON_BLUE);
-		jbDelay.setForeground(Color.WHITE);
 		
 		jpButton.add(jbDetail);
 		jpButton.add(jbCheckin);
@@ -463,6 +443,7 @@ public class HotelOrderUIPanel extends JPanel {
 			}
 			else if(order.status==OrderStatus.Executed){
 				jbCheckin.setEnabled(false);
+				jbCheckin.setBackground(Color.lightGray);
 				jbCheckin.setToolTipText("您只能对未执行订单进行入住操作");
 				jbDelay.setEnabled(false);
 				jbDelay.setToolTipText("您只能对异常订单进行延迟入住操作");

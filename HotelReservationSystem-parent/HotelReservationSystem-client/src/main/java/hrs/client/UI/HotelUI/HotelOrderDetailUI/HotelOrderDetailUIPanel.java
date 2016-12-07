@@ -3,7 +3,6 @@ package hrs.client.UI.HotelUI.HotelOrderDetailUI;
 import java.awt.Color;
 import java.awt.Font;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -15,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import hrs.client.UI.HotelUI.HotelOrderDetailUI.Listener.ReturnListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderMainPanel;
+import hrs.client.util.HRSButton;
 import hrs.common.VO.OrderVO;
 import hrs.common.util.DateHelper;
 
@@ -27,7 +27,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 	private JPanel jpDetail;
 	private JPanel jpButton;
 	
-	private JButton jbReturn;
+	private HRSButton jbReturn;
 	private JLabel jlID;
 	private JLabel jlPlaceOrder;
 	private JLabel jlExecute;
@@ -97,10 +97,8 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		returnListener = new ReturnListener(jpMain);
 		
-		jbReturn = new JButton();
+		jbReturn = new HRSButton("返回");
 		jbReturn.setBounds(805, 13, 90, 40);
-		jbReturn.setText("返回");
-		jbReturn.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbReturn.addMouseListener(returnListener);
 		
 		jpButton.add(jbReturn);

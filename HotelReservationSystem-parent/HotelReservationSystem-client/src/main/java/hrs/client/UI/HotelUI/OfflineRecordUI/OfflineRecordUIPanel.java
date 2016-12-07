@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -23,6 +22,7 @@ import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.CheckoutListener;
 import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.RecordSelectedListener;
 import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.SearchListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.HotelController.IOfflineRecordController;
 import hrs.common.Exception.OfflineRecordService.OfflineRecordNotFoundException;
@@ -41,11 +41,11 @@ public class OfflineRecordUIPanel extends JPanel {
 	private JScrollPane jspRecord;
 	private JLabel jlInput;
 	private JTextField jtfInput;
-	private JButton jbConfirm;
+	private HRSButton jbConfirm;
 	private JTable jtRecord;
 	private JTableHeader jth;
-	private JButton jbCheckin;
-	private JButton jbCheckout;
+	private HRSButton jbCheckin;
+	private HRSButton jbCheckout;
 	private OfflineRecordTableModel model;
 	private IOfflineRecordController controller;
 	private SearchListener searchListener;
@@ -115,10 +115,8 @@ public class OfflineRecordUIPanel extends JPanel {
 		
 		searchListener = new SearchListener(this);
 		
-		jbConfirm = new JButton();
+		jbConfirm = new HRSButton("确认");
 		jbConfirm.setBounds(362, 15, 90, 40);
-		jbConfirm.setText("确认");
-		jbConfirm.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbConfirm.addMouseListener(searchListener);
 		
 		jpSearch.add(jlInput);
@@ -167,18 +165,14 @@ public class OfflineRecordUIPanel extends JPanel {
 	public void setButtonPanel(){
 		checkinListener = new CheckinListener(this);
 		
-		jbCheckin = new JButton();
+		jbCheckin = new HRSButton("入住");
 		jbCheckin.setBounds(715, 13, 90, 40);
-		jbCheckin.setText("入住");
-		jbCheckin.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbCheckin.addMouseListener(checkinListener);
 		
 		checkoutListener = new CheckoutListener(this);
 		
-		jbCheckout = new JButton();
+		jbCheckout = new HRSButton("退房");
 		jbCheckout.setBounds(869, 13, 90, 40);
-		jbCheckout.setText("退房");
-		jbCheckout.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
 		jbCheckout.setEnabled(false);
 		jbCheckout.addMouseListener(checkoutListener);
 		
