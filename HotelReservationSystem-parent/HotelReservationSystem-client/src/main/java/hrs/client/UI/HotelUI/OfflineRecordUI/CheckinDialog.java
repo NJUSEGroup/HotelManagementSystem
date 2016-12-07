@@ -130,6 +130,12 @@ public class CheckinDialog extends JDialog {
 		jlExpectedCheckoutTime.setText("预计离开时间");
 		jlExpectedCheckoutTime.setBounds(15, 78, 135, 40);
 		
+		dcpCheckin = new DateChoosePanel();
+		dcpCheckin.setBounds(169, 13, 330, 40);
+		
+		dcpCheckout = new DateChoosePanel();
+		dcpCheckout.setBounds(169, 78, 330, 40);
+		
 		jpDate.add(jlCheckinTime);
 		jpDate.add(jlExpectedCheckoutTime);
 		jpDate.add(dcpCheckin);
@@ -150,12 +156,6 @@ public class CheckinDialog extends JDialog {
 		jlRoomNum.setFont(new Font("宋体", Font.PLAIN, 21));
 		jlRoomNum.setText("房间数量");
 		jlRoomNum.setBounds(15, 97, 100, 40);
-		
-		dcpCheckin = new DateChoosePanel();
-		dcpCheckin.setBounds(169, 13, 330, 40);
-		
-		dcpCheckout = new DateChoosePanel();
-		dcpCheckout.setBounds(169, 78, 330, 40);
 		
 		checkRoomNumListener = new CheckRoomNumListener(this);
 		

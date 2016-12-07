@@ -1,8 +1,8 @@
 package hrs.client.util;
 
 import java.awt.Font;
-import java.sql.Date;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -113,7 +113,15 @@ public class DateChoosePanel extends JPanel {
 		int year = (Integer)yearBox.getSelectedItem();
 		int month = (Integer)monthBox.getSelectedItem();
 		int day = (Integer)dayBox.getSelectedItem();
-		Date date = new Date(year, month, day);
+
+		Calendar cal = Calendar.getInstance();
+		
+		cal.set(Calendar.YEAR, year);
+		cal.set(Calendar.MONTH, month-1);
+		cal.set(Calendar.DAY_OF_MONTH, day);
+		
+		Date date = cal.getTime();
+		
 		return date;
 	}
 	
