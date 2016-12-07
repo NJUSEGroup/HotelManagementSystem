@@ -60,7 +60,8 @@ public class HotelUIPanel extends JPanel {
 	private HotelVO hotel;
 	private IHotelController hotelController;
 	private List<LocationVO> city;
-	List<CommercialCircleVO> circle;
+	private List<CommercialCircleVO> circle;
+	private Font hotelUIFont;
 	
 	/**
 	 * 初始化酒店信息界面面板
@@ -74,6 +75,7 @@ public class HotelUIPanel extends JPanel {
 		this.setSize(1080, 722);
 		this.setLayout(null);
 		
+		this.hotelUIFont = new Font("宋体", Font.PLAIN, 19);
 		this.setPanel();
 		this.setLabel();
 		this.setInfoComponents();
@@ -109,53 +111,53 @@ public class HotelUIPanel extends JPanel {
 		jlHotelName.setBounds(30, 20, 90, 30);
 		jlHotelName.setText("酒店名称");
 		jlHotelName.setHorizontalAlignment(SwingConstants.CENTER);
-		jlHotelName.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlHotelName.setFont(hotelUIFont);
 		
 		jlCity = new JLabel();
 		jlCity.setBounds(30, 70, 90, 30);
 		jlCity.setText("城市");
 		jlCity.setHorizontalAlignment(SwingConstants.CENTER);
-		jlCity.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlCity.setFont(hotelUIFont);
 		
 		jlCircle = new JLabel();
 		jlCircle.setBounds(30, 120, 90, 30);
 		jlCircle.setText("商圈");
 		jlCircle.setHorizontalAlignment(SwingConstants.CENTER);
-		jlCircle.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlCircle.setFont(hotelUIFont);
 		
 		jlAddress = new JLabel();
 		jlAddress.setBounds(30, 170, 90, 30);
 		jlAddress.setText("地址");
 		jlAddress.setHorizontalAlignment(SwingConstants.CENTER);
-		jlAddress.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlAddress.setFont(hotelUIFont);
 		
 		jlIntro = new JLabel();
 		jlIntro.setBounds(30, 220, 90, 30);
 		jlIntro.setText("简介");
 		jlIntro.setHorizontalAlignment(SwingConstants.CENTER);
-		jlIntro.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlIntro.setFont(hotelUIFont);
 		
 		jlService = new JLabel();
 		jlService.setBounds(30, 420, 90, 30);
 		jlService.setText("设施服务");
 		jlService.setHorizontalAlignment(SwingConstants.CENTER);
-		jlService.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlService.setFont(hotelUIFont);
 		
 		jlStar = new JLabel();
 		jlStar.setBounds(30, 550, 90, 30);
 		jlStar.setText("星级");
 		jlStar.setHorizontalAlignment(SwingConstants.CENTER);
-		jlStar.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlStar.setFont(hotelUIFont);
 		
 		jlScore = new JLabel();
 		jlScore.setBounds(30, 600, 90, 30);
 		jlScore.setText("评分");
 		jlScore.setHorizontalAlignment(SwingConstants.CENTER);
-		jlScore.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlScore.setFont(hotelUIFont);
 		
 		jtfHotelName = new JTextField();
 		jtfHotelName.setBounds(150, 20, 359, 30);
-		jtfHotelName.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfHotelName.setFont(hotelUIFont);
 		jtfHotelName.setEditable(true);
 		
 		jpHotelInfo.add(jlHotelName);
@@ -176,7 +178,7 @@ public class HotelUIPanel extends JPanel {
 		
 		jcbCity = new JComboBox<String>();
 		jcbCity.setBounds(150, 70, 172, 30);
-		jcbCity.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jcbCity.setFont(hotelUIFont);
 		jcbCity.setOpaque(true);
 		jcbCity.setBackground(Color.WHITE);
 		jcbCity.setEditable(false);
@@ -184,18 +186,18 @@ public class HotelUIPanel extends JPanel {
 		
 		jcbCircle = new JComboBox<String>();
 		jcbCircle.setBounds(150, 120, 172, 30);
-		jcbCircle.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jcbCircle.setFont(hotelUIFont);
 		jcbCircle.setOpaque(true);
 		jcbCircle.setBackground(Color.WHITE);
 		jcbCircle.setEditable(false);
 		
 		jtfAddress = new JTextField();
 		jtfAddress.setBounds(150, 170, 853, 30);
-		jtfAddress.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfAddress.setFont(hotelUIFont);
 		jtfAddress.setEditable(true);
 		
 		jtaIntro = new JTextArea();
-		jtaIntro.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtaIntro.setFont(hotelUIFont);
 		jtaIntro.setEditable(true);
 		jtaIntro.setLineWrap(true);
 		
@@ -204,7 +206,7 @@ public class HotelUIPanel extends JPanel {
 		jspIntro.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		jtaService = new JTextArea();
-		jtaService.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtaService.setFont(hotelUIFont);
 		jtaService.setEditable(true);
 		jtaService.setLineWrap(true);
 		
@@ -214,14 +216,14 @@ public class HotelUIPanel extends JPanel {
 		
 		jcbStar = new JComboBox<String>(new DefaultComboBoxModel<String>(new String[] {"1", "2", "3", "4", "5"}));
 		jcbStar.setBounds(150, 550, 105, 30);
-		jcbStar.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jcbStar.setFont(hotelUIFont);
 		jcbStar.setOpaque(true);
 		jcbStar.setBackground(Color.WHITE);
 		jcbStar.setEditable(false);
 		
 		jtfScore = new JTextField();
 		jtfScore.setBounds(150, 600, 105, 30);
-		jtfScore.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfScore.setFont(hotelUIFont);
 		jtfScore.setBorder(new EmptyBorder(0, 0, 0, 0));
 		jtfScore.setBackground(UIConstants.JFRAME);
 		jtfScore.setEditable(false);
@@ -246,13 +248,13 @@ public class HotelUIPanel extends JPanel {
 		jbEdit = new JButton();
 		jbEdit.setBounds(251, 17, 110, 50);
 		jbEdit.setText("修改");
-		jbEdit.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jbEdit.setFont(hotelUIFont);
 		jbEdit.addMouseListener(editListener);
 		
 		jbCancel = new JButton();
 		jbCancel.setBounds(606, 17, 110, 50);
 		jbCancel.setText("取消");
-		jbCancel.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jbCancel.setFont(hotelUIFont);
 		jbCancel.addMouseListener(cancelListener);
 		
 		jpButton.add(jbEdit);
@@ -304,15 +306,23 @@ public class HotelUIPanel extends JPanel {
 		int citySize = city.size();
 		int circleSize = circle.size();
 		String name = "";
+		String address = "";
 		int value = JOptionPane.showConfirmDialog(this, "您确定要修改酒店信息吗？", "请确认修改", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 		
 		if(value == JOptionPane.OK_OPTION){
 			name = jtfHotelName.getText();
+			address = jtfAddress.getText();
 			if(name.length()>20){
-				JOptionPane.showMessageDialog(null, "酒店名称长度不可超过20！", "错误", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "酒店名称长度不可超过20！", "错误", JOptionPane.WARNING_MESSAGE);
+			}
+			else if(name.equals("")){
+				JOptionPane.showMessageDialog(null, "酒店名称不可为空！", "错误", JOptionPane.WARNING_MESSAGE);
+			}
+			else if(address.equals("")){
+				JOptionPane.showMessageDialog(null, "酒店地址不可为空！", "错误", JOptionPane.WARNING_MESSAGE);
 			}
 			else{
-				hotel.name = jtfHotelName.getText();
+				hotel.name = name;
 			
 				for(i=0;i<citySize;i++){
 					if(city.get(i).name.equals(jcbCity.getSelectedItem())){
@@ -328,7 +338,7 @@ public class HotelUIPanel extends JPanel {
 					}
 				}
 			
-				hotel.street = jtfAddress.getText();
+				hotel.street = address;
 				hotel.profile = jtaIntro.getText();
 				hotel.service = jtaService.getText();
 				hotel.star = Integer.valueOf((String) jcbStar.getSelectedItem());

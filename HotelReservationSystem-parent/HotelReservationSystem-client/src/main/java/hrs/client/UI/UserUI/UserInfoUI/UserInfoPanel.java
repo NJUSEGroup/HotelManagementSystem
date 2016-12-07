@@ -107,6 +107,7 @@ public class UserInfoPanel extends CommonPanel {
 		try {
 			user = controller.findUserByUsername(username);
 			userTextField.setText(user.username);
+			userTextField.setEnabled(false);
 			nameTextField.setText(user.name);
 			contactTextField.setText(user.phone);
 			enterpriseField.setText(user.enterprise);
@@ -264,11 +265,8 @@ public class UserInfoPanel extends CommonPanel {
 		user.enterprise = getEnterprise();
 		user.name = getRealName();
 		user.phone = getPhone();
-		//panel重置用户名
-		username = getUsername();
 		
-		//TODO
-		//更新左边面板的用户名信息
+
 		
 		controller.updateUser(user);
 		init();

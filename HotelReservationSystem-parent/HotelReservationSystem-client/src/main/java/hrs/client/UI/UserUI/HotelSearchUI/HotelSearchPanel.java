@@ -2,6 +2,8 @@ package hrs.client.UI.UserUI.HotelSearchUI;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -24,7 +26,9 @@ import hrs.client.UI.UserUI.Components.CommonPanel;
 import hrs.client.UI.UserUI.Components.CommonTable;
 import hrs.client.UI.UserUI.HotelSearchUI.Listener.SearchListener;
 import hrs.client.UI.UserUI.HotelSearchUI.Listener.SearchTableListener;
-import hrs.client.UI.UserUI.HotelSearchUI.Listener.detailListener;
+import hrs.client.UI.UserUI.HotelSearchUI.Listener.DetailListener;
+import hrs.client.UI.UserUI.HotelSearchUI.Listener.OrderListener;
+import hrs.client.UI.UserUI.HotelSearchUI.Listener.PlaceOrderListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.UserController.IUserHotelController;
@@ -38,6 +42,12 @@ import hrs.common.util.FilterCondition.RoomTypeFilterCondition;
 import hrs.common.util.type.FilterType;
 import hrs.common.util.type.RoomType;
 
+/**
+ * 酒店搜索面板
+ * 含有显示搜索结果的表格
+ * @author 涵
+ *
+ */
 public class HotelSearchPanel extends CommonPanel {
 	/**
 	 * 
@@ -92,13 +102,14 @@ public class HotelSearchPanel extends CommonPanel {
 		detailJB.setFont(font);
 		detailJB.setBounds(this.getWidth() - 330, 645, 120, 40);
 		detailJB.setEnabled(false);
-		detailJB.addActionListener(new detailListener(this));
+		detailJB.addActionListener(new DetailListener(this));
 		contentPane.add(detailJB);
 
 		orderJB = new JButton("立即下单");
 		orderJB.setBounds(this.getWidth() - 180, 645, 120, 40);
 		orderJB.setFont(font);
 		orderJB.setEnabled(false);
+		orderJB.addActionListener(new OrderListener(this));
 		contentPane.add(orderJB);
 
 	}
@@ -115,8 +126,11 @@ public class HotelSearchPanel extends CommonPanel {
 		scrollPane.getViewport().setBackground(new Color(211, 237, 249));
 		scrollPane.setOpaque(true);
 
-		Map<HotelVO, List<RoomVO>> map = new HashMap<>();
-		table.setModel(new SearchResultTableModel(map));
+		
+		
+		List<HotelVO> hotels = new ArrayList<>();
+		
+		table.setModel(new SearchResultTableModel(hotels));
 		table.addMouseListener(new SearchTableListener(this));
 
 		contentPane.add(scrollPane);
@@ -146,7 +160,18 @@ public class HotelSearchPanel extends CommonPanel {
 		if (conditions != null) {
 			newmap = controller.filterHotels(map, conditions);
 		}
-		table.setModel(new SearchResultTableModel(newmap));
+		
+		List<HotelVO> hotels = new ArrayList<>();
+		Iterator<Entry<HotelVO, List<RoomVO>>> iter = ((Map<HotelVO, List<RoomVO>>) newmap).entrySet().iterator();
+		while (iter.hasNext()) {
+			@SuppressWarnings("rawtypes")
+			Map.Entry entry = (Map.Entry) iter.next();
+			HotelVO key = (HotelVO) entry.getKey();
+			hotels.add(key);
+		}
+		
+		
+		table.setModel(new SearchResultTableModel(hotels));
 		if(newmap.size() == 0){
 			JOptionPane.showMessageDialog(null, "未找到酒店!", "提示", JOptionPane.INFORMATION_MESSAGE);
 		}
@@ -160,13 +185,58 @@ public class HotelSearchPanel extends CommonPanel {
 	}
 
 	public void setButtonStatus() {
-		detailJB.setEnabled(true);
-		orderJB.setEnabled(true);
+		int i = table.getSelectedRow();
+		if(i != -1){
+			detailJB.setEnabled(true);
+			orderJB.setEnabled(true);
+		}
+		
 
 	}
 
 	@SuppressWarnings("unchecked")
 	public void showDetail() {
+		Map<HotelVO, List<RoomVO>> map = getChooseOne();
+		
+		HotelVO hotel = null;
+		List<RoomVO> rooms = null;
+		
+		Iterator<Entry<HotelVO, List<RoomVO>>> iter = map.entrySet().iterator();
+		while (iter.hasNext()) {
+		@SuppressWarnings("rawtypes")
+		Map.Entry entry = (Map.Entry) iter.next();
+		HotelVO key = (HotelVO) entry.getKey();
+		hotel = key;
+        rooms = (List<RoomVO>) entry.getValue();
+		break;
+		}
+		
+		RoomType type = searchPanel.getRoomType();
+		
+		List<RoomVO> resultRoom = new ArrayList<>();
+		if(type != null){
+			for(RoomVO vo:rooms){
+				if(vo.type.equals(type)){
+					resultRoom.add(vo);
+					break;
+				}
+			}
+		}
+		else{
+			resultRoom = rooms;
+		}
+		panel.showDetail(hotel,resultRoom);
+				
+	}
+	
+	
+	/**
+	 * 返回需要显示的酒店详细信息
+	 * map里只有一个元素
+	 * @return
+	 */
+	@SuppressWarnings({ "unchecked" })
+	private Map<HotelVO, List<RoomVO>> getChooseOne(){
 		int i = table.getSelectedRow();
 		String name = (String)table.getValueAt(i, 0);
 		HotelVO hotel = null;
@@ -186,20 +256,37 @@ public class HotelSearchPanel extends CommonPanel {
 		}
 		}
 		
-		RoomType type = searchPanel.getRoomType();
+		Map<HotelVO, List<RoomVO>> result = new HashMap<>();
+		result.put(hotel,rooms);
+		return result;
 		
-		if(type == null){
-			panel.showDetail(hotel,rooms);
+		
+	}
+
+	private BeginAndLeaveTime getOrderTime(){
+		return searchPanel.getOrderTime();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void placeOrder() {
+		Map<HotelVO, List<RoomVO>> map = getChooseOne();
+		
+		HotelVO hotel = null;
+		List<RoomVO> rooms = null;
+		
+		Iterator<Entry<HotelVO, List<RoomVO>>> iter = map.entrySet().iterator();
+		while (iter.hasNext()) {
+		@SuppressWarnings("rawtypes")
+		Map.Entry entry = (Map.Entry) iter.next();
+		HotelVO key = (HotelVO) entry.getKey();
+		hotel = key;
+        rooms = (List<RoomVO>) entry.getValue();
+		break;
 		}
-		else if(type != null){
-			for(RoomVO vo:rooms){
-				if(vo.type.equals(type)){
-					List<RoomVO> result = new ArrayList<>();
-					result.add(vo);
-					panel.showDetail(hotel,result);
-				}
-			}
-		}
+		
+		BeginAndLeaveTime orderTime = getOrderTime();
+		
+		panel.showOrderPanel(hotel,rooms,orderTime);
 		
 		
 		

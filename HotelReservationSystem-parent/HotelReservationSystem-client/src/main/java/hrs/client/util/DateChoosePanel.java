@@ -6,12 +6,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import android.R.integer;
-import hrs.client.UI.UserUI.HotelSearchUI.SearchPanel;
+import hrs.common.util.DateHelper;
 /**
  * 日期选择框
  * 年份选项为当年和今年
@@ -25,7 +23,10 @@ public class DateChoosePanel extends JPanel {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3090610523432699152L;
+	private static final long serialVersionUID = 928093702009916231L;
+	/**
+	 * 
+	 */
 	private JComboBox<Integer> yearBox;
 	private JComboBox<Integer> monthBox;
 	private JComboBox<Integer> dayBox;
@@ -116,18 +117,12 @@ public class DateChoosePanel extends JPanel {
 	 */
 	public Date getDate(){
 		int year = (Integer)yearBox.getSelectedItem();
-		int month = (Integer)monthBox.getSelectedItem();
+		int month = (Integer)monthBox.getSelectedItem()-1;
 		int day = (Integer)dayBox.getSelectedItem();
-
-		Calendar cal = Calendar.getInstance();
-		
-		cal.set(Calendar.YEAR, year);
-		cal.set(Calendar.MONTH, month-1);
-		cal.set(Calendar.DAY_OF_MONTH, day);
-		
-		Date date = cal.getTime();
-		
-		return date;
+		Calendar calendar =	Calendar.getInstance();
+		calendar.set(year, month, day, 0, 0, 0);
+		System.out.println(DateHelper.format(calendar.getTime()));
+		return calendar.getTime();
 	}
 	
 	/**
