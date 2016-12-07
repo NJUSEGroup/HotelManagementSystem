@@ -14,6 +14,7 @@ import hrs.client.UI.WebStaffUI.WebStaffFrame;
 import hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddListener.ConfirmMouseListener;
 import hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddListener.LastStepMouseListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebStaffController.IWebStaffController;
 import hrs.common.Exception.HotelService.HotelNotFoundException;
 import hrs.common.Exception.StaffService.StaffExistedException;
@@ -61,7 +62,7 @@ public class HotelStaffAddUIPanel extends JPanel {
 
 	public void init() {
 		this.setSize(1080, 722);
-		this.setBackground(new Color(211, 237, 249));
+		this.setBackground(UIConstants.JFRAME);
 
 		jpHotelAdd = new JPanel();
 		jpHotelAdd.setBackground(new Color(176, 224, 230));
@@ -78,7 +79,7 @@ public class HotelStaffAddUIPanel extends JPanel {
 
 		jbLastStep = new JButton("上一步");
 		jbLastStep.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
-		jbLastStep.setBackground(new Color(0, 160, 233));
+		jbLastStep.setBackground(UIConstants.JBUTTON_BLUE);
 		jbLastStep.setForeground(Color.WHITE);
 		jbLastStep.setBorderPainted(false);
 		jbLastStep.setOpaque(true);
@@ -87,7 +88,7 @@ public class HotelStaffAddUIPanel extends JPanel {
 
 		jbConfirm = new JButton("确认");
 		jbConfirm.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
-		jbConfirm.setBackground(new Color(0, 160, 233));
+		jbConfirm.setBackground(UIConstants.JBUTTON_BLUE);
 		jbConfirm.setForeground(Color.WHITE);
 		jbConfirm.setBorderPainted(false);
 		jbConfirm.setOpaque(true);

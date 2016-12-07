@@ -12,7 +12,7 @@ public class MenuLabel extends JLabel {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4397173187642793077L;
+	
 	Color color = UIConstants.JLABEL;
 	private MenuLabelListener listener = MenuLabelListenerFactory.getListener();
 	

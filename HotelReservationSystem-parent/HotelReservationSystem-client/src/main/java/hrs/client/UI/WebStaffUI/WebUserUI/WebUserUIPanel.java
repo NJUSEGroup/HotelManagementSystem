@@ -22,6 +22,7 @@ import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderListener.SearchConfirmMouseL
 import hrs.client.UI.WebStaffUI.WebUserUI.WebUserListener.ModifyUserInfoMouseListener;
 import hrs.client.UI.WebStaffUI.WebUserUI.WebUserListener.SearchUserConfirmMouseListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebStaffController.IWebUserController;
 import hrs.common.Exception.UserService.UserNotFoundException;
 import hrs.common.VO.UserVO;
@@ -51,17 +52,17 @@ public class WebUserUIPanel extends JPanel {
 
 	public void init() {
 		this.setSize(1080, 722);
-		this.setBackground(new Color(211, 237, 249));
+		this.setBackground(UIConstants.JFRAME);
 
 		jlUserSearch = new JLabel("搜索用户");
-		jlUserSearch.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
+		jlUserSearch.setFont(UIConstants.JLABEL_FONT);
 
 		jtextUsername = new JTextField();
 		jtextUsername.setColumns(10);
 
 		jbConfirm = new JButton("确认");
-		jbConfirm.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
-		jbConfirm.setBackground(new Color(0, 160, 233));
+		jbConfirm.setFont(UIConstants.JLABEL_FONT);
+		jbConfirm.setBackground(UIConstants.JBUTTON_BLUE);
 		jbConfirm.setForeground(Color.WHITE);
 		jbConfirm.setBorderPainted(false);
 		jbConfirm.setOpaque(true);
@@ -69,8 +70,8 @@ public class WebUserUIPanel extends JPanel {
 		jbConfirm.addMouseListener(confirmMouseListener);
 		
 		jbModify = new JButton("修改");
-		jbModify.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
-		jbModify.setBackground(new Color(0, 160, 233));
+		jbModify.setFont(UIConstants.JLABEL_FONT);
+		jbModify.setBackground(UIConstants.JBUTTON_BLUE);
 		jbModify.setForeground(Color.WHITE);
 		jbModify.setBorderPainted(false);
 		jbModify.setOpaque(true);

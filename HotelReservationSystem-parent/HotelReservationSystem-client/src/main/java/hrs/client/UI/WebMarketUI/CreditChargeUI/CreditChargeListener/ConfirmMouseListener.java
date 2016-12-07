@@ -51,7 +51,7 @@ public class ConfirmMouseListener implements MouseListener{
 		jbButton = (JButton)e.getSource();
 		//鼠标在标签上时更换背景及字体色
 		jbButton.setBackground(Color.WHITE);
-		jbButton.setForeground(Color.BLACK);
+		jbButton.setForeground(Color.GRAY);
 	}
 
 	@Override

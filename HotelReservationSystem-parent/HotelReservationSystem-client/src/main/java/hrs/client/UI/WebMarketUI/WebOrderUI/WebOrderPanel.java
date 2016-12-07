@@ -3,11 +3,9 @@ package hrs.client.UI.WebMarketUI.WebOrderUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.security.KeyStore.PrivateKeyEntry;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -17,19 +15,13 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
 
-import org.aspectj.weaver.CrosscuttingMembersSet;
-import org.junit.validator.PublicClassValidator;
-
-import android.R.string;
-import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountModel;
-import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountPanel;
 import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderListener.RevokeMouseListener;
 import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderListener.SearchConfirmMouseListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebOrderController;
 import hrs.common.Exception.OrderService.OrderNotFoundException;
 import hrs.common.VO.OrderVO;
-import hrs.common.VO.WebDiscountVO;
 import hrs.common.util.type.OrderStatus;
 import hrs.common.util.type.RestoreValueType;
 
@@ -37,11 +29,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
 
 public class WebOrderPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6007121701597459920L;
 	private WebOrderModel model;
 	private List<OrderVO> webOrderList;
 	private IWebOrderController orderController = ControllerFactory.getWebOrderController();
@@ -56,6 +51,8 @@ public class WebOrderPanel extends JPanel {
 	private JButton jbRevoke;
 	private JComboBox comboBox;
 	private JButton jbSearchConfirm;
+	private Font JBUTTON_FONT=new Font("Arial Unicode MS", Font.PLAIN, 15);
+	private Font JTABLE_FONT=new Font("Arial Unicode MS", Font.PLAIN, 18);
 
 	/**
 	 * Create the panel.
@@ -65,25 +62,25 @@ public class WebOrderPanel extends JPanel {
 	}
 
 	public void init() {
-		setSize(1067, 714);
-		setBackground(new Color(211, 237, 249));
+		setSize(1080, 722);
+		setBackground(UIConstants.JFRAME);
 
 		orderList = getAbnormalOrder();
 		// System.out.println(orderList);
 
 		jbRevoke = new JButton("撤销");
-		jbRevoke.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
-		jbRevoke.setBackground(new Color(0, 160, 233));
+		jbRevoke.setFont(UIConstants.JBUTTON_FONT);
+		jbRevoke.setBackground(UIConstants.JLABEL);
 		jbRevoke.setForeground(Color.WHITE);
 		jbRevoke.setBorderPainted(false);
 		jbRevoke.setOpaque(true);
 		jbRevoke.addMouseListener(new RevokeMouseListener(this));
 
 		jlNumberOfPO = new JLabel("共" + orderList.size() + "条记录");
-		jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
+		jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 
 		jlSearch = new JLabel("搜索");
-		jlSearch.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
+		jlSearch.setFont(UIConstants.JBUTTON_FONT);
 
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] { "用户名", "订单号" }));
@@ -92,8 +89,8 @@ public class WebOrderPanel extends JPanel {
 		textField.setColumns(10);
 
 		jbSearchConfirm = new JButton("确认");
-		jbSearchConfirm.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
-		jbSearchConfirm.setBackground(new Color(0, 160, 233));
+		jbSearchConfirm.setFont(JBUTTON_FONT);
+		jbSearchConfirm.setBackground(UIConstants.JLABEL);
 		jbSearchConfirm.setForeground(Color.WHITE);
 		jbSearchConfirm.setBorderPainted(false);
 		jbSearchConfirm.setOpaque(true);
@@ -128,8 +125,8 @@ public class WebOrderPanel extends JPanel {
 		jTable = new JTable();
 		model = new WebOrderModel(orderList);
 		jTable.setModel(model);
-		jTable.setBackground(new Color(211, 237, 249));
-		jTable.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
+		jTable.setBackground(UIConstants.JFRAME);
+		jTable.setFont(JTABLE_FONT);
 		jTable.setRowHeight(40);
 		jTable.setShowVerticalLines(false);
 		jTable.setShowHorizontalLines(false);
@@ -137,16 +134,16 @@ public class WebOrderPanel extends JPanel {
 		// 设置表头
 		jTableHeader = jTable.getTableHeader();
 		jTableHeader.setPreferredSize(new Dimension(jTableHeader.getWidth(), 30));
-		jTableHeader.setBackground(new Color(222, 237, 249));
+		jTableHeader.setBackground(UIConstants.JTABLEHEADER_COLOR);
 		jTableHeader.setEnabled(false);
 		jTableHeader.setBorder(new EmptyBorder(0, 0, 0, 0));
-		jTableHeader.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
+		jTableHeader.setFont(JTABLE_FONT);
 
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(jTable);
 		scrollPane.setBounds(3, 70, 1050, 560);
 		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
-		scrollPane.getViewport().setBackground(new Color(211, 237, 249));
+		scrollPane.getViewport().setBackground(UIConstants.JFRAME);
 		scrollPane.setOpaque(true);
 		add(scrollPane);
 	}
@@ -176,7 +173,7 @@ public class WebOrderPanel extends JPanel {
 		revokeModel = new WebOrderModel(webOrderList);
 		jTable.setModel(revokeModel);
 		jlNumberOfPO.setText("共 " + webOrderList.size() + " 条记录");
-		jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
+		jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 	}
 
 	public void revokeHalf(OrderVO vo) {
@@ -185,7 +182,7 @@ public class WebOrderPanel extends JPanel {
 		revokeModel = new WebOrderModel(webOrderList);
 		jTable.setModel(revokeModel);
 		jlNumberOfPO.setText("共 " + webOrderList.size() + " 条记录");
-		jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
+		jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 	}
 
 	public void search() {
@@ -198,14 +195,14 @@ public class WebOrderPanel extends JPanel {
 				searchModel = new WebOrderModel(orderVoList);
 				jTable.setModel(searchModel);
 				jlNumberOfPO.setText("共 " + orderVoList.size() + " 条记录");
-				jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
+				jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 			} catch (OrderNotFoundException e) {
 				// TODO Auto-generated catch block
 				List<OrderVO> list = new ArrayList<>();
 				searchModel = new WebOrderModel(list);
 				jTable.setModel(searchModel);
 				jlNumberOfPO.setText("共 0 条记录");
-				jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
+				jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 				JOptionPane.showMessageDialog(this, "不存在该用户的异常订单！", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 
@@ -219,14 +216,14 @@ public class WebOrderPanel extends JPanel {
 				searchByIDModel = new WebOrderModel(list);
 				jTable.setModel(searchByIDModel);
 				jlNumberOfPO.setText("共 " + list.size() + " 条记录");
-				jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
+				jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 			} catch (OrderNotFoundException e) {
 				// TODO Auto-generated catch block
 				List<OrderVO> list = new ArrayList<>();
 				searchByIDModel = new WebOrderModel(list);
 				jTable.setModel(searchByIDModel);
 				jlNumberOfPO.setText("共 0 条记录");
-				jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
+				jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 				JOptionPane.showMessageDialog(this, "不存在该异常订单！", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			break;

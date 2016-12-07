@@ -10,83 +10,97 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import hrs.client.UI.WebStaffUI.WebStaffListener.WebStaffMenulistMouseListener;
+import hrs.client.util.UIConstants;
 
-public class MenulistPanel extends JPanel{
-	private JLabel jlZone=new JLabel("网站管理中心",JLabel.CENTER);
-	private JLabel jlIdentity=new JLabel("网站管理人员",JLabel.CENTER);
-	private JLabel jlUsername=new JLabel("宋管理",JLabel.CENTER);//要改
-	private JLabel jlUserInfo=new JLabel("用户信息管理",JLabel.CENTER);
-	private JLabel jlHotelAdd=new JLabel("酒店信息添加",JLabel.CENTER);
-	private JLabel jlUser=new JLabel("•用户              ",JLabel.CENTER);
-	private JLabel jlHotelStaff=new JLabel("•酒店工作人员",JLabel.CENTER);
-	private JLabel jlWebMarketer=new JLabel("•网站营销人员",JLabel.CENTER);
-	private WebStaffMenulistMouseListener listener=new WebStaffMenulistMouseListener();
-	
-	public MenulistPanel(){
-		setBackground(new Color(211, 237, 249));
+public class MenulistPanel extends JPanel {
+	private JLabel jlZone;
+	private JLabel jlIdentity;
+	private JLabel jlUsername;
+	private JLabel jlUserInfo;
+	private JLabel jlHotelAdd;
+	private JLabel jlUser;
+	private JLabel jlHotelStaff;
+	private JLabel jlWebMarketer;
+	private WebStaffMenulistMouseListener listener;
+
+	public MenulistPanel() {
+		init();
+	}
+
+	public void init() {
+		listener = new WebStaffMenulistMouseListener();
+		
+		setBounds(5, 5, 263, 722);
+		setBackground(UIConstants.JFRAME);
 		setLayout(null);
 
-	    jlZone.setBounds(0, 0, 263, 79);
-		jlZone.setFont(new Font("Arial Unicode MS", Font.PLAIN, 25));
+		jlZone = new JLabel("网站管理中心", JLabel.CENTER);
+		jlZone.setBounds(0, 0, 263, 79);
+		jlZone.setFont(UIConstants.JZONE_FONT);
 		jlZone.setOpaque(true);
-		jlZone.setBackground(new Color(145, 179, 179));
+		jlZone.setBackground(UIConstants.JZONE);
+		jlZone.setForeground(UIConstants.JZONE_FONT_COLOR);
 		
+		jlIdentity = new JLabel("网站管理人员", JLabel.CENTER);
 		jlIdentity.setBounds(0, 79, 263, 29);
-		jlIdentity.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
-		
+		jlIdentity.setFont(UIConstants.JLABEL_FONT);
+
+		jlUsername = new JLabel("宋管理", JLabel.CENTER);// 要改
 		jlUsername.setBounds(0, 108, 263, 29);
-		jlUsername.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
-		
+		jlUsername.setFont(UIConstants.JLABEL_FONT);
+
+		jlUserInfo = new JLabel("用户信息管理", JLabel.CENTER);
 		jlUserInfo.setBounds(0, 200, 263, 65);
-		jlUserInfo.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
+		jlUserInfo.setFont(UIConstants.JLABEL_FONT);
 		jlUserInfo.setForeground(Color.WHITE);
 		jlUserInfo.setOpaque(true);
-		jlUserInfo.setBackground(new Color(0, 160, 233));
-				
+		jlUserInfo.setBackground(UIConstants.JLABEL);
+
+		jlUser = new JLabel("•用户              ", JLabel.CENTER);
 		jlUser.setBounds(0, 265, 263, 45);
-		jlUser.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
+		jlUser.setFont(UIConstants.JLABEL_FONT);
 		jlUser.addMouseListener(listener);
-//		System.out.println("!"+jlUser.getText()+"!");
 		jlUser.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
 				jlUserInfo.setBackground(Color.WHITE);
-				jlUserInfo.setForeground(Color.BLACK);
-				jlUser.setForeground(new Color(145, 179, 179));
+				jlUserInfo.setForeground(Color.GRAY);
+				jlUser.setForeground(UIConstants.JZONE_FONT_COLOR);
 			}
-			
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-				jlUserInfo.setBackground(new Color(0, 160, 233));
+				jlUserInfo.setBackground(UIConstants.JLABEL);
 				jlUserInfo.setForeground(Color.white);
 				jlUser.setForeground(Color.BLACK);
-				
+
 			}
 		});
-		
+
+		jlHotelStaff = new JLabel("•酒店工作人员", JLabel.CENTER);
 		jlHotelStaff.setBounds(0, 310, 263, 45);
-		jlHotelStaff.setBackground(new Color(211, 237, 249));
-		jlHotelStaff.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
+		jlHotelStaff.setBackground(UIConstants.JFRAME);
+		jlHotelStaff.setFont(UIConstants.JLABEL_FONT);
 		jlHotelStaff.setOpaque(true);
 		jlHotelStaff.addMouseListener(listener);
 		jlHotelStaff.addMouseListener(new MouseListener() {
@@ -94,41 +108,42 @@ public class MenulistPanel extends JPanel{
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
 				jlUserInfo.setBackground(Color.WHITE);
-				jlUserInfo.setForeground(Color.BLACK);
-				jlHotelStaff.setForeground(new Color(145, 179, 179));
+				jlUserInfo.setForeground(Color.GRAY);
+				jlHotelStaff.setForeground(UIConstants.JZONE_FONT_COLOR);
 			}
-			
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-				jlUserInfo.setBackground(new Color(0, 160, 233));
+				jlUserInfo.setBackground(UIConstants.JLABEL);
 				jlUserInfo.setForeground(Color.white);
 				jlHotelStaff.setForeground(Color.BLACK);
-				
+
 			}
 		});
-		
+
+		jlWebMarketer = new JLabel("•网站营销人员", JLabel.CENTER);
 		jlWebMarketer.setBounds(0, 355, 263, 45);
-		jlWebMarketer.setBackground(new Color(211, 237, 249));
-		jlWebMarketer.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
+		jlWebMarketer.setBackground(UIConstants.JFRAME);
+		jlWebMarketer.setFont(UIConstants.JLABEL_FONT);
 		jlWebMarketer.setOpaque(true);
 		jlWebMarketer.addMouseListener(listener);
 		jlWebMarketer.addMouseListener(new MouseListener() {
@@ -136,47 +151,46 @@ public class MenulistPanel extends JPanel{
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
 				jlUserInfo.setBackground(Color.WHITE);
-				jlUserInfo.setForeground(Color.BLACK);
-				jlWebMarketer.setForeground(new Color(145, 179, 179));
+				jlUserInfo.setForeground(Color.GRAY);
+				jlWebMarketer.setForeground(UIConstants.JZONE_FONT_COLOR);
 			}
-			
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-				jlUserInfo.setBackground(new Color(0, 160, 233));
+				jlUserInfo.setBackground(UIConstants.JLABEL);
 				jlUserInfo.setForeground(Color.white);
 				jlWebMarketer.setForeground(Color.BLACK);
-				
+
 			}
 		});
-		
+
+		jlHotelAdd = new JLabel("酒店信息添加", JLabel.CENTER);
 		jlHotelAdd.setBounds(0, 400, 257, 65);
-		jlHotelAdd.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
+		jlHotelAdd.setFont(UIConstants.JLABEL_FONT);
 		jlHotelAdd.setForeground(Color.WHITE);
 		jlHotelAdd.setOpaque(true);
-		jlHotelAdd.setBackground(new Color(0, 160, 233));
+		jlHotelAdd.setBackground(UIConstants.JLABEL);
 		jlHotelAdd.addMouseListener(listener);
-		
-		
-		
+
 		add(jlZone);
 		add(jlIdentity);
 		add(jlUsername);
@@ -186,14 +200,8 @@ public class MenulistPanel extends JPanel{
 		add(jlWebMarketer);
 		add(jlHotelAdd);
 	}
-	public JLabel jlUserInfo(){
+
+	public JLabel jlUserInfo() {
 		return jlUserInfo;
 	}
-//	public static void main(String[]args){
-//		JFrame frame=new JFrame();
-//		MenulistPanel panel=new MenulistPanel();
-//		frame.add(panel);
-//		frame.setVisible(true);
-//	}
 }
-//这里的监听

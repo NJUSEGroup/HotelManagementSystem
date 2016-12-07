@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketListener.AddWebMarketerDialogConfirmMouseListener;
+import hrs.client.util.UIConstants;
 import hrs.common.VO.StaffVO;
 import hrs.common.util.type.StaffType;
 
@@ -88,7 +89,7 @@ public class AddWebMarketerDialog extends JDialog {
 		
 		jbConfirm = new JButton("确认");
 		jbConfirm.setBounds(107, 181, 75, 29);
-		jbConfirm.setBackground(new Color(0, 160, 233));
+		jbConfirm.setBackground(UIConstants.JBUTTON_BLUE);
 		jbConfirm.setForeground(Color.WHITE);
 		jbConfirm.setBorderPainted(false);
 		jbConfirm.setOpaque(true);
@@ -98,7 +99,7 @@ public class AddWebMarketerDialog extends JDialog {
 		
 		jbCancel = new JButton("取消");
 		jbCancel.setBounds(211, 181, 75, 29);
-		jbCancel.setBackground(new Color(0, 160, 233));
+		jbCancel.setBackground(UIConstants.JBUTTON_BLUE);
 		jbCancel.setForeground(Color.WHITE);
 		jbCancel.setBorderPainted(false);
 		jbCancel.setOpaque(true);

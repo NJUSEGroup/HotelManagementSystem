@@ -28,7 +28,7 @@ public class MenulistPanelMouseListener extends MouseAdapter{
 	public void mouseEntered(MouseEvent me){
 		jLabel=(JLabel)me.getSource();
 		jLabel.setBackground(Color.WHITE);
-		jLabel.setForeground(Color.BLACK);	
+		jLabel.setForeground(Color.GRAY);	
 	}
 	public void mouseClicked(MouseEvent me){
 		jLabel=(JLabel)me.getSource();

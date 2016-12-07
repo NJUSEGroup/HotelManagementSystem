@@ -29,6 +29,7 @@ import hrs.client.UI.WebMarketUI.CreditChargeUI.CreditChargeListener.ConfirmMous
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountPanel;
 import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderPanel;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebCreditController;
 import hrs.common.Exception.UserService.UserNotFoundException;
 import hrs.common.VO.UserVO;
@@ -60,12 +61,12 @@ public class CreditChargePanel extends JPanel {
 	}
 	
 	public void init(){
-		setSize(1067, 714);
-		setBackground(new Color(211, 237, 249));
+		setSize(1080, 722);
+		setBackground(UIConstants.JFRAME);
 
 		jlFindUser = new JLabel("搜索用户");
 		jlFindUser.setHorizontalAlignment(SwingConstants.CENTER);
-		jlFindUser.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
+		jlFindUser.setFont(UIConstants.JLABEL_FONT);
 
 		jtUsername = new JTextField();
 		jtUsername.setColumns(10);
@@ -127,7 +128,7 @@ public class CreditChargePanel extends JPanel {
 		jTable = new JTable();
 		model = new CreditChargeModel();
 		jTable.setModel(model);
-		jTable.setBackground(new Color(211, 237, 249));
+		jTable.setBackground(UIConstants.JFRAME);
 		jTable.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
 		jTable.setRowHeight(40);
 		jTable.setShowVerticalLines(false);
@@ -136,7 +137,7 @@ public class CreditChargePanel extends JPanel {
 		// 设置表头
 		jTableHeader = jTable.getTableHeader();
 		jTableHeader.setPreferredSize(new Dimension(jTableHeader.getWidth(), 35));
-		jTableHeader.setBackground(new Color(222, 237, 249));
+		jTableHeader.setBackground(UIConstants.JTABLEHEADER_COLOR);
 		jTableHeader.setEnabled(false);
 		jTableHeader.setBorder(new EmptyBorder(0, 0, 0, 0));
 		jTableHeader.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
@@ -145,7 +146,7 @@ public class CreditChargePanel extends JPanel {
 		scrollPane.setViewportView(jTable);
 		scrollPane.setBounds(3, 85, 1000, 100);
 		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
-		scrollPane.getViewport().setBackground(new Color(211, 237, 249));
+		scrollPane.getViewport().setBackground(UIConstants.JFRAME);
 		scrollPane.setOpaque(true);
 		add(scrollPane);
 	}

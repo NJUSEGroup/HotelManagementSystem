@@ -15,6 +15,7 @@ import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketListener.AddWebMarketerMous
 import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketListener.ModifyWebMarketerMouseListener;
 import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketListener.SearchWebMarketerConfirmMouseListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebStaffController.IWebStaffController;
 import hrs.common.Exception.StaffService.StaffExistedException;
 import hrs.common.Exception.StaffService.StaffNotFoundExceptioon;
@@ -52,19 +53,19 @@ public class WebMarketerUIPanel extends JPanel {
 
 	public void init() {
 		this.setSize(1080, 722);
-		this.setBackground(new Color(211, 237, 249));
+		this.setBackground(UIConstants.JFRAME);
 
 		jlWebMarketerSearch = new JLabel("搜索网站营销人员");
-		jlWebMarketerSearch.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
+		jlWebMarketerSearch.setFont(UIConstants.JLABEL_FONT);
 
 		jlWebMarketerUsername = new JLabel("用户名");
-		jlWebMarketerUsername.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
+		jlWebMarketerUsername.setFont(UIConstants.JLABEL_FONT);
 
 		jlWebMarketerPassword = new JLabel("密码");
-		jlWebMarketerPassword.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
+		jlWebMarketerPassword.setFont(UIConstants.JLABEL_FONT);
 
 		jlWebMarketerRealName = new JLabel("真实姓名");
-		jlWebMarketerRealName.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
+		jlWebMarketerRealName.setFont(UIConstants.JLABEL_FONT);
 
 		jtextWebMarketerUsername = new JTextField();
 		jtextWebMarketerUsername.setColumns(10);
@@ -77,7 +78,7 @@ public class WebMarketerUIPanel extends JPanel {
 
 		jbSearchWebMarketerConfirm = new JButton("确认");
 		jbSearchWebMarketerConfirm.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
-		jbSearchWebMarketerConfirm.setBackground(new Color(0, 160, 233));
+		jbSearchWebMarketerConfirm.setBackground(UIConstants.JBUTTON_BLUE);
 		jbSearchWebMarketerConfirm.setForeground(Color.WHITE);
 		jbSearchWebMarketerConfirm.setBorderPainted(false);
 		jbSearchWebMarketerConfirm.setOpaque(true);
@@ -86,7 +87,7 @@ public class WebMarketerUIPanel extends JPanel {
 
 		jbModifyWebMarketer = new JButton("修改");
 		jbModifyWebMarketer.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
-		jbModifyWebMarketer.setBackground(new Color(0, 160, 233));
+		jbModifyWebMarketer.setBackground(UIConstants.JBUTTON_BLUE);
 		jbModifyWebMarketer.setForeground(Color.WHITE);
 		jbModifyWebMarketer.setBorderPainted(false);
 		jbModifyWebMarketer.setOpaque(true);
@@ -94,7 +95,7 @@ public class WebMarketerUIPanel extends JPanel {
 		jbModifyWebMarketer.addMouseListener(modifyWebMarketerMouseListener);
 
 		jbAddWebMarketer = new JButton("添加");
-		jbAddWebMarketer.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
+		jbAddWebMarketer.setFont(UIConstants.JLABEL_FONT);
 		jbAddWebMarketer.setBackground(new Color(0, 160, 233));
 		jbAddWebMarketer.setForeground(Color.WHITE);
 		jbAddWebMarketer.setBorderPainted(false);

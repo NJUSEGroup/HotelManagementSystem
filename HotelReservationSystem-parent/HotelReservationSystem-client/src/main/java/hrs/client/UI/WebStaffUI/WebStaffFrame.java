@@ -17,6 +17,8 @@ import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketerUIPanel;
 import hrs.client.UI.WebStaffUI.WebStaffListener.WebStaffMenulistMouseListener;
 import hrs.client.UI.WebStaffUI.WebUserUI.ShowUserInfoPanel;
 import hrs.client.UI.WebStaffUI.WebUserUI.WebUserUIPanel;
+import hrs.client.util.UIConstants;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -28,12 +30,12 @@ public class WebStaffFrame extends JFrame {
 	private static final long serialVersionUID = 6293618787121106494L;
 	private CardLayout cardLayout;
 	private MenulistPanel menulistPanel;
-	private HotelAddUIPanel jpHotelAdd = new HotelAddUIPanel(this);
-	private HotelStaffAddUIPanel jpHotelStaffAdd = new HotelStaffAddUIPanel(this, jpHotelAdd);
-	private WebMarketerUIPanel jpWebMarketer = new WebMarketerUIPanel();
-	private HotelStaffUIPanel jpHotelStaff = new HotelStaffUIPanel();
-	private WebUserUIPanel jpWebUser = new WebUserUIPanel(new ShowUserInfoPanel());
-	private WebStaffMenulistMouseListener listener = new WebStaffMenulistMouseListener();
+	private HotelAddUIPanel jpHotelAdd;
+	private HotelStaffAddUIPanel jpHotelStaffAdd;
+	private WebMarketerUIPanel jpWebMarketer;
+	private HotelStaffUIPanel jpHotelStaff;
+	private WebUserUIPanel jpWebUser;
+	private WebStaffMenulistMouseListener listener;
 	private JPanel contentPane;
 	private JPanel jpCard;
 
@@ -64,16 +66,16 @@ public class WebStaffFrame extends JFrame {
 	public void init() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1366, 768);
+
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(211, 237, 249));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(UIConstants.JZONE);
 		setContentPane(contentPane);
-		
+
 		menulistPanel = new MenulistPanel();
 		menulistPanel.setBounds(5, 5, 263, 722);
-		
+
 		jpCard = new JPanel();
-		
+
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane
 				.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -95,7 +97,13 @@ public class WebStaffFrame extends JFrame {
 		cardLayout = new CardLayout();
 		jpCard.setLayout(cardLayout);
 		jpCard.setBounds(273, 5, 1080, 722);
-		jpCard.setBackground(new Color(211, 237, 249));
+		jpCard.setBackground(UIConstants.JFRAME);
+
+		jpHotelAdd = new HotelAddUIPanel(this);
+		jpHotelStaffAdd = new HotelStaffAddUIPanel(this, jpHotelAdd);
+		jpWebMarketer = new WebMarketerUIPanel();
+		jpHotelStaff = new HotelStaffUIPanel();
+		jpWebUser = new WebUserUIPanel(new ShowUserInfoPanel());
 
 		jpCard.add(jpWebUser, "用户");
 		jpCard.add(jpHotelStaff, "酒店工作人员");
@@ -104,6 +112,7 @@ public class WebStaffFrame extends JFrame {
 		jpCard.add(jpHotelStaffAdd, "酒店工作人员添加");
 		cardLayout.show(jpCard, "用户");
 
+		listener = new WebStaffMenulistMouseListener();
 		listener.setCard(cardLayout, jpCard);
 		contentPane.add(jpCard);
 	}

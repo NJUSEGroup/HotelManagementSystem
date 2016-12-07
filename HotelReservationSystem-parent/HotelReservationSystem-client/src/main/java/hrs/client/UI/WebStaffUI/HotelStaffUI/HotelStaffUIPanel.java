@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 
 import hrs.client.UI.WebStaffUI.HotelStaffUI.HotelStaffListener.SearchConfirmMouseListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebStaffController.IWebStaffController;
 import hrs.common.Exception.HotelService.HotelNotFoundException;
 import hrs.common.Exception.StaffService.StaffNotFoundExceptioon;
@@ -59,10 +60,10 @@ public class HotelStaffUIPanel extends JPanel {
 
 	public void init() {
 		this.setSize(1080, 722);
-		this.setBackground(new Color(211, 237, 249));
+		this.setBackground(UIConstants.JFRAME);
 
 		jlSearchHotelStaff = new JLabel("搜索酒店工作人员");
-		jlSearchHotelStaff.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
+		jlSearchHotelStaff.setFont(UIConstants.JLABEL_FONT);
 
 		jcomboBoxType = new JComboBox();
 		jcomboBoxType.setModel(new DefaultComboBoxModel(new String[] { "酒店名称", "酒店工作人员名" }));
@@ -81,16 +82,16 @@ public class HotelStaffUIPanel extends JPanel {
 		jbSearchHotelStaffConfirm.addMouseListener(confirmMouseListener);
 
 		jlHotelStaffUsername = new JLabel("用户名");
-		jlHotelStaffUsername.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
+		jlHotelStaffUsername.setFont(UIConstants.JLABEL_FONT);
 
 		jlPassword = new JLabel("密码");
-		jlPassword.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
+		jlPassword.setFont(UIConstants.JLABEL_FONT);
 
 		jlRealName = new JLabel("真实姓名");
-		jlRealName.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
+		jlRealName.setFont(UIConstants.JLABEL_FONT);
 
 		jlHotelName = new JLabel("酒店名称");
-		jlHotelName.setFont(new Font("Arial Unicode MS", Font.PLAIN, 21));
+		jlHotelName.setFont(UIConstants.JLABEL_FONT);
 
 		jtextPassword = new JTextField();
 		jtextPassword.setColumns(10);
@@ -100,7 +101,7 @@ public class HotelStaffUIPanel extends JPanel {
 
 		jbModifyHotelStaff = new JButton("修改");
 		jbModifyHotelStaff.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
-		jbModifyHotelStaff.setBackground(new Color(0, 160, 233));
+		jbModifyHotelStaff.setBackground(UIConstants.JBUTTON_BLUE);
 		jbModifyHotelStaff.setForeground(Color.WHITE);
 		jbModifyHotelStaff.setBorderPainted(false);
 		jbModifyHotelStaff.setOpaque(true);

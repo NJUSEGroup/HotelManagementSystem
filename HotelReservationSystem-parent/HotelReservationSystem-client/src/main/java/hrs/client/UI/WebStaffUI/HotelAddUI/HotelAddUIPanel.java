@@ -11,6 +11,7 @@ import javax.swing.SwingConstants;
 
 import hrs.client.UI.WebStaffUI.WebStaffFrame;
 import hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddListener.NextStepMouseListener;
+import hrs.client.util.UIConstants;
 import hrs.common.VO.HotelVO;
 
 import javax.swing.JTextField;
@@ -37,7 +38,7 @@ public class HotelAddUIPanel extends JPanel {
 	}
 	public void init(){
 		this.setSize(1080, 722);
-		this.setBackground(new Color(211, 237, 249));
+		this.setBackground(UIConstants.JFRAME);
 		
 		jpHotelAdd = new JPanel();
 		jpHotelAdd.setBackground(Color.WHITE);

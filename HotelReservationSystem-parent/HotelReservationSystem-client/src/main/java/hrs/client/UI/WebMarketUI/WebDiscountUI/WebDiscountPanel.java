@@ -30,6 +30,7 @@ import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.DeleteMouseLi
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.ModifyMouseListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.AddWebDiscountDialog;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebDiscountController;
 import hrs.common.Exception.Promotion.WebDiscountService.WebDiscountNotFoundException;
 import hrs.common.VO.WebDiscountVO;
@@ -58,6 +59,7 @@ public class WebDiscountPanel extends JPanel {
 	private SpecialCommercialCircleDialog jdSpecialCommercialCircle;
 	private SpecialPeriodDialog jdSpecialPeriod;
 	private VIPDiaog jdVIP;
+	private Font JTABLE_FONT=new Font("Arial Unicode MS", Font.PLAIN, 18);
 	
 //	private ResourceBundle rb = ResourceBundle.getBundle("webDiscount", Locale.getDefault());
 
@@ -73,12 +75,12 @@ public class WebDiscountPanel extends JPanel {
 		webDiscountList = getWebDiscountList();
 		model = new WebDiscountModel(webDiscountList);
 
-		this.setSize(1067, 714);
-		this.setBackground(new Color(211, 237, 249));
+		this.setSize(1080, 722);
+		this.setBackground(UIConstants.JFRAME);
 
 		jbAdd = new JButton("添加");
-		jbAdd.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
-		jbAdd.setBackground(new Color(0, 160, 233));
+		jbAdd.setFont(UIConstants.JBUTTON_FONT);
+		jbAdd.setBackground(UIConstants.JLABEL);
 		jbAdd.setForeground(Color.WHITE);
 		jbAdd.setBorderPainted(false);
 		jbAdd.setOpaque(true);
@@ -87,8 +89,8 @@ public class WebDiscountPanel extends JPanel {
 		jbAdd.addMouseListener(addMouseListener);
 
 		jbModify = new JButton("修改");
-		jbModify.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
-		jbModify.setBackground(new Color(0, 160, 233));
+		jbModify.setFont(UIConstants.JBUTTON_FONT);
+		jbModify.setBackground(UIConstants.JLABEL);
 		jbModify.setForeground(Color.WHITE);
 		jbModify.setBorderPainted(false);
 		jbModify.setOpaque(true);
@@ -96,7 +98,7 @@ public class WebDiscountPanel extends JPanel {
 		jbModify.addMouseListener(modifyMouseListener);
 
 		jbDelete = new JButton("删除");
-		jbDelete.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
+		jbDelete.setFont(UIConstants.JBUTTON_FONT);
 		jbDelete.setBackground(Color.RED);
 		jbDelete.setForeground(Color.WHITE);
 		jbDelete.setBorderPainted(false);
@@ -106,7 +108,7 @@ public class WebDiscountPanel extends JPanel {
 
 		jlNumberOfPO = new JLabel();
 		jlNumberOfPO.setText("共 " + webDiscountList.size() + " 条记录");
-		jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
+		jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -129,8 +131,8 @@ public class WebDiscountPanel extends JPanel {
 		jTable.setModel(model);
 		// jTable.setEnabled(false);
 
-		jTable.setBackground(new Color(211, 237, 249));
-		jTable.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
+		jTable.setBackground(UIConstants.JFRAME);
+		jTable.setFont(JTABLE_FONT);
 		jTable.setRowHeight(40);
 		jTable.setShowVerticalLines(false);
 		jTable.setShowHorizontalLines(false);
@@ -138,16 +140,16 @@ public class WebDiscountPanel extends JPanel {
 		// 设置表头
 		jTableHeader = jTable.getTableHeader();
 		jTableHeader.setPreferredSize(new Dimension(jTableHeader.getWidth(), 25));
-		jTableHeader.setBackground(new Color(222, 237, 249));
+		jTableHeader.setBackground(UIConstants.JTABLEHEADER_COLOR);
 		jTableHeader.setEnabled(false);
 		jTableHeader.setBorder(new EmptyBorder(0, 0, 0, 0));
-		jTableHeader.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
+		jTableHeader.setFont(JTABLE_FONT);
 
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(jTable);
 		scrollPane.setBounds(3, 20, 1000, 530);
 		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
-		scrollPane.getViewport().setBackground(new Color(211, 237, 249));
+		scrollPane.getViewport().setBackground(UIConstants.JFRAME);
 		scrollPane.setOpaque(true);
 		add(scrollPane);
 	}
@@ -173,7 +175,7 @@ public class WebDiscountPanel extends JPanel {
 		addModel = new WebDiscountModel(webDiscountList);
 		jTable.setModel(addModel);
 		jlNumberOfPO.setText("共 " + webDiscountList.size() + " 条记录");
-		jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
+		jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 	}
 
 	public void deleteWebDiscount(WebDiscountVO vo) {
@@ -184,7 +186,7 @@ public class WebDiscountPanel extends JPanel {
 		deleteModel = new WebDiscountModel(webDiscountList);
 		jTable.setModel(deleteModel);
 		jlNumberOfPO.setText("共 " + webDiscountList.size() + " 条记录");
-		jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
+		jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 	}
 
 	public void showModifyDialog() {

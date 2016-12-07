@@ -81,7 +81,7 @@ public class WebStaffMenulistMouseListener implements MouseListener{
 		String string=jLabel.getText();
 		if(string.equals("酒店信息添加")){
 		jLabel.setBackground(Color.WHITE);
-		jLabel.setForeground(Color.BLACK);
+		jLabel.setForeground(Color.GRAY);
 		}
 	}
 
