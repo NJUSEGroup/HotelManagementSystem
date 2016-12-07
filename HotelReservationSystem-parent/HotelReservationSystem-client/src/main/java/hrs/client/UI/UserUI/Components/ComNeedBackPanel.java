@@ -19,7 +19,6 @@ public abstract class ComNeedBackPanel extends CommonPanel {
 
 	public void placeOrder() {
 		
-		
 	}
 
 }

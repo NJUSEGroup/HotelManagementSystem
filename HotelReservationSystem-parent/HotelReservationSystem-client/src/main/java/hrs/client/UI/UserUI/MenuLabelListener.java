@@ -38,6 +38,8 @@ public class MenuLabelListener extends MouseAdapter {
 			 card.show(panel, "userInfoPanel");
 		 if(s.equals("搜索酒店"))
 			 card.show(panel, "hotelPanel");
+		 if(s.equals("酒店信息"))
+			 card.show(panel, "hotelInfoPanel");
 		 System.out.println("已点击"+s);
 	 }
 

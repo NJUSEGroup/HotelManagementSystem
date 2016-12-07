@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import hrs.client.UI.UserUI.Components.CommonLabel;
-import hrs.client.UI.UserUI.HotelSearchUI.Listener.cityBoxListener;
+import hrs.client.UI.UserUI.HotelSearchUI.Listener.CityBoxListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.DateChoosePanel;
 import hrs.client.util.UIConstants;
@@ -42,6 +42,12 @@ import hrs.common.util.type.RoomType;
  *
  */
 public class SearchPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3831127469024773580L;
+
+
 	private IUserHotelController controller ;
 	
 	
@@ -139,7 +145,7 @@ public class SearchPanel extends JPanel {
 		cityBox.setFont(font);
 		cityBox.setBounds(LEFTIN_X, JL_HEIGHT+GAP, 150, TEXT_H);
 		cityBox.setSelectedItem(locs.get(0).name);
-		cityBox.addItemListener(new cityBoxListener(this));
+		cityBox.addItemListener(new CityBoxListener(this));
 		add(cityBox);
 		
 		checkInDate = new DateChoosePanel();
@@ -148,7 +154,7 @@ public class SearchPanel extends JPanel {
 		
 		roomTypeBox = new JComboBox<>();
 		String[] l = {"无限制","商务标间","豪华房","双人房","单人房","标准房","大床房","行政标间"};
-		for(int i = 0;i<=6;i++){
+		for(int i = 0;i<=7;i++){
 			roomTypeBox.addItem(l[i]);
 		}
 		roomTypeBox.setBounds(LEFTIN_X, JL_HEIGHT*3+GAP, 150, TEXT_H);
@@ -250,7 +256,7 @@ public class SearchPanel extends JPanel {
 		try {
 			hotels = controller.findHotels(locID, circleID, begin, end, userVO.username);
 		} catch (HotelNotFoundException e) {
-			JOptionPane.showMessageDialog(null, "未找到酒店!", "提示", JOptionPane.INFORMATION_MESSAGE);
+			
 		}
 		return hotels;
 	}
@@ -312,6 +318,10 @@ public class SearchPanel extends JPanel {
 			return RoomType.getRoomType((String)roomTypeBox.getSelectedItem());
 		}
 		return null;
+	}
+
+	public BeginAndLeaveTime getOrderTime() {
+		return new BeginAndLeaveTime(checkInDate.getDate(), checkOutDate.getDate());
 	}
 	
 	

@@ -163,7 +163,7 @@ public class OrderShowPanel extends CommonPanel {
 
 	public void setStatus(OrderStatus status) {
 		
-		table.setModel(getOrderList(status));;
+		table.setModel(getOrderList(status));
 			
 	}
 
@@ -258,5 +258,12 @@ public class OrderShowPanel extends CommonPanel {
 		if(statusBox.getSelectedItem().equals("已执行")||statusBox.getSelectedItem().equals("已撤销")){
 			revokeButton.setEnabled(false);
 		}
+	}
+
+	public void setButtonUnable() {
+		revokeButton.setEnabled(false);
+		evalueButton.setEnabled(false);
+		detailButton.setEnabled(false);
+		
 	}
 }

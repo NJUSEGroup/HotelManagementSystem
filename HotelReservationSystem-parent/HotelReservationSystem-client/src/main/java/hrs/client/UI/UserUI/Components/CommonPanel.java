@@ -13,11 +13,15 @@ public abstract class CommonPanel extends JPanel {
 	*/ 
 	private static final long serialVersionUID = -8514676097183408632L;
 	public abstract void init();
-	Font font = UIConstants.JLABEL_FONT;
+	private Font font = UIConstants.JLABEL_FONT;
 	public CommonPanel(){
 		setLayout(null);
 		setBackground(new Color(211, 237, 249));
 		setSize(1103, 768);
 		setFont(font);
+	}
+	public void back() {
+		
+		
 	}
 }

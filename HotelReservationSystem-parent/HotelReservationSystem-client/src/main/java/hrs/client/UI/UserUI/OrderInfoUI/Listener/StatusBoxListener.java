@@ -22,22 +22,24 @@ public class StatusBoxListener implements ItemListener {
 			
 			if(jb.getSelectedItem() == "未执行"){
 				panel.setStatus(OrderStatus.Unexecuted);
+				panel.setButtonUnable();
 				
 			}
 			
 			if(jb.getSelectedItem() == "已执行"){
 				panel.setStatus(OrderStatus.Executed);
-				panel.setRevokeFalse();
+				panel.setButtonUnable();
 			}
 			
 			if(jb.getSelectedItem() == "异常"){
 				panel.setStatus(OrderStatus.Abnormal);
+				panel.setButtonUnable();
 				
 			}
 			
 			if(jb.getSelectedItem() == "已撤销"){
 				panel.setStatus(OrderStatus.UserRevoked);
-				panel.setRevokeFalse();
+				panel.setButtonUnable();
 			}
 			
 		}

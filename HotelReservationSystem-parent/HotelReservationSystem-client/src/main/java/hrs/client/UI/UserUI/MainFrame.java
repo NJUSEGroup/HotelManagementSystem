@@ -6,15 +6,15 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import hrs.client.UI.UserUI.CreditInfoUI.CreditInfoPanel;
+import hrs.client.UI.UserUI.HotelInfoUI.HotelInfoPanel;
+import hrs.client.UI.UserUI.HotelSearchUI.HotelPanel;
+import hrs.client.UI.UserUI.OrderInfoUI.OrderInfoPanel;
+import hrs.client.UI.UserUI.UserInfoUI.UserInfoPanel;
 import hrs.client.util.ControllerFactory;
 import hrs.common.Controller.UserController.IUserController;
 import hrs.common.Exception.UserService.UserNotFoundException;
 import hrs.common.VO.UserVO;
-import hrs.client.UI.UserUI.CreditInfoUI.CreditInfoPanel;
-import hrs.client.UI.UserUI.HotelSearchUI.HotelPanel;
-import hrs.client.UI.UserUI.OrderInfoUI.OrderInfoPanel;
-import hrs.client.UI.UserUI.OrderInfoUI.OrderShowPanel;
-import hrs.client.UI.UserUI.UserInfoUI.UserInfoPanel;
 
 public class MainFrame extends JFrame{
 	/**
@@ -29,6 +29,7 @@ public class MainFrame extends JFrame{
 	private JPanel creditInfoPanel;
 	private JPanel orderInfoPanel;
 	private JPanel hotelPanel;
+	private JPanel hotelInfoPanel;
 	
 	JPanel cardPanel = new JPanel();
 	
@@ -41,6 +42,7 @@ public class MainFrame extends JFrame{
 		creditInfoPanel = new CreditInfoPanel(username);
 		orderInfoPanel = new OrderInfoPanel(userVO);
 		hotelPanel = new HotelPanel(userVO);
+		hotelInfoPanel = new HotelInfoPanel(userVO);
 		//初始化操作
 		Init();
 		
@@ -53,6 +55,7 @@ public class MainFrame extends JFrame{
 		cardPanel.add("creditInfoPanel",creditInfoPanel);
 		cardPanel.add("orderInfoPanel",orderInfoPanel);
 		cardPanel.add("hotelPanel",hotelPanel);
+		cardPanel.add("hotelInfoPanel", hotelInfoPanel);
 		card.show(cardPanel, "hotelPanel");
 	
 		
