@@ -2,15 +2,13 @@ package hrs.client.UI.UserUI.HotelSearchUI;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
-import javax.swing.ButtonModel;
-import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -18,7 +16,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import android.R.integer;
 import hrs.client.UI.UserUI.Components.CommonLabel;
 import hrs.client.UI.UserUI.HotelSearchUI.Listener.cityBoxListener;
 import hrs.client.util.ControllerFactory;
@@ -36,7 +33,6 @@ import hrs.common.util.FilterCondition.NameFilterCondition;
 import hrs.common.util.FilterCondition.RoomTypeFilterCondition;
 import hrs.common.util.FilterCondition.ScoreFilterCondition;
 import hrs.common.util.FilterCondition.StarFilterCondition;
-import hrs.common.util.FilterCondition.ValueFilterCondition;
 import hrs.common.util.type.FilterType;
 import hrs.common.util.type.RoomType;
 /**
