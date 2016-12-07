@@ -198,18 +198,26 @@ public class EditDiscountDialog extends JDialog {
 	 */
 	public void setByType(){
 		if(theDiscount.type==HotelDiscountType.Birthday){
+			dcpBegin.setUnusable();
+			dcpEnd.setUnusable();
 			jsRoomNum.setEnabled(false);
 			jcbFirm.setEnabled(false);
 		}
 		else if(theDiscount.type==HotelDiscountType.Enterprise){
+			dcpBegin.setUnusable();
+			dcpEnd.setUnusable();
 			jsRoomNum.setEnabled(false);
 			jcbFirm.setEnabled(true);
 		}
 		else if(theDiscount.type==HotelDiscountType.LargeQty){
+			dcpBegin.setUnusable();
+			dcpEnd.setUnusable();
 			jsRoomNum.setEnabled(true);
 			jcbFirm.setEnabled(false);
 		}
 		else if(theDiscount.type==HotelDiscountType.SpecialPeriod){
+			dcpBegin.setEnabled();
+			dcpEnd.setEnabled();
 			jsRoomNum.setEnabled(false);
 			jcbFirm.setEnabled(false);
 		}
@@ -237,6 +245,8 @@ public class EditDiscountDialog extends JDialog {
 			else if(theDiscount.type==HotelDiscountType.SpecialPeriod){
 				jtfType.setText("特定期间折扣");
 				jtfDiscount.setText(Double.toString(theDiscount.discount));
+				dcpBegin.setDate(theDiscount.beginTime);
+				dcpEnd.setDate(theDiscount.endTime);
 			}
 	}
 

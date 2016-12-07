@@ -1,6 +1,7 @@
 package hrs.client.util;
 
 import java.awt.Font;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -21,6 +22,10 @@ import hrs.client.UI.UserUI.HotelSearchUI.SearchPanel;
  *
  */
 public class DateChoosePanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3090610523432699152L;
 	private JComboBox<Integer> yearBox;
 	private JComboBox<Integer> monthBox;
 	private JComboBox<Integer> dayBox;
@@ -123,6 +128,37 @@ public class DateChoosePanel extends JPanel {
 		Date date = cal.getTime();
 		
 		return date;
+	}
+	
+	/**
+	 * 设置panel显示的时间
+	 * @param date
+	 */
+	public void setDate(Date date){
+		String theDate = (new SimpleDateFormat("yyyy/MM/dd")).format(date);
+		String[] time = theDate.split("/");
+		
+		yearBox.setSelectedItem(Integer.valueOf(time[0]));
+		monthBox.setSelectedItem(Integer.valueOf(time[1]));
+		dayBox.setSelectedItem(Integer.valueOf(time[2]));
+	}
+	
+	/**
+	 * 设置为不可用
+	 */
+	public void setUnusable(){
+		yearBox.setEnabled(false);
+		monthBox.setEnabled(false);
+		dayBox.setEnabled(false);
+	}
+	
+	/**
+	 * 设置为可用
+	 */
+	public void setEnabled(){
+		yearBox.setEnabled(true);
+		monthBox.setEnabled(true);
+		dayBox.setEnabled(true);
 	}
 	
 }

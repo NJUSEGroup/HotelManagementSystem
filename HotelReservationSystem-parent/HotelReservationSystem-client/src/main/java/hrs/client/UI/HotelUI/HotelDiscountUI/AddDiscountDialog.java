@@ -122,9 +122,11 @@ public class AddDiscountDialog extends JDialog {
 		
 		dcpBegin = new DateChoosePanel();
 		dcpBegin.setBounds(200, 70, 330, 40);
+		dcpBegin.setUnusable();
 		
 		dcpEnd = new DateChoosePanel();
 		dcpEnd.setBounds(200, 130, 330, 40);
+		dcpEnd.setUnusable();
 		
 		jsRoomNum = new JSpinner();
 		jsRoomNum.setBounds(200, 190, 100, 40);
@@ -202,16 +204,22 @@ public class AddDiscountDialog extends JDialog {
 		String type = (String) jcbType.getSelectedItem();
 		
 		if(type.equals("生日特惠折扣")){
+			dcpBegin.setUnusable();
+			dcpEnd.setUnusable();
 			jsRoomNum.setEnabled(false);
 			jcbFirm.setEnabled(false);
 			jtfDiscount.setEnabled(true);
 		}
 		else if(type.equals("房间预订特惠")){
+			dcpBegin.setUnusable();
+			dcpEnd.setUnusable();
 			jsRoomNum.setEnabled(true);
 			jcbFirm.setEnabled(false);
 			jtfDiscount.setEnabled(true);
 		}
 		else if(type.equals("合作企业客户折扣")){
+			dcpBegin.setUnusable();
+			dcpEnd.setUnusable();
 			jsRoomNum.setEnabled(false);
 			jcbFirm.setEnabled(true);
 			jtfDiscount.setEnabled(true);
@@ -219,6 +227,8 @@ public class AddDiscountDialog extends JDialog {
 			this.getAllFirms();
 		}
 		else if(type.equals("特定期间折扣")){
+			dcpBegin.setEnabled();
+			dcpEnd.setEnabled();
 			jsRoomNum.setEnabled(false);
 			jcbFirm.setEnabled(false);
 			jtfDiscount.setEnabled(true);
