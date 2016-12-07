@@ -3,6 +3,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.persistence.GeneratedValue;
 import javax.swing.event.TableModelListener;
@@ -14,6 +16,7 @@ import hrs.common.VO.CommercialCircleVO;
 
 public class WebDiscountModel implements TableModel{
 	private List<WebDiscountVO> webDiscountList;
+	private ResourceBundle rb = ResourceBundle.getBundle("webDiscount", Locale.getDefault());
 	
 	public WebDiscountModel(List<WebDiscountVO> webDiscountList) {
 		// TODO Auto-generated constructor stub
@@ -64,7 +67,8 @@ public class WebDiscountModel implements TableModel{
 		WebDiscountVO webDiscountVO =webDiscountList .get(rowIndex);
 		try {
 			if(columnIndex==0){
-				return webDiscountVO .type.toString();
+				String outputType=rb.getString("WebDiscount."+webDiscountVO .type.toString());
+				return outputType;
 			}
 			else if(columnIndex==1){
 				Date date=webDiscountVO .beginTime;

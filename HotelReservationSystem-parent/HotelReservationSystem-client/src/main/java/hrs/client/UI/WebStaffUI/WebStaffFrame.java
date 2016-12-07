@@ -27,15 +27,13 @@ public class WebStaffFrame extends JFrame {
 	 */
 	private static final long serialVersionUID = 6293618787121106494L;
 	private CardLayout cardLayout;
-	MenulistPanel menulistPanel;
+	private MenulistPanel menulistPanel;
 	private HotelAddUIPanel jpHotelAdd = new HotelAddUIPanel(this);
-	private HotelStaffAddUIPanel jpHotelStaffAdd= new HotelStaffAddUIPanel(this,jpHotelAdd);
-	private WebMarketerUIPanel jpWebMarketer= new WebMarketerUIPanel();
-//	private AddWebMarketerDialog addWebMarketerDialog=new AddWebMarketerDialog(jpWebMarketer);
-	private HotelStaffUIPanel jpHotelStaff= new HotelStaffUIPanel();
-	private WebUserUIPanel jpWebUser= new WebUserUIPanel(new ShowUserInfoPanel());
-	WebStaffMenulistMouseListener listener = new WebStaffMenulistMouseListener();
-
+	private HotelStaffAddUIPanel jpHotelStaffAdd = new HotelStaffAddUIPanel(this, jpHotelAdd);
+	private WebMarketerUIPanel jpWebMarketer = new WebMarketerUIPanel();
+	private HotelStaffUIPanel jpHotelStaff = new HotelStaffUIPanel();
+	private WebUserUIPanel jpWebUser = new WebUserUIPanel(new ShowUserInfoPanel());
+	private WebStaffMenulistMouseListener listener = new WebStaffMenulistMouseListener();
 	private JPanel contentPane;
 	private JPanel jpCard;
 
@@ -64,17 +62,18 @@ public class WebStaffFrame extends JFrame {
 	}
 
 	public void init() {
-		menulistPanel = new MenulistPanel();
-		menulistPanel.setBounds(5, 5, 263, 722);
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1366, 768);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(211, 237, 249));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-
+		
+		menulistPanel = new MenulistPanel();
+		menulistPanel.setBounds(5, 5, 263, 722);
+		
 		jpCard = new JPanel();
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane
 				.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -92,12 +91,12 @@ public class WebStaffFrame extends JFrame {
 								.addComponent(jpCard, GroupLayout.PREFERRED_SIZE, 722, GroupLayout.PREFERRED_SIZE))
 						.addContainerGap(110, Short.MAX_VALUE)));
 		contentPane.setLayout(gl_contentPane);
-	
+
 		cardLayout = new CardLayout();
 		jpCard.setLayout(cardLayout);
-		jpCard.setBounds(273, 5, 1080, 722);	
+		jpCard.setBounds(273, 5, 1080, 722);
 		jpCard.setBackground(new Color(211, 237, 249));
-		
+
 		jpCard.add(jpWebUser, "用户");
 		jpCard.add(jpHotelStaff, "酒店工作人员");
 		jpCard.add(jpWebMarketer, "网站营销人员");
@@ -108,10 +107,12 @@ public class WebStaffFrame extends JFrame {
 		listener.setCard(cardLayout, jpCard);
 		contentPane.add(jpCard);
 	}
-	public void showHotelStaffAddUIPanel(){
-		cardLayout.show(jpCard, "酒店工作人员添加");		
+
+	public void showHotelStaffAddUIPanel() {
+		cardLayout.show(jpCard, "酒店工作人员添加");
 	}
-	public void showHotelAddUIPanel(){
+
+	public void showHotelAddUIPanel() {
 		cardLayout.show(jpCard, "酒店添加");
 	}
 

@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import hrs.client.UI.WebMarketUI.CreditChargeUI.CreditChargePanel;
 import hrs.client.UI.WebMarketUI.Listener.MenulistPanelMouseListener;
+import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderPanel;
 import hrs.client.util.UIConstants;
 
 public class MenulistPanel extends JPanel{
@@ -19,7 +20,8 @@ public class MenulistPanel extends JPanel{
 	private JLabel jlPromotion;
 	private JLabel jlAbnormal;
 	private JLabel jlCreditCharge;
-	private MenulistPanelMouseListener jpMenulistMouseListener=new MenulistPanelMouseListener();
+	private WebOrderPanel webOrderPanel=new WebOrderPanel();
+	private MenulistPanelMouseListener jpMenulistMouseListener=new MenulistPanelMouseListener(webOrderPanel);
 	private Color jlabel_color=UIConstants.JLABEL;
 	private Font jlabel_font=UIConstants.JLABEL_FONT;
 	

@@ -26,11 +26,12 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class WebMarketFrame extends JFrame {
 
 	private JPanel contentPane;
-    MenulistPanel jpMenulist;
-    MenulistPanelMouseListener listener=new MenulistPanelMouseListener();
+    MenulistPanel jpMenulist; 
+    WebOrderPanel jpWebOrder=new WebOrderPanel();
+    MenulistPanelMouseListener listener=new MenulistPanelMouseListener(jpWebOrder);
     WebDiscountPanel jpWebDiscount=new WebDiscountPanel();
     CreditChargePanel jpCreditCharge=new CreditChargePanel();
-    WebOrderPanel jpWebOrder=new WebOrderPanel();
+   
     
 	/**
 	 * Launch the application.

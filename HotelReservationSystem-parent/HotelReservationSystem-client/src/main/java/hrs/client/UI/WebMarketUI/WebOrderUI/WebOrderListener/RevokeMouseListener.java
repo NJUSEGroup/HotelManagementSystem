@@ -11,10 +11,10 @@ import javax.swing.JOptionPane;
 import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderPanel;
 import hrs.client.util.UIConstants;
 
-public class revokeMouseListener implements MouseListener{
+public class RevokeMouseListener implements MouseListener{
 	private JButton jbButton;
 	WebOrderPanel webOrderPanel;
-    public revokeMouseListener(WebOrderPanel webOrderPanel) {
+    public RevokeMouseListener(WebOrderPanel webOrderPanel) {
 		// TODO Auto-generated constructor stub
     	this.webOrderPanel=webOrderPanel;
 	}
@@ -25,16 +25,16 @@ public class revokeMouseListener implements MouseListener{
 		
 //		System.out.println(result);
 		try {
-//			Object []options={"一半","全部"};
-//		int result=JOptionPane.showOptionDialog(webOrderPanel, "请选择要恢复的信用值", "Restore Credit", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE, null, options,options[0]);
-//			switch(result){
-//			case 0:
-//				webOrderPanel.revokeHalf(webOrderPanel.getSelected());
-//			    break;
-//			case 1:
+			Object []options={"一半","全部"};
+		int result=JOptionPane.showOptionDialog(webOrderPanel, "请选择要恢复的信用值", "Restore Credit", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE, null, options,options[0]);
+			switch(result){
+			case 0:
+				webOrderPanel.revokeHalf(webOrderPanel.getSelected());
+			    break;
+			case 1:
 				webOrderPanel.revokeFull(webOrderPanel.getSelected());
-//				break;				
-//			}
+				break;				
+			}
 		} catch (NullPointerException e2) {
 			// TODO: handle exception
 			JOptionPane.showMessageDialog(this.webOrderPanel, "请选中要撤销的异常订单！","Error",JOptionPane.ERROR_MESSAGE);

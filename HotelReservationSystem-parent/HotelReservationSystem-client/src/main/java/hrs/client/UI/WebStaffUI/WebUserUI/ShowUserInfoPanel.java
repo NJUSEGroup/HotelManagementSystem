@@ -36,13 +36,13 @@ public class ShowUserInfoPanel extends JPanel {
 	private JLabel jlPhone;
 	private JLabel jlEnterpriseName;
 	private JLabel jlCredit;
-	private JTextField jtextUsername=new JTextField();
-	private JTextField jtextPassword=new JTextField();
-	private JTextField jtextRealName=new JTextField();
-	private JTextField jtextBirthday=new JTextField();
-	private JTextField jtextPhone=new JTextField();
-	private JTextField jtextEnterpriseName=new JTextField();
-	private JLabel jlCreditvalue=new JLabel();
+	private JTextField jtextPassword;
+	private JTextField jtextRealName;
+	private JTextField jtextBirthday;
+	private JTextField jtextPhone;
+	private JTextField jtextEnterpriseName;
+	private JLabel jlCreditvalue;
+	private JLabel jlUsernameShow;
 
 	/**
 	 * Create the panel.
@@ -75,17 +75,23 @@ public class ShowUserInfoPanel extends JPanel {
 		jlCredit = new JLabel("信用值");
 		jlCredit.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
 		
-		jtextUsername.setColumns(10);
-//		jtextUsername.setEditable(false);
+		jtextPassword=new JTextField();
 		jtextPassword.setColumns(10);
-//		jtextPassword.setEnabled(false);
+		
+		jtextRealName=new JTextField();
 		jtextRealName.setColumns(10);
 		
+		jtextBirthday=new JTextField();
 		jtextBirthday.setColumns(10);
 		
+		jtextPhone=new JTextField();
 		jtextPhone.setColumns(10);
 		
+		jtextEnterpriseName=new JTextField();
 		jtextEnterpriseName.setColumns(10);
+		
+		jlUsernameShow = new JLabel();
+		jlCreditvalue=new JLabel();
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -102,12 +108,12 @@ public class ShowUserInfoPanel extends JPanel {
 						.addComponent(jlUsername, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
 					.addGap(56)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(jlUsernameShow, GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
 						.addComponent(jlCreditvalue, GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 							.addComponent(jtextEnterpriseName)
 							.addComponent(jtextRealName, 217, 217, Short.MAX_VALUE)
 							.addComponent(jtextPassword)
-							.addComponent(jtextUsername, GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
 							.addComponent(jtextBirthday)
 							.addComponent(jtextPhone)))
 					.addGap(680))
@@ -118,7 +124,7 @@ public class ShowUserInfoPanel extends JPanel {
 					.addGap(36)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(jlUsername, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-						.addComponent(jtextUsername, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE))
+						.addComponent(jlUsernameShow, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(jlPassword, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
@@ -143,13 +149,13 @@ public class ShowUserInfoPanel extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(jlCredit, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
 						.addComponent(jlCreditvalue, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(210, Short.MAX_VALUE))
+					.addContainerGap(110, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
 	}
-	public String getUsername(){
-		return jtextUsername.getText();
-	}
+//	public String getUsername(){
+//		return .getText();
+//	}
 	public String getPassword(){
 		return jtextPassword.getText();
 	}
@@ -184,14 +190,13 @@ public class ShowUserInfoPanel extends JPanel {
 //	}
 
 	public void inputInfo(UserVO userVO){
-		jtextUsername.setText(userVO.username);
+		jlUsernameShow.setText(userVO.username);
 		jtextPassword.setText(userVO.password);
 		jtextRealName.setText(userVO.name);
 		jtextBirthday.setText(DateHelper.format(userVO.birthDate));
 		jtextPhone.setText(userVO.phone);
 		jtextEnterpriseName.setText(userVO.enterprise);
 		jlCreditvalue.setText(userVO.credit+"");
-		jlCreditvalue.setEnabled(false);
 	}
 
 }

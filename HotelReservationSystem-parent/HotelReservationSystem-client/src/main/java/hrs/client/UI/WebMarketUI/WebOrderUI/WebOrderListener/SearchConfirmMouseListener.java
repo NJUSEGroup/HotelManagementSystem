@@ -1,35 +1,26 @@
-package hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener;
+package hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderListener;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 
-import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountPanel;
+import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderPanel;
 import hrs.client.util.UIConstants;
-import hrs.common.VO.WebDiscountVO;
-import hrs.common.util.type.WebsiteDiscountType;
 
-public class OKListener implements MouseListener{
+public class SearchConfirmMouseListener implements MouseListener{
 	private JButton jbButton;
-	WebDiscountPanel jpWebDiscount;
-	AddWebDiscountDialog jdAddWebDiscount;
-//	WebDiscountVO vo;
-	public OKListener(WebDiscountPanel jpWebDiscount ,AddWebDiscountDialog  jdAddWebDiscount) {
+	WebOrderPanel webOrderPanel;
+	public SearchConfirmMouseListener(WebOrderPanel webOrderPanel) {
 		// TODO Auto-generated constructor stub
-		this.jpWebDiscount=jpWebDiscount;
-		this.jdAddWebDiscount=jdAddWebDiscount;
+		this.webOrderPanel=webOrderPanel;
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		jpWebDiscount.addWebDiscount();//从vo显示到界面上,vo????
-		JOptionPane.showMessageDialog(null, "促销策略成功添加！", "Success", JOptionPane.PLAIN_MESSAGE, null);
-		jdAddWebDiscount.dispose();
-		jdAddWebDiscount.refresh();
+		webOrderPanel.search();
 	}
 
 	@Override
@@ -58,8 +49,9 @@ public class OKListener implements MouseListener{
 		// TODO Auto-generated method stub
 		jbButton = (JButton)e.getSource(); 
 		//鼠标离开标签时更换背景及字体色
-		 jbButton.setBackground(UIConstants.JLABEL);
+		jbButton.setBackground(UIConstants.JLABEL);
 		 jbButton.setForeground(Color.white);
 	}
+
 
 }

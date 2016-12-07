@@ -115,45 +115,6 @@ public class AddWebDiscountDialog extends JDialog {
 		init();
 	}
 
-	public WebDiscountVO jdaddWebDiscount() {
-		switch (jcomboBoxType.getSelectedItem().toString()) {
-		case "特定商圈专属折扣":
-			double commercialCircleDiscount = Double.parseDouble(jtextDiscount.getText());
-			// System.out.println(jcomboBoxLocation);
-			locationIndex = jcomboBoxLocation.getSelectedIndex();
-			location = locs.get(locationIndex);
-			int commercialCircleIndex = jcomboBoxCommercialCircle.getSelectedIndex();
-			commercialCircle = commercialCircleList.get(commercialCircleIndex);
-			// System.out.println(commercialCircle);
-			addVO = new WebDiscountVO(commercialCircleDiscount, WebsiteDiscountType.SpecialCommercialCircle, location,
-					commercialCircle, null, null, 0);
-
-			break;
-		case "特定期间折扣":
-			// System.out.println(jcomboBoxType.getSelectedItem());
-			double specialPeriodDiscount = Double.parseDouble(jtextDiscount.getText());
-			Date discountBeginTime = null;
-			Date discountEndTime = null;
-			try {
-				discountBeginTime = DateHelper.parse(jtextBegintime.getText());
-				discountEndTime = DateHelper.parse(jtextEndtime.getText());
-			} catch (ParseException exception) {
-				// TODO Auto-generated catch block
-				JOptionPane.showMessageDialog(null, "请输入正确的日期格式", "Error", JOptionPane.ERROR_MESSAGE);
-			}
-			addVO = new WebDiscountVO(specialPeriodDiscount, WebsiteDiscountType.SpecialPeriod, null, null,
-					discountBeginTime, discountEndTime, 0);
-			break;
-		case "会员等级折扣":
-			int VIPLevel = Integer.parseInt(jcomboBoxVIPLevel.getSelectedItem().toString());
-			double vipDiscount = Double.parseDouble(jtextDiscount.getText());
-			addVO = new WebDiscountVO(vipDiscount, WebsiteDiscountType.VIP, null, null, null, null, VIPLevel);
-			break;
-		default:
-			break;
-		}
-		return addVO;// 从dialog返回一个有数据的vo给jp
-	}
 
 	public void init() {
 		this.setTitle("酒店促销策略添加");
@@ -376,6 +337,45 @@ public class AddWebDiscountDialog extends JDialog {
 
 	}
 
+	public WebDiscountVO jdaddWebDiscount() {
+		switch (jcomboBoxType.getSelectedItem().toString()) {
+		case "特定商圈专属折扣":
+			double commercialCircleDiscount = Double.parseDouble(jtextDiscount.getText());
+			// System.out.println(jcomboBoxLocation);
+			locationIndex = jcomboBoxLocation.getSelectedIndex();
+			location = locs.get(locationIndex);
+			int commercialCircleIndex = jcomboBoxCommercialCircle.getSelectedIndex();
+			commercialCircle = commercialCircleList.get(commercialCircleIndex);
+			// System.out.println(commercialCircle);
+			addVO = new WebDiscountVO(commercialCircleDiscount, WebsiteDiscountType.SpecialCommercialCircle, location,
+					commercialCircle, null, null, 0);
+
+			break;
+		case "特定期间折扣":
+			// System.out.println(jcomboBoxType.getSelectedItem());
+			double specialPeriodDiscount = Double.parseDouble(jtextDiscount.getText());
+			Date discountBeginTime = null;
+			Date discountEndTime = null;
+			try {
+				discountBeginTime = DateHelper.parse(jtextBegintime.getText());
+				discountEndTime = DateHelper.parse(jtextEndtime.getText());
+			} catch (ParseException exception) {
+				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(null, "请输入正确的日期格式", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+			addVO = new WebDiscountVO(specialPeriodDiscount, WebsiteDiscountType.SpecialPeriod, null, null,
+					discountBeginTime, discountEndTime, 0);
+			break;
+		case "会员等级折扣":
+			int VIPLevel = Integer.parseInt(jcomboBoxVIPLevel.getSelectedItem().toString());
+			double vipDiscount = Double.parseDouble(jtextDiscount.getText());
+			addVO = new WebDiscountVO(vipDiscount, WebsiteDiscountType.VIP, null, null, null, null, VIPLevel);
+			break;
+		default:
+			break;
+		}
+		return addVO;// 从dialog返回一个有数据的vo给jp
+	}
 	private Object[] locToName() {
 		locs = controller.findAllLocations();
 		Object[] names = new Object[locs.size()];
@@ -385,6 +385,18 @@ public class AddWebDiscountDialog extends JDialog {
 		return names;
 	}
 
+	 public void refresh(){
+		 jtextBegintime.setText("");
+		 jtextEndtime.setText("");
+		 jtextDiscount.setText("");
+		 jcomboBoxType.setSelectedIndex(-1);
+//		 jcomboBoxCommercialCircle.setSelectedIndex(-1);
+//		 jcomboBoxLocation.setSelectedIndex(-1);
+//		 jcomboBoxVIPLevel.setSelectedIndex(-1);
+		 jcomboBoxCommercialCircle.setSelectedItem(null);
+		 jcomboBoxLocation.setSelectedItem(null);
+		 jcomboBoxVIPLevel.setSelectedItem(null);
+	 }
 	// public static void main(String[] args) {
 	// AddWebDiscountDialog dialog=new AddWebDiscountDialog();
 	// dialog.setVisible(true);

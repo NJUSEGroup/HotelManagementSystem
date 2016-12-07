@@ -1,4 +1,4 @@
-package hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderListener;
+package hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
@@ -6,21 +6,23 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 
-import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderPanel;
+import hrs.client.UI.WebMarketUI.WebDiscountUI.SpecialCommercialCircleDialog;
+import hrs.client.UI.WebMarketUI.WebDiscountUI.SpecialPeriodDialog;
 import hrs.client.util.UIConstants;
 
-public class searchConfirmMouseListener implements MouseListener{
+public class CancelModifySpecialCommercialListener implements MouseListener{
 	private JButton jbButton;
-	WebOrderPanel webOrderPanel;
-	public searchConfirmMouseListener(WebOrderPanel webOrderPanel) {
+	private SpecialCommercialCircleDialog specialCommercialCircleDialog;
+	
+	public CancelModifySpecialCommercialListener(SpecialCommercialCircleDialog specialCommercialCircleDialog) {
 		// TODO Auto-generated constructor stub
-		this.webOrderPanel=webOrderPanel;
+		this.specialCommercialCircleDialog=specialCommercialCircleDialog;
 	}
-
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		webOrderPanel.search();
+		specialCommercialCircleDialog.dispose();
 	}
 
 	@Override
@@ -49,9 +51,8 @@ public class searchConfirmMouseListener implements MouseListener{
 		// TODO Auto-generated method stub
 		jbButton = (JButton)e.getSource(); 
 		//鼠标离开标签时更换背景及字体色
-		jbButton.setBackground(UIConstants.JLABEL);
+		 jbButton.setBackground(UIConstants.JLABEL);
 		 jbButton.setForeground(Color.white);
 	}
-
 
 }

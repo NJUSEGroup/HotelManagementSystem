@@ -5,31 +5,23 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 
-import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountPanel;
+import hrs.client.UI.WebMarketUI.WebDiscountUI.SpecialPeriodDialog;
 import hrs.client.util.UIConstants;
-import hrs.common.VO.WebDiscountVO;
-import hrs.common.util.type.WebsiteDiscountType;
 
-public class OKListener implements MouseListener{
+public class CancelModifySpecialPeriodDiscountListener implements MouseListener{
 	private JButton jbButton;
-	WebDiscountPanel jpWebDiscount;
-	AddWebDiscountDialog jdAddWebDiscount;
-//	WebDiscountVO vo;
-	public OKListener(WebDiscountPanel jpWebDiscount ,AddWebDiscountDialog  jdAddWebDiscount) {
+	private SpecialPeriodDialog specialPeriodDialog;
+	
+	public CancelModifySpecialPeriodDiscountListener(SpecialPeriodDialog specialPeriodDialog) {
 		// TODO Auto-generated constructor stub
-		this.jpWebDiscount=jpWebDiscount;
-		this.jdAddWebDiscount=jdAddWebDiscount;
+		this.specialPeriodDialog=specialPeriodDialog;
 	}
-
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		jpWebDiscount.addWebDiscount();//从vo显示到界面上,vo????
-		JOptionPane.showMessageDialog(null, "促销策略成功添加！", "Success", JOptionPane.PLAIN_MESSAGE, null);
-		jdAddWebDiscount.dispose();
-		jdAddWebDiscount.refresh();
+		specialPeriodDialog.dispose();
 	}
 
 	@Override
@@ -61,5 +53,5 @@ public class OKListener implements MouseListener{
 		 jbButton.setBackground(UIConstants.JLABEL);
 		 jbButton.setForeground(Color.white);
 	}
-
+	
 }

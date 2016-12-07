@@ -24,6 +24,8 @@ public class HotelAddUIPanel extends JPanel {
 	private JLabel lblNewLabel;
 	private NextStepMouseListener nextStepMouseListener;
 	private WebStaffFrame webStaffFrame;
+	private JLabel jlHotelName;
+	private JButton jbNextStep;
 
 	/**
 	 * Create the panel.
@@ -43,14 +45,14 @@ public class HotelAddUIPanel extends JPanel {
 		jpHotelStaffAdd = new JPanel();
 		jpHotelStaffAdd.setBackground(new Color(176, 224, 230));
 		
-		JLabel jlHotelName = new JLabel("酒店名称");
+		jlHotelName = new JLabel("酒店名称");
 		jlHotelName.setHorizontalAlignment(SwingConstants.CENTER);
 		jlHotelName.setFont(new Font("Arial Unicode MS", Font.PLAIN, 19));
 		
 		jtextHotelName = new JTextField();
 		jtextHotelName.setColumns(10);
 		
-		JButton jbNextStep = new JButton("下一步");
+		jbNextStep = new JButton("下一步");
 		jbNextStep.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
 		jbNextStep.setBackground(new Color(0, 160, 233));
 		jbNextStep.setForeground(Color.WHITE);
@@ -150,6 +152,9 @@ public class HotelAddUIPanel extends JPanel {
 		HotelVO hotelVO=new HotelVO(getHotelName(), 0, 0, null, null,null, null, null, 0);
 //		HotelVO hotelVO=new HotelVO(getHotelName());
 		return hotelVO;
+	}
+	public void refresh(){
+		jtextHotelName.setText("");
 	}
 
 }

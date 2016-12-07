@@ -25,6 +25,11 @@ public class AddWebMarketerDialog extends JDialog {
 	private JTextField jtextRealName;
 	private AddWebMarketerDialogConfirmMouseListener addWebMarketerDialogConfirmMouseListener;
 	private WebMarketerUIPanel webMarketerUIPanel;
+	private JLabel jlUsername;
+	private JLabel jlPassword;
+	private JLabel jlRealName;
+	private JButton jbConfirm;
+	private JButton jbCancel;
 
 //	/**
 //	 * Launch the application.
@@ -54,15 +59,15 @@ public class AddWebMarketerDialog extends JDialog {
 		jpAddWebMarketer.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(jpAddWebMarketer, BorderLayout.CENTER);
 		
-		JLabel jlUsername = new JLabel("用户名");
+		jlUsername = new JLabel("用户名");
 		jlUsername.setBounds(86, 33, 61, 16);
 		getContentPane().add(jlUsername);
 		
-		JLabel jlPassword = new JLabel("密码");
+		jlPassword = new JLabel("密码");
 		jlPassword.setBounds(86, 77, 61, 16);
 		getContentPane().add(jlPassword);
 		
-		JLabel jlRealName = new JLabel("真实姓名");
+		jlRealName = new JLabel("真实姓名");
 		jlRealName.setBounds(86, 125, 61, 16);
 		getContentPane().add(jlRealName);
 		
@@ -81,7 +86,7 @@ public class AddWebMarketerDialog extends JDialog {
 		getContentPane().add(jtextRealName);
 		jtextRealName.setColumns(10);
 		
-		JButton jbConfirm = new JButton("确认");
+		jbConfirm = new JButton("确认");
 		jbConfirm.setBounds(107, 181, 75, 29);
 		jbConfirm.setBackground(new Color(0, 160, 233));
 		jbConfirm.setForeground(Color.WHITE);
@@ -91,7 +96,7 @@ public class AddWebMarketerDialog extends JDialog {
 		addWebMarketerDialogConfirmMouseListener=new AddWebMarketerDialogConfirmMouseListener(webMarketerUIPanel);
 		jbConfirm.addMouseListener(addWebMarketerDialogConfirmMouseListener);
 		
-		JButton jbCancel = new JButton("取消");
+		jbCancel = new JButton("取消");
 		jbCancel.setBounds(211, 181, 75, 29);
 		jbCancel.setBackground(new Color(0, 160, 233));
 		jbCancel.setForeground(Color.WHITE);

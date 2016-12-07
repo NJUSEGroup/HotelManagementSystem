@@ -3,6 +3,7 @@ package hrs.client.UI.WebMarketUI.WebOrderUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.security.KeyStore.PrivateKeyEntry;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +18,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
 
 import org.aspectj.weaver.CrosscuttingMembersSet;
+import org.junit.validator.PublicClassValidator;
 
 import android.R.string;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountModel;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountPanel;
-import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderListener.revokeMouseListener;
-import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderListener.searchConfirmMouseListener;
+import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderListener.RevokeMouseListener;
+import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderListener.SearchConfirmMouseListener;
 import hrs.client.util.ControllerFactory;
 import hrs.common.Controller.WebMarketController.IWebOrderController;
 import hrs.common.Exception.OrderService.OrderNotFoundException;
@@ -45,7 +47,9 @@ public class WebOrderPanel extends JPanel {
 	private IWebOrderController orderController = ControllerFactory.getWebOrderController();
 	private JTextField textField;
 	private JTable jTable;
+	private WebOrderModel revokeModel;
 	private JTableHeader jTableHeader;
+	private JScrollPane scrollPane;
 	private List<OrderVO> orderList;
 	private JLabel jlNumberOfPO;
 	private JLabel jlSearch;
@@ -57,13 +61,15 @@ public class WebOrderPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public WebOrderPanel() {
-		orderController = ControllerFactory.getWebOrderController();
-		orderList = getAbnormalOrder();
-		// System.out.println(orderList);
+		init();
+	}
+
+	public void init() {
 		setSize(1067, 714);
 		setBackground(new Color(211, 237, 249));
-		// setBorder(BorderFactory.createLineBorder(new Color(145, 189, 214),
-		// 3));
+
+		orderList = getAbnormalOrder();
+		// System.out.println(orderList);
 
 		jbRevoke = new JButton("撤销");
 		jbRevoke.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
@@ -71,7 +77,7 @@ public class WebOrderPanel extends JPanel {
 		jbRevoke.setForeground(Color.WHITE);
 		jbRevoke.setBorderPainted(false);
 		jbRevoke.setOpaque(true);
-		jbRevoke.addMouseListener(new revokeMouseListener(this));
+		jbRevoke.addMouseListener(new RevokeMouseListener(this));
 
 		jlNumberOfPO = new JLabel("共" + orderList.size() + "条记录");
 		jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
@@ -81,7 +87,6 @@ public class WebOrderPanel extends JPanel {
 
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] { "用户名", "订单号" }));
-		// comboBox.getSelectedItem();
 
 		textField = new JTextField();
 		textField.setColumns(10);
@@ -92,7 +97,7 @@ public class WebOrderPanel extends JPanel {
 		jbSearchConfirm.setForeground(Color.WHITE);
 		jbSearchConfirm.setBorderPainted(false);
 		jbSearchConfirm.setOpaque(true);
-		jbSearchConfirm.addMouseListener(new searchConfirmMouseListener(this));
+		jbSearchConfirm.addMouseListener(new SearchConfirmMouseListener(this));
 
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -137,7 +142,7 @@ public class WebOrderPanel extends JPanel {
 		jTableHeader.setBorder(new EmptyBorder(0, 0, 0, 0));
 		jTableHeader.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
 
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(jTable);
 		scrollPane.setBounds(3, 70, 1050, 560);
 		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -146,9 +151,15 @@ public class WebOrderPanel extends JPanel {
 		add(scrollPane);
 	}
 
+	public void refresh() {
+		List<OrderVO> list = getAbnormalOrder();
+		// System.out.println(list);
+		model = new WebOrderModel(list);
+		jTable.setModel(model);
+	}
+
 	public List<OrderVO> getAbnormalOrder() {
 		List<OrderVO> list = new ArrayList<>();
-
 		try {
 			list = orderController.findOrderByOrderStatus(OrderStatus.Abnormal);
 			// System.out.println(list.get(0).user.username);
@@ -161,8 +172,6 @@ public class WebOrderPanel extends JPanel {
 
 	public void revokeFull(OrderVO vo) {
 		orderController.revokeOrder(vo, RestoreValueType.Full);
-		WebOrderModel revokeModel;
-		orderController = ControllerFactory.getWebOrderController();
 		webOrderList = getAbnormalOrder();
 		revokeModel = new WebOrderModel(webOrderList);
 		jTable.setModel(revokeModel);
@@ -172,8 +181,6 @@ public class WebOrderPanel extends JPanel {
 
 	public void revokeHalf(OrderVO vo) {
 		orderController.revokeOrder(vo, RestoreValueType.Half);
-		WebOrderModel revokeModel;
-		orderController = ControllerFactory.getWebOrderController();
 		webOrderList = getAbnormalOrder();
 		revokeModel = new WebOrderModel(webOrderList);
 		jTable.setModel(revokeModel);
@@ -194,8 +201,11 @@ public class WebOrderPanel extends JPanel {
 				jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
 			} catch (OrderNotFoundException e) {
 				// TODO Auto-generated catch block
-//				searchModel = new WebOrderModel(null);
-//				jTable.setModel(searchModel);
+				List<OrderVO> list = new ArrayList<>();
+				searchModel = new WebOrderModel(list);
+				jTable.setModel(searchModel);
+				jlNumberOfPO.setText("共 0 条记录");
+				jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
 				JOptionPane.showMessageDialog(this, "不存在该用户的异常订单！", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 
@@ -212,14 +222,18 @@ public class WebOrderPanel extends JPanel {
 				jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
 			} catch (OrderNotFoundException e) {
 				// TODO Auto-generated catch block
-//				searchByIDModel = new WebOrderModel(null);
-//				jTable.setModel(searchByIDModel);
+				List<OrderVO> list = new ArrayList<>();
+				searchByIDModel = new WebOrderModel(list);
+				jTable.setModel(searchByIDModel);
+				jlNumberOfPO.setText("共 0 条记录");
+				jlNumberOfPO.setFont(new Font("Arial Unicode MS", Font.PLAIN, 15));
 				JOptionPane.showMessageDialog(this, "不存在该异常订单！", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			break;
 		default:
 			break;
 		}
+		textField.setText("");
 	}
 
 	public OrderVO getSelected() {

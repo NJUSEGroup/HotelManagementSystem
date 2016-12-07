@@ -1,6 +1,7 @@
 package hrs.client.UI.WebMarketUI.WebDiscountUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -10,7 +11,9 @@ import javax.swing.border.EmptyBorder;
 
 import org.hibernate.loader.custom.Return;
 
+import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.CancelModifySpecialPeriodDiscountListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.ConfirmModifySpecialPeriodListener;
+import hrs.client.util.UIConstants;
 import hrs.common.VO.WebDiscountVO;
 import hrs.common.util.DateHelper;
 import hrs.common.util.type.WebsiteDiscountType;
@@ -37,6 +40,7 @@ public class SpecialPeriodDialog extends JDialog {
 	private WebDiscountPanel webDiscountPanel;
 	private WebDiscountVO webDiscountVO;
 	private ConfirmModifySpecialPeriodListener listener;
+	private CancelModifySpecialPeriodDiscountListener cancelListener;
 
 	public SpecialPeriodDialog(WebDiscountPanel webDiscountPanel) {
 		this.webDiscountPanel = webDiscountPanel;
@@ -48,13 +52,15 @@ public class SpecialPeriodDialog extends JDialog {
 	 */
 	public void init() {
 		webDiscountVO = webDiscountPanel.getSelected();
-//		System.out.println(webDiscountVO);
+		// System.out.println(webDiscountVO);
 
+//		getContentPane().setBackground(UIConstants.JFRAME);
 		setTitle("特定期间专属折扣修改");
 		setBounds(100, 100, 420, 280);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(null);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBackground(UIConstants.JFRAME);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 
 		jlBeginTime = new JLabel("开始时间");
@@ -88,14 +94,25 @@ public class SpecialPeriodDialog extends JDialog {
 		jtextDiscount.setText(webDiscountVO.discount + "");
 
 		jbConfirmModify = new JButton("确认修改");
-		jbConfirmModify.setBounds(119, 204, 87, 29);
-		listener=new ConfirmModifySpecialPeriodListener(webDiscountPanel,this);
+		jbConfirmModify.setBounds(103, 204, 103, 29);
+		jbConfirmModify.setBackground(new Color(0, 160, 233));
+		jbConfirmModify.setForeground(Color.WHITE);
+		jbConfirmModify.setBorderPainted(false);
+		jbConfirmModify.setOpaque(true);
+		listener = new ConfirmModifySpecialPeriodListener(webDiscountPanel, this);
 		jbConfirmModify.addMouseListener(listener);
 		contentPanel.add(jbConfirmModify);
 
 		jbCancalModify = new JButton("取消修改");
-		jbCancalModify.setBounds(218, 204, 87, 29);
+		jbCancalModify.setBounds(218, 204, 103, 29);
+		jbCancalModify.setBackground(new Color(0, 160, 233));
+		jbCancalModify.setForeground(Color.WHITE);
+		jbCancalModify.setBorderPainted(false);
+		jbCancalModify.setOpaque(true);
 		contentPanel.add(jbCancalModify);
+		cancelListener = new CancelModifySpecialPeriodDiscountListener(this);
+		jbCancalModify.addMouseListener(cancelListener);
+
 	}
 
 	public WebDiscountVO getModifyVO() {
@@ -114,9 +131,10 @@ public class SpecialPeriodDialog extends JDialog {
 			JOptionPane.showMessageDialog(null, "请输入正确的日期格式", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		double newDiscount = Double.parseDouble(jtextDiscount.getText());
-		WebDiscountVO newVO = new WebDiscountVO(newDiscount, WebsiteDiscountType.SpecialPeriod, null, null,
-				newBeginTime, newEndTime, 0);
-		return newVO;
+		webDiscountVO.beginTime = newBeginTime;
+		webDiscountVO.endTime = newEndTime;
+		webDiscountVO.discount = newDiscount;
+		return webDiscountVO;
 	}
-	
+
 }

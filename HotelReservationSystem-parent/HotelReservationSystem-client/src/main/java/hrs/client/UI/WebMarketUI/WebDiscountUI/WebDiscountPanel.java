@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -56,6 +58,8 @@ public class WebDiscountPanel extends JPanel {
 	private SpecialCommercialCircleDialog jdSpecialCommercialCircle;
 	private SpecialPeriodDialog jdSpecialPeriod;
 	private VIPDiaog jdVIP;
+	
+//	private ResourceBundle rb = ResourceBundle.getBundle("webDiscount", Locale.getDefault());
 
 	/**
 	 * Create the panel.
@@ -211,10 +215,10 @@ public class WebDiscountPanel extends JPanel {
 	}
 
 	public void modifyWebDiscount() {
-		WebDiscountVO modifyVO = new WebDiscountVO();
+		WebDiscountVO modifyVO = null;
 		switch (getSelected().type) {
 		case SpecialCommercialCircle:
-			modifyVO=jdSpecialCommercialCircle.getModifyVO();
+			modifyVO = jdSpecialCommercialCircle.getModifyVO();
 			break;
 		case SpecialPeriod:
 			modifyVO = jdSpecialPeriod.getModifyVO();
@@ -230,6 +234,7 @@ public class WebDiscountPanel extends JPanel {
 		webDiscountList = getWebDiscountList();
 		modifyModel = new WebDiscountModel(webDiscountList);
 		jTable.setModel(modifyModel);
+		JOptionPane.showMessageDialog(null, "促销策略成功修改！", "Success", JOptionPane.PLAIN_MESSAGE, null);
 	}
 
 	public WebDiscountVO getSelected() {

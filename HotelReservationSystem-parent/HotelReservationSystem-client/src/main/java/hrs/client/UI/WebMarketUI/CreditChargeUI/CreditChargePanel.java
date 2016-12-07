@@ -46,9 +46,11 @@ public class CreditChargePanel extends JPanel {
 	private JButton jbConfirm;
 	private JButton jbChargeValue;
 	private JLabel jlChargeValue;
+	private JTableHeader jTableHeader;
 	private JTable jTable;
 	private UserVO userVO;
 	private String username;
+	private CreditChargeModel creditChargeModel;
 
 	/**
 	 * Create the panel.
@@ -132,7 +134,7 @@ public class CreditChargePanel extends JPanel {
 		jTable.setShowHorizontalLines(false);
 
 		// 设置表头
-		JTableHeader jTableHeader = jTable.getTableHeader();
+		jTableHeader = jTable.getTableHeader();
 		jTableHeader.setPreferredSize(new Dimension(jTableHeader.getWidth(), 35));
 		jTableHeader.setBackground(new Color(222, 237, 249));
 		jTableHeader.setEnabled(false);
@@ -147,11 +149,11 @@ public class CreditChargePanel extends JPanel {
 		scrollPane.setOpaque(true);
 		add(scrollPane);
 	}
+	
 	public UserVO getUserVOAndShow() throws UserNotFoundException {
 		username = jtUsername.getText();
 //		System.out.println(username);
 		userVO = null;
-		CreditChargeModel creditChargeModel;
 		try {
 		userVO = webCreditController.findUserByUsername(username);
 		} catch (UserNotFoundException e2) {
@@ -163,11 +165,10 @@ public class CreditChargePanel extends JPanel {
 
 		return userVO;
 	}
+	
 	public void charge(int value){
 		value=Integer.parseInt(jtChargeValue.getText());
-		CreditChargeModel creditChargeModel;
 		webCreditController.charge(userVO,value);
-//		webCreditController=ControllerFactory.getWebCreditController();
 		try {
 			userVO=webCreditController.findUserByUsername(username);
 		} catch (UserNotFoundException e) {

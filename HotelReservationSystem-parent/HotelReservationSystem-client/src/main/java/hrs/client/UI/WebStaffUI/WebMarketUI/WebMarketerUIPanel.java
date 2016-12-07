@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderListener.searchConfirmMouseListener;
+import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderListener.SearchConfirmMouseListener;
 import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketListener.AddWebMarketerMouseListener;
 import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketListener.ModifyWebMarketerMouseListener;
 import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketListener.SearchWebMarketerConfirmMouseListener;
@@ -30,7 +30,6 @@ public class WebMarketerUIPanel extends JPanel {
 	private JLabel jlWebMarketerPassword;
 	private JLabel jlWebMarketerRealName;
 	private JTextField jtextWebMarketerUsername;
-	private JTextField jtextUsername;
 	private JTextField jtextPassword;
 	private JTextField jtextWebMarketerRealName;
 	private JButton jbSearchWebMarketerConfirm;
@@ -42,6 +41,7 @@ public class WebMarketerUIPanel extends JPanel {
 	private ModifyWebMarketerMouseListener modifyWebMarketerMouseListener;
 	private AddWebMarketerMouseListener addWebMarketerMouseListener;
 	private AddWebMarketerDialog addWebMarketerDialog=new AddWebMarketerDialog(this);
+	private JLabel jlUsernameShow;
 
 	/**
 	 * Create the panel.
@@ -68,9 +68,6 @@ public class WebMarketerUIPanel extends JPanel {
 
 		jtextWebMarketerUsername = new JTextField();
 		jtextWebMarketerUsername.setColumns(10);
-
-		jtextUsername = new JTextField();
-		jtextUsername.setColumns(10);
 
 		jtextPassword = new JTextField();
 		jtextPassword.setColumns(10);
@@ -104,47 +101,61 @@ public class WebMarketerUIPanel extends JPanel {
 		jbAddWebMarketer.setOpaque(true);
 		addWebMarketerMouseListener = new AddWebMarketerMouseListener(this);
 		jbAddWebMarketer.addMouseListener(addWebMarketerMouseListener);
+		
+		jlUsernameShow = new JLabel();
 
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addGap(61)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(jlWebMarketerSearch)
-								.addComponent(jlWebMarketerUsername).addComponent(jlWebMarketerPassword)
-								.addComponent(jlWebMarketerRealName))
-						.addGap(69)
-						.addGroup(
-								groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(jtextWebMarketerRealName, GroupLayout.DEFAULT_SIZE, 211,
-												Short.MAX_VALUE)
-										.addComponent(jtextPassword, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-										.addComponent(jtextWebMarketerUsername, GroupLayout.DEFAULT_SIZE, 211,
-												Short.MAX_VALUE)
-										.addComponent(jtextUsername, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
-						.addGap(66).addComponent(jbSearchWebMarketerConfirm).addGap(425))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup().addContainerGap(629, Short.MAX_VALUE)
-						.addComponent(jbModifyWebMarketer).addGap(94).addComponent(jbAddWebMarketer).addGap(123)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addGap(53)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(jlWebMarketerSearch)
-								.addComponent(jtextWebMarketerUsername, GroupLayout.PREFERRED_SIZE, 37,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(jbSearchWebMarketerConfirm, GroupLayout.PREFERRED_SIZE, 32,
-										GroupLayout.PREFERRED_SIZE))
-						.addGap(41)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(jlWebMarketerUsername).addComponent(jtextUsername,
-										GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
-						.addGap(41)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(jlWebMarketerPassword).addComponent(jtextPassword,
-										GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
-						.addGap(41)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(jlWebMarketerRealName).addComponent(jtextWebMarketerRealName,
-										GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
-						.addGap(190).addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(jbModifyWebMarketer).addComponent(jbAddWebMarketer))
-						.addContainerGap(143, Short.MAX_VALUE)));
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(61)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(jlWebMarketerSearch)
+						.addComponent(jlWebMarketerUsername)
+						.addComponent(jlWebMarketerPassword)
+						.addComponent(jlWebMarketerRealName))
+					.addGap(69)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(jtextWebMarketerRealName, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+						.addComponent(jtextPassword, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+						.addComponent(jtextWebMarketerUsername, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+						.addComponent(jlUsernameShow, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
+					.addGap(66)
+					.addComponent(jbSearchWebMarketerConfirm)
+					.addGap(425))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(691, Short.MAX_VALUE)
+					.addComponent(jbModifyWebMarketer)
+					.addGap(94)
+					.addComponent(jbAddWebMarketer)
+					.addGap(123))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(53)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(jlWebMarketerSearch)
+						.addComponent(jtextWebMarketerUsername, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+						.addComponent(jbSearchWebMarketerConfirm, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
+					.addGap(41)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(jlWebMarketerUsername)
+						.addComponent(jlUsernameShow, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
+					.addGap(41)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(jlWebMarketerPassword)
+						.addComponent(jtextPassword, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
+					.addGap(41)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(jlWebMarketerRealName)
+						.addComponent(jtextWebMarketerRealName, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
+					.addGap(190)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(jbModifyWebMarketer)
+						.addComponent(jbAddWebMarketer))
+					.addContainerGap(179, Short.MAX_VALUE))
+		);
 		setLayout(groupLayout);
 	}
 
@@ -155,37 +166,44 @@ public class WebMarketerUIPanel extends JPanel {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(this, "网站营销人员不存在！", "No Such WebMarketer", JOptionPane.ERROR_MESSAGE);
 		}
-		jtextUsername.setText(webMarketerVO.username);
+		jlUsernameShow.setText(webMarketerVO.username);
 		jtextPassword.setText(webMarketerVO.password);
 		jtextWebMarketerRealName.setText(webMarketerVO.name);
 		return webMarketerVO;
 	}
 
 	public void modify() {
-		String newUsername = jtextUsername.getText();
 		String newPassword = jtextPassword.getText();
 		String newName = jtextWebMarketerRealName.getText();
-		StaffVO newWebMarketerVO = new StaffVO(newUsername, newPassword, newName, StaffType.WebsiteMarketer, null);
-		// System.out.println(newWebMarketerVO);
-		controller.updateStaff(newWebMarketerVO);
+		webMarketerVO.password=newPassword;
+		webMarketerVO.name=newName;
+		controller.updateStaff(webMarketerVO);
 	}
 
 	public void add() {
 		// if (addWebMarketerDialog.setAddIndex() == 1) {
 		StaffVO addStaffVO = addWebMarketerDialog.getInput();
-		System.out.println(addStaffVO);
+//		System.out.println(addStaffVO);
+		int result = JOptionPane.showConfirmDialog(null, "是否确定添加？", "提示", JOptionPane.YES_NO_OPTION,
+				JOptionPane.INFORMATION_MESSAGE);
+		if (result == 0) {
 		try {
 			controller.addStaff(addStaffVO);
+			JOptionPane.showConfirmDialog(null, "信息添加成功", "添加成功", JOptionPane.PLAIN_MESSAGE,
+					JOptionPane.INFORMATION_MESSAGE);
 		} catch (StaffExistedException e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(this, "网站营销人员已存在！", "Such WebMarketer Existed", JOptionPane.ERROR_MESSAGE);
+		}
 		}
 		addWebMarketerDialog.dispose();
 	}
 	// }
 
 	public void showDialog() {
-		addWebMarketerDialog.show();
+//		addWebMarketerDialog.show();
+		addWebMarketerDialog.setVisible(true);
+		addWebMarketerDialog.setLocationRelativeTo(null);
 	}
 
 }

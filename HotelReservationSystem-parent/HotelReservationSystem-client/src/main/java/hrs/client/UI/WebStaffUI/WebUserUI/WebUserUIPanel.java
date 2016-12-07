@@ -18,7 +18,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
 
-import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderListener.searchConfirmMouseListener;
+import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderListener.SearchConfirmMouseListener;
 import hrs.client.UI.WebStaffUI.WebUserUI.WebUserListener.ModifyUserInfoMouseListener;
 import hrs.client.UI.WebStaffUI.WebUserUI.WebUserListener.SearchUserConfirmMouseListener;
 import hrs.client.util.ControllerFactory;
@@ -121,14 +121,10 @@ public class WebUserUIPanel extends JPanel {
 	}
 
 	public void modify(){     
-	     userVO.username=showUserInfoPanel.getUsername();
 	     userVO.password=showUserInfoPanel.getPassword();
 	     userVO.name=showUserInfoPanel.getRealName();
-//	     userVO.name="songxinjian";
-	     //这边数据库存在问题！！
 	     //修改联系方式为什么生日会跟着变啊！！
 	     userVO.birthDate=showUserInfoPanel.getBirthday();
-//	     System.out.println(userVO.birthDate);
 	     userVO.phone=showUserInfoPanel.getPhone();
 	     userVO.enterprise=showUserInfoPanel.getEnterpriseName();
 	     controller.updateUser(userVO);	     
