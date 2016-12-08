@@ -145,6 +145,6 @@ public class DesUtil implements Serializable{
 		System.out.println(util.decode("BB3FDC628A6D0E98"));
 		System.out.println(util.decode("789A9F4156001E35"));
 		System.out.println(util.decode("747324D30D4BAE90"));
-		System.out.println(util.encode("呵呵"));
+		System.out.println(util.encode("admin666"));
 	}
 }
