@@ -67,9 +67,9 @@ public class AddWebDiscountDialog extends JDialog {
 	private JLabel jlPromotionType;
 	private JLabel jlVIPLevel;
 	private JLabel jlDiscount;
-//	private JButton jbOK;
-//	private JButton jbCancel;
-	private HRSButton jbOK,jbCancel;
+	// private JButton jbOK;
+	// private JButton jbCancel;
+	private HRSButton jbOK, jbCancel;
 
 	private WebDiscountPanel jpWebDiscount;
 	private WebDiscountVO addVO;
@@ -118,7 +118,6 @@ public class AddWebDiscountDialog extends JDialog {
 		init();
 	}
 
-
 	public void init() {
 		this.setTitle("酒店促销策略添加");
 		this.setBounds(100, 100, 450, 320);
@@ -147,12 +146,12 @@ public class AddWebDiscountDialog extends JDialog {
 		jtextDiscount.setColumns(10);
 		jtextDiscount.setText("");
 
-		jbOK=new HRSButton("确认添加");
+		jbOK = new HRSButton("确认添加");
 		jbOK.setFont(new Font("宋体", Font.PLAIN, 13));
 		listener = new OKListener(jpWebDiscount, this);
 		jbOK.addMouseListener(listener);
 
-		jbCancel=new HRSButton("取消添加");
+		jbCancel = new HRSButton("取消添加");
 		jbCancel.setFont(new Font("宋体", Font.PLAIN, 13));
 		cancelAddListener = new CancelAddListener(this);
 		jbCancel.addMouseListener(cancelAddListener);
@@ -254,7 +253,7 @@ public class AddWebDiscountDialog extends JDialog {
 							locationIndex = jcomboBoxLocation.getSelectedIndex();
 							location = locs.get(locationIndex);
 							commercialCircleList = controller.findCircleByLoc(location.id);
-//							System.out.println(commercialCircleList);
+							// System.out.println(commercialCircleList);
 							Object[] circleName = new Object[commercialCircleList.size()];
 							for (int i = 0; i != commercialCircleList.size(); ++i) {
 								circleName[i] = commercialCircleList.get(i).name;
@@ -373,6 +372,11 @@ public class AddWebDiscountDialog extends JDialog {
 		}
 		return addVO;// 从dialog返回一个有数据的vo给jp
 	}
+
+	public double getDiscount() {
+		return jdaddWebDiscount().discount;
+	}
+
 	private Object[] locToName() {
 		locs = controller.findAllLocations();
 		Object[] names = new Object[locs.size()];
@@ -382,18 +386,18 @@ public class AddWebDiscountDialog extends JDialog {
 		return names;
 	}
 
-	 public void refresh(){
-		 jtextBegintime.setText("");
-		 jtextEndtime.setText("");
-		 jtextDiscount.setText("");
-		 jcomboBoxType.setSelectedIndex(-1);
-//		 jcomboBoxCommercialCircle.setSelectedIndex(-1);
-//		 jcomboBoxLocation.setSelectedIndex(-1);
-//		 jcomboBoxVIPLevel.setSelectedIndex(-1);
-		 jcomboBoxCommercialCircle.setSelectedItem(null);
-		 jcomboBoxLocation.setSelectedItem(null);
-		 jcomboBoxVIPLevel.setSelectedItem(null);
-	 }
+	public void refresh() {
+		jtextBegintime.setText("");
+		jtextEndtime.setText("");
+		jtextDiscount.setText("");
+		jcomboBoxType.setSelectedIndex(-1);
+		// jcomboBoxCommercialCircle.setSelectedIndex(-1);
+		// jcomboBoxLocation.setSelectedIndex(-1);
+		// jcomboBoxVIPLevel.setSelectedIndex(-1);
+		jcomboBoxCommercialCircle.setSelectedItem(null);
+		jcomboBoxLocation.setSelectedItem(null);
+		jcomboBoxVIPLevel.setSelectedItem(null);
+	}
 	// public static void main(String[] args) {
 	// AddWebDiscountDialog dialog=new AddWebDiscountDialog();
 	// dialog.setVisible(true);

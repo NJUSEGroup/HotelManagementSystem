@@ -34,7 +34,7 @@ public class SpecialPeriodDialog extends JDialog {
 	private JTextField jtextBeginTime;
 	private JTextField jtextEndTime;
 	private JTextField jtextDiscount;
-	private HRSButton jbConfirmModify,jbCancalModify;
+	private HRSButton jbConfirmModify, jbCancalModify;
 	private JLabel jlBeginTime;
 	private JLabel jlDiscount;
 	private JLabel jlEndTime;
@@ -55,7 +55,7 @@ public class SpecialPeriodDialog extends JDialog {
 		webDiscountVO = webDiscountPanel.getSelected();
 		// System.out.println(webDiscountVO);
 
-//		getContentPane().setBackground(UIConstants.JFRAME);
+		// getContentPane().setBackground(UIConstants.JFRAME);
 		setTitle("特定期间专属折扣修改");
 		setBounds(100, 100, 420, 280);
 		getContentPane().setLayout(new BorderLayout());
@@ -130,6 +130,10 @@ public class SpecialPeriodDialog extends JDialog {
 		webDiscountVO.endTime = newEndTime;
 		webDiscountVO.discount = newDiscount;
 		return webDiscountVO;
+	}
+
+	public double getNewDiscount() {
+		return getModifyVO().discount;
 	}
 
 }

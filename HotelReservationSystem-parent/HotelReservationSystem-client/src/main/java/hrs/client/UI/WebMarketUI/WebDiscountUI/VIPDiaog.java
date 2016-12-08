@@ -31,7 +31,7 @@ public class VIPDiaog extends JDialog {
 	private JLabel jlDiscount;
 	private JLabel jlVIP;
 	private JComboBox jcomboBoxVIP;
-	private HRSButton jbComfirmModify,jbCancelModify;
+	private HRSButton jbComfirmModify, jbCancelModify;
 	private WebDiscountPanel webDiscountPanel;
 	private WebDiscountVO webDiscountVO;
 	private ConfirmModifyVIPListener listener;
@@ -80,24 +80,28 @@ public class VIPDiaog extends JDialog {
 		jbComfirmModify.setFont(new Font("宋体", Font.PLAIN, 13));
 		jbComfirmModify.setBounds(90, 157, 96, 29);
 		getContentPane().add(jbComfirmModify);
-		listener=new ConfirmModifyVIPListener(webDiscountPanel, this);
+		listener = new ConfirmModifyVIPListener(webDiscountPanel, this);
 		jbComfirmModify.addMouseListener(listener);
 
 		jbCancelModify = new HRSButton("取消修改");
 		jbCancelModify.setFont(new Font("宋体", Font.PLAIN, 13));
 		jbCancelModify.setBounds(206, 157, 96, 29);
 		getContentPane().add(jbCancelModify);
-		cancelListener=new CancelModifyVIPListener(this);
+		cancelListener = new CancelModifyVIPListener(this);
 		jbCancelModify.addMouseListener(cancelListener);
 	}
 
 	public WebDiscountVO getModifyVO() {
 		int newVIPLevel = Integer.parseInt(jcomboBoxVIP.getSelectedItem().toString());
 		double newDiscount = Double.parseDouble(jtextDiscount.getText());
-		webDiscountVO.VIPlevel=newVIPLevel;
-		webDiscountVO.discount=newDiscount;
+		webDiscountVO.VIPlevel = newVIPLevel;
+		webDiscountVO.discount = newDiscount;
 		System.out.println(webDiscountVO);
 		return webDiscountVO;
+	}
+
+	public double getNewDiscount() {
+		return getModifyVO().discount;
 	}
 
 }

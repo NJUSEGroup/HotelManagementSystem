@@ -42,7 +42,7 @@ public class SpecialCommercialCircleDialog extends JDialog {
 	private JLabel jlCommercialCircle;
 	private JComboBox jcomboBoxCommercialCircle;
 	private JComboBox jcomboBoxLocation;
-	private HRSButton jbConfirmModify,jbCancelModify;
+	private HRSButton jbConfirmModify, jbCancelModify;
 	private JLabel jlDiscount;
 	private LocationVO location;
 	private List<LocationVO> locs;
@@ -87,14 +87,14 @@ public class SpecialCommercialCircleDialog extends JDialog {
 		jbConfirmModify.setBounds(99, 221, 96, 29);
 		jbConfirmModify.setFont(new Font("宋体", Font.PLAIN, 12));
 		getContentPane().add(jbConfirmModify);
-		listener=new ConfirmModifySpecialCommercialListener(webDiscountPanel, this);
+		listener = new ConfirmModifySpecialCommercialListener(webDiscountPanel, this);
 		jbConfirmModify.addMouseListener(listener);
 
 		jbCancelModify = new HRSButton("取消修改");
 		jbCancelModify.setBounds(214, 221, 96, 29);
 		jbCancelModify.setFont(new Font("宋体", Font.PLAIN, 12));
 		getContentPane().add(jbCancelModify);
-		cancelListener=new CancelModifySpecialCommercialListener(this);
+		cancelListener = new CancelModifySpecialCommercialListener(this);
 		jbCancelModify.addMouseListener(cancelListener);
 
 		jcomboBoxLocation = new JComboBox();
@@ -119,7 +119,7 @@ public class SpecialCommercialCircleDialog extends JDialog {
 		DefaultComboBoxModel<Object> model = new DefaultComboBoxModel<>(circleName);
 		jcomboBoxCommercialCircle.setModel(model);
 
-//		jcomboBoxCommercialCircle.setSelectedItem(webDiscountVO.commercialCircle.name);
+		// jcomboBoxCommercialCircle.setSelectedItem(webDiscountVO.commercialCircle.name);
 
 		jcomboBoxLocation.addItemListener(new ItemListener() {
 			@Override
@@ -145,11 +145,15 @@ public class SpecialCommercialCircleDialog extends JDialog {
 	}
 
 	public WebDiscountVO getModifyVO() {
-		double newDiscount=Double.parseDouble(jtextDiscount.getText());
-		webDiscountVO.location.name=(String) jcomboBoxLocation.getSelectedItem();
-		webDiscountVO.commercialCircle.name=(String) jcomboBoxCommercialCircle.getSelectedItem();
-		webDiscountVO.discount=newDiscount;
+		double newDiscount = Double.parseDouble(jtextDiscount.getText());
+		webDiscountVO.location.name = (String) jcomboBoxLocation.getSelectedItem();
+		webDiscountVO.commercialCircle.name = (String) jcomboBoxCommercialCircle.getSelectedItem();
+		webDiscountVO.discount = newDiscount;
 		return webDiscountVO;
+	}
+
+	public double getNewDiscount() {
+		return getModifyVO().discount;
 	}
 
 	private Object[] locToName() {
