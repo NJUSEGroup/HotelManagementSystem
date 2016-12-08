@@ -12,7 +12,6 @@ import hrs.client.UI.WebStaffUI.WebUserUI.WebUserListener.ModifyUserInfoMouseLis
 import hrs.client.UI.WebStaffUI.WebUserUI.WebUserListener.SearchUserConfirmMouseListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.HRSButton;
-import hrs.client.util.RegExpHelper;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebStaffController.IWebUserController;
 import hrs.common.Exception.UserService.UserNotFoundException;
