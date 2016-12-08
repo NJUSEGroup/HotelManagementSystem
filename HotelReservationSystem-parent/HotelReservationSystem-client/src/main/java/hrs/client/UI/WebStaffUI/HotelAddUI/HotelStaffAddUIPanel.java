@@ -14,6 +14,7 @@ import hrs.client.UI.WebStaffUI.WebStaffFrame;
 import hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddListener.ConfirmMouseListener;
 import hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddListener.LastStepMouseListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebStaffController.IWebStaffController;
 import hrs.common.Exception.HotelService.HotelNotFoundException;
@@ -34,8 +35,8 @@ public class HotelStaffAddUIPanel extends JPanel {
 	private JPanel jpHotelStaffAdd;
 	private JLabel jlpanelIN;
 	private JLabel lblNewLabel;
-	private JButton jbConfirm;
-	private JButton jbLastStep;
+	private HRSButton jbConfirm;
+	private HRSButton jbLastStep;
 	private JLabel jlPassword;
 	private JLabel jlPasswordConfirm;
 	private JLabel jlHotelStaffRealName;
@@ -77,21 +78,13 @@ public class HotelStaffAddUIPanel extends JPanel {
 		jtextHotelStaffUsrname = new JTextField();
 		jtextHotelStaffUsrname.setColumns(10);
 
-		jbLastStep = new JButton("上一步");
-		jbLastStep.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
-		jbLastStep.setBackground(UIConstants.JBUTTON_BLUE);
-		jbLastStep.setForeground(Color.WHITE);
-		jbLastStep.setBorderPainted(false);
-		jbLastStep.setOpaque(true);
+		jbLastStep = new HRSButton("上一步");
+		jbLastStep.setFont(new Font("宋体", Font.PLAIN, 18));
 		lastStepMouseListener = new LastStepMouseListener(this);
 		jbLastStep.addMouseListener(lastStepMouseListener);
 
-		jbConfirm = new JButton("确认");
-		jbConfirm.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
-		jbConfirm.setBackground(UIConstants.JBUTTON_BLUE);
-		jbConfirm.setForeground(Color.WHITE);
-		jbConfirm.setBorderPainted(false);
-		jbConfirm.setOpaque(true);
+		jbConfirm = new HRSButton("确认");
+		jbConfirm.setFont(new Font("宋体", Font.PLAIN, 18));
 		listener = new ConfirmMouseListener(this);
 		jbConfirm.addMouseListener(listener);
 

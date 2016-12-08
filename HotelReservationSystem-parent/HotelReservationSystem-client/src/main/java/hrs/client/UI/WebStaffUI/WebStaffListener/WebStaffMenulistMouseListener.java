@@ -53,28 +53,6 @@ public class WebStaffMenulistMouseListener implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
-//	public void mouseEnteredDouble(MouseEvent me){
-//
-//		this.jlUserInfo=menulistPanel.jlUserInfo();
-//		jLabel=(JLabel)me.getSource();
-//		String string=jLabel.getText();
-//		if(string.equals("•用户              ")||string.equals("•酒店工作人员")||string.equals("•网站营销人员")){
-//			jlUserInfo.setBackground(Color.WHITE);
-//			jlUserInfo.setForeground(Color.BLACK);
-//			jLabel.setForeground(new Color(145, 179, 179));
-//			}
-//	}
-//	
-//	public void mouseExitedDouble(MouseEvent me){
-//		this.jlUserInfo=menulistPanel.jlUserInfo();
-//		jLabel=(JLabel)me.getSource();
-//		String string=jLabel.getText();
-//		if(string.equals("•用户              ")||string.equals("•酒店工作人员")||string.equals("•网站营销人员")){
-//			jlUserInfo.setBackground(new Color(0, 160, 233));
-//			jlUserInfo.setForeground(Color.white);
-//			jLabel.setForeground(Color.BLACK);
-//			}
-//	}
 
 	public void mouseEntered(MouseEvent me){
 		jLabel=(JLabel)me.getSource();

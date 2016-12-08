@@ -3,6 +3,7 @@ package hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -20,6 +21,7 @@ import android.R.color;
 import android.R.string;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountPanel;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebDiscountController;
 import hrs.common.POJO.CommercialCirclePO;
@@ -65,8 +67,9 @@ public class AddWebDiscountDialog extends JDialog {
 	private JLabel jlPromotionType;
 	private JLabel jlVIPLevel;
 	private JLabel jlDiscount;
-	private JButton jbOK;
-	private JButton jbCancel;
+//	private JButton jbOK;
+//	private JButton jbCancel;
+	private HRSButton jbOK,jbCancel;
 
 	private WebDiscountPanel jpWebDiscount;
 	private WebDiscountVO addVO;
@@ -144,19 +147,13 @@ public class AddWebDiscountDialog extends JDialog {
 		jtextDiscount.setColumns(10);
 		jtextDiscount.setText("");
 
-		jbOK = new JButton("确认添加");
-		jbOK.setBackground(new Color(0, 160, 233));
-		jbOK.setForeground(Color.WHITE);
-		jbOK.setBorderPainted(false);
-		jbOK.setOpaque(true);
+		jbOK=new HRSButton("确认添加");
+		jbOK.setFont(new Font("宋体", Font.PLAIN, 13));
 		listener = new OKListener(jpWebDiscount, this);
 		jbOK.addMouseListener(listener);
 
-		jbCancel = new JButton("取消添加");
-		jbCancel.setBackground(Color.RED);
-		jbCancel.setForeground(Color.WHITE);
-		jbCancel.setBorderPainted(false);
-		jbCancel.setOpaque(true);
+		jbCancel=new HRSButton("取消添加");
+		jbCancel.setFont(new Font("宋体", Font.PLAIN, 13));
 		cancelAddListener = new CancelAddListener(this);
 		jbCancel.addMouseListener(cancelAddListener);
 

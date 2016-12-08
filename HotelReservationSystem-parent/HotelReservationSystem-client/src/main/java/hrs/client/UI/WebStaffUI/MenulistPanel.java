@@ -30,7 +30,6 @@ public class MenulistPanel extends JPanel {
 	public void init() {
 		listener = new WebStaffMenulistMouseListener();
 		
-		setBounds(5, 5, 263, 722);
 		setBackground(UIConstants.JFRAME);
 		setLayout(null);
 
@@ -184,7 +183,7 @@ public class MenulistPanel extends JPanel {
 		});
 
 		jlHotelAdd = new JLabel("酒店信息添加", JLabel.CENTER);
-		jlHotelAdd.setBounds(0, 400, 257, 65);
+		jlHotelAdd.setBounds(0, 400, 263, 65);
 		jlHotelAdd.setFont(UIConstants.JLABEL_FONT);
 		jlHotelAdd.setForeground(Color.WHITE);
 		jlHotelAdd.setOpaque(true);

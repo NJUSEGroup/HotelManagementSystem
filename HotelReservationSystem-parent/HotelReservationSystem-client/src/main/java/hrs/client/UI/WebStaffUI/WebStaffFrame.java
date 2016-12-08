@@ -59,14 +59,16 @@ public class WebStaffFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public WebStaffFrame() {
-		setTitle("酒店预订系统");
 		init();
 	}
 
 	public void init() {
+		setTitle("酒店预订系统");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1366, 768);
-
+		setLocationRelativeTo(null);
+		setResizable(false);
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(UIConstants.JZONE);
 		setContentPane(contentPane);
@@ -91,7 +93,7 @@ public class WebStaffFrame extends JFrame {
 								.addComponent(menulistPanel, GroupLayout.PREFERRED_SIZE, 722,
 										GroupLayout.PREFERRED_SIZE)
 								.addComponent(jpCard, GroupLayout.PREFERRED_SIZE, 722, GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(110, Short.MAX_VALUE)));
+						.addContainerGap(105, Short.MAX_VALUE)));
 		contentPane.setLayout(gl_contentPane);
 
 		cardLayout = new CardLayout();

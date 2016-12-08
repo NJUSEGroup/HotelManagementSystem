@@ -2,18 +2,22 @@ package hrs.client.UI.WebMarketUI;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import hrs.client.UI.WebMarketUI.CreditChargeUI.CreditChargePanel;
 import hrs.client.UI.WebMarketUI.Listener.MenulistPanelMouseListener;
 import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderPanel;
 import hrs.client.util.UIConstants;
 
 public class MenulistPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -617125775570164635L;
 	private JLabel jlZone;
 	private JLabel jlIdentity;
 	private JLabel jlUsername;
@@ -25,7 +29,8 @@ public class MenulistPanel extends JPanel {
 	private Color jlabel_color = UIConstants.JLABEL;
 	private Font jlabel_font = UIConstants.JLABEL_FONT;
 
-	public MenulistPanel() {
+	public MenulistPanel(WebOrderPanel webOrderPanel) {
+		this.webOrderPanel=webOrderPanel;
 		init();
 	}
 
@@ -33,8 +38,6 @@ public class MenulistPanel extends JPanel {
 		setBounds(5, 5, 263, 722);
 		setLayout(null);
 		setBackground(UIConstants.JFRAME);
-
-		webOrderPanel = new WebOrderPanel();
 
 		jlZone = new JLabel("网站营销中心", JLabel.CENTER);
 		jlZone.setBounds(0, 0, 263, 79);
@@ -57,7 +60,7 @@ public class MenulistPanel extends JPanel {
 		jlPromotion.setForeground(Color.WHITE);
 		jlPromotion.setOpaque(true);
 		jlPromotion.setBackground(jlabel_color);
-		jpMenulistMouseListener = new MenulistPanelMouseListener(webOrderPanel);
+		jpMenulistMouseListener = new MenulistPanelMouseListener();
 		jlPromotion.addMouseListener(jpMenulistMouseListener);
 
 		jlAbnormal = new JLabel("异常订单", JLabel.CENTER);
@@ -67,6 +70,11 @@ public class MenulistPanel extends JPanel {
 		jlAbnormal.setOpaque(true);
 		jlAbnormal.setBackground(jlabel_color);
 		jlAbnormal.addMouseListener(jpMenulistMouseListener);
+		jlAbnormal.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				webOrderPanel.refresh();
+			}
+		});
 
 		jlCreditCharge = new JLabel("信用充值", JLabel.CENTER);
 		jlCreditCharge.setBounds(0, 330, 263, 65);

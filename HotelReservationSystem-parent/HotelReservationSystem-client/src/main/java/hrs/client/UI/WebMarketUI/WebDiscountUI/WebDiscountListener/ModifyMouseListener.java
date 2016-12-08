@@ -37,19 +37,11 @@ public class ModifyMouseListener implements MouseListener{
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		jbButton = (JButton)e.getSource();
-		//鼠标在标签上时更换背景及字体色
-		jbButton.setBackground(Color.WHITE);
-		jbButton.setForeground(Color.GRAY);
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		jbButton = (JButton)e.getSource(); 
-		//鼠标离开标签时更换背景及字体色
-		 jbButton.setBackground(UIConstants.JBUTTON_BLUE);
-		 jbButton.setForeground(Color.white);
 	}
 	
 

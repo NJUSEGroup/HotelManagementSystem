@@ -70,12 +70,12 @@ public class WebMarketFrame extends JFrame {
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup().addContainerGap(283, Short.MAX_VALUE)
-						.addComponent(jpCard, GroupLayout.PREFERRED_SIZE, 1067, GroupLayout.PREFERRED_SIZE)
+				.addGroup(gl_contentPane.createSequentialGroup().addContainerGap(270, Short.MAX_VALUE)
+						.addComponent(jpCard, GroupLayout.PREFERRED_SIZE, 1080, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap()));
 		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup().addContainerGap()
-						.addComponent(jpCard, GroupLayout.PREFERRED_SIZE, 714, GroupLayout.PREFERRED_SIZE)
+						.addComponent(jpCard, GroupLayout.PREFERRED_SIZE, 722, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(16, Short.MAX_VALUE)));
 		CardLayout cardLayout = new CardLayout();
 
@@ -89,10 +89,10 @@ public class WebMarketFrame extends JFrame {
 		jpCard.add(jpCreditCharge, "信用充值");
 		cardLayout.show(jpCard, "促销策略");
 
-		listener = new MenulistPanelMouseListener(jpWebOrder);
+		listener = new MenulistPanelMouseListener();
 		listener.setCard(cardLayout, jpCard);
 
-		jpMenulist = new MenulistPanel();
+		jpMenulist = new MenulistPanel(jpWebOrder);
 		jpMenulist.setBounds(5, 5, 263, 722);
 
 		contentPane.setLayout(gl_contentPane);

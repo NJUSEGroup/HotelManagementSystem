@@ -15,11 +15,7 @@ public class MenulistPanelMouseListener extends MouseAdapter{
 	private JLabel jLabel=new JLabel();
 	private static CardLayout cardLayout;
 	private static JPanel jPanel;
-	private WebOrderPanel webOrderPanel;
-	public MenulistPanelMouseListener(WebOrderPanel webOrderPanel) {
-		// TODO Auto-generated constructor stub
-		this.webOrderPanel=webOrderPanel;
-	}
+
 	public void setCard(CardLayout cardLayout,JPanel jPanel){
 		this.cardLayout=cardLayout;
 		this.jPanel=jPanel;
@@ -37,7 +33,6 @@ public class MenulistPanelMouseListener extends MouseAdapter{
 			cardLayout.show(jPanel, "促销策略");
 		}else if(string.equals("异常订单")){
 			cardLayout.show(jPanel, "异常订单");	
-//			webOrderPanel.refresh();			
 		}else if(string.equals("信用充值")){
 			cardLayout.show(jPanel, "信用充值");
 		}

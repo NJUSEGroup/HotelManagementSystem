@@ -3,6 +3,7 @@ package hrs.client.UI.WebStaffUI.WebMarketUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -11,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketListener.AddWebMarketerDialogConfirmMouseListener;
+import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.VO.StaffVO;
 import hrs.common.util.type.StaffType;
@@ -29,8 +31,7 @@ public class AddWebMarketerDialog extends JDialog {
 	private JLabel jlUsername;
 	private JLabel jlPassword;
 	private JLabel jlRealName;
-	private JButton jbConfirm;
-	private JButton jbCancel;
+	private HRSButton jbConfirm,jbCancel;
 
 //	/**
 //	 * Launch the application.
@@ -87,22 +88,16 @@ public class AddWebMarketerDialog extends JDialog {
 		getContentPane().add(jtextRealName);
 		jtextRealName.setColumns(10);
 		
-		jbConfirm = new JButton("确认");
+		jbConfirm = new HRSButton("确认");
+		jbConfirm.setFont(new Font("宋体", Font.PLAIN, 13));
 		jbConfirm.setBounds(107, 181, 75, 29);
-		jbConfirm.setBackground(UIConstants.JBUTTON_BLUE);
-		jbConfirm.setForeground(Color.WHITE);
-		jbConfirm.setBorderPainted(false);
-		jbConfirm.setOpaque(true);
 		getContentPane().add(jbConfirm);
 		addWebMarketerDialogConfirmMouseListener=new AddWebMarketerDialogConfirmMouseListener(webMarketerUIPanel);
 		jbConfirm.addMouseListener(addWebMarketerDialogConfirmMouseListener);
 		
-		jbCancel = new JButton("取消");
+		jbCancel = new HRSButton("取消");
+		jbCancel.setFont(new Font("宋体", Font.PLAIN, 13));
 		jbCancel.setBounds(211, 181, 75, 29);
-		jbCancel.setBackground(UIConstants.JBUTTON_BLUE);
-		jbCancel.setForeground(Color.WHITE);
-		jbCancel.setBorderPainted(false);
-		jbCancel.setOpaque(true);
 		getContentPane().add(jbCancel);
 	}
 	public StaffVO getInput(){

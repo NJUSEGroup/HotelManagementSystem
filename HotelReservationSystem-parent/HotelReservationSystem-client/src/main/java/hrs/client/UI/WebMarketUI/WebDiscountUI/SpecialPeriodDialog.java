@@ -3,6 +3,7 @@ package hrs.client.UI.WebMarketUI.WebDiscountUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -13,6 +14,7 @@ import org.hibernate.loader.custom.Return;
 
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.CancelModifySpecialPeriodDiscountListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.ConfirmModifySpecialPeriodListener;
+import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.VO.WebDiscountVO;
 import hrs.common.util.DateHelper;
@@ -32,8 +34,7 @@ public class SpecialPeriodDialog extends JDialog {
 	private JTextField jtextBeginTime;
 	private JTextField jtextEndTime;
 	private JTextField jtextDiscount;
-	private JButton jbConfirmModify;
-	private JButton jbCancalModify;
+	private HRSButton jbConfirmModify,jbCancalModify;
 	private JLabel jlBeginTime;
 	private JLabel jlDiscount;
 	private JLabel jlEndTime;
@@ -93,22 +94,16 @@ public class SpecialPeriodDialog extends JDialog {
 		jtextDiscount.setColumns(10);
 		jtextDiscount.setText(webDiscountVO.discount + "");
 
-		jbConfirmModify = new JButton("确认修改");
+		jbConfirmModify = new HRSButton("确认修改");
+		jbConfirmModify.setFont(new Font("宋体", Font.PLAIN, 13));
 		jbConfirmModify.setBounds(103, 204, 103, 29);
-		jbConfirmModify.setBackground(new Color(0, 160, 233));
-		jbConfirmModify.setForeground(Color.WHITE);
-		jbConfirmModify.setBorderPainted(false);
-		jbConfirmModify.setOpaque(true);
 		listener = new ConfirmModifySpecialPeriodListener(webDiscountPanel, this);
 		jbConfirmModify.addMouseListener(listener);
 		contentPanel.add(jbConfirmModify);
 
-		jbCancalModify = new JButton("取消修改");
+		jbCancalModify = new HRSButton("取消修改");
+		jbCancalModify.setFont(new Font("宋体", Font.PLAIN, 13));
 		jbCancalModify.setBounds(218, 204, 103, 29);
-		jbCancalModify.setBackground(new Color(0, 160, 233));
-		jbCancalModify.setForeground(Color.WHITE);
-		jbCancalModify.setBorderPainted(false);
-		jbCancalModify.setOpaque(true);
 		contentPanel.add(jbCancalModify);
 		cancelListener = new CancelModifySpecialPeriodDiscountListener(this);
 		jbCancalModify.addMouseListener(cancelListener);

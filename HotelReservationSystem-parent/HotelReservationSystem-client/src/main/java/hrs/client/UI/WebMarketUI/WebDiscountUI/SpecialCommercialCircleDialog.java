@@ -3,6 +3,7 @@ package hrs.client.UI.WebMarketUI.WebDiscountUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
@@ -20,6 +21,7 @@ import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.ConfirmModify
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.ConfirmModifySpecialPeriodListener;
 import hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddListener.ConfirmMouseListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebDiscountController;
 import hrs.common.VO.CommercialCircleVO;
@@ -40,8 +42,7 @@ public class SpecialCommercialCircleDialog extends JDialog {
 	private JLabel jlCommercialCircle;
 	private JComboBox jcomboBoxCommercialCircle;
 	private JComboBox jcomboBoxLocation;
-	private JButton jbConfirmModify;
-	private JButton jbCancelModify;
+	private HRSButton jbConfirmModify,jbCancelModify;
 	private JLabel jlDiscount;
 	private LocationVO location;
 	private List<LocationVO> locs;
@@ -82,22 +83,16 @@ public class SpecialCommercialCircleDialog extends JDialog {
 		jlDiscount.setBounds(99, 161, 61, 16);
 		getContentPane().add(jlDiscount);
 
-		jbConfirmModify = new JButton("确认修改");
+		jbConfirmModify = new HRSButton("确认修改");
 		jbConfirmModify.setBounds(99, 221, 96, 29);
-		jbConfirmModify.setBackground(new Color(0, 160, 233));
-		jbConfirmModify.setForeground(Color.WHITE);
-		jbConfirmModify.setBorderPainted(false);
-		jbConfirmModify.setOpaque(true);
+		jbConfirmModify.setFont(new Font("宋体", Font.PLAIN, 12));
 		getContentPane().add(jbConfirmModify);
 		listener=new ConfirmModifySpecialCommercialListener(webDiscountPanel, this);
 		jbConfirmModify.addMouseListener(listener);
 
-		jbCancelModify = new JButton("取消修改");
+		jbCancelModify = new HRSButton("取消修改");
 		jbCancelModify.setBounds(214, 221, 96, 29);
-		jbCancelModify.setBackground(new Color(0, 160, 233));
-		jbCancelModify.setForeground(Color.WHITE);
-		jbCancelModify.setBorderPainted(false);
-		jbCancelModify.setOpaque(true);
+		jbCancelModify.setFont(new Font("宋体", Font.PLAIN, 12));
 		getContentPane().add(jbCancelModify);
 		cancelListener=new CancelModifySpecialCommercialListener(this);
 		jbCancelModify.addMouseListener(cancelListener);
@@ -124,7 +119,7 @@ public class SpecialCommercialCircleDialog extends JDialog {
 		DefaultComboBoxModel<Object> model = new DefaultComboBoxModel<>(circleName);
 		jcomboBoxCommercialCircle.setModel(model);
 
-		jcomboBoxCommercialCircle.setSelectedItem(webDiscountVO.commercialCircle.name);
+//		jcomboBoxCommercialCircle.setSelectedItem(webDiscountVO.commercialCircle.name);
 
 		jcomboBoxLocation.addItemListener(new ItemListener() {
 			@Override

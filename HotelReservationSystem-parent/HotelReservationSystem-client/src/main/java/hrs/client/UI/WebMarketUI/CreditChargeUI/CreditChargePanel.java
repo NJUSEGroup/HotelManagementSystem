@@ -29,6 +29,7 @@ import hrs.client.UI.WebMarketUI.CreditChargeUI.CreditChargeListener.ConfirmMous
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountPanel;
 import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderPanel;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebCreditController;
 import hrs.common.Exception.UserService.UserNotFoundException;
@@ -44,14 +45,14 @@ public class CreditChargePanel extends JPanel {
 	private CreditChargeModel model;
 	private JScrollPane scrollPane;
 	private JLabel jlFindUser;
-	private JButton jbConfirm;
-	private JButton jbChargeValue;
+	private HRSButton jbConfirm,jbChargeValue;
 	private JLabel jlChargeValue;
 	private JTableHeader jTableHeader;
 	private JTable jTable;
 	private UserVO userVO;
 	private String username;
 	private CreditChargeModel creditChargeModel;
+	
 
 	/**
 	 * Create the panel.
@@ -59,8 +60,8 @@ public class CreditChargePanel extends JPanel {
 	public CreditChargePanel() {
 		init();
 	}
-	
-	public void init(){
+
+	public void init() {
 		setSize(1080, 722);
 		setBackground(UIConstants.JFRAME);
 
@@ -71,12 +72,8 @@ public class CreditChargePanel extends JPanel {
 		jtUsername = new JTextField();
 		jtUsername.setColumns(10);
 
-		jbConfirm = new JButton("确认");
-		jbConfirm.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
-		jbConfirm.setBackground(new Color(0, 160, 233));
-		jbConfirm.setForeground(Color.WHITE);
-		jbConfirm.setBorderPainted(false);
-		jbConfirm.setOpaque(true);
+		jbConfirm = new HRSButton("确认");
+		jbConfirm.setFont(new Font("宋体", Font.PLAIN, 18));
 		jbConfirm.addMouseListener(new ConfirmMouseListener(this));
 
 		jlChargeValue = new JLabel("充值额度");
@@ -86,12 +83,8 @@ public class CreditChargePanel extends JPanel {
 		jtChargeValue = new JTextField();
 		jtChargeValue.setColumns(10);
 
-		jbChargeValue = new JButton("充值");
-		jbChargeValue.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
-		jbChargeValue.setBackground(new Color(0, 160, 233));
-		jbChargeValue.setForeground(Color.WHITE);
-		jbChargeValue.setBorderPainted(false);
-		jbChargeValue.setOpaque(true);
+		jbChargeValue = new HRSButton("充值");
+		jbChargeValue.setFont(new Font("宋体", Font.PLAIN, 20));
 		jbChargeValue.addMouseListener(new ChargeMouseListener(this, jtChargeValue));
 
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -132,7 +125,7 @@ public class CreditChargePanel extends JPanel {
 		jTable.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
 		jTable.setRowHeight(40);
 		jTable.setShowVerticalLines(false);
-		jTable.setShowHorizontalLines(false);
+		jTable.setShowHorizontalLines(true);
 
 		// 设置表头
 		jTableHeader = jTable.getTableHeader();
@@ -150,42 +143,55 @@ public class CreditChargePanel extends JPanel {
 		scrollPane.setOpaque(true);
 		add(scrollPane);
 	}
-	
-	public UserVO getUserVOAndShow() throws UserNotFoundException {
-		username = jtUsername.getText();
-//		System.out.println(username);
-		userVO = null;
-		try {
-		userVO = webCreditController.findUserByUsername(username);
-		} catch (UserNotFoundException e2) {
-			// TODO: handle exception
-			JOptionPane.showMessageDialog(this, "用户名不存在", "No Such Username", JOptionPane.ERROR_MESSAGE);
-		}
-		creditChargeModel = new CreditChargeModel(userVO);
-		jTable.setModel(creditChargeModel);
 
+	public UserVO getUserVOAndShow() throws UserNotFoundException {
+		userVO = null;
+		if (jtUsername.getText().equals("")) {
+			JOptionPane.showMessageDialog(this, "请输入用户名！", "Enter The Username", JOptionPane.ERROR_MESSAGE);
+		} else {
+			username = jtUsername.getText();
+			try {
+				userVO = webCreditController.findUserByUsername(username);
+			} catch (UserNotFoundException e2) {
+				// TODO: handle exception
+				JOptionPane.showMessageDialog(this, "用户名不存在", "No Such Username", JOptionPane.ERROR_MESSAGE);
+				jtUsername.setText("");
+			}
+			creditChargeModel = new CreditChargeModel(userVO);
+			jTable.setModel(creditChargeModel);
+			// jbChargeValue.setEnabled(true);
+		}
 		return userVO;
 	}
-	
-	public void charge(int value){
-		value=Integer.parseInt(jtChargeValue.getText());
-		webCreditController.charge(userVO,value);
-		try {
-			userVO=webCreditController.findUserByUsername(username);
-		} catch (UserNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+	public void charge(int value) {
+		int result = JOptionPane.showConfirmDialog(null, "是否确定充值？", "提示", JOptionPane.YES_NO_OPTION,
+				JOptionPane.INFORMATION_MESSAGE);
+		if (result == 0) {
+			value = Integer.parseInt(jtChargeValue.getText());
+			webCreditController.charge(userVO, value);
+			try {
+				userVO = webCreditController.findUserByUsername(username);
+			} catch (UserNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			creditChargeModel = new CreditChargeModel(userVO);
+			jTable.setModel(creditChargeModel);
+			jtChargeValue.setText("");
 		}
-		
-		creditChargeModel=new CreditChargeModel(userVO);
-		jTable.setModel(creditChargeModel);		
+
 	}
 
-//	public static void main(String[] args) {
-//		JFrame frame = new JFrame();
-//		frame.setSize(1000, 700);
-//		CreditChargePanel p = new CreditChargePanel();
-//		frame.add(p);
-//		frame.setVisible(true);
-//	}
+	public String getUsername() {
+		return jtUsername.getText();
+	}
+	// public static void main(String[] args) {
+	// JFrame frame = new JFrame();
+	// frame.setSize(1000, 700);
+	// CreditChargePanel p = new CreditChargePanel();
+	// frame.add(p);
+	// frame.setVisible(true);
+	// }
 }

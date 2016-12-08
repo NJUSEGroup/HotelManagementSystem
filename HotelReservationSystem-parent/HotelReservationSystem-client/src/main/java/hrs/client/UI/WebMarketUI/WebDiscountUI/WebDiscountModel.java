@@ -1,18 +1,15 @@
 package hrs.client.UI.WebMarketUI.WebDiscountUI;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javax.persistence.GeneratedValue;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 import hrs.common.VO.WebDiscountVO;
 import hrs.common.util.DateHelper;
-import hrs.common.VO.CommercialCircleVO;
 
 public class WebDiscountModel implements TableModel{
 	private List<WebDiscountVO> webDiscountList;

@@ -3,48 +3,43 @@ package hrs.client.UI.WebMarketUI.WebDiscountUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
 
-import org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor;
 
-import hrs.client.UI.WebMarketUI.CreditChargeUI.CreditChargePanel;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.AddMouseListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.DeleteMouseListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.ModifyMouseListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.AddWebDiscountDialog;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebDiscountController;
 import hrs.common.Exception.Promotion.WebDiscountService.WebDiscountNotFoundException;
 import hrs.common.VO.WebDiscountVO;
-import hrs.common.util.type.WebsiteDiscountType;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class WebDiscountPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6524280989363498476L;
 	private IWebDiscountController webDiscountController;
 	private List<WebDiscountVO> webDiscountList;
 	private WebDiscountModel model;
-	private WebDiscountModel addModel, modifyModel;
-	private JButton jbAdd, jbModify, jbDelete;
+	private HRSButton jbAdd,jbModify, jbDelete;
 
 	private DeleteMouseListener listener;
 	private AddMouseListener addMouseListener;
@@ -61,8 +56,6 @@ public class WebDiscountPanel extends JPanel {
 	private VIPDiaog jdVIP;
 	private Font JTABLE_FONT=new Font("Arial Unicode MS", Font.PLAIN, 18);
 	
-//	private ResourceBundle rb = ResourceBundle.getBundle("webDiscount", Locale.getDefault());
-
 	/**
 	 * Create the panel.
 	 */
@@ -78,31 +71,16 @@ public class WebDiscountPanel extends JPanel {
 		this.setSize(1080, 722);
 		this.setBackground(UIConstants.JFRAME);
 
-		jbAdd = new JButton("添加");
-		jbAdd.setFont(UIConstants.JBUTTON_FONT);
-		jbAdd.setBackground(UIConstants.JLABEL);
-		jbAdd.setForeground(Color.WHITE);
-		jbAdd.setBorderPainted(false);
-		jbAdd.setOpaque(true);
+		jbAdd=new HRSButton("添加");
 		jdAddWebDiscount = new AddWebDiscountDialog(this);// this
 		addMouseListener = new AddMouseListener(this);
 		jbAdd.addMouseListener(addMouseListener);
 
-		jbModify = new JButton("修改");
-		jbModify.setFont(UIConstants.JBUTTON_FONT);
-		jbModify.setBackground(UIConstants.JLABEL);
-		jbModify.setForeground(Color.WHITE);
-		jbModify.setBorderPainted(false);
-		jbModify.setOpaque(true);
+		jbModify=new HRSButton("修改");
 		modifyMouseListener = new ModifyMouseListener(this);
 		jbModify.addMouseListener(modifyMouseListener);
 
-		jbDelete = new JButton("删除");
-		jbDelete.setFont(UIConstants.JBUTTON_FONT);
-		jbDelete.setBackground(Color.RED);
-		jbDelete.setForeground(Color.WHITE);
-		jbDelete.setBorderPainted(false);
-		jbDelete.setOpaque(true);
+		jbDelete=new HRSButton("删除");
 		listener = new DeleteMouseListener(this);
 		jbDelete.addMouseListener(listener);
 
@@ -135,7 +113,7 @@ public class WebDiscountPanel extends JPanel {
 		jTable.setFont(JTABLE_FONT);
 		jTable.setRowHeight(40);
 		jTable.setShowVerticalLines(false);
-		jTable.setShowHorizontalLines(false);
+		jTable.setShowHorizontalLines(true);
 
 		// 设置表头
 		jTableHeader = jTable.getTableHeader();
@@ -147,7 +125,7 @@ public class WebDiscountPanel extends JPanel {
 
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(jTable);
-		scrollPane.setBounds(3, 20, 1000, 530);
+		scrollPane.setBounds(3, 20, 1060, 530);
 		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		scrollPane.getViewport().setBackground(UIConstants.JFRAME);
 		scrollPane.setOpaque(true);
@@ -168,23 +146,15 @@ public class WebDiscountPanel extends JPanel {
 
 	public void addWebDiscount() {
 		addVo = jdAddWebDiscount.jdaddWebDiscount();
-		// System.out.println(addVo);
 		webDiscountController.add(addVo);
-		webDiscountController = ControllerFactory.getWebDiscountController();
-		webDiscountList = getWebDiscountList();
-		addModel = new WebDiscountModel(webDiscountList);
-		jTable.setModel(addModel);
+		refresh();
 		jlNumberOfPO.setText("共 " + webDiscountList.size() + " 条记录");
 		jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 	}
 
 	public void deleteWebDiscount(WebDiscountVO vo) {
 		webDiscountController.delete(vo.id);
-		WebDiscountModel deleteModel;
-		webDiscountController = ControllerFactory.getWebDiscountController();
-		webDiscountList = getWebDiscountList();
-		deleteModel = new WebDiscountModel(webDiscountList);
-		jTable.setModel(deleteModel);
+		refresh();
 		jlNumberOfPO.setText("共 " + webDiscountList.size() + " 条记录");
 		jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 	}
@@ -200,7 +170,6 @@ public class WebDiscountPanel extends JPanel {
 				jdSpecialCommercialCircle.setLocationRelativeTo(null);
 				break;
 			case SpecialPeriod:
-				// System.out.println("选中了");
 				jdSpecialPeriod = new SpecialPeriodDialog(this);
 				jdSpecialPeriod.setVisible(true);
 				jdSpecialPeriod.setLocationRelativeTo(null);
@@ -232,10 +201,7 @@ public class WebDiscountPanel extends JPanel {
 			break;
 		}
 		webDiscountController.update(modifyVO);
-		webDiscountController = ControllerFactory.getWebDiscountController();
-		webDiscountList = getWebDiscountList();
-		modifyModel = new WebDiscountModel(webDiscountList);
-		jTable.setModel(modifyModel);
+		refresh();
 		JOptionPane.showMessageDialog(null, "促销策略成功修改！", "Success", JOptionPane.PLAIN_MESSAGE, null);
 	}
 
@@ -249,5 +215,9 @@ public class WebDiscountPanel extends JPanel {
 	public void showAddDialog() {
 		jdAddWebDiscount.setVisible(true);
 		jdAddWebDiscount.setLocationRelativeTo(null);
+	}
+	public void refresh(){
+		model=new WebDiscountModel(getWebDiscountList());
+		jTable.setModel(model);
 	}
 }

@@ -11,6 +11,7 @@ import javax.swing.SwingConstants;
 
 import hrs.client.UI.WebStaffUI.WebStaffFrame;
 import hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddListener.NextStepMouseListener;
+import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.VO.HotelVO;
 
@@ -26,7 +27,7 @@ public class HotelAddUIPanel extends JPanel {
 	private NextStepMouseListener nextStepMouseListener;
 	private WebStaffFrame webStaffFrame;
 	private JLabel jlHotelName;
-	private JButton jbNextStep;
+	private HRSButton jbNextStep;
 
 	/**
 	 * Create the panel.
@@ -53,12 +54,8 @@ public class HotelAddUIPanel extends JPanel {
 		jtextHotelName = new JTextField();
 		jtextHotelName.setColumns(10);
 		
-		jbNextStep = new JButton("下一步");
-		jbNextStep.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
-		jbNextStep.setBackground(new Color(0, 160, 233));
-		jbNextStep.setForeground(Color.WHITE);
-		jbNextStep.setBorderPainted(false);
-		jbNextStep.setOpaque(true);
+		jbNextStep = new HRSButton("下一步");
+		jbNextStep.setFont(new Font("宋体", Font.PLAIN, 18));
 		nextStepMouseListener=new NextStepMouseListener(this);
 		jbNextStep.addMouseListener(nextStepMouseListener);
 		

@@ -22,6 +22,7 @@ import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderListener.SearchConfirmMouseL
 import hrs.client.UI.WebStaffUI.WebUserUI.WebUserListener.ModifyUserInfoMouseListener;
 import hrs.client.UI.WebStaffUI.WebUserUI.WebUserListener.SearchUserConfirmMouseListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebStaffController.IWebUserController;
 import hrs.common.Exception.UserService.UserNotFoundException;
@@ -32,11 +33,10 @@ public class WebUserUIPanel extends JPanel {
 	private IWebUserController controller = ControllerFactory.getWebUserController();
 	private JTextField jtextUsername;
 	private JLabel jlUserSearch;
-	private JButton jbConfirm;
+	private HRSButton jbConfirm,jbModify;
 	private ShowUserInfoPanel showUserInfoPanel;
 	private SearchUserConfirmMouseListener confirmMouseListener;
 	private UserVO userVO;
-	private JButton jbModify;
 	private ModifyUserInfoMouseListener modifyUserInfoMouseListener;
 
 	/**
@@ -60,21 +60,11 @@ public class WebUserUIPanel extends JPanel {
 		jtextUsername = new JTextField();
 		jtextUsername.setColumns(10);
 
-		jbConfirm = new JButton("确认");
-		jbConfirm.setFont(UIConstants.JLABEL_FONT);
-		jbConfirm.setBackground(UIConstants.JBUTTON_BLUE);
-		jbConfirm.setForeground(Color.WHITE);
-		jbConfirm.setBorderPainted(false);
-		jbConfirm.setOpaque(true);
+		jbConfirm = new HRSButton("确认");
 		confirmMouseListener = new SearchUserConfirmMouseListener(this);
 		jbConfirm.addMouseListener(confirmMouseListener);
 		
-		jbModify = new JButton("修改");
-		jbModify.setFont(UIConstants.JLABEL_FONT);
-		jbModify.setBackground(UIConstants.JBUTTON_BLUE);
-		jbModify.setForeground(Color.WHITE);
-		jbModify.setBorderPainted(false);
-		jbModify.setOpaque(true);
+		jbModify = new HRSButton("修改");
 		modifyUserInfoMouseListener=new ModifyUserInfoMouseListener(this);
 		jbModify.addMouseListener(modifyUserInfoMouseListener);
 

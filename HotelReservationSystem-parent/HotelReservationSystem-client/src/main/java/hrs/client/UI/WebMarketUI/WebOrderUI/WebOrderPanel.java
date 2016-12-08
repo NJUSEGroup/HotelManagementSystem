@@ -18,6 +18,7 @@ import javax.swing.table.JTableHeader;
 import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderListener.RevokeMouseListener;
 import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderListener.SearchConfirmMouseListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebOrderController;
 import hrs.common.Exception.OrderService.OrderNotFoundException;
@@ -48,11 +49,10 @@ public class WebOrderPanel extends JPanel {
 	private List<OrderVO> orderList;
 	private JLabel jlNumberOfPO;
 	private JLabel jlSearch;
-	private JButton jbRevoke;
 	private JComboBox comboBox;
-	private JButton jbSearchConfirm;
-	private Font JBUTTON_FONT=new Font("Arial Unicode MS", Font.PLAIN, 15);
-	private Font JTABLE_FONT=new Font("Arial Unicode MS", Font.PLAIN, 18);
+	private HRSButton jbRevoke, jbSearchConfirm;
+	private Font JBUTTON_FONT = new Font("Arial Unicode MS", Font.PLAIN, 15);
+	private Font JTABLE_FONT = new Font("Arial Unicode MS", Font.PLAIN, 18);
 
 	/**
 	 * Create the panel.
@@ -68,12 +68,7 @@ public class WebOrderPanel extends JPanel {
 		orderList = getAbnormalOrder();
 		// System.out.println(orderList);
 
-		jbRevoke = new JButton("撤销");
-		jbRevoke.setFont(UIConstants.JBUTTON_FONT);
-		jbRevoke.setBackground(UIConstants.JLABEL);
-		jbRevoke.setForeground(Color.WHITE);
-		jbRevoke.setBorderPainted(false);
-		jbRevoke.setOpaque(true);
+		jbRevoke = new HRSButton("撤销");
 		jbRevoke.addMouseListener(new RevokeMouseListener(this));
 
 		jlNumberOfPO = new JLabel("共" + orderList.size() + "条记录");
@@ -88,12 +83,8 @@ public class WebOrderPanel extends JPanel {
 		textField = new JTextField();
 		textField.setColumns(10);
 
-		jbSearchConfirm = new JButton("确认");
-		jbSearchConfirm.setFont(JBUTTON_FONT);
-		jbSearchConfirm.setBackground(UIConstants.JLABEL);
-		jbSearchConfirm.setForeground(Color.WHITE);
-		jbSearchConfirm.setBorderPainted(false);
-		jbSearchConfirm.setOpaque(true);
+		jbSearchConfirm = new HRSButton("确认");
+		jbSearchConfirm.setFont(new Font("宋体", Font.PLAIN, 14));
 		jbSearchConfirm.addMouseListener(new SearchConfirmMouseListener(this));
 
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -129,7 +120,7 @@ public class WebOrderPanel extends JPanel {
 		jTable.setFont(JTABLE_FONT);
 		jTable.setRowHeight(40);
 		jTable.setShowVerticalLines(false);
-		jTable.setShowHorizontalLines(false);
+		jTable.setShowHorizontalLines(true);
 
 		// 设置表头
 		jTableHeader = jTable.getTableHeader();
@@ -149,79 +140,73 @@ public class WebOrderPanel extends JPanel {
 	}
 
 	public void refresh() {
-		List<OrderVO> list = getAbnormalOrder();
-		// System.out.println(list);
-		model = new WebOrderModel(list);
+		orderList = getAbnormalOrder();
+		model = new WebOrderModel(orderList);
 		jTable.setModel(model);
+		jlNumberOfPO.setText("共 " + orderList.size() + " 条记录");
+		jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 	}
 
 	public List<OrderVO> getAbnormalOrder() {
-		List<OrderVO> list = new ArrayList<>();
 		try {
-			list = orderController.findOrderByOrderStatus(OrderStatus.Abnormal);
+			orderList = orderController.findOrderByOrderStatus(OrderStatus.Abnormal);
 			// System.out.println(list.get(0).user.username);
 		} catch (OrderNotFoundException e) {
 			JOptionPane.showMessageDialog(this, "此时异常订单为空！", "NullAbnormalOrder", JOptionPane.INFORMATION_MESSAGE);
 
 		}
-		return list;
+		return orderList;
 	}
 
 	public void revokeFull(OrderVO vo) {
 		orderController.revokeOrder(vo, RestoreValueType.Full);
-		webOrderList = getAbnormalOrder();
-		revokeModel = new WebOrderModel(webOrderList);
-		jTable.setModel(revokeModel);
-		jlNumberOfPO.setText("共 " + webOrderList.size() + " 条记录");
-		jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
+		refresh();
 	}
 
 	public void revokeHalf(OrderVO vo) {
 		orderController.revokeOrder(vo, RestoreValueType.Half);
-		webOrderList = getAbnormalOrder();
-		revokeModel = new WebOrderModel(webOrderList);
-		jTable.setModel(revokeModel);
-		jlNumberOfPO.setText("共 " + webOrderList.size() + " 条记录");
-		jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
+		refresh();
 	}
 
 	public void search() {
 		String input = textField.getText();
-		switch (comboBox.getSelectedIndex()) {
-		case 0:
-			WebOrderModel searchModel;
+		switch ((String) comboBox.getSelectedItem()) {
+		case "用户名":
 			try {
 				List<OrderVO> orderVoList = orderController.findOrderByUsernameAndStatus(input, OrderStatus.Abnormal);
-				searchModel = new WebOrderModel(orderVoList);
-				jTable.setModel(searchModel);
+				model = new WebOrderModel(orderVoList);
+				jTable.setModel(model);
 				jlNumberOfPO.setText("共 " + orderVoList.size() + " 条记录");
 				jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 			} catch (OrderNotFoundException e) {
 				// TODO Auto-generated catch block
 				List<OrderVO> list = new ArrayList<>();
-				searchModel = new WebOrderModel(list);
-				jTable.setModel(searchModel);
+				model = new WebOrderModel(list);
+				jTable.setModel(model);
 				jlNumberOfPO.setText("共 0 条记录");
 				jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 				JOptionPane.showMessageDialog(this, "不存在该用户的异常订单！", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 
 			break;
-		case 1:
-			WebOrderModel searchByIDModel;
+		case "订单号":
 			try {
 				OrderVO orderVO = orderController.findOrderByID(Integer.parseInt(input));
-				List<OrderVO> list = new ArrayList<>();
-				list.add(orderVO);
-				searchByIDModel = new WebOrderModel(list);
-				jTable.setModel(searchByIDModel);
-				jlNumberOfPO.setText("共 " + list.size() + " 条记录");
-				jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
+				if (!orderVO.status.equals(OrderStatus.Abnormal)) {
+					JOptionPane.showMessageDialog(this, "不存在该异常订单！", "Error", JOptionPane.ERROR_MESSAGE);
+				} else {
+					List<OrderVO> list = new ArrayList<>();
+					list.add(orderVO);
+					model = new WebOrderModel(list);
+					jTable.setModel(model);
+					jlNumberOfPO.setText("共 " + list.size() + " 条记录");
+					jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
+				}
 			} catch (OrderNotFoundException e) {
 				// TODO Auto-generated catch block
 				List<OrderVO> list = new ArrayList<>();
-				searchByIDModel = new WebOrderModel(list);
-				jTable.setModel(searchByIDModel);
+				model = new WebOrderModel(list);
+				jTable.setModel(model);
 				jlNumberOfPO.setText("共 0 条记录");
 				jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 				JOptionPane.showMessageDialog(this, "不存在该异常订单！", "Error", JOptionPane.ERROR_MESSAGE);
@@ -239,12 +224,4 @@ public class WebOrderPanel extends JPanel {
 		} else
 			return null;
 	}
-
-	// public static void main(String[] args) {
-	// JFrame frame = new JFrame();
-	// frame.setSize(1000, 700);
-	// WebOrderPanel p = new WebOrderPanel();
-	// frame.add(p);
-	// frame.setVisible(true);
-	// }
 }
