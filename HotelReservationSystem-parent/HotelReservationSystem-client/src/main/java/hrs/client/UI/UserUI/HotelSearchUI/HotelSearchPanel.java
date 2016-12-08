@@ -2,10 +2,7 @@ package hrs.client.UI.UserUI.HotelSearchUI;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -17,29 +14,21 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
 
-import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
-
-import hrs.client.UI.HotelUI.Components.RoomTableModel;
 import hrs.client.UI.UserUI.Components.CommonPanel;
 import hrs.client.UI.UserUI.Components.CommonTable;
-import hrs.client.UI.UserUI.HotelSearchUI.Listener.SearchListener;
-import hrs.client.UI.UserUI.HotelSearchUI.Listener.SearchTableListener;
 import hrs.client.UI.UserUI.HotelSearchUI.Listener.DetailListener;
 import hrs.client.UI.UserUI.HotelSearchUI.Listener.OrderListener;
-import hrs.client.UI.UserUI.HotelSearchUI.Listener.PlaceOrderListener;
+import hrs.client.UI.UserUI.HotelSearchUI.Listener.SearchListener;
+import hrs.client.UI.UserUI.HotelSearchUI.Listener.SearchTableListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.UserController.IUserHotelController;
-import hrs.common.Exception.HotelService.HotelNotFoundException;
 import hrs.common.VO.HotelVO;
 import hrs.common.VO.RoomVO;
 import hrs.common.VO.UserVO;
 import hrs.common.util.FilterCondition.FilterCondition;
-import hrs.common.util.FilterCondition.NameFilterCondition;
-import hrs.common.util.FilterCondition.RoomTypeFilterCondition;
-import hrs.common.util.type.FilterType;
 import hrs.common.util.type.RoomType;
 
 /**
@@ -59,8 +48,8 @@ public class HotelSearchPanel extends CommonPanel {
 	private SearchPanel searchPanel;
 	private IUserHotelController controller;
 	private CommonTable table;
-	private JButton orderJB;
-	private JButton detailJB;
+	private HRSButton orderJB;
+	private HRSButton detailJB;
 	private HotelPanel panel;
 	Font font = UIConstants.JLABEL_FONT;
 	public HotelSearchPanel(UserVO user) {
@@ -98,16 +87,16 @@ public class HotelSearchPanel extends CommonPanel {
 
 	private void setdownButton() {
 
-		detailJB = new JButton("详细信息");
-		detailJB.setFont(font);
+		detailJB = new HRSButton("详细信息");
+//		detailJB.setFont(font);
 		detailJB.setBounds(this.getWidth() - 330, 645, 120, 40);
 		detailJB.setEnabled(false);
 		detailJB.addActionListener(new DetailListener(this));
 		contentPane.add(detailJB);
 
-		orderJB = new JButton("立即下单");
+		orderJB = new HRSButton("立即下单");
 		orderJB.setBounds(this.getWidth() - 180, 645, 120, 40);
-		orderJB.setFont(font);
+//		orderJB.setFont(font);
 		orderJB.setEnabled(false);
 		orderJB.addActionListener(new OrderListener(this));
 		contentPane.add(orderJB);
@@ -144,9 +133,9 @@ public class HotelSearchPanel extends CommonPanel {
 	}
 
 	private void setSearchButton() {
-		JButton searchJB = new JButton("搜索");
+		HRSButton searchJB = new HRSButton("搜索");
 		searchJB.setBounds(this.getWidth() - 160, 295, 100, 40);
-		searchJB.setFont(font);
+//		searchJB.setFont(font);
 		contentPane.add(searchJB);
 		searchJB.addActionListener(new SearchListener(this));
 	}
@@ -286,7 +275,7 @@ public class HotelSearchPanel extends CommonPanel {
 		
 		BeginAndLeaveTime orderTime = getOrderTime();
 		
-		panel.showOrderPanel(hotel,rooms,orderTime);
+		panel.showOrderPanel(hotel,rooms,orderTime,user);
 		
 		
 		

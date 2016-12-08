@@ -3,6 +3,7 @@ package hrs.client.UI.UserUI.UserInfoUI;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -14,9 +15,11 @@ import hrs.client.UI.UserUI.Components.CommonPanel;
 import hrs.client.UI.UserUI.UserInfoUI.UserInfoListener.CancelListener;
 import hrs.client.UI.UserUI.UserInfoUI.UserInfoListener.ConfirmListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.UserController.IUserController;
 import hrs.common.Exception.UserService.UserNotFoundException;
+import hrs.common.VO.OrderVO;
 import hrs.common.VO.UserVO;
 import hrs.common.util.DateHelper;
 
@@ -35,9 +38,9 @@ public class UserInfoPanel extends CommonPanel {
 	private JTextField enterpriseField = new UserInfoText();// 企业
 	private JLabel creditJL;
 
-	private JComboBox yearBox = new JComboBox();// 出生年份选框
-	private JComboBox monthBox = new JComboBox();// 出生月份选框
-	private JComboBox dayBox = new JComboBox();// 出生日期选框
+	private JComboBox<String> yearBox ;// 出生年份选框
+	private JComboBox<String> monthBox ;// 出生月份选框
+	private JComboBox<String> dayBox ;// 出生日期选框
 
 	private static int COMP_HEIGHT = 60;//标签宽度，也即每行高度
 	private static int TEXT_HEIGHT = 40;//文本框高度
@@ -45,7 +48,8 @@ public class UserInfoPanel extends CommonPanel {
 	private static int TEXT_X = 130 + GAP_WIDTH;//文本框起始x坐标
 	
 	private String username;
-	private Date date;
+	private Calendar calendar;
+//	private Date date;
 	private IUserController controller = ControllerFactory.getUserController();
 
 	private UserVO user;
@@ -85,17 +89,17 @@ public class UserInfoPanel extends CommonPanel {
 	
 
 	private void setButton() {
-		JButton cancelJB = new JButton("取消");
-		cancelJB.setPreferredSize(new Dimension(180, 80));
-		cancelJB.setFont(font);
-		cancelJB.setBounds(160, 500, 180, 70);
+		HRSButton  cancelJB = new HRSButton("取消");
+//		cancelJB.setPreferredSize(new Dimension(180, 80));
+//		cancelJB.setFont(font);
+		cancelJB.setBounds(160, 500, 150, 60);
 		cancelJB.addActionListener(new CancelListener(this));
 		this.add(cancelJB);
 
-		JButton confirmJB = new JButton("确认");
-		confirmJB.setPreferredSize(new Dimension(180, 80));
-		confirmJB.setFont(font);
-		confirmJB.setBounds(560, 500, 180, 70);
+		HRSButton confirmJB = new HRSButton("确认");
+//		confirmJB.setPreferredSize(new Dimension(180, 80));
+//		confirmJB.setFont(font);
+		confirmJB.setBounds(560, 500, 150, 60);
 		confirmJB.addActionListener(new ConfirmListener(this,user));
 		this.add(confirmJB);
 	}
@@ -119,8 +123,11 @@ public class UserInfoPanel extends CommonPanel {
 
 		creditJL.setFont(font);
 		creditJL.setPreferredSize(new Dimension(100, 60));
-
-		date = new Date(1997, 1, 1);
+		
+		calendar = Calendar.getInstance();
+		Date d = user.birthDate;
+		calendar.setTime(d);
+		
 	}
 
 	/*
@@ -130,6 +137,9 @@ public class UserInfoPanel extends CommonPanel {
 	 * 
 	 */
 	private void setInfo() {
+		yearBox = new JComboBox<>();
+		monthBox = new JComboBox<>();
+		dayBox = new JComboBox<>();
 		JLabel yearJL = new DateLabel("年");
 		JLabel monthJL = new DateLabel("月");
 		JLabel dayJL = new DateLabel("日");
@@ -147,9 +157,10 @@ public class UserInfoPanel extends CommonPanel {
 		dayBox.setBounds(430+GAP_WIDTH, COMP_HEIGHT*3+10, 80, TEXT_HEIGHT);
 		dayJL.setBounds(510+GAP_WIDTH, COMP_HEIGHT*3+10, 40, TEXT_HEIGHT);
 
-		int year = date.getYear();
-		int month = date.getMonth();
-		int day = date.getDay();
+		
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DATE);
 		yearBox.setFont(font);
 		monthBox.setFont(font);
 		dayBox.setFont(font);
@@ -174,15 +185,15 @@ public class UserInfoPanel extends CommonPanel {
 			dayBox.addItem(s);
 		}
 
-		yearBox.setPreferredSize(new Dimension(120, 40));
-		monthBox.setPreferredSize(new Dimension(80, 40));
-		dayBox.setPreferredSize(new Dimension(80, 40));
-		String birth = DateHelper.format(user.birthDate);
-		String[] strs = birth.split("-");
+//		yearBox.setPreferredSize(new Dimension(120, 40));
+//		monthBox.setPreferredSize(new Dimension(80, 40));
+//		dayBox.setPreferredSize(new Dimension(80, 40));
+//		String birth = DateHelper.format(user.birthDate);
+//		String[] strs = birth.split("-");
 
-		yearBox.setSelectedItem(strs[0]);
-		monthBox.setSelectedItem(strs[1]);
-		dayBox.setSelectedItem(strs[2]);
+		yearBox.setSelectedItem(year+"");
+		monthBox.setSelectedItem(month+"");
+		dayBox.setSelectedItem(day+"");
 
 		this.add(userTextField);
 		this.add(nameTextField);

@@ -25,7 +25,7 @@ public class EnumHelper {
 		map.put(RoomType.Double,"双人房");
 		map.put(RoomType.Single,"单人房");
 		map.put(RoomType.Standard,"标准房");
-		map.put(RoomType.KingSize,"大床房");
+		map.put(RoomType.KingSize,"大床间");
 		map.put(RoomType.Executive,"行政标间");
 		
 		return map.get(type);
@@ -61,5 +61,20 @@ public class EnumHelper {
 		map.put("已撤销",OrderStatus.UserRevoked);
 		map.put("未执行",OrderStatus.Unexecuted);
 		return map.get(status);
+	}
+	
+	public static RoomType toRoomType(String type){
+		HashMap<String,RoomType > map = new HashMap<>();
+		map.put("商务标间",RoomType.Business);
+		map.put("豪华房",RoomType.Deluxe);
+		map.put("双人房",RoomType.Double);
+		map.put("单人房",RoomType.Single);
+		map.put("标准房",RoomType.Standard);
+		map.put("大床间",RoomType.KingSize);
+		map.put("行政标间",RoomType.Executive);
+		
+		return map.get(type);
+		
+		
 	}
 }
