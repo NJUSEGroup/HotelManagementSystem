@@ -1,5 +1,6 @@
 package hrs.client.UI.UserUI.HotelSearchUI;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,8 +11,6 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 import hrs.common.VO.HotelDiscountVO;
-import hrs.common.VO.HotelVO;
-import hrs.common.VO.RoomVO;
 import hrs.common.VO.WebDiscountVO;
 import hrs.common.util.type.HotelDiscountType;
 import hrs.common.util.type.WebsiteDiscountType;
@@ -29,6 +28,11 @@ public class DiscountTableModel implements TableModel {
 		this.webDiscountsAndDouble = webDiscountsAndDouble;
 		this.hotelDiscountsAndDouble = hotelDiscountsAndDouble;
 		
+		webDiscounts = new ArrayList<>();
+		hotelDiscounts = new ArrayList<>();
+		webDoubles = new ArrayList<>();
+		hotelDoubles = new ArrayList<>();
+		
 		Iterator<Entry<WebDiscountVO,Double>> iter = ((Map<WebDiscountVO,Double>) webDiscountsAndDouble).entrySet().iterator();
 		while (iter.hasNext()) {
 			@SuppressWarnings("rawtypes")
@@ -43,7 +47,7 @@ public class DiscountTableModel implements TableModel {
 		Iterator<Entry<HotelDiscountVO,Double>> newiter = ((Map<HotelDiscountVO,Double>) hotelDiscountsAndDouble).entrySet().iterator();
 		while (newiter.hasNext()) {
 			@SuppressWarnings("rawtypes")
-			Map.Entry entry = (Map.Entry) iter.next();
+			Map.Entry entry = (Map.Entry) newiter.next();
 			HotelDiscountVO key = (HotelDiscountVO) entry.getKey();
 			Double d = (Double) entry.getValue();
 			hotelDiscounts.add(key);
@@ -85,14 +89,15 @@ public class DiscountTableModel implements TableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
+		DecimalFormat decimalFormat = new DecimalFormat("0.00");
 		if(rowIndex<webSize){
 			WebDiscountVO webDiscount = webDiscounts.get(rowIndex);
-			String[] result = {"网站促销",WebsiteDiscountType.toDiscountName(webDiscount.type),webDoubles.get(rowIndex)+"","",""};
+			String[] result = {"网站促销",WebsiteDiscountType.toDiscountName(webDiscount.type),decimalFormat.format(webDoubles.get(rowIndex))+"","",""};
 			return result[columnIndex];
 		}
 		else {
 			HotelDiscountVO hotelDiscount = hotelDiscounts.get(rowIndex-webSize);
-			String[] result = {"酒店促销",HotelDiscountType.toDiscountName(hotelDiscount.type),hotelDoubles.get(rowIndex-webSize)+"","",""};
+			String[] result = {"酒店促销",HotelDiscountType.toDiscountName(hotelDiscount.type),decimalFormat.format(hotelDoubles.get(rowIndex-webSize))+""+"","",""};
 			return result[columnIndex];
 		}
 		

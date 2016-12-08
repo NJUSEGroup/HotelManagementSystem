@@ -90,9 +90,10 @@ public class HotelPanel extends ComNeedBackPanel {
 	 * @param hotel 下单界面需要的酒店信息
 	 * @param rooms 下单需要的房间信息
 	 * @param orderTime 下单需要的预计入房时间和预计退房时间
+	 * @param user 
 	 */
-	public void showOrderPanel(HotelVO hotel,List<RoomVO> rooms,BeginAndLeaveTime orderTime){
-		placeOrderPanel = new PlaceOrderPanel(hotel, rooms, orderTime);
+	public void showOrderPanel(HotelVO hotel,List<RoomVO> rooms,BeginAndLeaveTime orderTime, UserVO user){
+		placeOrderPanel = new PlaceOrderPanel(hotel, rooms, orderTime,user);
 		placeOrderPanel.setPanel(this);
 		hotelCardPanel.add("placeOrder", placeOrderPanel);
 		hotelCard.show(hotelCardPanel, "placeOrder");

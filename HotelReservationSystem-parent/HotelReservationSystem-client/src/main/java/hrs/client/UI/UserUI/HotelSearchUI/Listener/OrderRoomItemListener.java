@@ -3,19 +3,19 @@ package hrs.client.UI.UserUI.HotelSearchUI.Listener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import hrs.client.UI.UserUI.HotelSearchUI.SearchPanel;
+import hrs.client.UI.UserUI.HotelSearchUI.PlaceOrderPanel;
 
-public class CityBoxListener implements ItemListener {
-	private SearchPanel panel;
+public class OrderRoomItemListener implements ItemListener {
+	private PlaceOrderPanel panel;
 
-	public CityBoxListener(SearchPanel panel) {
+	public OrderRoomItemListener(PlaceOrderPanel panel) {
 		this.panel = panel;
 	}
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED)
-			panel.changeCity();
+			panel.change();
 
 	}
 

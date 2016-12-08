@@ -32,4 +32,25 @@ public enum RoomType {
 			return null;
 		}
 	}
+	
+	public static String toRoomName(RoomType type) {
+		switch (type) {
+		case Single:
+			return "单人房";
+		case Double:
+			return "双人房";
+		case KingSize:
+			return "大床间";
+		case Standard:
+			return "标准房";
+		case Deluxe:
+			return "豪华房";
+		case Business:
+			return "商务标间";
+		case Executive:
+			return "行政标间";
+		default:
+			return null;
+		}
+	}
 }
