@@ -96,7 +96,7 @@ public class VIPDiaog extends JDialog {
 		double newDiscount = Double.parseDouble(jtextDiscount.getText());
 		webDiscountVO.VIPlevel = newVIPLevel;
 		webDiscountVO.discount = newDiscount;
-		System.out.println(webDiscountVO);
+//		System.out.println(webDiscountVO);
 		return webDiscountVO;
 	}
 

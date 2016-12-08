@@ -43,6 +43,8 @@ public class SpecialCommercialCircleDialog extends JDialog {
 	private JLabel jlDiscount;
 	private LocationVO location;
 	private List<LocationVO> locs;
+	private List<LocationVO> locations;
+	private List<CommercialCircleVO> commercialCircles;
 	private List<CommercialCircleVO> commercialCircleList;
 	private int locationIndex;
 	private IWebDiscountController controller = ControllerFactory.getWebDiscountController();
@@ -143,12 +145,29 @@ public class SpecialCommercialCircleDialog extends JDialog {
 	}
 
 	public WebDiscountVO getModifyVO() {
+		locations = controller.findAllLocations();
+		int j = 0, k = 0;
 		double newDiscount = Double.parseDouble(jtextDiscount.getText());
-		webDiscountVO.location.name = (String) jcomboBoxLocation.getSelectedItem();
-		webDiscountVO.commercialCircle.name = (String) jcomboBoxCommercialCircle.getSelectedItem();
+		String newLocation = (String) jcomboBoxLocation.getSelectedItem();
+		String newCommercialCircle = (String) jcomboBoxCommercialCircle.getSelectedItem();
+		for (j = 0; j < locations.size(); j++) {
+			if (locations.get(j).name.equals(newLocation))
+				break;
+		} // 找到新的位置
+		webDiscountVO.location = locations.get(j);
+
+		commercialCircles = controller.findCircleByLoc(j + 1);
+		System.out.println(commercialCircles.size());
+		for (k = 0; k < commercialCircles.size(); k++) {
+			if (commercialCircles.get(k).name.equals(newCommercialCircle))
+				break;
+		} // 找到新的商圈
+		webDiscountVO.commercialCircle = commercialCircles.get(k);
+
 		webDiscountVO.discount = newDiscount;
+
 		return webDiscountVO;
-	}
+	}// 转成vo，而不仅仅是string；否则id没发生变化
 
 	public double getNewDiscount() {
 		return getModifyVO().discount;

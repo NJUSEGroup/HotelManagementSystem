@@ -197,6 +197,7 @@ public class WebDiscountPanel extends JPanel {
 		default:
 			break;
 		}
+		System.out.println(modifyVO);
 		webDiscountController.update(modifyVO);
 		refresh();
 		JOptionPane.showMessageDialog(null, "促销策略成功修改！", "Success", JOptionPane.PLAIN_MESSAGE, null);
@@ -210,6 +211,7 @@ public class WebDiscountPanel extends JPanel {
 	}
 
 	public void showAddDialog() {
+		jdAddWebDiscount=new AddWebDiscountDialog(this);
 		jdAddWebDiscount.setVisible(true);
 		jdAddWebDiscount.setLocationRelativeTo(null);
 	}

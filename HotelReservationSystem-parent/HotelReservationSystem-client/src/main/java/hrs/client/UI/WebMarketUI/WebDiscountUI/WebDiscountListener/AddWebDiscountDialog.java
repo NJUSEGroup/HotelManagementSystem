@@ -376,12 +376,9 @@ public class AddWebDiscountDialog extends JDialog {
 		jtextEndtime.setText("");
 		jtextDiscount.setText("");
 		jcomboBoxType.setSelectedIndex(-1);
-		// jcomboBoxCommercialCircle.setSelectedIndex(-1);
-		// jcomboBoxLocation.setSelectedIndex(-1);
-		// jcomboBoxVIPLevel.setSelectedIndex(-1);
-		jcomboBoxCommercialCircle.setSelectedItem(null);
-		jcomboBoxLocation.setSelectedItem(null);
-		jcomboBoxVIPLevel.setSelectedItem(null);
+		jcomboBoxCommercialCircle.setSelectedIndex(-1);
+		jcomboBoxLocation.setSelectedIndex(-1);
+		jcomboBoxVIPLevel.setSelectedIndex(-1);
 	}
 	// public static void main(String[] args) {
 	// AddWebDiscountDialog dialog=new AddWebDiscountDialog();
