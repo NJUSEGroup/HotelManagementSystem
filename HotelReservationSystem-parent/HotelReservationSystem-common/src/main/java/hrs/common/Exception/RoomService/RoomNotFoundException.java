@@ -9,8 +9,8 @@ package hrs.common.Exception.RoomService;
 public class RoomNotFoundException extends Exception{
 
 	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	* @Fields serialVersionUID : TODO
+	*/ 
+	private static final long serialVersionUID = -6089543477025846190L;
 
 }

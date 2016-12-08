@@ -153,7 +153,7 @@ public class SearchPanel extends JPanel {
 		add(checkInDate);
 		
 		roomTypeBox = new JComboBox<>();
-		String[] l = {"无限制","商务标间","豪华房","双人房","单人房","标准房","大床房","行政标间"};
+		String[] l = {"无限制","商务标间","豪华房","双人房","单人房","标准房","大床间","行政标间"};
 		for(int i = 0;i<=7;i++){
 			roomTypeBox.addItem(l[i]);
 		}
