@@ -1,7 +1,5 @@
 package hrs.client.UI.WebStaffUI.HotelStaffUI;
 
-import java.awt.Color;
-
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -9,8 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,21 +19,20 @@ import hrs.client.util.ControllerFactory;
 import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebStaffController.IWebStaffController;
-import hrs.common.Exception.HotelService.HotelNotFoundException;
 import hrs.common.Exception.StaffService.StaffNotFoundExceptioon;
-import hrs.common.VO.HotelVO;
 import hrs.common.VO.StaffVO;
-import hrs.common.util.type.StaffType;
 import hrs.client.UI.WebStaffUI.HotelStaffUI.HotelStaffListener.ModifyHotelStaffMouseListener;
 
-import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
-
 public class HotelStaffUIPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8596027990923031324L;
 	private JTextField jtextInput;
 	private JLabel jlPassword;
 	private JLabel jlHotelStaffUsername;
 	private JLabel jlSearchHotelStaff;
+	@SuppressWarnings("rawtypes")
 	private JComboBox jcomboBoxType;
 	private JLabel jlHotelName;
 	private JTextField jtextPassword;
@@ -59,6 +54,7 @@ public class HotelStaffUIPanel extends JPanel {
 		init();
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void init() {
 		this.setSize(1080, 722);
 		this.setBackground(UIConstants.JFRAME);
@@ -163,7 +159,7 @@ public class HotelStaffUIPanel extends JPanel {
 								.addComponent(jlHotelNameShow, GroupLayout.PREFERRED_SIZE, 26,
 										GroupLayout.PREFERRED_SIZE))
 						.addGap(186)
-						.addComponent(jbModifyHotelStaff, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+						.addComponent(jbModifyHotelStaff, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(141, Short.MAX_VALUE)));
 		setLayout(groupLayout);
 
@@ -175,7 +171,7 @@ public class HotelStaffUIPanel extends JPanel {
 		Object findTypeComboBox = jcomboBoxType.getSelectedItem();
 		if (getSearchInput().equals("")) {
 			clear();
-			JOptionPane.showMessageDialog(null, "请输入酒店名称或酒店工作人员名称", "Error！", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "请输入酒店名称或酒店工作人员名称", "Error", JOptionPane.ERROR_MESSAGE);
 		} else {
 			if (findTypeComboBox.equals("酒店名称")) {
 				try {
@@ -183,7 +179,7 @@ public class HotelStaffUIPanel extends JPanel {
 				} catch (StaffNotFoundExceptioon e) {
 					// TODO Auto-generated catch block
 					clear();
-					JOptionPane.showMessageDialog(null, "酒店及工作人员不存在！", "No Such HotelStaff", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "酒店及工作人员不存在！", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 			if (findTypeComboBox.equals("酒店工作人员名")) {
@@ -192,7 +188,7 @@ public class HotelStaffUIPanel extends JPanel {
 				} catch (StaffNotFoundExceptioon e1) {
 					// TODO Auto-generated catch block
 					clear();
-					JOptionPane.showMessageDialog(null, "此酒店工作人员不存在！", "No Such HotelStaff", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "此酒店工作人员不存在！", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}
@@ -216,13 +212,13 @@ public class HotelStaffUIPanel extends JPanel {
 			for (int i = 0; i < toAddStaffVOs.size(); i++) {
 				vos[i] = toAddStaffVOs.get(i).hotel.name;
 			} // 根据用户的选择酒店名称hhhh知道vos[i]的i,get就可以得到了；
-			// selection = (StaffVO) JOptionPane.showInputDialog(null,
-			// "搜索到多家酒店，请选择一家：\n", "酒店选择",
-			// JOptionPane.PLAIN_MESSAGE, null, vos, toAddStaffVOs.get(0));
-			// System.out.println(selection);
-			// System.out.println(JOptionPane.showInputDialog(null,
-			// "搜索到多家酒店，请选择一家：\n", "酒店选择",
-			// JOptionPane.PLAIN_MESSAGE, null, vos, toAddStaffVOs.get(0)));
+				// selection = (StaffVO) JOptionPane.showInputDialog(null,
+				// "搜索到多家酒店，请选择一家：\n", "酒店选择",
+				// JOptionPane.PLAIN_MESSAGE, null, vos, toAddStaffVOs.get(0));
+				// System.out.println(selection);
+				// System.out.println(JOptionPane.showInputDialog(null,
+				// "搜索到多家酒店，请选择一家：\n", "酒店选择",
+				// JOptionPane.PLAIN_MESSAGE, null, vos, toAddStaffVOs.get(0)));
 			String userSelected = (String) JOptionPane.showInputDialog(null, "搜索到多家酒店，请选择一家：\n", "酒店选择",
 					JOptionPane.PLAIN_MESSAGE, null, vos, toAddStaffVOs.get(0));
 			for (index = 0; index < toAddStaffVOs.size(); ++index) {
@@ -242,21 +238,22 @@ public class HotelStaffUIPanel extends JPanel {
 		return jtextInput.getText();
 	}
 
+	public String getUsername() {
+		return jlUsernameShow.getText();
+	}
+
 	public void modify() {
 		String newPassword = jtextPassword.getText();
 		String newRealName = jtextRealName.getText();
-		// String newHotelName=jtextHotelName.getText();
-		// HotelVO hotelVO=new HotelVO(newHotelName, selection.hotel.star,
-		// selection.hotel.score, selection.hotel.location,
-		// selection.hotel.commercialCircle, selection.hotel.profile,
-		// selection.hotel.service, selection.hotel.street,
-		// selection.hotel.remarkNum);
-
 		selection.password = newPassword;
 		selection.name = newRealName;
 		selection.hotel = selection.hotel;
 		controller.updateStaff(selection);
 	}// 酒店名称默认不可修改
+
+	public String getPassword() {
+		return jtextPassword.getText();
+	}
 
 	public void clear() {
 		jlUsernameShow.setText("");

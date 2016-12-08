@@ -5,12 +5,14 @@ import java.awt.event.MouseListener;
 
 import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketerUIPanel;
 
-public class SearchWebMarketerConfirmMouseListener implements MouseListener{
+public class SearchWebMarketerConfirmMouseListener implements MouseListener {
 	private WebMarketerUIPanel WebMarketerUIPanel;
+
 	public SearchWebMarketerConfirmMouseListener(WebMarketerUIPanel webMarketerUIPanel) {
 		// TODO Auto-generated constructor stub
-		this.WebMarketerUIPanel=webMarketerUIPanel;
+		this.WebMarketerUIPanel = webMarketerUIPanel;
 	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -20,13 +22,13 @@ public class SearchWebMarketerConfirmMouseListener implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -38,7 +40,5 @@ public class SearchWebMarketerConfirmMouseListener implements MouseListener{
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 	}
-
-	
 
 }

@@ -13,10 +13,7 @@ public class UIConstants {
 	final public static Color JTABLEHEADER_COLOR=new Color(188, 226, 236);
 	final public static Color CONTENTPANE_COLOR=new Color(188, 226, 236);
 	
-	final public static Font JZONE_FONT=new Font("Arial Unicode MS", Font.PLAIN, 25);
-	final public static Font JLABEL_FONT=new Font("Arial Unicode MS", Font.PLAIN, 21);
-	final public static Font JLABEL_NUMBER_OF_INFO=new Font("Arial Unicode MS", Font.PLAIN, 15);
-	
-	final public static Font JBUTTON_FONT=new Font("Arial Unicode MS", Font.PLAIN, 20);//可能会有不同
-	
+	final public static Font JZONE_FONT=new Font("宋体", Font.PLAIN, 25);
+	final public static Font JLABEL_FONT=new Font("宋体", Font.PLAIN, 21);
+	final public static Font JLABEL_NUMBER_OF_INFO=new Font("宋体", Font.PLAIN, 15);
 }

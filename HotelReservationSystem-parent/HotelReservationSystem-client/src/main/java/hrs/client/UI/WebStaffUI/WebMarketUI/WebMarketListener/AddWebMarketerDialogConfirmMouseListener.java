@@ -5,30 +5,30 @@ import java.awt.event.MouseListener;
 
 import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketerUIPanel;
 
-public class AddWebMarketerDialogConfirmMouseListener implements MouseListener{
-//	private AddWebMarketerDialog addWebMarketerDialog;
+public class AddWebMarketerDialogConfirmMouseListener implements MouseListener {
 	private WebMarketerUIPanel webMarketerUIPanel;
+
 	public AddWebMarketerDialogConfirmMouseListener(WebMarketerUIPanel webMarketerUIPanel) {
 		// TODO Auto-generated constructor stub
-//		this.addWebMarketerDialog=addWebMarketerDialog;
-		this.webMarketerUIPanel=webMarketerUIPanel;
+		this.webMarketerUIPanel = webMarketerUIPanel;
 	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		webMarketerUIPanel.add();		
+		webMarketerUIPanel.add();
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

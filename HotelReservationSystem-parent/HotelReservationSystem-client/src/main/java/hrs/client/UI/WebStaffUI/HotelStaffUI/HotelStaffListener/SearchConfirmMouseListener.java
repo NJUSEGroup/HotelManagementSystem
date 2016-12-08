@@ -5,31 +5,32 @@ import java.awt.event.MouseListener;
 
 import hrs.client.UI.WebStaffUI.HotelStaffUI.HotelStaffUIPanel;
 
-public class SearchConfirmMouseListener implements MouseListener{
+public class SearchConfirmMouseListener implements MouseListener {
 	private HotelStaffUIPanel HotelStaffUIPanel;
-	
+
 	public SearchConfirmMouseListener(HotelStaffUIPanel hotelStaffUIPanel) {
 		// TODO Auto-generated constructor stub
-		this.HotelStaffUIPanel=hotelStaffUIPanel;
+		this.HotelStaffUIPanel = hotelStaffUIPanel;
 	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-//		HotelStaffUIPanel.search();
+		// HotelStaffUIPanel.search();
 		HotelStaffUIPanel.selectHotelAndShow();
-		
+
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

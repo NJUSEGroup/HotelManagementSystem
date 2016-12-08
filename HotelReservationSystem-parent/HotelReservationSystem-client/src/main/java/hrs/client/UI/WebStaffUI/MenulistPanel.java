@@ -1,11 +1,9 @@
 package hrs.client.UI.WebStaffUI;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -13,6 +11,10 @@ import hrs.client.UI.WebStaffUI.WebStaffListener.WebStaffMenulistMouseListener;
 import hrs.client.util.UIConstants;
 
 public class MenulistPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5788092434669376335L;
 	private JLabel jlZone;
 	private JLabel jlIdentity;
 	private JLabel jlUsername;
@@ -29,7 +31,7 @@ public class MenulistPanel extends JPanel {
 
 	public void init() {
 		listener = new WebStaffMenulistMouseListener();
-		
+
 		setBackground(UIConstants.JFRAME);
 		setLayout(null);
 
@@ -39,7 +41,7 @@ public class MenulistPanel extends JPanel {
 		jlZone.setOpaque(true);
 		jlZone.setBackground(UIConstants.JZONE);
 		jlZone.setForeground(UIConstants.JZONE_FONT_COLOR);
-		
+
 		jlIdentity = new JLabel("网站管理人员", JLabel.CENTER);
 		jlIdentity.setBounds(0, 79, 263, 29);
 		jlIdentity.setFont(UIConstants.JLABEL_FONT);
@@ -55,7 +57,7 @@ public class MenulistPanel extends JPanel {
 		jlUserInfo.setOpaque(true);
 		jlUserInfo.setBackground(UIConstants.JLABEL);
 
-		jlUser = new JLabel("•用户              ", JLabel.CENTER);
+		jlUser = new JLabel("•用户            ", JLabel.CENTER);
 		jlUser.setBounds(0, 265, 263, 45);
 		jlUser.setFont(UIConstants.JLABEL_FONT);
 		jlUser.addMouseListener(listener);

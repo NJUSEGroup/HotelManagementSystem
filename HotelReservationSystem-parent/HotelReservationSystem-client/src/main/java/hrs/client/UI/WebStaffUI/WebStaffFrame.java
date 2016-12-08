@@ -1,18 +1,13 @@
 package hrs.client.UI.WebStaffUI;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddUIPanel;
 import hrs.client.UI.WebStaffUI.HotelAddUI.HotelStaffAddUIPanel;
 import hrs.client.UI.WebStaffUI.HotelStaffUI.HotelStaffUIPanel;
-import hrs.client.UI.WebStaffUI.WebMarketUI.AddWebMarketerDialog;
 import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketerUIPanel;
 import hrs.client.UI.WebStaffUI.WebStaffListener.WebStaffMenulistMouseListener;
 import hrs.client.UI.WebStaffUI.WebUserUI.ShowUserInfoPanel;
@@ -68,7 +63,7 @@ public class WebStaffFrame extends JFrame {
 		setSize(1366, 768);
 		setLocationRelativeTo(null);
 		setResizable(false);
-		
+
 		contentPane = new JPanel();
 		contentPane.setBackground(UIConstants.JZONE);
 		setContentPane(contentPane);

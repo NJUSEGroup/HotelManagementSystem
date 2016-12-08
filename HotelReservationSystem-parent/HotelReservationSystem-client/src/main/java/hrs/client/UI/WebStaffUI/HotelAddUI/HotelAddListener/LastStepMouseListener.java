@@ -5,12 +5,14 @@ import java.awt.event.MouseListener;
 
 import hrs.client.UI.WebStaffUI.HotelAddUI.HotelStaffAddUIPanel;
 
-public class LastStepMouseListener implements MouseListener{
+public class LastStepMouseListener implements MouseListener {
 	private HotelStaffAddUIPanel hotelStaffAddUIPanel;
+
 	public LastStepMouseListener(HotelStaffAddUIPanel hotelStaffAddUIPanel) {
 		// TODO Auto-generated constructor stub
-		this.hotelStaffAddUIPanel=hotelStaffAddUIPanel;
+		this.hotelStaffAddUIPanel = hotelStaffAddUIPanel;
 	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -20,13 +22,13 @@ public class LastStepMouseListener implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

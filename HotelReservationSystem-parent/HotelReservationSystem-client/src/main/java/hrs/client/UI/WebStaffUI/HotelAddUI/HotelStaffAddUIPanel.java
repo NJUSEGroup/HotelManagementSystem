@@ -6,6 +6,9 @@ import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+
+import android.R.string;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -24,12 +27,12 @@ import hrs.common.VO.StaffVO;
 import hrs.common.util.type.StaffType;
 
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class HotelStaffAddUIPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2255510894682597506L;
 	private JTextField jtextHotelStaffUsrname;
 	private JPanel jpHotelAdd;
 	private JPanel jpHotelStaffAdd;
@@ -235,38 +238,51 @@ public class HotelStaffAddUIPanel extends JPanel {
 	public void addHotelStaff() {
 		String username = jtextHotelStaffUsrname.getText();
 		String password = jtextPassword.getText();
-		// String doublePassword=jtextPasswordConfirm.getText();
+		String doublePassword = jtextPasswordConfirm.getText();
 		String realName = jtextRealName.getText();
 		// HotelVO hotelVO=this.hotelAddUIPanel.getHotelVO();
-		addHotel();
-		HotelVO newHotelVO = null;
-		try {
-			newHotelVO = controller.findHotelByHotelName(hotelAddUIPanel.getHotelName());
-		} catch (HotelNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		staffVO = new StaffVO(username, password, realName, StaffType.HotelStaff, newHotelVO);
-		// System.out.println(staffVO);
-		int result = JOptionPane.showConfirmDialog(null, "是否确定添加酒店？", "提示", JOptionPane.YES_NO_OPTION,
-				JOptionPane.INFORMATION_MESSAGE);
-		if (result == 0) {
+		if (username.equals("") || password.equals("") || doublePassword.equals("") || realName.equals("")) {
+			JOptionPane.showMessageDialog(null, "请完整填写信息!", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			addHotel();
+			HotelVO newHotelVO = null;
 			try {
-				controller.addStaff(staffVO);
-				JOptionPane.showMessageDialog(null, "添加酒店成功！");
-			} catch (StaffExistedException e) {
+				newHotelVO = controller.findHotelByHotelName(hotelAddUIPanel.getHotelName());
+			} catch (HotelNotFoundException e1) {
 				// TODO Auto-generated catch block
-				JOptionPane.showMessageDialog(hotelAddUIPanel, "此酒店已存在！", "Error", JOptionPane.ERROR_MESSAGE);
+				e1.printStackTrace();
 			}
+			staffVO = new StaffVO(username, password, realName, StaffType.HotelStaff, newHotelVO);
+			// System.out.println(staffVO);
+			int result = JOptionPane.showConfirmDialog(null, "是否确定添加酒店？", "提示", JOptionPane.YES_NO_OPTION,
+					JOptionPane.INFORMATION_MESSAGE);
+			if (result == 0) {
+				try {
+					controller.addStaff(staffVO);
+					JOptionPane.showMessageDialog(null, "添加酒店成功！");
+				} catch (StaffExistedException e) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(hotelAddUIPanel, "此酒店已存在！", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			refresh();
+			webStaffFrame.showHotelAddUIPanel();
 		}
-		refresh();
-		webStaffFrame.showHotelAddUIPanel();
 	}
-	public void refresh(){
+
+	public void refresh() {
 		hotelAddUIPanel.refresh();
 		jtextHotelStaffUsrname.setText("");
 		jtextPassword.setText("");
 		jtextPasswordConfirm.setText("");
 		jtextRealName.setText("");
+	}
+
+	public String getUsername() {
+		return jtextHotelStaffUsrname.getText();
+	}
+
+	public String getPassword() {
+		return jtextPassword.getText();
 	}
 }
