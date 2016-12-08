@@ -11,7 +11,6 @@ public class OKListener implements MouseListener {
 	WebDiscountPanel jpWebDiscount;
 	AddWebDiscountDialog jdAddWebDiscount;
 
-	// WebDiscountVO vo;
 	public OKListener(WebDiscountPanel jpWebDiscount, AddWebDiscountDialog jdAddWebDiscount) {
 		// TODO Auto-generated constructor stub
 		this.jpWebDiscount = jpWebDiscount;

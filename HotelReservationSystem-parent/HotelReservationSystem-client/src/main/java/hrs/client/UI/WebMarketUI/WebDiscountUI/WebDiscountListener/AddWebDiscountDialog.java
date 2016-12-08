@@ -2,38 +2,23 @@ package hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult;
-import org.apache.commons.collections.set.SynchronizedSortedSet;
-import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
-import org.junit.validator.PublicClassValidator;
-import org.omg.CORBA.PRIVATE_MEMBER;
-
-import android.R.color;
-import android.R.string;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountPanel;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebDiscountController;
-import hrs.common.POJO.CommercialCirclePO;
-import hrs.common.POJO.LocationPO;
 import hrs.common.VO.CommercialCircleVO;
 import hrs.common.VO.LocationVO;
 import hrs.common.VO.WebDiscountVO;
 import hrs.common.util.DateHelper;
-import hrs.common.util.type.HotelDiscountType;
 import hrs.common.util.type.WebsiteDiscountType;
 
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -42,18 +27,18 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.awt.event.ActionEvent;
-import java.awt.Dialog.ModalityType;
 
 public class AddWebDiscountDialog extends JDialog {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5923810422972507715L;
 
 	private final JPanel jpAdd = new JPanel();
 	private JTextField jtextBegintime;

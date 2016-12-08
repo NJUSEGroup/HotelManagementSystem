@@ -1,16 +1,11 @@
 package hrs.client.UI.WebMarketUI.WebDiscountUI;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import org.hibernate.loader.custom.Return;
 
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.CancelModifySpecialPeriodDiscountListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.ConfirmModifySpecialPeriodListener;
@@ -18,18 +13,19 @@ import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.VO.WebDiscountVO;
 import hrs.common.util.DateHelper;
-import hrs.common.util.type.WebsiteDiscountType;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.Date;
-import java.awt.event.ActionEvent;
 
 public class SpecialPeriodDialog extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7392840371079479208L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField jtextBeginTime;
 	private JTextField jtextEndTime;

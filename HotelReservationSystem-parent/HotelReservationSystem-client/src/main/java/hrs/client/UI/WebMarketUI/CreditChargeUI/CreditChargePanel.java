@@ -1,10 +1,7 @@
 package hrs.client.UI.WebMarketUI.CreditChargeUI;
 
-import java.awt.Color;
 import java.awt.Dimension;
 
-import javax.print.attribute.standard.RequestingUserName;
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -13,8 +10,6 @@ import javax.swing.JOptionPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Font;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.SwingConstants;
 
@@ -23,11 +18,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
 
-import hrs.client.UI.UserUI.UserInfoUI.UserInfoListener.ConfirmListener;
 import hrs.client.UI.WebMarketUI.CreditChargeUI.CreditChargeListener.ChargeMouseListener;
 import hrs.client.UI.WebMarketUI.CreditChargeUI.CreditChargeListener.ConfirmMouseListener;
-import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountPanel;
-import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderPanel;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
@@ -35,24 +27,24 @@ import hrs.common.Controller.WebMarketController.IWebCreditController;
 import hrs.common.Exception.UserService.UserNotFoundException;
 import hrs.common.VO.UserVO;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
 public class CreditChargePanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5309610749415781785L;
 	private IWebCreditController webCreditController = ControllerFactory.getWebCreditController();
 	private JTextField jtUsername;
 	private JTextField jtChargeValue;
 	private CreditChargeModel model;
 	private JScrollPane scrollPane;
 	private JLabel jlFindUser;
-	private HRSButton jbConfirm,jbChargeValue;
+	private HRSButton jbConfirm, jbChargeValue;
 	private JLabel jlChargeValue;
 	private JTableHeader jTableHeader;
 	private JTable jTable;
 	private UserVO userVO;
 	private String username;
 	private CreditChargeModel creditChargeModel;
-	
 
 	/**
 	 * Create the panel.

@@ -1,6 +1,5 @@
 package hrs.client.UI.WebMarketUI.WebDiscountUI;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -11,11 +10,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
-
 
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.AddMouseListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.DeleteMouseListener;
@@ -39,7 +36,7 @@ public class WebDiscountPanel extends JPanel {
 	private IWebDiscountController webDiscountController;
 	private List<WebDiscountVO> webDiscountList;
 	private WebDiscountModel model;
-	private HRSButton jbAdd,jbModify, jbDelete;
+	private HRSButton jbAdd, jbModify, jbDelete;
 
 	private DeleteMouseListener listener;
 	private AddMouseListener addMouseListener;
@@ -54,8 +51,8 @@ public class WebDiscountPanel extends JPanel {
 	private SpecialCommercialCircleDialog jdSpecialCommercialCircle;
 	private SpecialPeriodDialog jdSpecialPeriod;
 	private VIPDiaog jdVIP;
-	private Font JTABLE_FONT=new Font("Arial Unicode MS", Font.PLAIN, 18);
-	
+	private Font JTABLE_FONT = new Font("Arial Unicode MS", Font.PLAIN, 18);
+
 	/**
 	 * Create the panel.
 	 */
@@ -71,16 +68,16 @@ public class WebDiscountPanel extends JPanel {
 		this.setSize(1080, 722);
 		this.setBackground(UIConstants.JFRAME);
 
-		jbAdd=new HRSButton("添加");
+		jbAdd = new HRSButton("添加");
 		jdAddWebDiscount = new AddWebDiscountDialog(this);// this
 		addMouseListener = new AddMouseListener(this);
 		jbAdd.addMouseListener(addMouseListener);
 
-		jbModify=new HRSButton("修改");
+		jbModify = new HRSButton("修改");
 		modifyMouseListener = new ModifyMouseListener(this);
 		jbModify.addMouseListener(modifyMouseListener);
 
-		jbDelete=new HRSButton("删除");
+		jbDelete = new HRSButton("删除");
 		listener = new DeleteMouseListener(this);
 		jbDelete.addMouseListener(listener);
 
@@ -216,8 +213,9 @@ public class WebDiscountPanel extends JPanel {
 		jdAddWebDiscount.setVisible(true);
 		jdAddWebDiscount.setLocationRelativeTo(null);
 	}
-	public void refresh(){
-		model=new WebDiscountModel(getWebDiscountList());
+
+	public void refresh() {
+		model = new WebDiscountModel(getWebDiscountList());
 		jTable.setModel(model);
 	}
 }

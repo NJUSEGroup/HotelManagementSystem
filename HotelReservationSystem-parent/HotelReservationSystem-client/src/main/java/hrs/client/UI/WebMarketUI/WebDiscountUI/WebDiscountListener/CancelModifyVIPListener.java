@@ -5,14 +5,14 @@ import java.awt.event.MouseListener;
 
 import hrs.client.UI.WebMarketUI.WebDiscountUI.VIPDiaog;
 
-public class CancelModifyVIPListener implements MouseListener{
+public class CancelModifyVIPListener implements MouseListener {
 	private VIPDiaog vipDiaog;
-	
+
 	public CancelModifyVIPListener(VIPDiaog vipDiaog) {
 		// TODO Auto-generated constructor stub
-		this.vipDiaog=vipDiaog;
+		this.vipDiaog = vipDiaog;
 	}
-	
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -22,13 +22,13 @@ public class CancelModifyVIPListener implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

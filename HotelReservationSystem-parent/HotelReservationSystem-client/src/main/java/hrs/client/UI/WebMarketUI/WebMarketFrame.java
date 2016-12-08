@@ -1,17 +1,10 @@
 package hrs.client.UI.WebMarketUI;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.EventQueue;
-import java.awt.Graphics;
-import java.awt.Insets;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 
 import hrs.client.UI.WebMarketUI.CreditChargeUI.CreditChargePanel;
 import hrs.client.UI.WebMarketUI.Listener.MenulistPanelMouseListener;
@@ -19,13 +12,15 @@ import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountPanel;
 import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderPanel;
 import hrs.client.util.UIConstants;
 
-import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class WebMarketFrame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4135325882994307575L;
 	private JPanel contentPane;
 	private JPanel jpCard;
 	private MenulistPanel jpMenulist;

@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,7 +29,7 @@ public class MenulistPanel extends JPanel {
 	private Font jlabel_font = UIConstants.JLABEL_FONT;
 
 	public MenulistPanel(WebOrderPanel webOrderPanel) {
-		this.webOrderPanel=webOrderPanel;
+		this.webOrderPanel = webOrderPanel;
 		init();
 	}
 

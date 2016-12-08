@@ -1,7 +1,6 @@
 package hrs.client.UI.WebMarketUI.WebDiscountUI;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ItemEvent;
@@ -9,17 +8,12 @@ import java.awt.event.ItemListener;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.mchange.v2.c3p0.impl.WrapperConnectionPoolDataSourceBase;
-
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.CancelModifySpecialCommercialListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.ConfirmModifySpecialCommercialListener;
-import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.ConfirmModifySpecialPeriodListener;
-import hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddListener.ConfirmMouseListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
@@ -32,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class SpecialCommercialCircleDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -40,7 +35,9 @@ public class SpecialCommercialCircleDialog extends JDialog {
 	private WebDiscountVO webDiscountVO;
 	private JLabel jlLocation;
 	private JLabel jlCommercialCircle;
+	@SuppressWarnings("rawtypes")
 	private JComboBox jcomboBoxCommercialCircle;
+	@SuppressWarnings("rawtypes")
 	private JComboBox jcomboBoxLocation;
 	private HRSButton jbConfirmModify, jbCancelModify;
 	private JLabel jlDiscount;
@@ -60,6 +57,7 @@ public class SpecialCommercialCircleDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void init() {
 		webDiscountVO = webDiscountPanel.getSelected();
 

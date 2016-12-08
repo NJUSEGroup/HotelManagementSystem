@@ -1,13 +1,8 @@
 package hrs.client.UI.WebMarketUI.WebDiscountUI;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -17,7 +12,6 @@ import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.ConfirmModify
 import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.VO.WebDiscountVO;
-import hrs.common.util.type.WebsiteDiscountType;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -26,10 +20,15 @@ import javax.swing.DefaultComboBoxModel;
 
 public class VIPDiaog extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2167532987431957999L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField jtextDiscount;
 	private JLabel jlDiscount;
 	private JLabel jlVIP;
+	@SuppressWarnings("rawtypes")
 	private JComboBox jcomboBoxVIP;
 	private HRSButton jbComfirmModify, jbCancelModify;
 	private WebDiscountPanel webDiscountPanel;
@@ -45,6 +44,7 @@ public class VIPDiaog extends JDialog {
 		init();
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void init() {
 		webDiscountVO = webDiscountPanel.getSelected();
 

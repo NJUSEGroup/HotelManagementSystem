@@ -1,20 +1,13 @@
 package hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener;
 
-import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import org.easymock.internal.ErrorMessage;
-
-import android.R.color;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountPanel;
 
 public class DeleteMouseListener implements MouseListener {
-	private JButton jbButton = new JButton();
 	WebDiscountPanel jpwebDiscount;
 
 	public DeleteMouseListener(WebDiscountPanel jpWebDiscount) {
