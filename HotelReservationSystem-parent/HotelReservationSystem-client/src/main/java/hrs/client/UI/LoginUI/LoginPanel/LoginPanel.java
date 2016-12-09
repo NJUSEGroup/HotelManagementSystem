@@ -45,7 +45,7 @@ public class LoginPanel extends JPanel {
 	private int JL_HEIGHT = 50;
 	private int TEXT_WIDTH = 200;
 	private int TEXT_HEIGHT = 30;
-	private int START_X = 80;
+	private int START_X = 0;
 	private int START_Y = 30;
 	private LoginFrame frame;
 
@@ -54,9 +54,9 @@ public class LoginPanel extends JPanel {
 	 */
 	public LoginPanel(LoginFrame frame) {
 		this.frame = frame;
-		setSize(508, 376);
+		setSize(508, 420);
 		setLayout(null);
-		setBackground(UIConstants.JFRAME);
+//		setBackground(UIConstants.JFRAME);
 		init();
 	}
 
@@ -70,12 +70,12 @@ public class LoginPanel extends JPanel {
 
 	private void setButton() {
 		HMSBlueButton cancelJB = new HMSBlueButton("取消");
-		cancelJB.setBounds(120, START_Y+JL_HEIGHT*4, 120, 50);
+		cancelJB.setBounds(80, START_Y+JL_HEIGHT*4, 120, 50);
 		cancelJB.addActionListener(new CancelJBListener(this));
 		add(cancelJB);
 		
 		HMSBlueButton loginJB = new HMSBlueButton("确定");
-		loginJB.setBounds(280, START_Y+JL_HEIGHT*4, 120, 50);
+		loginJB.setBounds(220, START_Y+JL_HEIGHT*4, 120, 50);
 		loginJB.addActionListener(new LoginJBListener(this));
 		add(loginJB);
 		

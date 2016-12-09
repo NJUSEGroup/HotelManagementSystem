@@ -1,5 +1,6 @@
 package hrs.client.UI.LoginUI.RegisterPanel;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Panel;
 
@@ -35,7 +36,7 @@ public class RegisterPanel extends JPanel {
 	private int TEXT_WIDTH = 250;
 	private int TEXT_HEIGHT = 24;
 	private int GAP = (JL_HEIGHT-TEXT_HEIGHT)/2;
-	private int START_X = 20;
+	private int START_X = 0;
 	private int START_Y = 0;
 	
 	private JComboBox<String> typeBox ;
@@ -55,9 +56,9 @@ public class RegisterPanel extends JPanel {
 	 */
 	public RegisterPanel(LoginFrame frame) {
 		this.frame = frame;
-		setSize(508,376);
+		setSize(508,420);
 		setLayout(null);
-		setBackground(UIConstants.JFRAME);
+//		setBackground(UIConstants.JFRAME);
 		init();
 	}
 	private void init() {
@@ -133,7 +134,7 @@ public class RegisterPanel extends JPanel {
 		dateChoosePanel.changeTobirth();
 		dateChoosePanel.setBounds(START_X+JL_WIDTH+30, START_Y+GAP+JL_HEIGHT*5, dateChoosePanel.getWidth(), TEXT_HEIGHT+10);
 		add(dateChoosePanel);
-		dateChoosePanel.setBackground(UIConstants.JFRAME);
+		dateChoosePanel.setBackground(this.getBackground());
 		
 		
 		phoneField = new JTextField();
@@ -149,12 +150,12 @@ public class RegisterPanel extends JPanel {
 	}
 	private void setButton() {
 		HMSBlueButton cancelJB = new HMSBlueButton("取消");
-		cancelJB.setBounds(120, START_Y+JL_HEIGHT*8+20, 120, 50);
+		cancelJB.setBounds(80, START_Y+JL_HEIGHT*8+20, 120, 50);
 		cancelJB.addActionListener(new CancelJBListener(this));
 		add(cancelJB);
 		
 		HMSBlueButton loginJB = new HMSBlueButton("确定");
-		loginJB.setBounds(280, START_Y+JL_HEIGHT*8+20, 120, 50);
+		loginJB.setBounds(220, START_Y+JL_HEIGHT*8+20, 120, 50);
 		loginJB.addActionListener(new RegisterJBListener(this));
 		add(loginJB);
 		
