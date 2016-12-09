@@ -1,8 +1,6 @@
 package hrs.client.UI.LoginUI.LoginPanel;
 
 import java.awt.Font;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -10,18 +8,14 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import org.hibernate.property.access.spi.SetterFieldImpl;
-import org.springframework.web.bind.annotation.InitBinder;
-
 import hrs.client.UI.LoginUI.LoginFrame;
 import hrs.client.UI.LoginUI.LoginPanel.Listener.CancelJBListener;
 import hrs.client.UI.LoginUI.LoginPanel.Listener.LoginJBListener;
 import hrs.client.UI.UserUI.Components.CommonLabel;
 import hrs.client.util.ControllerFactory;
-import hrs.client.util.HRSButton;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.LoginController.ILoginController;
-import hrs.common.Controller.UserController.IUserController;
 import hrs.common.Exception.StaffService.StaffNotFoundExceptioon;
 import hrs.common.Exception.StaffService.StaffPasswordErrorException;
 import hrs.common.Exception.UserService.UserNotFoundException;
@@ -67,12 +61,12 @@ public class LoginPanel extends JPanel {
 		
 	}
 	private void setButton() {
-		HRSButton cancelJB = new HRSButton("取消");
+		HMSBlueButton cancelJB = new HMSBlueButton("取消");
 		cancelJB.setBounds(120, START_Y+JL_HEIGHT*4, 120, 50);
 		cancelJB.addActionListener(new CancelJBListener(this));
 		add(cancelJB);
 		
-		HRSButton loginJB = new HRSButton("确定");
+		HMSBlueButton loginJB = new HMSBlueButton("确定");
 		loginJB.setBounds(280, START_Y+JL_HEIGHT*4, 120, 50);
 		loginJB.addActionListener(new LoginJBListener(this));
 		add(loginJB);

@@ -6,7 +6,6 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -15,11 +14,10 @@ import hrs.client.UI.UserUI.Components.CommonPanel;
 import hrs.client.UI.UserUI.UserInfoUI.UserInfoListener.CancelListener;
 import hrs.client.UI.UserUI.UserInfoUI.UserInfoListener.ConfirmListener;
 import hrs.client.util.ControllerFactory;
-import hrs.client.util.HRSButton;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.UserController.IUserController;
 import hrs.common.Exception.UserService.UserNotFoundException;
-import hrs.common.VO.OrderVO;
 import hrs.common.VO.UserVO;
 import hrs.common.util.DateHelper;
 
@@ -89,14 +87,14 @@ public class UserInfoPanel extends CommonPanel {
 	
 
 	private void setButton() {
-		HRSButton  cancelJB = new HRSButton("取消");
+		HMSBlueButton  cancelJB = new HMSBlueButton("取消");
 //		cancelJB.setPreferredSize(new Dimension(180, 80));
 //		cancelJB.setFont(font);
 		cancelJB.setBounds(160, 500, 150, 60);
 		cancelJB.addActionListener(new CancelListener(this));
 		this.add(cancelJB);
 
-		HRSButton confirmJB = new HRSButton("确认");
+		HMSBlueButton confirmJB = new HMSBlueButton("确认");
 //		confirmJB.setPreferredSize(new Dimension(180, 80));
 //		confirmJB.setFont(font);
 		confirmJB.setBounds(560, 500, 150, 60);

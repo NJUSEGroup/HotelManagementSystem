@@ -1,6 +1,7 @@
 package hrs.client.UI.LoginUI.RegisterPanel;
 
 import java.awt.Font;
+import java.awt.Panel;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -15,7 +16,7 @@ import hrs.client.UI.LoginUI.RegisterPanel.Listener.TypeItemListener;
 import hrs.client.UI.UserUI.Components.CommonLabel;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.DateChoosePanel;
-import hrs.client.util.HRSButton;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.LoginController.ILoginController;
 import hrs.common.Exception.UserService.UserExistedException;
@@ -146,12 +147,12 @@ public class RegisterPanel extends JPanel {
 		enterpriseField.setEnabled(false);
 	}
 	private void setButton() {
-		HRSButton cancelJB = new HRSButton("取消");
+		HMSBlueButton cancelJB = new HMSBlueButton("取消");
 		cancelJB.setBounds(120, START_Y+JL_HEIGHT*8+20, 120, 50);
 		cancelJB.addActionListener(new CancelJBListener(this));
 		add(cancelJB);
 		
-		HRSButton loginJB = new HRSButton("确定");
+		HMSBlueButton loginJB = new HMSBlueButton("确定");
 		loginJB.setBounds(280, START_Y+JL_HEIGHT*8+20, 120, 50);
 		loginJB.addActionListener(new RegisterJBListener(this));
 		add(loginJB);
@@ -191,6 +192,8 @@ public class RegisterPanel extends JPanel {
 			userVO.type = UserType.Normal;
 			try {
 				controller.register(userVO);
+				JOptionPane.showMessageDialog(null, "注册成功!", "成功", JOptionPane.INFORMATION_MESSAGE);
+				frame.showLogin();
 			} catch (UserExistedException e) {
 				JOptionPane.showMessageDialog(null, "用户名已存在!", "提示", JOptionPane.INFORMATION_MESSAGE);
 			}
@@ -203,6 +206,8 @@ public class RegisterPanel extends JPanel {
 			userVO.enterprise = enterpriseField.getText();
 			try {
 				controller.register(userVO);
+				JOptionPane.showMessageDialog(null, "注册成功!", "成功", JOptionPane.INFORMATION_MESSAGE);
+				frame.showLogin();
 			} catch (UserExistedException e) {
 				JOptionPane.showMessageDialog(null, "用户名已存在!", "提示", JOptionPane.INFORMATION_MESSAGE);
 			}

@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import hrs.client.UI.WebStaffUI.WebUserUI.WebUserListener.ModifyUserInfoMouseListener;
 import hrs.client.UI.WebStaffUI.WebUserUI.WebUserListener.SearchUserConfirmMouseListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebStaffController.IWebUserController;

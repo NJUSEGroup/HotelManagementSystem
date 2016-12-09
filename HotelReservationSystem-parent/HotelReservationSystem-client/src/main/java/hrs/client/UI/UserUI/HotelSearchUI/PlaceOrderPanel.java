@@ -26,7 +26,7 @@ import hrs.client.UI.UserUI.HotelSearchUI.Listener.OrderItemListener;
 import hrs.client.UI.UserUI.HotelSearchUI.Listener.OrderRoomItemListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.EnumHelper;
-import hrs.client.util.HRSButton;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.UserController.IUserOrderController;
 import hrs.common.VO.HotelDiscountVO;
@@ -317,7 +317,7 @@ public class PlaceOrderPanel extends CommonPanel {
 	}
 
 	private void setOrderButton() {
-		HRSButton orderButton = new HRSButton("确认下单");
+		HMSBlueButton orderButton = new HMSBlueButton("确认下单");
 //		orderButton.setFont(font);
 		orderButton.setBounds(this.getWidth() - 750, 680, 120, 40);
 		orderButton.addActionListener(new OrderButtonListener(this));
@@ -326,7 +326,7 @@ public class PlaceOrderPanel extends CommonPanel {
 	}
 
 	private void setCancelButton() {
-		HRSButton cancelButton = new HRSButton("取消");
+		HMSBlueButton cancelButton = new HMSBlueButton("取消");
 //		cancelButton.setFont(font);
 		cancelButton.setBounds(this.getWidth() - 400, 680, 100, 40);
 		cancelButton.addActionListener(new BackListener(this));
