@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountPanel;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.DateChoosePanel;
 import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebDiscountController;
@@ -43,6 +44,7 @@ public class AddWebDiscountDialog extends JDialog {
 	private final JPanel jpAdd = new JPanel();
 	private JTextField jtextBegintime;
 	private JTextField jtextEndtime;
+
 	private JTextField jtextDiscount;
 
 	private JLabel jlBeginTime;
@@ -52,8 +54,6 @@ public class AddWebDiscountDialog extends JDialog {
 	private JLabel jlPromotionType;
 	private JLabel jlVIPLevel;
 	private JLabel jlDiscount;
-	// private JButton jbOK;
-	// private JButton jbCancel;
 	private HRSButton jbOK, jbCancel;
 
 	private WebDiscountPanel jpWebDiscount;
@@ -273,7 +273,6 @@ public class AddWebDiscountDialog extends JDialog {
 					jcomboBoxVIPLevel.setBackground(Color.LIGHT_GRAY);
 					jcomboBoxCommercialCircle.setEnabled(true);
 					jcomboBoxLocation.setEnabled(true);
-					;
 					jtextBegintime.setEditable(false);
 					jtextEndtime.setEditable(false);
 					jcomboBoxVIPLevel.setEnabled(false);
@@ -285,7 +284,6 @@ public class AddWebDiscountDialog extends JDialog {
 					jtextDiscount.setText("");
 					jtextBegintime.setBackground(Color.WHITE);
 					jtextEndtime.setBackground(Color.WHITE);
-
 					jtextBegintime.setEditable(true);
 					jtextEndtime.setEditable(true);
 					jcomboBoxCommercialCircle.setEnabled(false);
@@ -321,38 +319,51 @@ public class AddWebDiscountDialog extends JDialog {
 	public WebDiscountVO jdaddWebDiscount() {
 		switch (jcomboBoxType.getSelectedItem().toString()) {
 		case "特定商圈专属折扣":
-			double commercialCircleDiscount = Double.parseDouble(jtextDiscount.getText());
-			// System.out.println(jcomboBoxLocation);
-			locationIndex = jcomboBoxLocation.getSelectedIndex();
-			location = locs.get(locationIndex);
-			int commercialCircleIndex = jcomboBoxCommercialCircle.getSelectedIndex();
-			commercialCircle = commercialCircleList.get(commercialCircleIndex);
-			// System.out.println(commercialCircle);
-			addVO = new WebDiscountVO(commercialCircleDiscount, WebsiteDiscountType.SpecialCommercialCircle, location,
-					commercialCircle, null, null, 0);
-
+			if (jtextDiscount.getText().equals("") || jcomboBoxCommercialCircle.getSelectedIndex() == -1
+					|| jcomboBoxLocation.getSelectedIndex() == -1) {
+				JOptionPane.showMessageDialog(null, "请完整填写折扣信息！", "Error", JOptionPane.ERROR_MESSAGE);
+			} else {
+				double commercialCircleDiscount = Double.parseDouble(jtextDiscount.getText());
+				// System.out.println(jcomboBoxLocation);
+				locationIndex = jcomboBoxLocation.getSelectedIndex();
+				location = locs.get(locationIndex);
+				int commercialCircleIndex = jcomboBoxCommercialCircle.getSelectedIndex();
+				commercialCircle = commercialCircleList.get(commercialCircleIndex);
+				// System.out.println(commercialCircle);
+				addVO = new WebDiscountVO(commercialCircleDiscount, WebsiteDiscountType.SpecialCommercialCircle,
+						location, commercialCircle, null, null, 0);
+			}
 			break;
 		case "特定期间折扣":
-			// System.out.println(jcomboBoxType.getSelectedItem());
-			double specialPeriodDiscount = Double.parseDouble(jtextDiscount.getText());
-			Date discountBeginTime = null;
-			Date discountEndTime = null;
-			try {
-				discountBeginTime = DateHelper.parse(jtextBegintime.getText());
-				discountEndTime = DateHelper.parse(jtextEndtime.getText());
-			} catch (ParseException exception) {
-				// TODO Auto-generated catch block
-				JOptionPane.showMessageDialog(null, "请输入正确的日期格式", "Error", JOptionPane.ERROR_MESSAGE);
+			if (jtextBegintime.getText().equals("") || jtextEndtime.getText().equals("") || jtextDiscount.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "请完整填写折扣信息！", "Error", JOptionPane.ERROR_MESSAGE);
+			} else {
+				// System.out.println(jcomboBoxType.getSelectedItem());
+				double specialPeriodDiscount = Double.parseDouble(jtextDiscount.getText());
+				Date discountBeginTime = null;
+				Date discountEndTime = null;
+				try {
+					discountBeginTime = DateHelper.parse(jtextBegintime.getText());
+					discountEndTime = DateHelper.parse(jtextEndtime.getText());
+				} catch (ParseException exception) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, "请输入正确的日期格式", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				addVO = new WebDiscountVO(specialPeriodDiscount, WebsiteDiscountType.SpecialPeriod, null, null,
+						discountBeginTime, discountEndTime, 0);
 			}
-			addVO = new WebDiscountVO(specialPeriodDiscount, WebsiteDiscountType.SpecialPeriod, null, null,
-					discountBeginTime, discountEndTime, 0);
 			break;
 		case "会员等级折扣":
-			int VIPLevel = Integer.parseInt(jcomboBoxVIPLevel.getSelectedItem().toString());
-			double vipDiscount = Double.parseDouble(jtextDiscount.getText());
-			addVO = new WebDiscountVO(vipDiscount, WebsiteDiscountType.VIP, null, null, null, null, VIPLevel);
+			if (jcomboBoxVIPLevel.getSelectedIndex() == -1 || jtextDiscount.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "请完整填写折扣信息！", "Error", JOptionPane.ERROR_MESSAGE);
+			} else {
+				int VIPLevel = Integer.parseInt(jcomboBoxVIPLevel.getSelectedItem().toString());
+				double vipDiscount = Double.parseDouble(jtextDiscount.getText());
+				addVO = new WebDiscountVO(vipDiscount, WebsiteDiscountType.VIP, null, null, null, null, VIPLevel);
+			}
 			break;
 		default:
+			JOptionPane.showMessageDialog(null, "请选择折扣类型！", "Error", JOptionPane.ERROR_MESSAGE);
 			break;
 		}
 		return addVO;// 从dialog返回一个有数据的vo给jp

@@ -90,7 +90,7 @@ public class WebDiscountPanel extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup().addContainerGap(575, Short.MAX_VALUE).addComponent(jbAdd)
 						.addGap(61).addComponent(jbModify).addGap(57).addComponent(jbDelete).addGap(116))
 				.addGroup(groupLayout.createSequentialGroup().addGap(41)
-						.addComponent(jlNumberOfPO, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+						.addComponent(jlNumberOfPO, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(944, Short.MAX_VALUE)));
 		groupLayout
 				.setVerticalGroup(
@@ -145,15 +145,11 @@ public class WebDiscountPanel extends JPanel {
 		addVo = jdAddWebDiscount.jdaddWebDiscount();
 		webDiscountController.add(addVo);
 		refresh();
-		jlNumberOfPO.setText("共 " + webDiscountList.size() + " 条记录");
-		jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 	}
 
 	public void deleteWebDiscount(WebDiscountVO vo) {
 		webDiscountController.delete(vo.id);
 		refresh();
-		jlNumberOfPO.setText("共 " + webDiscountList.size() + " 条记录");
-		jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 	}
 
 	public void showModifyDialog() {
@@ -197,7 +193,6 @@ public class WebDiscountPanel extends JPanel {
 		default:
 			break;
 		}
-		System.out.println(modifyVO);
 		webDiscountController.update(modifyVO);
 		refresh();
 		JOptionPane.showMessageDialog(null, "促销策略成功修改！", "Success", JOptionPane.PLAIN_MESSAGE, null);
@@ -211,7 +206,7 @@ public class WebDiscountPanel extends JPanel {
 	}
 
 	public void showAddDialog() {
-		jdAddWebDiscount=new AddWebDiscountDialog(this);
+		jdAddWebDiscount = new AddWebDiscountDialog(this);
 		jdAddWebDiscount.setVisible(true);
 		jdAddWebDiscount.setLocationRelativeTo(null);
 	}
@@ -219,5 +214,7 @@ public class WebDiscountPanel extends JPanel {
 	public void refresh() {
 		model = new WebDiscountModel(getWebDiscountList());
 		jTable.setModel(model);
+		jlNumberOfPO.setText("共 " + getWebDiscountList().size() + " 条记录");
+		jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 	}
 }

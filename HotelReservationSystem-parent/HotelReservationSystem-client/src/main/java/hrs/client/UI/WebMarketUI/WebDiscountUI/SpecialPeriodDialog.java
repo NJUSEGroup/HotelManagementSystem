@@ -76,13 +76,13 @@ public class SpecialPeriodDialog extends JDialog {
 		jtextBeginTime.setBounds(205, 37, 130, 26);
 		contentPanel.add(jtextBeginTime);
 		jtextBeginTime.setColumns(10);
-		jtextBeginTime.setText(webDiscountVO.beginTime.toString());
+		jtextBeginTime.setText(DateHelper.format((webDiscountVO.beginTime)));
 
 		jtextEndTime = new JTextField();
 		jtextEndTime.setBounds(205, 93, 130, 26);
 		contentPanel.add(jtextEndTime);
 		jtextEndTime.setColumns(10);
-		jtextEndTime.setText(webDiscountVO.endTime.toString());
+		jtextEndTime.setText(DateHelper.format((webDiscountVO.endTime)));
 
 		jtextDiscount = new JTextField();
 		jtextDiscount.setBounds(205, 149, 130, 26);
@@ -91,14 +91,14 @@ public class SpecialPeriodDialog extends JDialog {
 		jtextDiscount.setText(webDiscountVO.discount + "");
 
 		jbConfirmModify = new HRSButton("确认修改");
-		jbConfirmModify.setFont(new Font("宋体", Font.PLAIN, 13));
+		jbConfirmModify.setFont(new Font("宋体", Font.PLAIN, 12));
 		jbConfirmModify.setBounds(103, 204, 103, 29);
 		listener = new ConfirmModifySpecialPeriodListener(webDiscountPanel, this);
 		jbConfirmModify.addMouseListener(listener);
 		contentPanel.add(jbConfirmModify);
 
 		jbCancalModify = new HRSButton("取消修改");
-		jbCancalModify.setFont(new Font("宋体", Font.PLAIN, 13));
+		jbCancalModify.setFont(new Font("宋体", Font.PLAIN, 12));
 		jbCancalModify.setBounds(218, 204, 103, 29);
 		contentPanel.add(jbCancalModify);
 		cancelListener = new CancelModifySpecialPeriodDiscountListener(this);
@@ -130,6 +130,14 @@ public class SpecialPeriodDialog extends JDialog {
 
 	public double getNewDiscount() {
 		return getModifyVO().discount;
+	}
+
+	public Date getBegintime() {
+		return getModifyVO().beginTime;
+	}
+
+	public Date getEndtime() {
+		return getModifyVO().endTime;
 	}
 
 }
