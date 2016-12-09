@@ -3,6 +3,8 @@ package hrs.client.UI.WebMarketUI.WebOrderUI;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
@@ -12,7 +14,9 @@ import hrs.common.util.DateHelper;
 
 public class WebOrderModel implements TableModel {
 	private List<OrderVO> ordervoList;
-
+	private ResourceBundle rb = ResourceBundle.getBundle("orderStatus", Locale.getDefault());
+	private ResourceBundle rb_Second = ResourceBundle.getBundle("hotel", Locale.getDefault());
+	
 	public WebOrderModel(List<OrderVO> orderVoList) {
 		// TODO Auto-generated constructor stub
 		this.ordervoList = orderVoList;
@@ -78,13 +82,15 @@ public class WebOrderModel implements TableModel {
 			} else if (columnIndex == 4) {
 				return orderVO.hotel.name;
 			} else if (columnIndex == 5) {
-				return orderVO.type.toString();
+				String type = rb_Second.getString("Room." + orderVO.type.toString());
+				return type;
 			} else if (columnIndex == 6) {
 				return orderVO.roomNum + "";
 			} else if (columnIndex == 7) {
 				return orderVO.value + "";
 			} else {
-				return orderVO.status.toString();
+				String outputType = rb.getString("Order." + orderVO.status.toString());
+				return outputType;
 			}
 
 		} catch (NullPointerException e) {
