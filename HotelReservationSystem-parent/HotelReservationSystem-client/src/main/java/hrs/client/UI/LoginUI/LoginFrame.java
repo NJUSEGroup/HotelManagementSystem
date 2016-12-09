@@ -2,6 +2,8 @@ package hrs.client.UI.LoginUI;
 
 import java.awt.CardLayout;
 import java.awt.EventQueue;
+import java.awt.Graphics;
+import java.awt.Panel;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -15,11 +17,13 @@ import javax.swing.border.EmptyBorder;
 import org.aspectj.lang.reflect.InitializerSignature;
 import org.springframework.web.bind.annotation.InitBinder;
 
+import hrs.client.UI.LoginUI.LoginPanel.BGPanel;
 import hrs.client.UI.LoginUI.LoginPanel.LoginPanel;
 import hrs.client.UI.LoginUI.RegisterPanel.RegisterPanel;
 import hrs.client.UI.UserUI.UserFrame;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.ImageLoader;
+import hrs.client.util.UIConstants;
 import hrs.common.Controller.LoginController.ILoginController;
 import hrs.common.VO.StaffVO;
 import hrs.common.VO.UserVO;
@@ -37,8 +41,9 @@ public class LoginFrame extends JFrame {
 	private JLabel jlTest;
 	private ImageLoader img = ImageLoader.getInstance();
 	private ILoginController loginController = ControllerFactory.getLoginController();
-	private int HEIGHT = 476;
-	private int WIDTH = 508;
+	private int HEIGHT = 536;
+	private int WIDTH = 1100;
+	private BGPanel backGroundPanel;
 	private CardLayout cardLayout;
 
 	/**
@@ -67,6 +72,7 @@ public class LoginFrame extends JFrame {
 	 */
 	public LoginFrame() throws ClassNotFoundException, InstantiationException, IllegalAccessException,
 			UnsupportedLookAndFeelException {
+		
 		init();
 
 	}
@@ -95,19 +101,33 @@ public class LoginFrame extends JFrame {
 		contentPane.add("register", registerPanel);
 		cardLayout.show(contentPane, "login");
 		
-		add(contentPane);
-		contentPane.setBounds(0, 100, WIDTH, HEIGHT - 100);
+		
+		contentPane.setBounds(530, 100, 508, HEIGHT - 180);
+	
+		backGroundPanel = new BGPanel();
+		backGroundPanel.setOpaque(false);
+		backGroundPanel.add(contentPane);
+		backGroundPanel.setLayout(null);
+		add(backGroundPanel);
+		backGroundPanel.setBounds(0, 0, WIDTH, HEIGHT);
+		
 
 	}
 
 	private void setLabel() {
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(null);
+		buttonPanel.setBackground(UIConstants.JFRAME);
+		buttonPanel.setBounds(530, 30, 508, 70);
+		backGroundPanel.add(buttonPanel);
+		
 		LoginJL loginJL = new LoginJL(this, "登录");
-		loginJL.setBounds(120,20,130,50);
-		add(loginJL);
+		loginJL.setBounds(120,10,130,50);
+		buttonPanel.add(loginJL);
 		
 		RegisterJL registerJL = new RegisterJL(this, "注册");
-		registerJL.setBounds(270,20,130,50);
-		add(registerJL);
+		registerJL.setBounds(270,10,130,50);
+		buttonPanel.add(registerJL);
 	}
 
 	public void showRegister() {

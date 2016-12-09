@@ -57,6 +57,7 @@ public class RegisterPanel extends JPanel {
 		this.frame = frame;
 		setSize(508,376);
 		setLayout(null);
+		setBackground(UIConstants.JFRAME);
 		init();
 	}
 	private void init() {
@@ -132,7 +133,7 @@ public class RegisterPanel extends JPanel {
 		dateChoosePanel.changeTobirth();
 		dateChoosePanel.setBounds(START_X+JL_WIDTH+30, START_Y+GAP+JL_HEIGHT*5, dateChoosePanel.getWidth(), TEXT_HEIGHT+10);
 		add(dateChoosePanel);
-		dateChoosePanel.setBackground(frame.getBackground());
+		dateChoosePanel.setBackground(UIConstants.JFRAME);
 		
 		
 		phoneField = new JTextField();
