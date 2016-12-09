@@ -25,6 +25,7 @@ import hrs.common.VO.RoomVO;
 import hrs.common.util.DateHelper;
 import hrs.common.util.FilterCondition.FilterCondition;
 import hrs.common.util.FilterCondition.NameFilterCondition;
+import hrs.common.util.FilterCondition.RoomNumFilterCondition;
 import hrs.common.util.FilterCondition.RoomTypeFilterCondition;
 import hrs.common.util.FilterCondition.ScoreFilterCondition;
 import hrs.common.util.FilterCondition.StarFilterCondition;
@@ -378,6 +379,35 @@ public class TestHotelService {
 				System.out.println(room);
 			}
 		}
+	}
+	
+	@Test
+	public void testFilerByRoomNum() throws HotelNotFoundException, ParseException{
+		Date begin = DateHelper.parseWithHMS("2016-10-27 00:00:00");
+		Date end = DateHelper.parseWithHMS("2016-11-19 00:00:00");
+		Map<HotelVO, List<RoomVO>> map = service.find(1, 2, begin, end, "admin");
+		for (HotelVO vo : map.keySet()) {
+			System.out.println(vo);
+			for (RoomVO room : map.get(vo)) {
+				System.out.println(room);
+			}
+			System.out.println();
+		}
+		System.out.println();
+
+		List<FilterCondition> list = new ArrayList<>();
+		RoomNumFilterCondition condition = new RoomNumFilterCondition(FilterType.RoomNum);
+		condition.setRoomNum(15);
+		list.add(condition);
+		Map<HotelVO, List<RoomVO>> res = service.filter(map,list);
+		System.out.println(res.size());
+		for (HotelVO vo : res.keySet()) {
+			System.out.println(vo);
+			for (RoomVO room : map.get(vo)) {
+				System.out.println(room);
+			}
+		}
+
 	}
 	
 	@Test

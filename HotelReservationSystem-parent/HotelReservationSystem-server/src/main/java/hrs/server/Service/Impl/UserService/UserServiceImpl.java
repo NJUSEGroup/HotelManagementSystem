@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
 		UserPO po = new UserPO(uservo);
 		if (dao.add(po) == ResultMessage.EXISTED) {
 			throw new UserExistedException();
-		} else {
+		} else if(po.getEnterprise() != null){
 			enterpriseService.add(new EnterpriseVO(po.getEnterprise()));
 		}
 	}
