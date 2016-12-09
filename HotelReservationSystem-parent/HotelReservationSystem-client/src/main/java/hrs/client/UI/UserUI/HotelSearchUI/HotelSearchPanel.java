@@ -188,7 +188,7 @@ public class HotelSearchPanel extends CommonPanel {
 		Map<HotelVO, List<RoomVO>> map = getChooseOne();
 		
 		HotelVO hotel = null;
-		List<RoomVO> rooms = null;
+		List<RoomVO> rooms = new ArrayList<>();
 		
 		Iterator<Entry<HotelVO, List<RoomVO>>> iter = map.entrySet().iterator();
 		while (iter.hasNext()) {

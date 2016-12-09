@@ -117,8 +117,7 @@ public class UserInfoPanel extends CommonPanel {
 			enterpriseField.setText(user.enterprise);
 			creditJL = new JLabel("" + user.credit);
 		} catch (UserNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 
 		creditJL.setFont(font);

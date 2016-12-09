@@ -17,9 +17,13 @@ import org.springframework.web.bind.annotation.InitBinder;
 
 import hrs.client.UI.LoginUI.LoginPanel.LoginPanel;
 import hrs.client.UI.LoginUI.RegisterPanel.RegisterPanel;
+import hrs.client.UI.UserUI.UserFrame;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.ImageLoader;
 import hrs.common.Controller.LoginController.ILoginController;
+import hrs.common.VO.StaffVO;
+import hrs.common.VO.UserVO;
+import hrs.common.util.type.StaffType;
 
 public class LoginFrame extends JFrame {
 
@@ -112,5 +116,28 @@ public class LoginFrame extends JFrame {
 
 	public void showLogin() {
 		cardLayout.show(contentPane, "login");
+	}
+
+	
+
+	public void loginUser(UserVO userVO) {
+		UserFrame userFrame = new UserFrame(userVO);
+		this.dispose();
+		
+	}
+
+	public void loginStaff(StaffVO staffVO) {
+		StaffType type = staffVO.type;
+		switch (type) {
+		case HotelStaff:
+			System.out.println("酒店工作人员");break;
+		case WebsiteAdminister:
+			System.out.println("网站管理人员");break;
+		case WebsiteMarketer:
+			System.out.println("网站营销人员");break;
+		default:
+			break;
+		}
+		
 	}
 }

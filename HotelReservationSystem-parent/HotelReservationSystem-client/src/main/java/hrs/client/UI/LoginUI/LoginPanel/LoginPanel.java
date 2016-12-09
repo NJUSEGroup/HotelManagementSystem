@@ -5,15 +5,29 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import org.hibernate.property.access.spi.SetterFieldImpl;
 import org.springframework.web.bind.annotation.InitBinder;
 
 import hrs.client.UI.LoginUI.LoginFrame;
+import hrs.client.UI.LoginUI.LoginPanel.Listener.CancelJBListener;
+import hrs.client.UI.LoginUI.LoginPanel.Listener.LoginJBListener;
 import hrs.client.UI.UserUI.Components.CommonLabel;
+import hrs.client.util.ControllerFactory;
+import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
+import hrs.common.Controller.LoginController.ILoginController;
+import hrs.common.Controller.UserController.IUserController;
+import hrs.common.Exception.StaffService.StaffNotFoundExceptioon;
+import hrs.common.Exception.StaffService.StaffPasswordErrorException;
+import hrs.common.Exception.UserService.UserNotFoundException;
+import hrs.common.Exception.UserService.UserPasswordErrorException;
+import hrs.common.VO.StaffVO;
+import hrs.common.VO.UserVO;
 
 public class LoginPanel extends JPanel {
 
@@ -25,8 +39,9 @@ public class LoginPanel extends JPanel {
 	Font font = UIConstants.JLABEL_FONT;
 	private JComboBox<String> accountType;
 	private JTextField accountField;
-	private JTextField passwordField;
+	private JPasswordField passwordField;
 	
+	private ILoginController controller;
 	private int JL_WIDTH = 120;
 	private int JL_HEIGHT = 50;
 	private int TEXT_WIDTH = 200;
@@ -44,6 +59,7 @@ public class LoginPanel extends JPanel {
 		init();
 	}
 	private void init() {
+		controller = ControllerFactory.getLoginController();
 		setLabel();
 		setInputField();
 		setButton();
@@ -51,7 +67,15 @@ public class LoginPanel extends JPanel {
 		
 	}
 	private void setButton() {
+		HRSButton cancelJB = new HRSButton("取消");
+		cancelJB.setBounds(120, START_Y+JL_HEIGHT*4, 120, 50);
+		cancelJB.addActionListener(new CancelJBListener(this));
+		add(cancelJB);
 		
+		HRSButton loginJB = new HRSButton("确定");
+		loginJB.setBounds(280, START_Y+JL_HEIGHT*4, 120, 50);
+		loginJB.addActionListener(new LoginJBListener(this));
+		add(loginJB);
 		
 	}
 	private void setInputField() {
@@ -67,7 +91,7 @@ public class LoginPanel extends JPanel {
 		accountField.setBounds(START_X+JL_WIDTH+30, START_Y+(JL_HEIGHT-TEXT_HEIGHT)/2+JL_HEIGHT, TEXT_WIDTH, TEXT_HEIGHT);
 		add(accountField);
 		
-		passwordField = new JTextField();
+		passwordField = new JPasswordField();
 		passwordField.setFont(font);
 		passwordField.setBounds(START_X+JL_WIDTH+30, START_Y+(JL_HEIGHT-TEXT_HEIGHT)/2+JL_HEIGHT*2, TEXT_WIDTH, TEXT_HEIGHT);
 		add(passwordField);
@@ -81,9 +105,44 @@ public class LoginPanel extends JPanel {
 		accountJL.setBounds(START_X, START_Y+JL_HEIGHT, JL_WIDTH, JL_HEIGHT);
 		add(accountJL);
 		
-		CommonLabel passwordJL = new CommonLabel("用户名");
+		CommonLabel passwordJL = new CommonLabel("密码");
 		passwordJL.setBounds(START_X, START_Y+JL_HEIGHT*2, JL_WIDTH, JL_HEIGHT);
 		add(passwordJL);
+	}
+	public void cancel() {
+		accountField.setText("");
+		passwordField.setText("");
+	}
+	public void login() {
+		String account = accountField.getText();
+		String password = new String(passwordField.getPassword());
+		if(accountType.getSelectedItem().equals("用户")){
+			UserVO userVO = new UserVO();
+			try {
+				userVO = controller.loginUser(account, password);
+				frame.loginUser(userVO);
+			} catch (UserNotFoundException e) {
+				JOptionPane.showMessageDialog(null, "该用户不存在！", "登录错误", JOptionPane.INFORMATION_MESSAGE);
+				
+			} catch (UserPasswordErrorException e) {
+				JOptionPane.showMessageDialog(null, "密码错误！", "登录错误", JOptionPane.INFORMATION_MESSAGE);
+				
+			}
+		}
+		else{
+			StaffVO staffVO = new StaffVO();
+			try {
+				staffVO = controller.loginStaff(account, password);
+				frame.loginStaff(staffVO);
+			} catch (StaffNotFoundExceptioon e) {
+				JOptionPane.showMessageDialog(null, "该工作人员不存在！", "登录错误", JOptionPane.INFORMATION_MESSAGE);
+				
+			} catch (StaffPasswordErrorException e) {
+				JOptionPane.showMessageDialog(null, "密码错误！", "登录错误", JOptionPane.INFORMATION_MESSAGE);
+				
+			}
+		}
+		
 	}
 	
 	

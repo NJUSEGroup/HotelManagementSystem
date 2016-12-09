@@ -181,7 +181,7 @@ public class SearchPanel extends JPanel {
 
 	private void setRightLabel() {
 
-		JLabel commercialJL = new CommonLabel("商       圈*", JLabel.LEFT);
+		JLabel commercialJL = new CommonLabel("商    圈*", JLabel.LEFT);
 		commercialJL.setBounds(RIGHTJL_X, JL_HEIGHT, JL_WIDTH, JL_HEIGHT);
 		add(commercialJL);
 
@@ -204,7 +204,7 @@ public class SearchPanel extends JPanel {
 
 	private void setLeftLabel() {
 
-		JLabel cityJL = new CommonLabel("城       市*", JLabel.LEFT);
+		JLabel cityJL = new CommonLabel("城    市*", JLabel.LEFT);
 		cityJL.setBounds(LEFTJL_X, JL_HEIGHT, JL_WIDTH, JL_HEIGHT);
 		add(cityJL);
 
@@ -318,8 +318,6 @@ public class SearchPanel extends JPanel {
 		if (hasOrderedBox.isSelected())
 			list.add(ifOrderedFilter);
 		if (roomNumField.getText().equals("")) {
-			roomNumFilter.setRoomNum(1000);
-			list.add(roomNumFilter);
 		} else {
 			 
 			 System.out.println(Integer.parseInt(roomNumField.getText()));
@@ -330,7 +328,7 @@ public class SearchPanel extends JPanel {
 	}
 
 	public RoomType getRoomType() {
-		if (roomTypeBox.getSelectedItem() != "无限制") {
+		if (!roomTypeBox.getSelectedItem() .equals("无限制") ) {
 			return RoomType.getRoomType((String) roomTypeBox.getSelectedItem());
 		}
 		return null;

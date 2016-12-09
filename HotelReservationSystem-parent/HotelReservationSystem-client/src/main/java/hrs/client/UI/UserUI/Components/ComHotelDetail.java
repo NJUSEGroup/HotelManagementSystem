@@ -2,6 +2,7 @@ package hrs.client.UI.UserUI.Components;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -88,7 +89,7 @@ public class ComHotelDetail extends CommonPanel {
 		orderScrollPane.getViewport().setBackground(new Color(211, 237, 249));
 		orderScrollPane.setOpaque(true);
 
-		List<OrderVO> list = null;
+		List<OrderVO> list = new ArrayList<>();
 		try {
 			list = controller.findOrderByHotelAndUsername(hotel.id, user.username);
 		} catch (OrderNotFoundException e) {

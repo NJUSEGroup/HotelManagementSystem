@@ -5,6 +5,7 @@ import java.awt.Dialog.ModalityType;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -121,6 +122,7 @@ public class OrderShowPanel extends CommonPanel {
 		scrollPane.setOpaque(true);
 		table.addMouseListener(new TableListener(this));
 		
+
 		add(scrollPane);
 		
 	}
@@ -155,10 +157,11 @@ public class OrderShowPanel extends CommonPanel {
 		try {
 			return controller.findOrdersByUsernameAndStatus(userVO.username, status);
 		} catch (OrderNotFoundException e) {
+			List<OrderVO> list = new ArrayList<>();
+			return list;
 			
-			e.printStackTrace();
 		}
-		return null;
+		
 	}
 
 	public void setStatus(OrderStatus status) {

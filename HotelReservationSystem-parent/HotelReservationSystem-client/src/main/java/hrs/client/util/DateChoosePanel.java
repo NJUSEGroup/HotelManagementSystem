@@ -1,5 +1,7 @@
 package hrs.client.util;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -15,7 +17,7 @@ import hrs.common.util.DateHelper;
  * 年份选项为当年和今年
  * 日期选项根据年份和月份确定
  * 各项均默认为当前日期
- * 大小为330*40
+ * 大小为260*40
  * @author 涵
  *
  */
@@ -41,7 +43,7 @@ public class DateChoosePanel extends JPanel {
 	}
 
 	private void Init() {
-		setSize(330,40);
+		setSize(260,40);
 		setLayout(null);
 		setBackground(UIConstants.JFRAME);
 		
@@ -55,7 +57,7 @@ public class DateChoosePanel extends JPanel {
 		yearBox.addItem(currentTm.get(Calendar.YEAR)+1);
 		yearBox.addItemListener(listener);
 		yearBox.setFont(font);
-		yearBox.setBounds(0,5,100,30);
+		yearBox.setBounds(0,5,70,30);
 		yearBox.setSelectedItem(currentTm.get(Calendar.YEAR));
 		add(yearBox);
 		
@@ -64,7 +66,7 @@ public class DateChoosePanel extends JPanel {
 			monthBox.addItem(i);
 		}
 		monthBox.setFont(font);
-		monthBox.setBounds(130,5,70,30);
+		monthBox.setBounds(100,5,50,30);
 		monthBox.setSelectedItem(currentTm.get(Calendar.MONTH)+1);
 		monthBox.addItemListener(listener);
 		add(monthBox);
@@ -75,7 +77,7 @@ public class DateChoosePanel extends JPanel {
 			dayBox.addItem(i);
 		}
 		dayBox.setFont(font);
-		dayBox.setBounds(230,5,70,30);
+		dayBox.setBounds(180,5,50,30);
 		dayBox.setSelectedItem(currentTm.get(Calendar.DATE));
 		add(dayBox);
 		
@@ -84,24 +86,30 @@ public class DateChoosePanel extends JPanel {
 	private void setLabel() {
 		JLabel yearJL = new JLabel("年");
 		yearJL.setFont(font);
-		yearJL.setBounds(100,0,30,40);
+		yearJL.setBounds(70,0,30,40);
 		add(yearJL);
 		
 		JLabel monthJL = new JLabel("月");
 		monthJL.setFont(font);
-		monthJL.setBounds(200,0,30,40);
+		monthJL.setBounds(150,0,30,40);
 		add(monthJL);
 		
 		JLabel dayJL = new JLabel("日");
 		dayJL.setFont(font);
-		dayJL.setBounds(300,0,30,40);
+		dayJL.setBounds(230,0,30,40);
 		add(dayJL);
 		
 	}
 
 	public void change() {
+		//只要一项为0，就是不选择
+		if((Integer)yearBox.getSelectedItem()==0||
+				(Integer)monthBox.getSelectedItem()==0||
+				(Integer)dayBox.getSelectedItem()==0){
+			return;
+		}
 		currentTm.set(Calendar.YEAR, (Integer)yearBox.getSelectedItem());
-		currentTm.set(Calendar.MONTH, (Integer)monthBox.getSelectedItem()+1);
+		currentTm.set(Calendar.MONTH, (Integer)monthBox.getSelectedItem()-1);
 		dayBox.removeAllItems();
 		int MaxDay = currentTm.getActualMaximum(Calendar.DATE);
 		for(Integer i = 1;i<=MaxDay;i++){
@@ -111,11 +119,31 @@ public class DateChoosePanel extends JPanel {
 		
 	}
 	
+	public void changeTobirth(){
+		yearBox.removeAllItems();
+		for (int i = 1960;i<=2015;i++){
+			yearBox.addItem(i);
+		}
+		yearBox.addItem(0);
+		yearBox.setSelectedItem(0);
+		
+		monthBox.addItem(0);
+		monthBox.setSelectedItem(0);
+		
+		dayBox.addItem(0);
+		dayBox.setSelectedItem(0);
+	}
+	
 	/**
 	 * 得到当前panel选择的日期
 	 * @return Date
 	 */
 	public Date getDate(){
+		if((Integer)yearBox.getSelectedItem()==0||
+				(Integer)monthBox.getSelectedItem()==0||
+				(Integer)dayBox.getSelectedItem()==0){
+			return null;
+		}
 		int year = (Integer)yearBox.getSelectedItem();
 		int month = (Integer)monthBox.getSelectedItem()-1;
 		int day = (Integer)dayBox.getSelectedItem();

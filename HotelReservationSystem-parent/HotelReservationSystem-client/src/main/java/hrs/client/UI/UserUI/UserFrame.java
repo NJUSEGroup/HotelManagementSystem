@@ -16,7 +16,7 @@ import hrs.common.Controller.UserController.IUserController;
 import hrs.common.Exception.UserService.UserNotFoundException;
 import hrs.common.VO.UserVO;
 
-public class MainFrame extends JFrame{
+public class UserFrame extends JFrame{
 	/**
 	 * 
 	 */
@@ -36,7 +36,7 @@ public class MainFrame extends JFrame{
 	private UserVO userVO;
 	private String username;
 	
-	public MainFrame(UserVO userVO){
+	public UserFrame(UserVO userVO){
 		this.username = userVO.username;
 		userInfoPanel = new UserInfoPanel(username);
 		creditInfoPanel = new CreditInfoPanel(username);
@@ -70,18 +70,18 @@ public class MainFrame extends JFrame{
 		
 	}
 	
-	public static void main(String[] args){
-		IUserController controller = ControllerFactory.getUserController();
-		UserVO vo;
-		try {
-			vo = controller.findUserByUsername("admin");
-			new MainFrame(vo);
-		} catch (UserNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
+//	public static void main(String[] args){
+//		IUserController controller = ControllerFactory.getUserController();
+//		UserVO vo;
+//		try {
+//			vo = controller.findUserByUsername("admin");
+//			new UserFrame(vo);
+//		} catch (UserNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//	}
 	private void Init() {
 		height = 768;
 		width = 1366;
