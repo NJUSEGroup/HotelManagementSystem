@@ -17,6 +17,8 @@ import javax.swing.border.EmptyBorder;
 import hrs.client.UI.HotelUI.RoomUI.RoomUIPanel;
 import hrs.client.UI.HotelUI.RoomUI.Listener.AddCancelListener;
 import hrs.client.UI.HotelUI.RoomUI.Listener.AddConfirmListener;
+import hrs.client.util.HMSBlueButton;
+import hrs.client.util.HMSGrayButton;
 import hrs.common.Exception.RoomService.RoomNotFoundException;
 import hrs.common.VO.RoomVO;
 import hrs.common.util.type.RoomType;
@@ -39,8 +41,8 @@ public class AddRoomDialog extends JDialog {
 	private JComboBox<String> jcbRoomType;
 	private JSpinner jsRoomNum;
 	private JTextField jtfMoney;
-	private JButton jbConfirm;
-	private JButton jbCancel;
+	private HMSBlueButton jbConfirm;
+	private HMSGrayButton jbCancel;
 	private AddCancelListener addCancelListener;
 	private AddConfirmListener addConfirmListener;
 	private RoomUIPanel jpRoomUI;
@@ -134,17 +136,15 @@ public class AddRoomDialog extends JDialog {
 	public void setButtonPanel(){
 		addConfirmListener = new AddConfirmListener(this);
 		
-		jbConfirm = new JButton();
+		jbConfirm = new HMSBlueButton("确定");
 		jbConfirm.setFont(new Font("宋体", Font.PLAIN, 16));
-		jbConfirm.setText("确定");
 		jbConfirm.setBounds(92, 13, 70, 40);
 		jbConfirm.addMouseListener(addConfirmListener);
 		
 		addCancelListener = new AddCancelListener(this);
 		
-		jbCancel = new JButton();
+		jbCancel = new HMSGrayButton("取消");
 		jbCancel.setFont(new Font("宋体", Font.PLAIN, 16));
-		jbCancel.setText("取消");
 		jbCancel.setBounds(264, 13, 70, 40);
 		jbCancel.addMouseListener(addCancelListener);
 		

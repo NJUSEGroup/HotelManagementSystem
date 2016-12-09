@@ -14,46 +14,22 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.JButton;
 
-public class HRSButton extends JButton{
+public class HMSRedButton extends JButton{
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 2245476139901075947L;
 	/* 决定圆角的弧度 */
     public static int radius = 10;
-    public static Color COLOR1, COLOR2;
-    public static int red = 2, ashen = 1, stone = 0;
-    /* 红 */
-    public static Color red1 = new Color(240, 240, 240);
-    public static Color red2 = new Color(230, 0, 18);
-    /* 灰白 */
-    public static Color ashen1 = new Color(250, 250, 250);
-    public static Color ashen2 = new Color(197, 197, 197);
-    /* 深宝石蓝 */
-    public static Color stone1 = new Color(79, 125, 184);
-    public static Color stone2 = new Color(89, 200, 240);
+    public static Color COLOR1 = new Color(240, 240, 240);
+    public static Color COLOR2 = new Color(230, 0, 18);
     /*光标进入按钮判断*/
     private boolean hover;
-    public HRSButton(){
-    	this("", stone);
+    public HMSRedButton(){
+    	this("");
     }
-    public HRSButton(String name){
-    	this(name, stone);
-    }
-    public HRSButton(String name, int style){
+    public HMSRedButton(String name){
     	super.setText(name);
-    	if (style == red){
-    		COLOR1 = red1;
-    		COLOR2 = red2;
-    	}
-    	if (style == ashen){
-    		COLOR1 = ashen1;
-    		COLOR2 = ashen2;
-    	}
-    	if (style == stone){
-    		COLOR1 = stone1;
-    		COLOR2 = stone2;
-    	}
   
     	paintcolor(COLOR1, COLOR2);
     }

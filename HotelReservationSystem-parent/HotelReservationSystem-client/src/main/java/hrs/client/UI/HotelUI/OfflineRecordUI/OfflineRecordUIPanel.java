@@ -22,7 +22,7 @@ import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.CheckoutListener;
 import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.RecordSelectedListener;
 import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.SearchListener;
 import hrs.client.util.ControllerFactory;
-import hrs.client.util.HRSButton;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.HotelController.IOfflineRecordController;
 import hrs.common.Exception.OfflineRecordService.OfflineRecordNotFoundException;
@@ -41,11 +41,11 @@ public class OfflineRecordUIPanel extends JPanel {
 	private JScrollPane jspRecord;
 	private JLabel jlInput;
 	private JTextField jtfInput;
-	private HRSButton jbConfirm;
+	private HMSBlueButton jbConfirm;
 	private JTable jtRecord;
 	private JTableHeader jth;
-	private HRSButton jbCheckin;
-	private HRSButton jbCheckout;
+	private HMSBlueButton jbCheckin;
+	private HMSBlueButton jbCheckout;
 	private OfflineRecordTableModel model;
 	private IOfflineRecordController controller;
 	private SearchListener searchListener;
@@ -115,7 +115,7 @@ public class OfflineRecordUIPanel extends JPanel {
 		
 		searchListener = new SearchListener(this);
 		
-		jbConfirm = new HRSButton("确认");
+		jbConfirm = new HMSBlueButton("确认");
 		jbConfirm.setBounds(362, 15, 90, 40);
 		jbConfirm.addMouseListener(searchListener);
 		
@@ -165,13 +165,13 @@ public class OfflineRecordUIPanel extends JPanel {
 	public void setButtonPanel(){
 		checkinListener = new CheckinListener(this);
 		
-		jbCheckin = new HRSButton("入住");
+		jbCheckin = new HMSBlueButton("入住");
 		jbCheckin.setBounds(715, 13, 90, 40);
 		jbCheckin.addMouseListener(checkinListener);
 		
 		checkoutListener = new CheckoutListener(this);
 		
-		jbCheckout = new HRSButton("退房");
+		jbCheckout = new HMSBlueButton("退房");
 		jbCheckout.setBounds(869, 13, 90, 40);
 		jbCheckout.setEnabled(false);
 		jbCheckout.addMouseListener(checkoutListener);
@@ -235,7 +235,7 @@ public class OfflineRecordUIPanel extends JPanel {
 	}
 	
 	/**
-	 * 当表格中的某项线下记录被选中时，根据线下记录状态判断退房按钮是否可用
+	 * 当表格中的某项线下记录被选中时，根据线下记录状态设置退房按钮的可用状态
 	 */
 	public void recordSelected(){
 		String checkoutTime = "";

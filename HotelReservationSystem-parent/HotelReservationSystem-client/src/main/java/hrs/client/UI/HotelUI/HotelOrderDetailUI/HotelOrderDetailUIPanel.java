@@ -14,7 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import hrs.client.UI.HotelUI.HotelOrderDetailUI.Listener.ReturnListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderMainPanel;
-import hrs.client.util.HRSButton;
+import hrs.client.util.HMSBlueButton;
 import hrs.common.VO.OrderVO;
 import hrs.common.util.DateHelper;
 
@@ -27,7 +27,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 	private JPanel jpDetail;
 	private JPanel jpButton;
 	
-	private HRSButton jbReturn;
+	private HMSBlueButton jbReturn;
 	private JLabel jlID;
 	private JLabel jlPlaceOrder;
 	private JLabel jlExecute;
@@ -97,7 +97,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		returnListener = new ReturnListener(jpMain);
 		
-		jbReturn = new HRSButton("返回");
+		jbReturn = new HMSBlueButton("返回");
 		jbReturn.setBounds(805, 13, 90, 40);
 		jbReturn.addMouseListener(returnListener);
 		

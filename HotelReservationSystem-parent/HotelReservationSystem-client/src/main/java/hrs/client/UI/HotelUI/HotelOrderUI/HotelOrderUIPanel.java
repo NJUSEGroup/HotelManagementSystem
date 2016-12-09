@@ -27,7 +27,7 @@ import hrs.client.UI.HotelUI.HotelOrderUI.Listener.OrderSelectedListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.Listener.SearchByIdOrUsernameListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.Listener.SearchByOrderTypeListener;
 import hrs.client.util.ControllerFactory;
-import hrs.client.util.HRSButton;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.HotelController.IHotelOrderController;
 import hrs.common.Exception.OrderService.OrderNotFoundException;
@@ -50,12 +50,12 @@ public class HotelOrderUIPanel extends JPanel {
 	private JComboBox<String> jcbOrderType;
 	private JComboBox<String> jcbSearch;
 	private JTextField jtfSearch;
-	private HRSButton jbConfirm1;
-	private HRSButton jbConfirm2;
-	private HRSButton jbDetail;
-	private HRSButton jbCheckin;
-	private HRSButton jbCheckout;
-	private HRSButton jbDelay;
+	private HMSBlueButton jbConfirm1;
+	private HMSBlueButton jbConfirm2;
+	private HMSBlueButton jbDetail;
+	private HMSBlueButton jbCheckin;
+	private HMSBlueButton jbCheckout;
+	private HMSBlueButton jbDelay;
 	private JTable jtOrderList;
 	private JTableHeader jthOrderList;
 	private OrderListTableModel orderListTableModel;
@@ -158,11 +158,11 @@ public class HotelOrderUIPanel extends JPanel {
 		searchListener1 = new SearchByOrderTypeListener(this);
 		searchListener2 = new SearchByIdOrUsernameListener(this);
 		
-		jbConfirm1 = new HRSButton("确认");
+		jbConfirm1 = new HMSBlueButton("确认");
 		jbConfirm1.setBounds(681, 15, 90, 40);
 		jbConfirm1.addMouseListener(searchListener1);
 		
-		jbConfirm2 = new HRSButton("确认");
+		jbConfirm2 = new HMSBlueButton("确认");
 		jbConfirm2.setBounds(681, 95, 90, 40);
 		jbConfirm2.addMouseListener(searchListener2);
 		
@@ -187,7 +187,7 @@ public class HotelOrderUIPanel extends JPanel {
 		orderListTableModel = new OrderListTableModel(orderList);
 		
 		jtOrderList = new JTable(orderListTableModel);
-		jtOrderList.setBackground(UIConstants.JFRAME);
+		jtOrderList.setBackground(Color.WHITE);
 		jtOrderList.setFont(tableFont);
 		jtOrderList.setRowHeight(40);
 		jtOrderList.setShowVerticalLines(false);
@@ -203,7 +203,6 @@ public class HotelOrderUIPanel extends JPanel {
 		jspOrderList = new JScrollPane(jtOrderList);
 		jspOrderList.setBounds(10, 10, 1060, 452);
 		jspOrderList.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		jspOrderList.setOpaque(false);
 		jspOrderList.getViewport().setOpaque(false);
 		jspOrderList.setBackground(Color.WHITE);
 		
@@ -214,28 +213,28 @@ public class HotelOrderUIPanel extends JPanel {
 	 * 设置按钮面板
 	 */
 	public void setButtonPanel(){
-		jbDetail = new HRSButton("查看详细", 0);
+		jbDetail = new HMSBlueButton("查看详细");
 		jbDetail.setBounds(410, 13, 110, 40);
 		jbDetail.addMouseListener(detailListener);
 		jbDetail.setEnabled(false);
 		
 		checkinListener = new CheckinListener(this);
 		
-		jbCheckin = new HRSButton("入住");
+		jbCheckin = new HMSBlueButton("入住");
 		jbCheckin.setBounds(550, 13, 110, 40);
 		jbCheckin.setEnabled(false);
 		jbCheckin.addMouseListener(checkinListener);
 		
 		checkoutListener = new CheckoutListener(this);
 		
-		jbCheckout = new HRSButton("退房");
+		jbCheckout = new HMSBlueButton("退房");
 		jbCheckout.setBounds(690, 13, 110, 40);
 		jbCheckout.setEnabled(false);
 		jbCheckout.addMouseListener(checkoutListener);
 		
 		delayListener = new DelayCheckinListener(this);
 		
-		jbDelay = new HRSButton("延迟入住");
+		jbDelay = new HMSBlueButton("延迟入住");
 		jbDelay.setBounds(830, 13, 110, 40);
 		jbDelay.setEnabled(false);
 		jbDelay.addMouseListener(delayListener);

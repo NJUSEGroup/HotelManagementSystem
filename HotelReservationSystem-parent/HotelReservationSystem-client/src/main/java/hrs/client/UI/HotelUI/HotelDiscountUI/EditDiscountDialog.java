@@ -23,6 +23,8 @@ import hrs.client.UI.HotelUI.HotelDiscountUI.Listener.EditConfirmListener;
 import hrs.client.UI.HotelUI.HotelDiscountUI.Listener.TypeSelectedListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.DateChoosePanel;
+import hrs.client.util.HMSBlueButton;
+import hrs.client.util.HMSGrayButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.HotelController.IHotelDiscountController;
 import hrs.common.Exception.PromotionService.EnterpriseNotFoundException;
@@ -51,8 +53,8 @@ public class EditDiscountDialog extends JDialog {
 	private JSpinner jsRoomNum;
 	private JComboBox<String> jcbFirm;
 	private JTextField jtfDiscount;
-	private JButton jbConfirm;
-	private JButton jbCancel;
+	private HMSBlueButton jbConfirm;
+	private HMSGrayButton jbCancel;
 	private HotelDiscountVO theDiscount;
 	private List<EnterpriseVO> allFirms;
 	private EditCancelListener cancelListener;
@@ -142,17 +144,15 @@ public class EditDiscountDialog extends JDialog {
 		
 		editListener = new EditConfirmListener(this);
 		
-		jbConfirm = new JButton();
+		jbConfirm = new HMSBlueButton("确定");
 		jbConfirm.setFont(new Font("宋体", Font.PLAIN, 16));
-		jbConfirm.setText("确定");
 		jbConfirm.setBounds(141, 13, 70, 40);
 		jbConfirm.addMouseListener(editListener);
 		
 		cancelListener = new EditCancelListener(this);
 		
-		jbCancel = new JButton();
+		jbCancel = new HMSGrayButton("取消");
 		jbCancel.setFont(new Font("宋体", Font.PLAIN, 16));
-		jbCancel.setText("取消");
 		jbCancel.setBounds(321, 13, 70, 40);
 		jbCancel.addMouseListener(cancelListener);
 		

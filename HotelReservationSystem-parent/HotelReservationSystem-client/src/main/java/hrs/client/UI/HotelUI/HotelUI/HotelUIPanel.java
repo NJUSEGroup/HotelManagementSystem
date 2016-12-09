@@ -19,7 +19,8 @@ import hrs.client.UI.HotelUI.HotelUI.Listener.CancelListener;
 import hrs.client.UI.HotelUI.HotelUI.Listener.CityListener;
 import hrs.client.UI.HotelUI.HotelUI.Listener.EditListener;
 import hrs.client.util.ControllerFactory;
-import hrs.client.util.HRSButton;
+import hrs.client.util.HMSBlueButton;
+import hrs.client.util.HMSGrayButton;
 import hrs.client.util.RegExpHelper;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.HotelController.IHotelController;
@@ -53,8 +54,8 @@ public class HotelUIPanel extends JPanel {
 	private JTextArea jtaIntro;
 	private JTextArea jtaService;
 	private JComboBox<String> jcbStar;
-	private HRSButton jbEdit;
-	private HRSButton jbCancel;
+	private HMSBlueButton jbEdit;
+	private HMSGrayButton jbCancel;
 	private EditListener editListener;
 	private CancelListener cancelListener;
 	private CityListener cityListener;
@@ -246,11 +247,11 @@ public class HotelUIPanel extends JPanel {
 		editListener = new EditListener(this);
 		cancelListener = new CancelListener(this);
 		
-		jbEdit = new HRSButton("修改");
+		jbEdit = new HMSBlueButton("修改");
 		jbEdit.setBounds(251, 17, 110, 50);
 		jbEdit.addMouseListener(editListener);
 		
-		jbCancel = new HRSButton("取消",1);
+		jbCancel = new HMSGrayButton("取消");
 		jbCancel.setBounds(606, 17, 110, 50);
 		jbCancel.addMouseListener(cancelListener);
 		
