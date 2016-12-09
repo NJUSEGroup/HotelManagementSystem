@@ -215,7 +215,7 @@ public class PlaceOrderPanel extends CommonPanel {
 	}
 
 	/**
-	 * 显示折扣信息4
+	 * 显示折扣信息
 	 * 以初始信息生成订单信息
 	 */
 	private void setDiscountTable() {
@@ -224,12 +224,12 @@ public class PlaceOrderPanel extends CommonPanel {
 		order = new OrderVO();
 		
 		//设置订单的抵达时间，具体时刻默认为1:00
-		order.checkinTime = orderTime.beginTime;
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(orderTime.endTime);
+		calendar.setTime(orderTime.beginTime);
 		calendar.set(Calendar.HOUR, 01);
 		calendar.set(Calendar.MINUTE,00);
-		order.expectedCheckoutTime = calendar.getTime();
+		order.execTime = calendar.getTime();
+		order.expectedCheckoutTime = orderTime.endTime;
 		
 		//设置订单里的初始值
 		order.hasChild = false;
@@ -355,7 +355,7 @@ public class PlaceOrderPanel extends CommonPanel {
 		int result = JOptionPane.showConfirmDialog(null, "是否确认下单？", "提示", JOptionPane.YES_NO_OPTION);
 		if(result == JOptionPane.YES_OPTION){
 			controller.addOrder(order);
-			JOptionPane.showMessageDialog(null, "您已成功下单！/r/n可以随时从订单管理里查看修改您的订单", "提示", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "您已成功下单！"+"可以随时从订单管理里查看修改您的订单", "提示", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		
@@ -372,18 +372,20 @@ public class PlaceOrderPanel extends CommonPanel {
 			order.hasChild = false;
 		}
 		
-		//修改订单里抵达时间的小时数字
+		//修改订单里执行时间的小时数字
 		String time = (String)arriveTmBox.getSelectedItem();
 		String[] arriveTime = time.split(":");
 		time = arriveTime[0];
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(order.checkinTime);
 		calendar.set(Calendar.HOUR, Integer.parseInt(time));
-		order.checkinTime = calendar.getTime();
+		order.execTime = calendar.getTime();
 		
 	}
 	
 	public void change(){
+		
+		
 		String roomstr = (String)roomTypeBox.getSelectedItem();
 		RoomType roomType = RoomType.getRoomType(roomstr);
 		order.type = roomType;
@@ -415,8 +417,6 @@ public class PlaceOrderPanel extends CommonPanel {
 		
 	}
 	
-	
-
 	private boolean isTextValid(String str){
 		if(str.equals("")){
 			return false;

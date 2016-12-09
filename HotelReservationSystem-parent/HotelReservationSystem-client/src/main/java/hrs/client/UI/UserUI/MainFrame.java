@@ -96,7 +96,7 @@ public class MainFrame extends JFrame{
 		this.setLayout(null);
 		
 		
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+//		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
 		
 	}

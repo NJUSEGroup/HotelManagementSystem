@@ -17,7 +17,7 @@ public class MenuLabel extends JLabel {
 	private MenuLabelListener listener = MenuLabelListenerFactory.getListener();
 	
 	public MenuLabel(String s){
-		this.setFont(new Font("微软雅黑",Font.PLAIN,24));
+		this.setFont(UIConstants.JLABEL_FONT);
 		
 		//标签固定大小
 		setPreferredSize(new Dimension(260,70)); 

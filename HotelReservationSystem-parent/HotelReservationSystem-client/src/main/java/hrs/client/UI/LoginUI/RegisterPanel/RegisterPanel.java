@@ -1,6 +1,8 @@
-package hrs.client.UI.LoginUI;
+package hrs.client.UI.LoginUI.RegisterPanel;
 
 import javax.swing.JPanel;
+
+import hrs.client.UI.LoginUI.LoginFrame;
 
 public class RegisterPanel extends JPanel {
 
@@ -9,11 +11,12 @@ public class RegisterPanel extends JPanel {
 	*/ 
 	private static final long serialVersionUID = 6960447518091833432L;
 
+	private LoginFrame frame;
 	/**
 	 * Create the panel.
 	 */
-	public RegisterPanel() {
-
+	public RegisterPanel(LoginFrame frame) {
+		this.frame = frame;
 	}
 
 }
