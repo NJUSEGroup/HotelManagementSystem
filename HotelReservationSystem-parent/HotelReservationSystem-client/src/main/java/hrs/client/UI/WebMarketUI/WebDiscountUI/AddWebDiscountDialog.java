@@ -10,28 +10,26 @@ import javax.swing.border.EmptyBorder;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.CancelAddListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.OKListener;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.DateChoosePanel;
 import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebDiscountController;
 import hrs.common.VO.CommercialCircleVO;
 import hrs.common.VO.LocationVO;
 import hrs.common.VO.WebDiscountVO;
-import hrs.common.util.DateHelper;
 import hrs.common.util.type.WebsiteDiscountType;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AddWebDiscountDialog extends JDialog {
 
@@ -41,8 +39,8 @@ public class AddWebDiscountDialog extends JDialog {
 	private static final long serialVersionUID = -5923810422972507715L;
 
 	private final JPanel jpAdd = new JPanel();
-	private JTextField jtextBegintime;
-	private JTextField jtextEndtime;
+	private DateChoosePanel jtextBegintime;
+	private DateChoosePanel jtextEndtime;
 	private JTextField jtextDiscount;
 	private JLabel jlBeginTime;
 	private JLabel jlEndTime;
@@ -58,10 +56,10 @@ public class AddWebDiscountDialog extends JDialog {
 	private OKListener listener;
 	private CancelAddListener cancelAddListener;
 
-	private JComboBox<Object> jcomboBoxType = new JComboBox<>();
-	private JComboBox<Object> jcomboBoxCommercialCircle = new JComboBox<>();
-	private JComboBox<Object> jcomboBoxLocation = new JComboBox<>();
-	private JComboBox<Object> jcomboBoxVIPLevel = new JComboBox<>();
+	private JComboBox<Object> jcomboBoxType;
+	private JComboBox<Object> jcomboBoxCommercialCircle;
+	private JComboBox<Object> jcomboBoxLocation;
+	private JComboBox<Object> jcomboBoxVIPLevel;
 
 	private LocationVO location;
 	private CommercialCircleVO commercialCircle;
@@ -79,29 +77,12 @@ public class AddWebDiscountDialog extends JDialog {
 	 */
 	public AddWebDiscountDialog(WebDiscountPanel panel) {
 		jpWebDiscount = panel;
-		jcomboBoxType.addItem("会员等级折扣");
-		jcomboBoxType.addItem("特定期间折扣");
-		jcomboBoxType.addItem("特定商圈专属折扣");
-		jcomboBoxType.setSelectedIndex(-1);
-
-		for (int i = 0; i < locToName().length; i++) {
-			jcomboBoxLocation.addItem(locToName()[i]);
-		}
-		jcomboBoxLocation.setSelectedIndex(-1);
-
-		jcomboBoxVIPLevel.addItem("1");
-		jcomboBoxVIPLevel.addItem("2");
-		jcomboBoxVIPLevel.addItem("3");
-		jcomboBoxVIPLevel.addItem("4");
-		jcomboBoxVIPLevel.addItem("5");
-		jcomboBoxVIPLevel.setSelectedIndex(-1);
-
 		init();
 	}
 
 	public void init() {
 		this.setTitle("酒店促销策略添加");
-		this.setBounds(100, 100, 450, 320);
+		this.setBounds(100, 100, 600, 450);
 
 		getContentPane().setLayout(new BorderLayout());
 		jpAdd.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -109,114 +90,106 @@ public class AddWebDiscountDialog extends JDialog {
 		getContentPane().add(jpAdd, BorderLayout.CENTER);
 
 		jlPromotionType = new JLabel("折扣类型");
+		jlPromotionType.setFont(UIConstants.FONT_16);
+		jlPromotionType.setBounds(121, 15, 76, 16);
+
 		jlBeginTime = new JLabel("开始时间");
+		jlBeginTime.setFont(UIConstants.FONT_16);
+		jlBeginTime.setBounds(121, 62, 76, 16);
+
 		jlEndTime = new JLabel("结束时间");
+		jlEndTime.setFont(UIConstants.FONT_16);
+		jlEndTime.setBounds(121, 109, 76, 16);
+
+		jlLocation = new JLabel("城市");
+		jlLocation.setFont(UIConstants.FONT_16);
+		jlLocation.setBounds(121, 156, 76, 16);
+
 		jlCommercialCircle = new JLabel("商圈");
+		jlCommercialCircle.setFont(UIConstants.FONT_16);
+		jlCommercialCircle.setBounds(121, 203, 76, 16);
+
 		jlVIPLevel = new JLabel("VIP等级");
+		jlVIPLevel.setFont(UIConstants.FONT_16);
+		jlVIPLevel.setBounds(121, 250, 76, 16);
+
 		jlDiscount = new JLabel("折扣信息");
+		jlDiscount.setFont(UIConstants.FONT_16);
+		jlDiscount.setBounds(121, 297, 76, 16);
 
-		jtextBegintime = new JTextField();
-		jtextBegintime.setColumns(10);
-		jtextBegintime.setText("");
+		jcomboBoxType = new JComboBox<>();
+		jcomboBoxType.setBounds(262, 15, 261, 27);
+		jcomboBoxType.addItem("会员等级折扣");
+		jcomboBoxType.addItem("特定期间折扣");
+		jcomboBoxType.addItem("特定商圈专属折扣");
+		jcomboBoxType.setSelectedIndex(-1);
 
-		jtextEndtime = new JTextField();
-		jtextEndtime.setColumns(10);
-		jtextEndtime.setText("");
+		jtextBegintime = new DateChoosePanel();
+		jtextBegintime.setBounds(262, 52, 261, 33);
+
+		jtextEndtime = new DateChoosePanel();
+		jtextEndtime.setBounds(262, 100, 261, 32);
+
+		jcomboBoxLocation = new JComboBox<>();
+		for (int i = 0; i < locToName().length; i++) {
+			jcomboBoxLocation.addItem(locToName()[i]);
+		}
+		jcomboBoxLocation.setBounds(262, 156, 261, 27);
+		jcomboBoxLocation.setSelectedIndex(-1);
+
+		jcomboBoxCommercialCircle = new JComboBox<>();
+		jcomboBoxCommercialCircle.setBounds(262, 203, 261, 27);
+
+		jcomboBoxVIPLevel = new JComboBox<>();
+		jcomboBoxVIPLevel.setBounds(262, 250, 261, 27);
+		jcomboBoxVIPLevel.addItem("1");
+		jcomboBoxVIPLevel.addItem("2");
+		jcomboBoxVIPLevel.addItem("3");
+		jcomboBoxVIPLevel.addItem("4");
+		jcomboBoxVIPLevel.addItem("5");
+		jcomboBoxVIPLevel.setSelectedIndex(-1);
 
 		jtextDiscount = new JTextField();
+		jtextDiscount.setBounds(262, 297, 261, 26);
 		jtextDiscount.setColumns(10);
 		jtextDiscount.setText("");
 
 		jbOK = new HMSBlueButton("确认添加");
+		jbOK.setBounds(165, 353, 92, 29);
 		jbOK.setFont(UIConstants.FONT_13);
 		listener = new OKListener(jpWebDiscount, this);
 		jbOK.addMouseListener(listener);
 
 		jbCancel = new HMSBlueButton("取消添加");
+		jbCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		jbCancel.setBounds(353, 353, 92, 29);
 		jbCancel.setFont(UIConstants.FONT_13);
 		cancelAddListener = new CancelAddListener(this);
 		jbCancel.addMouseListener(cancelAddListener);
 
-		jlLocation = new JLabel("城市");
-
-		// jcomboBoxCommercialCircle.setSelectedIndex(-1);
 		setUnableAndCombox();
 
 		initWebDiscountDialog();
-
-		GroupLayout gl_jpAdd = new GroupLayout(jpAdd);
-		gl_jpAdd.setHorizontalGroup(
-				gl_jpAdd.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_jpAdd.createSequentialGroup().addGroup(gl_jpAdd
-								.createParallelGroup(
-										Alignment.LEADING)
-								.addGroup(gl_jpAdd.createSequentialGroup().addGap(93).addGroup(gl_jpAdd
-										.createParallelGroup(Alignment.LEADING).addComponent(jlDiscount)
-										.addGroup(gl_jpAdd.createParallelGroup(Alignment.LEADING, false)
-												.addComponent(jlCommercialCircle, GroupLayout.DEFAULT_SIZE,
-														GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(jlLocation, GroupLayout.DEFAULT_SIZE,
-														GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(jlEndTime, GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-												.addComponent(jlBeginTime, GroupLayout.DEFAULT_SIZE, 76,
-														Short.MAX_VALUE)
-												.addComponent(jlPromotionType, GroupLayout.DEFAULT_SIZE, 76,
-														Short.MAX_VALUE)
-												.addComponent(jlVIPLevel, GroupLayout.DEFAULT_SIZE, 76,
-														Short.MAX_VALUE)))
-										.addPreferredGap(ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-										.addGroup(gl_jpAdd.createParallelGroup(Alignment.LEADING)
-												.addGroup(gl_jpAdd.createParallelGroup(Alignment.LEADING, false)
-														.addComponent(jtextDiscount, Alignment.TRAILING)
-														.addComponent(jtextEndtime, Alignment.TRAILING)
-														.addComponent(jcomboBoxCommercialCircle, Alignment.TRAILING, 0,
-																GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-														.addComponent(jcomboBoxLocation, Alignment.TRAILING, 0, 168,
-																Short.MAX_VALUE)
-														.addComponent(jcomboBoxVIPLevel, Alignment.TRAILING, 0,
-																GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-														.addComponent(jtextBegintime))
-												.addComponent(jcomboBoxType, GroupLayout.PREFERRED_SIZE, 168,
-														GroupLayout.PREFERRED_SIZE))
-										.addGap(73))
-								.addGroup(gl_jpAdd.createSequentialGroup().addGap(131).addComponent(jbOK).addGap(18)
-										.addComponent(jbCancel)))
-								.addContainerGap()));
-		gl_jpAdd.setVerticalGroup(gl_jpAdd.createParallelGroup(Alignment.LEADING).addGroup(gl_jpAdd
-				.createSequentialGroup().addContainerGap()
-				.addGroup(gl_jpAdd.createParallelGroup(Alignment.BASELINE).addComponent(jlPromotionType).addComponent(
-						jcomboBoxType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-						GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(gl_jpAdd.createParallelGroup(Alignment.BASELINE).addComponent(jlBeginTime).addComponent(
-						jtextBegintime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-						GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(gl_jpAdd.createParallelGroup(Alignment.BASELINE).addComponent(jlEndTime).addComponent(
-						jtextEndtime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(gl_jpAdd.createParallelGroup(Alignment.LEADING).addComponent(jlLocation).addComponent(
-						jcomboBoxLocation, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-						GroupLayout.PREFERRED_SIZE))
-				.addGap(7)
-				.addGroup(gl_jpAdd.createParallelGroup(Alignment.BASELINE).addComponent(jlCommercialCircle)
-						.addComponent(jcomboBoxCommercialCircle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(ComponentPlacement.UNRELATED)
-				.addGroup(
-						gl_jpAdd.createParallelGroup(Alignment.BASELINE)
-								.addComponent(jlVIPLevel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)
-								.addComponent(jcomboBoxVIPLevel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(gl_jpAdd.createParallelGroup(Alignment.BASELINE).addComponent(jlDiscount).addComponent(
-						jtextDiscount, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-						GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(ComponentPlacement.UNRELATED)
-				.addGroup(gl_jpAdd.createParallelGroup(Alignment.BASELINE).addComponent(jbOK).addComponent(jbCancel))
-				.addGap(106)));
-		jpAdd.setLayout(gl_jpAdd);
+		jpAdd.setLayout(null);
+		jpAdd.add(jlDiscount);
+		jpAdd.add(jlCommercialCircle);
+		jpAdd.add(jlLocation);
+		jpAdd.add(jlEndTime);
+		jpAdd.add(jlBeginTime);
+		jpAdd.add(jlPromotionType);
+		jpAdd.add(jlVIPLevel);
+		jpAdd.add(jtextDiscount);
+		jpAdd.add(jtextEndtime);
+		jpAdd.add(jcomboBoxCommercialCircle);
+		jpAdd.add(jcomboBoxLocation);
+		jpAdd.add(jcomboBoxVIPLevel);
+		jpAdd.add(jtextBegintime);
+		jpAdd.add(jcomboBoxType);
+		jpAdd.add(jbOK);
+		jpAdd.add(jbCancel);
 	}
 
 	public void initWebDiscountDialog() {
@@ -224,8 +197,6 @@ public class AddWebDiscountDialog extends JDialog {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if (jcomboBoxType.getSelectedItem().toString().equals("特定商圈专属折扣")) {
-					// locationIndex = jcomboBoxLocation.getSelectedIndex();
-					// location = locs.get(locationIndex);
 					jcomboBoxLocation.addItemListener(new ItemListener() {
 						@Override
 						public void itemStateChanged(ItemEvent e) {
@@ -233,7 +204,6 @@ public class AddWebDiscountDialog extends JDialog {
 							locationIndex = jcomboBoxLocation.getSelectedIndex();
 							location = locs.get(locationIndex);
 							commercialCircleList = controller.findCircleByLoc(location.id);
-							// System.out.println(commercialCircleList);
 							Object[] circleName = new Object[commercialCircleList.size()];
 							for (int i = 0; i != commercialCircleList.size(); ++i) {
 								circleName[i] = commercialCircleList.get(i).name;
@@ -260,27 +230,23 @@ public class AddWebDiscountDialog extends JDialog {
 					jcomboBoxVIPLevel.setSelectedIndex(-1);
 					jcomboBoxCommercialCircle.setSelectedIndex(-1);
 					jcomboBoxLocation.setSelectedIndex(-1);
-					jtextBegintime.setText("");
-					jtextEndtime.setText("");
+					jtextBegintime.setUnusable();
+					jtextEndtime.setUnusable();
 					jtextDiscount.setText("");
 					jtextBegintime.setBackground(Color.LIGHT_GRAY);
 					jtextEndtime.setBackground(Color.LIGHT_GRAY);
 					jcomboBoxVIPLevel.setBackground(Color.LIGHT_GRAY);
 					jcomboBoxCommercialCircle.setEnabled(true);
 					jcomboBoxLocation.setEnabled(true);
-					jtextBegintime.setEditable(false);
-					jtextEndtime.setEditable(false);
 					jcomboBoxVIPLevel.setEnabled(false);
 					break;
-				case "特定期间折扣"://改成DateChoosePanel
+				case "特定期间折扣":// 改成DateChoosePanel
 					jcomboBoxVIPLevel.setSelectedIndex(-1);
 					jcomboBoxCommercialCircle.setSelectedIndex(-1);
 					jcomboBoxLocation.setSelectedIndex(-1);
 					jtextDiscount.setText("");
-					jtextBegintime.setBackground(Color.WHITE);
-					jtextEndtime.setBackground(Color.WHITE);
-					jtextBegintime.setEditable(true);
-					jtextEndtime.setEditable(true);
+					jtextBegintime.setEnabled();
+					jtextEndtime.setEnabled();
 					jcomboBoxCommercialCircle.setEnabled(false);
 					jcomboBoxLocation.setEnabled(false);
 					jcomboBoxVIPLevel.setEnabled(false);
@@ -288,19 +254,14 @@ public class AddWebDiscountDialog extends JDialog {
 				case "会员等级折扣":
 					jcomboBoxVIPLevel.setSelectedIndex(-1);
 					jcomboBoxVIPLevel.setEnabled(true);
-					jtextBegintime.setText("");
-					jtextEndtime.setText("");
 					jtextDiscount.setText("");
 					jcomboBoxVIPLevel.setBackground(Color.WHITE);
-					jtextBegintime.setBackground(Color.LIGHT_GRAY);
-					jtextEndtime.setBackground(Color.LIGHT_GRAY);
-					jtextBegintime.setEditable(false);
-					jtextEndtime.setEditable(false);
+					jtextBegintime.setUnusable();
+					jtextEndtime.setUnusable();
 					jcomboBoxCommercialCircle.setSelectedIndex(-1);
 					jcomboBoxLocation.setSelectedIndex(-1);
 					jcomboBoxCommercialCircle.setEnabled(false);
 					jcomboBoxLocation.setEnabled(false);
-
 					break;
 				default:
 					break;
@@ -319,32 +280,21 @@ public class AddWebDiscountDialog extends JDialog {
 				JOptionPane.showMessageDialog(null, "请完整填写折扣信息！", "Error", JOptionPane.ERROR_MESSAGE);
 			} else {
 				double commercialCircleDiscount = Double.parseDouble(jtextDiscount.getText());
-				// System.out.println(jcomboBoxLocation);
 				locationIndex = jcomboBoxLocation.getSelectedIndex();
 				location = locs.get(locationIndex);
 				int commercialCircleIndex = jcomboBoxCommercialCircle.getSelectedIndex();
 				commercialCircle = commercialCircleList.get(commercialCircleIndex);
-				// System.out.println(commercialCircle);
 				addVO = new WebDiscountVO(commercialCircleDiscount, WebsiteDiscountType.SpecialCommercialCircle,
 						location, commercialCircle, null, null, 0);
 			}
 			break;
-		case "特定期间折扣"://vo改变
-			if (jtextBegintime.getText().equals("") || jtextEndtime.getText().equals("")
-					|| jtextDiscount.getText().equals("")) {
+		case "特定期间折扣":// vo改变
+			if (jtextDiscount.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "请完整填写折扣信息！", "Error", JOptionPane.ERROR_MESSAGE);
 			} else {
-				// System.out.println(jcomboBoxType.getSelectedItem());
 				double specialPeriodDiscount = Double.parseDouble(jtextDiscount.getText());
-				Date discountBeginTime = null;
-				Date discountEndTime = null;
-				try {
-					discountBeginTime = DateHelper.parse(jtextBegintime.getText());
-					discountEndTime = DateHelper.parse(jtextEndtime.getText());
-				} catch (ParseException exception) {
-					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(null, "请输入正确的日期格式", "Error", JOptionPane.ERROR_MESSAGE);
-				}
+				Date discountBeginTime = jtextBegintime.getDate();
+				Date discountEndTime = jtextEndtime.getDate();
 				addVO = new WebDiscountVO(specialPeriodDiscount, WebsiteDiscountType.SpecialPeriod, null, null,
 						discountBeginTime, discountEndTime, 0);
 			}
@@ -379,9 +329,8 @@ public class AddWebDiscountDialog extends JDialog {
 	}
 
 	public void refresh() {
-		jtextBegintime.setText("");
-		jtextEndtime.setText("");
-		jtextDiscount.setText("");
+		jtextBegintime = new DateChoosePanel();
+		jtextEndtime = new DateChoosePanel();
 		jcomboBoxType.setSelectedIndex(-1);
 		jcomboBoxCommercialCircle.setSelectedIndex(-1);
 		jcomboBoxLocation.setSelectedIndex(-1);

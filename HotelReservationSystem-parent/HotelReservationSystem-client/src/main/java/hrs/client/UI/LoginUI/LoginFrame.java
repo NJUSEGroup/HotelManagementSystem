@@ -42,8 +42,6 @@ public class LoginFrame extends JFrame {
 	private JPanel contentPane;
 	private LoginPanel loginPanel;
 	private RegisterPanel registerPanel;
-	private JLabel jlTest;
-	private ILoginController loginController = ControllerFactory.getLoginController();
 	private int HEIGHT = 506;
 	private int WIDTH = 1100;
 	private int PANEL_W = 420;
@@ -149,6 +147,7 @@ public class LoginFrame extends JFrame {
 
 	public void loginUser(UserVO userVO) {
 		UserFrame userFrame = new UserFrame(userVO);
+		userFrame.setVisible(true);
 		this.dispose();
 		
 	}

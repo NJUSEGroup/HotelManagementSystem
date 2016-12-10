@@ -13,9 +13,12 @@ import hrs.client.util.UIConstants;
 public class MenuLabelListener extends MouseAdapter {
 	Color color = UIConstants.JLABEL;
 	private JLabel jl = new JLabel();
-	private static CardLayout card ;
-	private static JPanel panel ;
-	
+//	private static CardLayout card ;
+//	private static JPanel panel ;
+	private UserFrame frame;
+	public MenuLabelListener(UserFrame frame){
+		this.frame = frame;
+	}
 	public void mouseEntered(MouseEvent e){
 		jl = (JLabel)e.getSource();
 		//鼠标在标签上时更换背景及字体色
@@ -27,20 +30,17 @@ public class MenuLabelListener extends MouseAdapter {
 		 jl = (JLabel)e.getSource();
 		 String s = jl.getText();
 		 if(s.equals("信用记录")){
-			 card.show(panel, "creditInfoPanel");
-			 
+			 frame.card.show(frame.cardPanel, "creditInfoPanel");
 		 }
 		 if(s.equals("订单信息")){
-			 card.show(panel, "orderInfoPanel");
-
+			 frame.card.show(frame.cardPanel, "orderInfoPanel");
 		 }	 
 		 if(s.equals("个人信息"))
-			 card.show(panel, "userInfoPanel");
+			 frame.card.show(frame.cardPanel, "userInfoPanel");
 		 if(s.equals("搜索酒店"))
-			 card.show(panel, "hotelPanel");
+			 frame.card.show(frame.cardPanel, "hotelPanel");
 		 if(s.equals("酒店信息"))
-			 card.show(panel, "hotelInfoPanel");
-		 System.out.println("已点击"+s);
+			 frame.card.show(frame.cardPanel, "hotelInfoPanel");
 	 }
 
 	 public void mouseExited(MouseEvent e){
@@ -50,8 +50,5 @@ public class MenuLabelListener extends MouseAdapter {
 		 jl.setForeground(Color.white);
 	 } 
 	 
-	 public void setCard(CardLayout card,JPanel panel){
-		this.card = card; 
-		this.panel = panel;
-	 }
+	 
 }
