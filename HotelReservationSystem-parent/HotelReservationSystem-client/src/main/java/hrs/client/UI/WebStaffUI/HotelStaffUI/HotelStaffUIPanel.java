@@ -6,7 +6,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +31,7 @@ public class HotelStaffUIPanel extends JPanel {
 	private JLabel jlPassword;
 	private JLabel jlHotelStaffUsername;
 	private JLabel jlSearchHotelStaff;
-	@SuppressWarnings("rawtypes")
-	private JComboBox jcomboBoxType;
+	private JComboBox<Object> jcomboBoxType;
 	private JLabel jlHotelName;
 	private JTextField jtextPassword;
 	private JTextField jtextRealName;
@@ -54,7 +52,6 @@ public class HotelStaffUIPanel extends JPanel {
 		init();
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void init() {
 		this.setSize(1080, 722);
 		this.setBackground(UIConstants.JFRAME);
@@ -62,8 +59,8 @@ public class HotelStaffUIPanel extends JPanel {
 		jlSearchHotelStaff = new JLabel("搜索酒店工作人员");
 		jlSearchHotelStaff.setFont(UIConstants.JLABEL_FONT);
 
-		jcomboBoxType = new JComboBox();
-		jcomboBoxType.setModel(new DefaultComboBoxModel(new String[] { "酒店名称", "酒店工作人员名" }));
+		jcomboBoxType = new JComboBox<Object>();
+		jcomboBoxType.setModel(new DefaultComboBoxModel<Object>(new String[] { "酒店名称", "酒店工作人员名" }));
 		jcomboBoxType.setSelectedIndex(-1);
 
 		jtextInput = new JTextField();

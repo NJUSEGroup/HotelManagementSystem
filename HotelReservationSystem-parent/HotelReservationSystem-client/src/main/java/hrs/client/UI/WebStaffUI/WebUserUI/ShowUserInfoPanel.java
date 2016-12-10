@@ -9,7 +9,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import java.awt.Font;
 import java.text.ParseException;
 
 import javax.swing.JTextField;

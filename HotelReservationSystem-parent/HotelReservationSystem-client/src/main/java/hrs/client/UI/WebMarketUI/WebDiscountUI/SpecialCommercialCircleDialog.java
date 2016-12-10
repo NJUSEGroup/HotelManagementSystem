@@ -2,7 +2,6 @@ package hrs.client.UI.WebMarketUI.WebDiscountUI;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
@@ -26,19 +25,20 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
-@SuppressWarnings("serial")
 public class SpecialCommercialCircleDialog extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7143214906969942501L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField jtextDiscount;
 	private WebDiscountPanel webDiscountPanel;
 	private WebDiscountVO webDiscountVO;
 	private JLabel jlLocation;
 	private JLabel jlCommercialCircle;
-	@SuppressWarnings("rawtypes")
-	private JComboBox jcomboBoxCommercialCircle;
-	@SuppressWarnings("rawtypes")
-	private JComboBox jcomboBoxLocation;
+	private JComboBox<Object> jcomboBoxCommercialCircle;
+	private JComboBox<Object> jcomboBoxLocation;
 	private HMSBlueButton jbConfirmModify, jbCancelModify;
 	private JLabel jlDiscount;
 	private LocationVO location;
@@ -59,7 +59,6 @@ public class SpecialCommercialCircleDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void init() {
 		webDiscountVO = webDiscountPanel.getSelected();
 
@@ -97,7 +96,7 @@ public class SpecialCommercialCircleDialog extends JDialog {
 		cancelListener = new CancelModifySpecialCommercialListener(this);
 		jbCancelModify.addMouseListener(cancelListener);
 
-		jcomboBoxLocation = new JComboBox();
+		jcomboBoxLocation = new JComboBox<Object>();
 		jcomboBoxLocation.setBounds(195, 48, 130, 27);
 		getContentPane().add(jcomboBoxLocation);
 		for (int i = 0; i < locToName().length; i++) {
@@ -105,7 +104,7 @@ public class SpecialCommercialCircleDialog extends JDialog {
 		}
 		jcomboBoxLocation.setSelectedItem(webDiscountVO.location.name);
 
-		jcomboBoxCommercialCircle = new JComboBox();
+		jcomboBoxCommercialCircle = new JComboBox<Object>();
 		jcomboBoxCommercialCircle.setBounds(195, 103, 130, 27);
 		getContentPane().add(jcomboBoxCommercialCircle);
 

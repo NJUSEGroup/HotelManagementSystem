@@ -1,7 +1,6 @@
 package hrs.client.UI.WebStaffUI.HotelAddUI;
 
 import java.awt.Color;
-import java.awt.Font;
 
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
@@ -248,7 +247,7 @@ public class HotelStaffAddUIPanel extends JPanel {
 				newHotelVO = controller.findHotelByHotelName(hotelAddUIPanel.getHotelName());
 			} catch (HotelNotFoundException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Error!", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			staffVO = new StaffVO(username, password, realName, StaffType.HotelStaff, newHotelVO);
 			// System.out.println(staffVO);

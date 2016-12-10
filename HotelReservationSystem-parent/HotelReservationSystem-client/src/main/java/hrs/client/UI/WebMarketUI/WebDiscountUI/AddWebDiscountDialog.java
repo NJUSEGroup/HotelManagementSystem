@@ -2,7 +2,6 @@ package hrs.client.UI.WebMarketUI.WebDiscountUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
 
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -44,9 +43,7 @@ public class AddWebDiscountDialog extends JDialog {
 	private final JPanel jpAdd = new JPanel();
 	private JTextField jtextBegintime;
 	private JTextField jtextEndtime;
-
 	private JTextField jtextDiscount;
-
 	private JLabel jlBeginTime;
 	private JLabel jlEndTime;
 	private JLabel jlLocation;
@@ -275,7 +272,7 @@ public class AddWebDiscountDialog extends JDialog {
 					jtextEndtime.setEditable(false);
 					jcomboBoxVIPLevel.setEnabled(false);
 					break;
-				case "特定期间折扣":
+				case "特定期间折扣"://改成DateChoosePanel
 					jcomboBoxVIPLevel.setSelectedIndex(-1);
 					jcomboBoxCommercialCircle.setSelectedIndex(-1);
 					jcomboBoxLocation.setSelectedIndex(-1);
@@ -332,7 +329,7 @@ public class AddWebDiscountDialog extends JDialog {
 						location, commercialCircle, null, null, 0);
 			}
 			break;
-		case "特定期间折扣":
+		case "特定期间折扣"://vo改变
 			if (jtextBegintime.getText().equals("") || jtextEndtime.getText().equals("")
 					|| jtextDiscount.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "请完整填写折扣信息！", "Error", JOptionPane.ERROR_MESSAGE);

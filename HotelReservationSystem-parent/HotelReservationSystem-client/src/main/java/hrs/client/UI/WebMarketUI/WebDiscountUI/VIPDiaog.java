@@ -2,7 +2,6 @@ package hrs.client.UI.WebMarketUI.WebDiscountUI;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -28,8 +27,7 @@ public class VIPDiaog extends JDialog {
 	private JTextField jtextDiscount;
 	private JLabel jlDiscount;
 	private JLabel jlVIP;
-	@SuppressWarnings("rawtypes")
-	private JComboBox jcomboBoxVIP;
+	private JComboBox<Object> jcomboBoxVIP;
 	private HMSBlueButton jbComfirmModify, jbCancelModify;
 	private WebDiscountPanel webDiscountPanel;
 	private WebDiscountVO webDiscountVO;
@@ -44,7 +42,6 @@ public class VIPDiaog extends JDialog {
 		init();
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void init() {
 		webDiscountVO = webDiscountPanel.getSelected();
 
@@ -70,8 +67,8 @@ public class VIPDiaog extends JDialog {
 		jtextDiscount.setColumns(10);
 		jtextDiscount.setText(webDiscountVO.discount + "");
 
-		jcomboBoxVIP = new JComboBox();
-		jcomboBoxVIP.setModel(new DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
+		jcomboBoxVIP = new JComboBox<Object>();
+		jcomboBoxVIP.setModel(new DefaultComboBoxModel<Object>(new String[] { "1", "2", "3", "4", "5" }));
 		jcomboBoxVIP.setBounds(185, 47, 130, 27);
 		getContentPane().add(jcomboBoxVIP);
 		jcomboBoxVIP.setSelectedIndex(webDiscountVO.VIPlevel - 1);
@@ -96,7 +93,7 @@ public class VIPDiaog extends JDialog {
 		double newDiscount = Double.parseDouble(jtextDiscount.getText());
 		webDiscountVO.VIPlevel = newVIPLevel;
 		webDiscountVO.discount = newDiscount;
-//		System.out.println(webDiscountVO);
+		// System.out.println(webDiscountVO);
 		return webDiscountVO;
 	}
 

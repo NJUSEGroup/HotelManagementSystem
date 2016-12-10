@@ -1,7 +1,6 @@
 package hrs.client.UI.WebMarketUI.WebOrderUI;
 
 import java.awt.Dimension;
-import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,8 +44,7 @@ public class WebOrderPanel extends JPanel {
 	private List<OrderVO> orderList;
 	private JLabel jlNumberOfPO;
 	private JLabel jlSearch;
-	@SuppressWarnings("rawtypes")
-	private JComboBox comboBox;
+	private JComboBox<Object> comboBox;
 	private HMSBlueButton jbRevoke, jbSearchConfirm;
 
 	/**
@@ -56,7 +54,6 @@ public class WebOrderPanel extends JPanel {
 		init();
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void init() {
 		setSize(1080, 722);
 		setBackground(UIConstants.JFRAME);
@@ -73,8 +70,8 @@ public class WebOrderPanel extends JPanel {
 		jlSearch = new JLabel("搜索");
 		jlSearch.setFont(UIConstants.FONT_21);
 
-		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] { "用户名", "订单号" }));
+		comboBox = new JComboBox<Object>();
+		comboBox.setModel(new DefaultComboBoxModel<Object>(new String[] { "用户名", "订单号" }));
 
 		textField = new JTextField();
 		textField.setColumns(10);

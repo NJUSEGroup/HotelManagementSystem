@@ -2,13 +2,12 @@ package hrs.client.UI.WebStaffUI;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import hrs.client.UI.WebStaffUI.WebStaffListener.UserLabelMouseListener;
 import hrs.client.UI.WebStaffUI.WebStaffListener.WebStaffMenulistMouseListener;
 import hrs.client.util.UIConstants;
 
@@ -28,9 +27,12 @@ public class MenulistPanel extends JPanel {
 	private ImageIcon webUser, hotelAdd;
 	private WebStaffMenulistMouseListener listener;
 	private WebStaffFrame webStaffFrame;
+	private UserLabelMouseListener webUserLabelMouseListener;
+	private UserLabelMouseListener webMarketerLabelMouseListener;
+	private UserLabelMouseListener hotelStaffLabelMouseListener;
 
 	public MenulistPanel(WebStaffFrame webStaffFrame) {
-		this.webStaffFrame=webStaffFrame;
+		this.webStaffFrame = webStaffFrame;
 		init();
 	}
 
@@ -54,10 +56,10 @@ public class MenulistPanel extends JPanel {
 		jlUsername = new JLabel(webStaffFrame.getName(), JLabel.CENTER);// 要改
 		jlUsername.setBounds(0, 108, 263, 29);
 		jlUsername.setFont(UIConstants.JLABEL_FONT);
-		
+
 		webUser = new ImageIcon("src/main/resources/imgs/WebStaffUI/WebUser.png");
 		webUser.setImage(webUser.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
-		
+
 		jlUserInfo = new JLabel("用户信息管理", JLabel.CENTER);
 		jlUserInfo.setBounds(0, 200, 263, 65);
 		jlUserInfo.setIcon(webUser);
@@ -70,42 +72,8 @@ public class MenulistPanel extends JPanel {
 		jlUser.setBounds(0, 265, 263, 45);
 		jlUser.setFont(UIConstants.JLABEL_FONT);
 		jlUser.addMouseListener(listener);
-		jlUser.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				jlUserInfo.setBackground(Color.WHITE);
-				jlUserInfo.setForeground(Color.GRAY);
-				jlUser.setForeground(UIConstants.JZONE_FONT_COLOR);
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				jlUserInfo.setBackground(UIConstants.JLABEL);
-				jlUserInfo.setForeground(Color.white);
-				jlUser.setForeground(Color.BLACK);
-
-			}
-		});
+		webUserLabelMouseListener = new UserLabelMouseListener(jlUser, this);
+		jlUser.addMouseListener(webUserLabelMouseListener);
 
 		jlHotelStaff = new JLabel("•酒店工作人员", JLabel.CENTER);
 		jlHotelStaff.setBounds(0, 310, 263, 45);
@@ -113,42 +81,8 @@ public class MenulistPanel extends JPanel {
 		jlHotelStaff.setFont(UIConstants.JLABEL_FONT);
 		jlHotelStaff.setOpaque(true);
 		jlHotelStaff.addMouseListener(listener);
-		jlHotelStaff.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				jlUserInfo.setBackground(Color.WHITE);
-				jlUserInfo.setForeground(Color.GRAY);
-				jlHotelStaff.setForeground(UIConstants.JZONE_FONT_COLOR);
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				jlUserInfo.setBackground(UIConstants.JLABEL);
-				jlUserInfo.setForeground(Color.white);
-				jlHotelStaff.setForeground(Color.BLACK);
-
-			}
-		});
+		hotelStaffLabelMouseListener = new UserLabelMouseListener(jlHotelStaff, this);
+		jlHotelStaff.addMouseListener(hotelStaffLabelMouseListener);
 
 		jlWebMarketer = new JLabel("•网站营销人员", JLabel.CENTER);
 		jlWebMarketer.setBounds(0, 355, 263, 45);
@@ -156,46 +90,12 @@ public class MenulistPanel extends JPanel {
 		jlWebMarketer.setFont(UIConstants.JLABEL_FONT);
 		jlWebMarketer.setOpaque(true);
 		jlWebMarketer.addMouseListener(listener);
-		jlWebMarketer.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				jlUserInfo.setBackground(Color.WHITE);
-				jlUserInfo.setForeground(Color.GRAY);
-				jlWebMarketer.setForeground(UIConstants.JZONE_FONT_COLOR);
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				jlUserInfo.setBackground(UIConstants.JLABEL);
-				jlUserInfo.setForeground(Color.white);
-				jlWebMarketer.setForeground(Color.BLACK);
-
-			}
-		});
+		webMarketerLabelMouseListener = new UserLabelMouseListener(jlWebMarketer, this);
+		jlWebMarketer.addMouseListener(webMarketerLabelMouseListener);
 
 		hotelAdd = new ImageIcon("src/main/resources/imgs/WebStaffUI/AddHotel.png");
 		hotelAdd.setImage(hotelAdd.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
-		
+
 		jlHotelAdd = new JLabel("酒店信息添加", JLabel.CENTER);
 		jlHotelAdd.setBounds(0, 400, 263, 65);
 		jlHotelAdd.setIcon(hotelAdd);

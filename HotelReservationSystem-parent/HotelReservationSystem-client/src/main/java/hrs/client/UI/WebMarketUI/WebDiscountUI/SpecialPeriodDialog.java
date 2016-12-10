@@ -1,7 +1,6 @@
 package hrs.client.UI.WebMarketUI.WebDiscountUI;
 
 import java.awt.BorderLayout;
-import java.awt.Font;
 
 import javax.swing.JDialog;
 import javax.swing.JPanel;

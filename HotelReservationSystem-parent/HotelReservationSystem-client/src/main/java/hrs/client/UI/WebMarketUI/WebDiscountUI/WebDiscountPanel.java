@@ -1,7 +1,6 @@
 package hrs.client.UI.WebMarketUI.WebDiscountUI;
 
 import java.awt.Dimension;
-import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
