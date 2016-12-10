@@ -11,6 +11,7 @@ import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.CancelAddList
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.OKListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.DateChoosePanel;
+import hrs.client.util.DoubleFormat;
 import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebDiscountController;
