@@ -23,7 +23,7 @@ public class UserFrame extends JFrame{
 	private static final long serialVersionUID = 2942323300288708231L;
 	Color frameColor = new Color(211, 237, 249);
 	private int height, width;
-	private JPanel leftPanel = new LeftPanel();
+	private JPanel leftPanel ;
 	
 	private JPanel userInfoPanel ;
 	private JPanel creditInfoPanel;
@@ -62,6 +62,7 @@ public class UserFrame extends JFrame{
 		MenuLabelListenerFactory.getListener().setCard(card,cardPanel);
 		
 		//设置左侧面板
+		leftPanel = new LeftPanel(userVO);
 		this.add(leftPanel);
 		
 

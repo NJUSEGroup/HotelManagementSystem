@@ -119,7 +119,7 @@ public class LoginFrame extends JFrame {
 	private void setLabel() {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(null);
-//		buttonPanel.setBackground(Color.white);
+		buttonPanel.setBackground(Color.white);
 		buttonPanel.setBounds(630, 40, 420, 60);
 		backGroundPanel.add(buttonPanel);
 		

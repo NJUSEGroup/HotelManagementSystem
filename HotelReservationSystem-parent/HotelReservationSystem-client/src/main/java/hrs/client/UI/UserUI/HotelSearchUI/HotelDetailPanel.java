@@ -17,6 +17,7 @@ import hrs.client.UI.UserUI.HotelSearchUI.Listener.BackListener;
 import hrs.client.UI.UserUI.HotelSearchUI.Listener.PlaceOrderListener;
 import hrs.client.UI.UserUI.OrderInfoUI.OrderTableModel;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.UserController.IUserHotelController;
 import hrs.common.Controller.UserController.IUserOrderController;
@@ -55,7 +56,7 @@ public class HotelDetailPanel extends ComHotelDetail {
 	
 	
 	public void setOrderButton(){
-		JButton orderJB = new JButton("立即下单");
+		HMSBlueButton orderJB = new HMSBlueButton("立即下单");
 		orderJB.setFont(font);
 		orderJB.setBounds(this.getWidth() - 300, 650, 120, 40);
 		orderJB.addActionListener(new PlaceOrderListener(this));

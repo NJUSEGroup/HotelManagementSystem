@@ -2,7 +2,6 @@ package hrs.client.UI.LoginUI.RegisterPanel;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Panel;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -18,6 +17,7 @@ import hrs.client.UI.UserUI.Components.CommonLabel;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.DateChoosePanel;
 import hrs.client.util.HMSBlueButton;
+import hrs.client.util.HMSGrayButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.LoginController.ILoginController;
 import hrs.common.Exception.UserService.UserExistedException;
@@ -58,7 +58,7 @@ public class RegisterPanel extends JPanel {
 		this.frame = frame;
 		setSize(508,420);
 		setLayout(null);
-//		setBackground(UIConstants.JFRAME);
+		setBackground(Color.white);
 		init();
 	}
 	private void init() {
@@ -149,7 +149,7 @@ public class RegisterPanel extends JPanel {
 		enterpriseField.setEnabled(false);
 	}
 	private void setButton() {
-		HMSBlueButton cancelJB = new HMSBlueButton("取消");
+		HMSGrayButton cancelJB = new HMSGrayButton("取消");
 		cancelJB.setBounds(80, START_Y+JL_HEIGHT*8+20, 120, 50);
 		cancelJB.addActionListener(new CancelJBListener(this));
 		add(cancelJB);
