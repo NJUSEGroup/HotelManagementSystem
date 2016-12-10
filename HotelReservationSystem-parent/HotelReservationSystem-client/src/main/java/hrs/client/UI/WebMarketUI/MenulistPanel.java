@@ -30,8 +30,10 @@ public class MenulistPanel extends JPanel {
 	private MenulistPanelMouseListener jpMenulistMouseListener;
 	private Color jlabel_color = UIConstants.JLABEL;
 	private Font jlabel_font = UIConstants.JLABEL_FONT;
+	private WebMarketFrame webMarketFrame;
 
-	public MenulistPanel(WebOrderPanel webOrderPanel) {
+	public MenulistPanel(WebOrderPanel webOrderPanel,WebMarketFrame webMarketFrame) {
+		this.webMarketFrame=webMarketFrame;
 		this.webOrderPanel = webOrderPanel;
 		init();
 	}
@@ -52,7 +54,7 @@ public class MenulistPanel extends JPanel {
 		jlIdentity.setBounds(0, 79, 263, 29);
 		jlIdentity.setFont(UIConstants.JLABEL_FONT);
 
-		jlUsername = new JLabel("BStaff", JLabel.CENTER);
+		jlUsername = new JLabel(webMarketFrame.getName(), JLabel.CENTER);
 		jlUsername.setBounds(0, 108, 263, 29);
 		jlUsername.setFont(UIConstants.JLABEL_FONT);
 

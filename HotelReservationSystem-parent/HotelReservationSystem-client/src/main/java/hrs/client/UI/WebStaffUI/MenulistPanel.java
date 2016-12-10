@@ -27,8 +27,10 @@ public class MenulistPanel extends JPanel {
 	private JLabel jlWebMarketer;
 	private ImageIcon webUser, hotelAdd;
 	private WebStaffMenulistMouseListener listener;
+	private WebStaffFrame webStaffFrame;
 
-	public MenulistPanel() {
+	public MenulistPanel(WebStaffFrame webStaffFrame) {
+		this.webStaffFrame=webStaffFrame;
 		init();
 	}
 
@@ -49,7 +51,7 @@ public class MenulistPanel extends JPanel {
 		jlIdentity.setBounds(0, 79, 263, 29);
 		jlIdentity.setFont(UIConstants.JLABEL_FONT);
 
-		jlUsername = new JLabel("宋管理", JLabel.CENTER);// 要改
+		jlUsername = new JLabel(webStaffFrame.getName(), JLabel.CENTER);// 要改
 		jlUsername.setBounds(0, 108, 263, 29);
 		jlUsername.setFont(UIConstants.JLABEL_FONT);
 		

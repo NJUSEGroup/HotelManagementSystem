@@ -56,7 +56,7 @@ public class WebStaffFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public WebStaffFrame(StaffVO staffVO) {
-		this.staffVO=staffVO;
+		this.staffVO = staffVO;
 		init();
 	}
 
@@ -71,7 +71,7 @@ public class WebStaffFrame extends JFrame {
 		contentPane.setBackground(UIConstants.JZONE);
 		setContentPane(contentPane);
 
-		menulistPanel = new MenulistPanel();
+		menulistPanel = new MenulistPanel(this);
 		menulistPanel.setBounds(5, 5, 263, 722);
 
 		jpCard = new JPanel();
@@ -123,6 +123,11 @@ public class WebStaffFrame extends JFrame {
 
 	public void showHotelAddUIPanel() {
 		cardLayout.show(jpCard, "酒店添加");
+	}
+
+	public String getName() {
+		return staffVO.username;
+
 	}
 
 }

@@ -11,6 +11,7 @@ import hrs.client.UI.WebMarketUI.Listener.MenulistPanelMouseListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountPanel;
 import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderPanel;
 import hrs.client.util.UIConstants;
+import hrs.common.VO.StaffVO;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -28,6 +29,7 @@ public class WebMarketFrame extends JFrame {
 	private WebDiscountPanel jpWebDiscount;
 	private CreditChargePanel jpCreditCharge;
 	private MenulistPanelMouseListener listener;
+	private StaffVO staffVO;
 
 	/**
 	 * Launch the application.
@@ -36,7 +38,7 @@ public class WebMarketFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					WebMarketFrame frame = new WebMarketFrame();
+					WebMarketFrame frame = new WebMarketFrame(new StaffVO());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +50,12 @@ public class WebMarketFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public WebMarketFrame() {
+	public WebMarketFrame(StaffVO staffVO) {
+		this.staffVO = staffVO;
+		init();
+	}
+
+	public void init() {
 		setTitle("酒店管理系统");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1366, 768);
@@ -87,10 +94,15 @@ public class WebMarketFrame extends JFrame {
 		listener = new MenulistPanelMouseListener();
 		listener.setCard(cardLayout, jpCard);
 
-		jpMenulist = new MenulistPanel(jpWebOrder);
+		jpMenulist = new MenulistPanel(jpWebOrder,this);
 		jpMenulist.setBounds(5, 5, 263, 722);
 
 		contentPane.setLayout(gl_contentPane);
 		contentPane.add(jpMenulist);
+
+	}
+
+	public String getName() {
+		return staffVO.username;
 	}
 }
