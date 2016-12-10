@@ -22,7 +22,9 @@ import hrs.client.UI.LoginUI.LoginPanel.BGPanel;
 import hrs.client.UI.LoginUI.LoginPanel.LoginPanel;
 import hrs.client.UI.LoginUI.RegisterPanel.RegisterPanel;
 import hrs.client.UI.UserUI.UserFrame;
+import hrs.client.UI.WebMarketUI.WebMarketFrame;
 import hrs.client.UI.WebStaffUI.WebStaffFrame;
+import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketerUIPanel;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.ImageLoader;
 import hrs.client.util.UIConstants;
@@ -161,7 +163,9 @@ public class LoginFrame extends JFrame {
 			webStaffFrame.setVisible(true);
 			this.dispose();break;
 		case WebsiteMarketer:
-			System.out.println("网站营销人员");break;
+			WebMarketFrame webMarketFrame = new WebMarketFrame(staffVO);
+			webMarketFrame.setVisible(true);
+			this.dispose();break;
 		default:
 			break;
 		}
