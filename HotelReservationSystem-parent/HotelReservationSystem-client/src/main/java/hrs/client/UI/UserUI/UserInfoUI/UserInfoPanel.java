@@ -90,14 +90,14 @@ public class UserInfoPanel extends CommonPanel {
 		HMSBlueButton  cancelJB = new HMSBlueButton("取消");
 //		cancelJB.setPreferredSize(new Dimension(180, 80));
 //		cancelJB.setFont(font);
-		cancelJB.setBounds(160, 500, 150, 60);
+		cancelJB.setBounds(560, 500, 150, 60);
 		cancelJB.addActionListener(new CancelListener(this));
 		this.add(cancelJB);
 
 		HMSBlueButton confirmJB = new HMSBlueButton("确认");
 //		confirmJB.setPreferredSize(new Dimension(180, 80));
 //		confirmJB.setFont(font);
-		confirmJB.setBounds(560, 500, 150, 60);
+		confirmJB.setBounds(800, 500, 150, 60);
 		confirmJB.addActionListener(new ConfirmListener(this,user));
 		this.add(confirmJB);
 	}

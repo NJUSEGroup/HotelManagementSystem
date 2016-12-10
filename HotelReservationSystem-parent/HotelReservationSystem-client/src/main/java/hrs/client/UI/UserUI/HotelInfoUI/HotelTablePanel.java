@@ -21,6 +21,7 @@ import hrs.client.UI.UserUI.HotelInfoUI.Listener.DetailInfoListener;
 import hrs.client.UI.UserUI.HotelInfoUI.Listener.HotelTableListener;
 import hrs.client.UI.UserUI.HotelSearchUI.SearchResultTableModel;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.UserController.IUserHotelController;
 import hrs.common.Exception.OrderService.OrderNotFoundException;
@@ -42,7 +43,7 @@ public class HotelTablePanel extends CommonPanel {
 	private JScrollPane scrollPane;
 	private JTable table;
 	private UserVO user;
-	private JButton detailJB;
+	private HMSBlueButton detailJB;
 	private HotelInfoPanel panel;
 	Font font = UIConstants.JLABEL_FONT;
 	private IUserHotelController controller;
@@ -91,7 +92,7 @@ public class HotelTablePanel extends CommonPanel {
 		setDetailTable();
 	}
 	private void setDetailTable() {
-		detailJB = new JButton("详细信息");
+		detailJB = new HMSBlueButton("详细信息");
 		detailJB.setFont(font);
 		detailJB.setBounds(this.getWidth() - 230, 645, 120, 40);
 		detailJB.setEnabled(false);

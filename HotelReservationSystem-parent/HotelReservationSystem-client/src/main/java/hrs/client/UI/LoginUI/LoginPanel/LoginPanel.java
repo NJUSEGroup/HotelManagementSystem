@@ -1,5 +1,6 @@
 package hrs.client.UI.LoginUI.LoginPanel;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,7 @@ import hrs.client.UI.LoginUI.LoginPanel.Listener.LoginJBListener;
 import hrs.client.UI.UserUI.Components.CommonLabel;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.HMSBlueButton;
+import hrs.client.util.HMSGrayButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.LoginController.ILoginController;
 import hrs.common.Exception.StaffService.StaffNotFoundExceptioon;
@@ -56,7 +58,7 @@ public class LoginPanel extends JPanel {
 		this.frame = frame;
 		setSize(508, 420);
 		setLayout(null);
-//		setBackground(UIConstants.JFRAME);
+		setBackground(Color.white);
 		init();
 	}
 
@@ -69,7 +71,7 @@ public class LoginPanel extends JPanel {
 	}
 
 	private void setButton() {
-		HMSBlueButton cancelJB = new HMSBlueButton("取消");
+		HMSGrayButton cancelJB = new HMSGrayButton("取消");
 		cancelJB.setBounds(80, START_Y+JL_HEIGHT*4, 120, 50);
 		cancelJB.addActionListener(new CancelJBListener(this));
 		add(cancelJB);

@@ -8,7 +8,7 @@ import hrs.client.UI.UserUI.Components.CommonLabel;
 import hrs.client.UI.UserUI.Components.CommonPanel;
 import hrs.client.UI.UserUI.OrderInfoUI.Listener.BackJBListener;
 import hrs.client.util.EnumHelper;
-
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.VO.OrderVO;
 import hrs.common.util.DateHelper;
@@ -103,7 +103,7 @@ public class DetailedOrderPanel extends CommonPanel {
 	}
 
 	private void setButton() {
-		JButton backButton = new JButton("返回");
+		HMSBlueButton backButton = new HMSBlueButton("返回");
 		backButton.setFont(UIConstants.JLABEL_FONT);
 		backButton.setBounds(this.getWidth()-RIGHTP_X-200,this.getHeight()-RIGHTP_Y-130, 100, 40);
 		infoPanel.add(backButton);

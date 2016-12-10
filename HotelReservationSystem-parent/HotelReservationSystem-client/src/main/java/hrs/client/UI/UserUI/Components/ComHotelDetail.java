@@ -13,6 +13,7 @@ import hrs.client.UI.UserUI.HotelInfoUI.HotelDetailInfoPanel;
 import hrs.client.UI.UserUI.HotelSearchUI.Listener.BackListener;
 import hrs.client.UI.UserUI.OrderInfoUI.OrderTableModel;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.UserController.IUserHotelController;
 import hrs.common.Exception.OrderService.OrderNotFoundException;
@@ -56,7 +57,7 @@ public class ComHotelDetail extends CommonPanel {
 
 	protected void setBackButton() {
 
-		JButton backJB = new JButton("返回");
+		HMSBlueButton backJB = new HMSBlueButton("返回");
 		backJB.setFont(font);
 		backJB.setBounds(this.getWidth() - 150, detailInfoPanel.getHeight() + 360, 100, 40);
 		backJB.addActionListener(new BackListener(this));

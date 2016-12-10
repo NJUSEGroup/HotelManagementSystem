@@ -22,6 +22,9 @@ import hrs.client.UI.LoginUI.LoginPanel.BGPanel;
 import hrs.client.UI.LoginUI.LoginPanel.LoginPanel;
 import hrs.client.UI.LoginUI.RegisterPanel.RegisterPanel;
 import hrs.client.UI.UserUI.UserFrame;
+import hrs.client.UI.WebMarketUI.WebMarketFrame;
+import hrs.client.UI.WebStaffUI.WebStaffFrame;
+import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketerUIPanel;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.ImageLoader;
 import hrs.client.util.UIConstants;
@@ -43,6 +46,8 @@ public class LoginFrame extends JFrame {
 	private ILoginController loginController = ControllerFactory.getLoginController();
 	private int HEIGHT = 506;
 	private int WIDTH = 1100;
+	private int PANEL_W = 420;
+	private int PANEL_X = WIDTH - PANEL_W - 50;
 	private BGPanel backGroundPanel;
 	private CardLayout cardLayout;
 
@@ -107,7 +112,7 @@ public class LoginFrame extends JFrame {
 		cardLayout.show(contentPane, "login");
 		
 		
-		contentPane.setBounds(630, 100, 420, HEIGHT - 170);
+		contentPane.setBounds(PANEL_X, 100, PANEL_W, HEIGHT - 170);
 	
 		backGroundPanel.add(contentPane);
 		
@@ -119,16 +124,16 @@ public class LoginFrame extends JFrame {
 	private void setLabel() {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(null);
-//		buttonPanel.setBackground(Color.white);
-		buttonPanel.setBounds(630, 40, 420, 60);
+		buttonPanel.setBackground(Color.white);
+		buttonPanel.setBounds(PANEL_X, 40, PANEL_W, 60);
 		backGroundPanel.add(buttonPanel);
 		
 		LoginJL loginJL = new LoginJL(this, "登录");
-		loginJL.setBounds(70,10,130,50);
+		loginJL.setBounds(70,10,130,40);
 		buttonPanel.add(loginJL);
 		
 		RegisterJL registerJL = new RegisterJL(this, "注册");
-		registerJL.setBounds(210,10,130,50);
+		registerJL.setBounds(210,10,130,40);
 		buttonPanel.add(registerJL);
 	}
 
@@ -154,9 +159,13 @@ public class LoginFrame extends JFrame {
 		case HotelStaff:
 			System.out.println("酒店工作人员");break;
 		case WebsiteAdminister:
-			System.out.println("网站管理人员");break;
+			WebStaffFrame  webStaffFrame= new WebStaffFrame(staffVO);
+			webStaffFrame.setVisible(true);
+			this.dispose();break;
 		case WebsiteMarketer:
-			System.out.println("网站营销人员");break;
+			WebMarketFrame webMarketFrame = new WebMarketFrame(staffVO);
+			webMarketFrame.setVisible(true);
+			this.dispose();break;
 		default:
 			break;
 		}

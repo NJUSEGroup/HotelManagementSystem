@@ -27,6 +27,8 @@ import hrs.client.UI.UserUI.OrderInfoUI.Listener.TableListener;
 import hrs.client.UI.UserUI.OrderInfoUI.Listener.revokeListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.EnumHelper;
+import hrs.client.util.HMSBlueButton;
+import hrs.client.util.HMSRedButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.UserController.IUserOrderController;
 import hrs.common.Exception.OrderService.OrderNotFoundException;
@@ -46,9 +48,9 @@ public class OrderShowPanel extends CommonPanel {
 	JComboBox<String> statusBox;
 	private OrderTable table;
 	
-	private JButton evalueButton;
-	private JButton detailButton;
-	private JButton revokeButton;
+	private HMSBlueButton evalueButton;
+	private HMSBlueButton detailButton;
+	private HMSRedButton revokeButton;
 	
 	private OrderInfoPanel panel;
 	Font font = UIConstants.JLABEL_FONT;
@@ -81,19 +83,19 @@ public class OrderShowPanel extends CommonPanel {
 
 	private void setButton() {
 		//查看详细按钮
-		detailButton = new JButton("查看详细");
+		detailButton = new HMSBlueButton("查看详细");
 		detailButton.setFont(font);
 		detailButton.setBounds(550, 640, 150, 40);
 		detailButton.addActionListener(new DetailButtonLisener(this));
 		
 		//评价按钮
-		evalueButton = new JButton("评价");
+		evalueButton = new HMSBlueButton("评价");
 		evalueButton.setFont(font);
 		evalueButton.setBounds(730, 640, 120, 40);
 		evalueButton.addActionListener(new EvalueButtonListener(this));
 		
 		//撤销按钮
-		revokeButton = new JButton("撤销");
+		revokeButton = new HMSRedButton("撤销");
 		revokeButton.setFont(font);
 		revokeButton.setBounds(880, 640, 120, 40);
 		revokeButton.addActionListener(new revokeListener(this));

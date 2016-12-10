@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 public class BGPanel extends JPanel {
 //	Image IMG_BG=new ImageIcon("src/main/source/imgs/LoginUI/bg.png").getImage();
-	Image IMG_BG=new ImageIcon("src/main/resources/imgs/LoginUI/bg3.png").getImage();;
+	Image IMG_BG=new ImageIcon("src/main/resources/imgs/LoginUI/bg.png").getImage();;
 	
 	@Override
 	public void paintComponent(Graphics g){

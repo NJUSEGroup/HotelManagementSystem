@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import hrs.client.util.UIConstants;
+import hrs.common.VO.UserVO;
 
 public class LeftPanel extends JPanel {
 	/**
@@ -29,8 +30,10 @@ public class LeftPanel extends JPanel {
 	private final int LABEL_WIDTH = 260;
 	private final int LABEL_HEIGHT = 40;
 	
+	private UserVO userVO;
 	
-	public LeftPanel(){
+	public LeftPanel(UserVO userVO){
+		this.userVO = userVO;
 		setLayout(null);
 		//宽203，高768
 		setBounds(0,0,263,768);
@@ -78,7 +81,7 @@ public class LeftPanel extends JPanel {
 		//用户昵称标签；置于userPanel(20,50)处
 		nameJL.setFont(font);
 		nameJL.setPreferredSize(new Dimension(260,30)); 
-		nameJL.setText("NewSong");
+		nameJL.setText(userVO.username);
 		nameJL.setBounds(20,50,LABEL_WIDTH,30);
 //		nameJL.setOpaque(true);
 		
