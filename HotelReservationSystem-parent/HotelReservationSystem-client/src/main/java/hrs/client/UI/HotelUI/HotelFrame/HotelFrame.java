@@ -63,41 +63,17 @@ public class HotelFrame extends JFrame {
 	private Color labelColor;
 	
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					HotelFrame frame = new HotelFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * 初始化酒店管理中心界面主框架
 	 * @throws RoomNotFoundException 
 	 * @throws OrderNotFoundException 
 	 */
-	public HotelFrame(/**StaffVO staff**/){
-		init(/**staff**/);
+	public HotelFrame(StaffVO staff){
+		init(staff);
 	}
 	
-	public void init(/**StaffVO staff**/){
-		//this.staff = staff;
-		//this.hotel = staff.hotel;
-		controller = ControllerFactory.getHotelController();
-		
-		try {
-			hotel = controller.findHotelByID(4);
-		} catch (HotelNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void init(StaffVO staff){
+		this.staff = staff;
+		this.hotel = staff.hotel;
 		
 		this.setFontAndColor();
 		

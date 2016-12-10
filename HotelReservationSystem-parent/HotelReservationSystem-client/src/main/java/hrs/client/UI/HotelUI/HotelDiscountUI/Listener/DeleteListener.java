@@ -20,11 +20,15 @@ public class DeleteListener implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if(jpDiscount.isButtonEnable("删除")){
-			HotelDiscountVO discount = jpDiscount.getSelectedDiscount();
-			jpDiscount.deleteDiscount(discount);
-			jpDiscount.getAllDiscounts();
-			jpDiscount.refresh();
-			JOptionPane.showMessageDialog(null, "促销策略已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);
+			int value = JOptionPane.showConfirmDialog(null, "您确定要删除该促销策略吗？", "请确认修改", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+			
+			if(value==JOptionPane.OK_OPTION){
+				HotelDiscountVO discount = jpDiscount.getSelectedDiscount();
+				jpDiscount.deleteDiscount(discount);
+				jpDiscount.getAllDiscounts();
+				jpDiscount.refresh();
+				JOptionPane.showMessageDialog(null, "促销策略已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
 		
 	}
