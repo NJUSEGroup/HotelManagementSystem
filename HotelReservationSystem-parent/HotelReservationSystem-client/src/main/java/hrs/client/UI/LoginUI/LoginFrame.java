@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import org.aspectj.lang.reflect.InitializerSignature;
 import org.springframework.web.bind.annotation.InitBinder;
 
+import hrs.client.UI.HotelUI.HotelFrame.HotelFrame;
 import hrs.client.UI.LoginUI.LoginPanel.BGPanel;
 import hrs.client.UI.LoginUI.LoginPanel.LoginPanel;
 import hrs.client.UI.LoginUI.RegisterPanel.RegisterPanel;
@@ -156,7 +157,9 @@ public class LoginFrame extends JFrame {
 		StaffType type = staffVO.type;
 		switch (type) {
 		case HotelStaff:
-			System.out.println("酒店工作人员");break;
+			HotelFrame hotelFrame = new HotelFrame(staffVO);
+			hotelFrame.setVisible(true);
+			this.dispose();break;
 		case WebsiteAdminister:
 			WebStaffFrame  webStaffFrame= new WebStaffFrame(staffVO);
 			webStaffFrame.setVisible(true);

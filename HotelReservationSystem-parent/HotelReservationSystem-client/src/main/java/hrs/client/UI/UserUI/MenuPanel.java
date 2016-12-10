@@ -12,6 +12,10 @@ import javax.swing.JPanel;
 import hrs.client.util.ImageLoader;
 
 public class MenuPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2780811634437624154L;
 	private JLabel searchJLabel ;
 	private JLabel infoJLabel ;
 	private JLabel orderJLabel;
@@ -24,34 +28,34 @@ public class MenuPanel extends JPanel {
 	
 	
 	public MenuPanel(UserFrame frame){
-		
+		ImageLoader loader = ImageLoader.getInstance();
 		setBounds(0, 140, 260, 628);
 //		jp.setBackground(frameColor);
 		setLayout(null);
 		setBackground(new Color(211, 237, 249));
 		
 		searchJLabel = new MenuLabel("搜索酒店",frame);
-		ImageIcon search = new ImageIcon("src/main/resources/imgs/UserUI/search.png");
+		ImageIcon search = loader.getIcon("UserUI/search.png");
 		search.setImage(search.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 		searchJLabel.setIcon(search);
 		
 		infoJLabel = new MenuLabel("个人信息",frame);
-		ImageIcon userInfo = new ImageIcon("src/main/resources/imgs/UserUI/userinfo.png");
+		ImageIcon userInfo = loader.getIcon("UserUI/userinfo.png");
 		userInfo.setImage(userInfo.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 		infoJLabel.setIcon(userInfo);
 		
 		orderJLabel = new MenuLabel("订单信息",frame);
-		ImageIcon order = new ImageIcon("src/main/resources/imgs/UserUI/order.png");
+		ImageIcon order = loader.getIcon("UserUI/order.png");
 		order.setImage(order.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 		orderJLabel.setIcon(order);
 		
 		hotelJLabel = new MenuLabel("酒店信息",frame);
-		ImageIcon hotel = new ImageIcon("src/main/resources/imgs/UserUI/hotel.png");
+		ImageIcon hotel = loader.getIcon("UserUI/hotel.png");
 		hotel.setImage(hotel.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 		hotelJLabel.setIcon(hotel);
 		
 		creditJLabel = new MenuLabel("信用记录",frame);
-		ImageIcon credit = new ImageIcon("src/main/resources/imgs/UserUI/credit.png");
+		ImageIcon credit = loader.getIcon("UserUI/credit.png");
 		credit.setImage(credit.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 		creditJLabel.setIcon(credit);
 		

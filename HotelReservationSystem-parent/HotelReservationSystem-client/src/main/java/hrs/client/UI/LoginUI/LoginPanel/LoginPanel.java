@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JComboBox;
@@ -90,14 +91,17 @@ public class LoginPanel extends JPanel {
 			}
 			
 		},KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,0),JComponent.WHEN_IN_FOCUSED_WINDOW);
+		
 	}
 	private void setInputField() {
+		
 		accountType = new JComboBox<>();
 		accountType.setFont(font);
 		accountType.addItem("用户");
 		accountType.addItem("工作人员");
 		accountType.setBounds(START_X + JL_WIDTH + 30, START_Y + (JL_HEIGHT - TEXT_HEIGHT) / 2, TEXT_WIDTH,
 				TEXT_HEIGHT);
+		accountType.setFocusable(false);;
 		add(accountType);
 
 		accountField = new JTextField();
@@ -105,11 +109,28 @@ public class LoginPanel extends JPanel {
 		accountField.setBounds(START_X + JL_WIDTH + 30, START_Y + (JL_HEIGHT - TEXT_HEIGHT) / 2 + JL_HEIGHT, TEXT_WIDTH,
 				TEXT_HEIGHT);
 		add(accountField);
+		accountField.requestFocus();
+		accountField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e){
+				if (e.getKeyCode() == KeyEvent.VK_DOWN){
+					passwordField.requestFocus();
+				}
+			}
+		});
 
 		passwordField = new JPasswordField();
 		passwordField.setFont(font);
 		passwordField.setBounds(START_X + JL_WIDTH + 30, START_Y + (JL_HEIGHT - TEXT_HEIGHT) / 2 + JL_HEIGHT * 2,
 				TEXT_WIDTH, TEXT_HEIGHT);
+		passwordField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e){
+				if (e.getKeyCode() == KeyEvent.VK_UP){
+					accountField.requestFocus();
+				}
+			}
+		});
 		add(passwordField);
 	}
 

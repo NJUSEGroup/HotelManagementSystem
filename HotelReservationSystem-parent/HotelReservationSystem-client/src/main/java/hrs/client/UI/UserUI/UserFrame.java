@@ -38,6 +38,7 @@ public class UserFrame extends JFrame{
 	private String username;
 	
 	public UserFrame(UserVO userVO){
+		
 		this.username = userVO.username;
 		userInfoPanel = new UserInfoPanel(username);
 		creditInfoPanel = new CreditInfoPanel(username);
@@ -69,7 +70,7 @@ public class UserFrame extends JFrame{
 		
 
 		this.add(cardPanel);
-//		this.add(userInfoPanel);
+
 		
 	}
 	
