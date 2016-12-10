@@ -14,6 +14,7 @@ import java.text.ParseException;
 
 import javax.swing.JTextField;
 
+import hrs.client.util.UIConstants;
 import hrs.common.VO.UserVO;
 import hrs.common.util.DateHelper;
 
@@ -49,25 +50,25 @@ public class ShowUserInfoPanel extends JPanel {
 		this.setBackground(new Color(211, 237, 249));
 
 		jlUsername = new JLabel("用户名");
-		jlUsername.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
+		jlUsername.setFont(UIConstants.FONT_18);
 
 		jlPassword = new JLabel("密码");
-		jlPassword.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
+		jlPassword.setFont(UIConstants.FONT_18);
 
 		jlRealName = new JLabel("真实姓名");
-		jlRealName.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
+		jlRealName.setFont(UIConstants.FONT_18);
 
 		jlBirthday = new JLabel("生日");
-		jlBirthday.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
+		jlBirthday.setFont(UIConstants.FONT_18);
 
 		jlPhone = new JLabel("联系方式");
-		jlPhone.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
+		jlPhone.setFont(UIConstants.FONT_18);
 
 		jlEnterpriseName = new JLabel("企业名称");
-		jlEnterpriseName.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
+		jlEnterpriseName.setFont(UIConstants.FONT_18);
 
 		jlCredit = new JLabel("信用值");
-		jlCredit.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
+		jlCredit.setFont(UIConstants.FONT_18);
 
 		jtextPassword = new JTextField();
 		jtextPassword.setColumns(10);

@@ -70,7 +70,7 @@ public class HotelStaffUIPanel extends JPanel {
 		jtextInput.setColumns(10);
 
 		jbSearchHotelStaffConfirm = new HMSBlueButton("确认");
-		jbSearchHotelStaffConfirm.setFont(new Font("宋体", Font.PLAIN, 16));
+		jbSearchHotelStaffConfirm.setFont(UIConstants.FONT_16);
 		confirmMouseListener = new SearchConfirmMouseListener(this);
 		jbSearchHotelStaffConfirm.addMouseListener(confirmMouseListener);
 
@@ -93,7 +93,7 @@ public class HotelStaffUIPanel extends JPanel {
 		jtextRealName.setColumns(10);
 
 		jbModifyHotelStaff = new HMSBlueButton("修改");
-		jbModifyHotelStaff.setFont(new Font("宋体", Font.PLAIN, 18));
+		jbModifyHotelStaff.setFont(UIConstants.FONT_18);
 		modifyHotelStaffMouseListener = new ModifyHotelStaffMouseListener(this);
 		jbModifyHotelStaff.addMouseListener(modifyHotelStaffMouseListener);
 

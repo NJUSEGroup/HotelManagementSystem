@@ -3,6 +3,8 @@ package hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import hrs.client.UI.WebMarketUI.WebDiscountUI.AddWebDiscountDialog;
+
 public class CancelAddListener implements MouseListener {
 	AddWebDiscountDialog jdAddWebDiscount;
 

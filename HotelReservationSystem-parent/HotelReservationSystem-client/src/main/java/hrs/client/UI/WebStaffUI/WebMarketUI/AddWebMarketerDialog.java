@@ -90,14 +90,14 @@ public class AddWebMarketerDialog extends JDialog {
 		jtextRealName.setColumns(10);
 
 		jbConfirm = new HMSBlueButton("确认");
-		jbConfirm.setFont(new Font("宋体", Font.PLAIN, 13));
+		jbConfirm.setFont(UIConstants.FONT_13);
 		jbConfirm.setBounds(107, 181, 75, 29);
 		getContentPane().add(jbConfirm);
 		addWebMarketerDialogConfirmMouseListener = new AddWebMarketerDialogConfirmMouseListener(webMarketerUIPanel);
 		jbConfirm.addMouseListener(addWebMarketerDialogConfirmMouseListener);
 
 		jbCancel = new HMSBlueButton("取消");
-		jbCancel.setFont(new Font("宋体", Font.PLAIN, 13));
+		jbCancel.setFont(UIConstants.FONT_13);
 		jbCancel.setBounds(211, 181, 75, 29);
 		getContentPane().add(jbCancel);
 	}

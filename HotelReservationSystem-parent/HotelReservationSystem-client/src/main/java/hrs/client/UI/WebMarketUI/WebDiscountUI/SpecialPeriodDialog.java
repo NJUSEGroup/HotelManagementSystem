@@ -91,14 +91,14 @@ public class SpecialPeriodDialog extends JDialog {
 		jtextDiscount.setText(webDiscountVO.discount + "");
 
 		jbConfirmModify = new HMSBlueButton("确认修改");
-		jbConfirmModify.setFont(new Font("宋体", Font.PLAIN, 12));
+		jbConfirmModify.setFont(UIConstants.FONT_12);
 		jbConfirmModify.setBounds(103, 204, 103, 29);
 		listener = new ConfirmModifySpecialPeriodListener(webDiscountPanel, this);
 		jbConfirmModify.addMouseListener(listener);
 		contentPanel.add(jbConfirmModify);
 
 		jbCancalModify = new HMSBlueButton("取消修改");
-		jbCancalModify.setFont(new Font("宋体", Font.PLAIN, 12));
+		jbCancalModify.setFont(UIConstants.FONT_12);
 		jbCancalModify.setBounds(218, 204, 103, 29);
 		contentPanel.add(jbCancalModify);
 		cancelListener = new CancelModifySpecialPeriodDiscountListener(this);

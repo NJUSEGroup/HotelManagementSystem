@@ -5,6 +5,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 
+import hrs.client.UI.WebMarketUI.WebDiscountUI.AddWebDiscountDialog;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountPanel;
 
 public class OKListener implements MouseListener {

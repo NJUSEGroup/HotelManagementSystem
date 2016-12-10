@@ -13,6 +13,7 @@ import hrs.client.UI.WebStaffUI.WebStaffListener.WebStaffMenulistMouseListener;
 import hrs.client.UI.WebStaffUI.WebUserUI.ShowUserInfoPanel;
 import hrs.client.UI.WebStaffUI.WebUserUI.WebUserUIPanel;
 import hrs.client.util.UIConstants;
+import hrs.common.VO.StaffVO;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -33,6 +34,7 @@ public class WebStaffFrame extends JFrame {
 	private WebStaffMenulistMouseListener listener;
 	private JPanel contentPane;
 	private JPanel jpCard;
+	private StaffVO staffVO;
 
 	/**
 	 * Launch the application.
@@ -41,7 +43,7 @@ public class WebStaffFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					WebStaffFrame frame = new WebStaffFrame();
+					WebStaffFrame frame = new WebStaffFrame(new StaffVO());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,7 +55,8 @@ public class WebStaffFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public WebStaffFrame() {
+	public WebStaffFrame(StaffVO staffVO) {
+		this.staffVO=staffVO;
 		init();
 	}
 

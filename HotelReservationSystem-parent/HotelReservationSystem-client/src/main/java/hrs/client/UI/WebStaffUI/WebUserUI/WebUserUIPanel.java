@@ -57,7 +57,7 @@ public class WebUserUIPanel extends JPanel {
 		jbConfirm.addMouseListener(confirmMouseListener);
 
 		jbModify = new HMSBlueButton("修改");
-		jbModify.setFont(new Font("宋体", Font.PLAIN, 21));
+		jbModify.setFont(UIConstants.FONT_21);
 		modifyUserInfoMouseListener = new ModifyUserInfoMouseListener(this);
 		jbModify.addMouseListener(modifyUserInfoMouseListener);
 

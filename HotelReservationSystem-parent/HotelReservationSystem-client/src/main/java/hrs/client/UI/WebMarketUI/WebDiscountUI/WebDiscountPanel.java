@@ -17,7 +17,6 @@ import javax.swing.table.JTableHeader;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.AddMouseListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.DeleteMouseListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.ModifyMouseListener;
-import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.AddWebDiscountDialog;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.HMSBlueButton;
 import hrs.client.util.HMSRedButton;
@@ -53,7 +52,6 @@ public class WebDiscountPanel extends JPanel {
 	private SpecialCommercialCircleDialog jdSpecialCommercialCircle;
 	private SpecialPeriodDialog jdSpecialPeriod;
 	private VIPDiaog jdVIP;
-	private Font JTABLE_FONT = new Font("Arial Unicode MS", Font.PLAIN, 18);
 
 	/**
 	 * Create the panel.
@@ -109,7 +107,7 @@ public class WebDiscountPanel extends JPanel {
 		// jTable.setEnabled(false);
 
 		jTable.setBackground(UIConstants.JFRAME);
-		jTable.setFont(JTABLE_FONT);
+		jTable.setFont(UIConstants.FONT_18);
 		jTable.setRowHeight(40);
 		jTable.setShowVerticalLines(false);
 		jTable.setShowHorizontalLines(true);
@@ -120,7 +118,7 @@ public class WebDiscountPanel extends JPanel {
 		jTableHeader.setBackground(UIConstants.JTABLEHEADER_COLOR);
 		jTableHeader.setEnabled(false);
 		jTableHeader.setBorder(new EmptyBorder(0, 0, 0, 0));
-		jTableHeader.setFont(JTABLE_FONT);
+		jTableHeader.setFont(UIConstants.FONT_18);
 
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(jTable);

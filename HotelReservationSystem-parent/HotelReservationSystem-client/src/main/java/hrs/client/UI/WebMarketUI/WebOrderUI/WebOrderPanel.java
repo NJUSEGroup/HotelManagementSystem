@@ -48,7 +48,6 @@ public class WebOrderPanel extends JPanel {
 	@SuppressWarnings("rawtypes")
 	private JComboBox comboBox;
 	private HMSBlueButton jbRevoke, jbSearchConfirm;
-	private Font JTABLE_FONT = new Font("Arial Unicode MS", Font.PLAIN, 18);
 
 	/**
 	 * Create the panel.
@@ -72,7 +71,7 @@ public class WebOrderPanel extends JPanel {
 		jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
 
 		jlSearch = new JLabel("搜索");
-		jlSearch.setFont(new Font("宋体", Font.PLAIN, 21));
+		jlSearch.setFont(UIConstants.FONT_21);
 
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] { "用户名", "订单号" }));
@@ -81,7 +80,7 @@ public class WebOrderPanel extends JPanel {
 		textField.setColumns(10);
 
 		jbSearchConfirm = new HMSBlueButton("确认");
-		jbSearchConfirm.setFont(new Font("宋体", Font.PLAIN, 14));
+		jbSearchConfirm.setFont(UIConstants.FONT_14);
 		jbSearchConfirm.addMouseListener(new SearchConfirmMouseListener(this));
 
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -114,7 +113,7 @@ public class WebOrderPanel extends JPanel {
 		model = new WebOrderModel(orderList);
 		jTable.setModel(model);
 		jTable.setBackground(UIConstants.JFRAME);
-		jTable.setFont(JTABLE_FONT);
+		jTable.setFont(UIConstants.FONT_18);
 		jTable.setRowHeight(40);
 		jTable.setShowVerticalLines(false);
 		jTable.setShowHorizontalLines(true);
@@ -125,7 +124,7 @@ public class WebOrderPanel extends JPanel {
 		jTableHeader.setBackground(UIConstants.JTABLEHEADER_COLOR);
 		jTableHeader.setEnabled(false);
 		jTableHeader.setBorder(new EmptyBorder(0, 0, 0, 0));
-		jTableHeader.setFont(JTABLE_FONT);
+		jTableHeader.setFont(UIConstants.FONT_18);
 
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(jTable);

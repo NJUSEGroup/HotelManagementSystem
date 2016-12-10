@@ -77,17 +77,17 @@ public class WebMarketerUIPanel extends JPanel {
 		jtextWebMarketerRealName.setColumns(10);
 
 		jbSearchWebMarketerConfirm = new HMSBlueButton("确认");
-		jbSearchWebMarketerConfirm.setFont(new Font("宋体", Font.PLAIN, 18));
+		jbSearchWebMarketerConfirm.setFont(UIConstants.FONT_18);
 		searchWebMarketerConfirmMouseListener = new SearchWebMarketerConfirmMouseListener(this);
 		jbSearchWebMarketerConfirm.addMouseListener(searchWebMarketerConfirmMouseListener);
 
 		jbModifyWebMarketer = new HMSBlueButton("修改");
-		jbModifyWebMarketer.setFont(new Font("宋体", Font.PLAIN, 21));
+		jbModifyWebMarketer.setFont(UIConstants.FONT_18);
 		modifyWebMarketerMouseListener = new ModifyWebMarketerMouseListener(this);
 		jbModifyWebMarketer.addMouseListener(modifyWebMarketerMouseListener);
 
 		jbAddWebMarketer = new HMSBlueButton("添加");
-		jbAddWebMarketer.setFont(new Font("宋体", Font.PLAIN, 21));
+		jbAddWebMarketer.setFont(UIConstants.FONT_18);
 		addWebMarketerMouseListener = new AddWebMarketerMouseListener(this);
 		jbAddWebMarketer.addMouseListener(addWebMarketerMouseListener);
 

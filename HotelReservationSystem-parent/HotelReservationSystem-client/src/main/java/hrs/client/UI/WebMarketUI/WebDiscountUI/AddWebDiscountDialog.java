@@ -1,4 +1,4 @@
-package hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener;
+package hrs.client.UI.WebMarketUI.WebDiscountUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -8,7 +8,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountPanel;
+import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.CancelAddListener;
+import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.OKListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
@@ -60,10 +61,10 @@ public class AddWebDiscountDialog extends JDialog {
 	private OKListener listener;
 	private CancelAddListener cancelAddListener;
 
-	private JComboBox jcomboBoxType = new JComboBox<>();
-	private JComboBox jcomboBoxCommercialCircle = new JComboBox<>();
-	private JComboBox jcomboBoxLocation = new JComboBox<>();
-	private JComboBox jcomboBoxVIPLevel = new JComboBox<>();
+	private JComboBox<Object> jcomboBoxType = new JComboBox<>();
+	private JComboBox<Object> jcomboBoxCommercialCircle = new JComboBox<>();
+	private JComboBox<Object> jcomboBoxLocation = new JComboBox<>();
+	private JComboBox<Object> jcomboBoxVIPLevel = new JComboBox<>();
 
 	private LocationVO location;
 	private CommercialCircleVO commercialCircle;
@@ -79,7 +80,6 @@ public class AddWebDiscountDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	@SuppressWarnings("unchecked")
 	public AddWebDiscountDialog(WebDiscountPanel panel) {
 		jpWebDiscount = panel;
 		jcomboBoxType.addItem("会员等级折扣");
@@ -131,12 +131,12 @@ public class AddWebDiscountDialog extends JDialog {
 		jtextDiscount.setText("");
 
 		jbOK = new HMSBlueButton("确认添加");
-		jbOK.setFont(new Font("宋体", Font.PLAIN, 13));
+		jbOK.setFont(UIConstants.FONT_13);
 		listener = new OKListener(jpWebDiscount, this);
 		jbOK.addMouseListener(listener);
 
 		jbCancel = new HMSBlueButton("取消添加");
-		jbCancel.setFont(new Font("宋体", Font.PLAIN, 13));
+		jbCancel.setFont(UIConstants.FONT_13);
 		cancelAddListener = new CancelAddListener(this);
 		jbCancel.addMouseListener(cancelAddListener);
 
@@ -224,7 +224,6 @@ public class AddWebDiscountDialog extends JDialog {
 
 	public void initWebDiscountDialog() {
 		jcomboBoxType.addItemListener(new ItemListener() {
-			@SuppressWarnings("unchecked")
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if (jcomboBoxType.getSelectedItem().toString().equals("特定商圈专属折扣")) {
@@ -391,13 +390,4 @@ public class AddWebDiscountDialog extends JDialog {
 		jcomboBoxLocation.setSelectedIndex(-1);
 		jcomboBoxVIPLevel.setSelectedIndex(-1);
 	}
-	// public static void main(String[] args) {
-	// AddWebDiscountDialog dialog=new AddWebDiscountDialog();
-	// dialog.setVisible(true);
-	// }
-	// private Object[] commCircleToName(int selectedIndex){
-	//
-	// }
-	// jcomboBoxLocation.addActionListener(new ItemListener() {
-	//
 }

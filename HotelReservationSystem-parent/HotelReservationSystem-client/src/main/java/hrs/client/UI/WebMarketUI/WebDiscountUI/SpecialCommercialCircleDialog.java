@@ -85,14 +85,14 @@ public class SpecialCommercialCircleDialog extends JDialog {
 
 		jbConfirmModify = new HMSBlueButton("确认修改");
 		jbConfirmModify.setBounds(99, 221, 96, 29);
-		jbConfirmModify.setFont(new Font("宋体", Font.PLAIN, 12));
+		jbConfirmModify.setFont(UIConstants.FONT_12);
 		getContentPane().add(jbConfirmModify);
 		listener = new ConfirmModifySpecialCommercialListener(webDiscountPanel, this);
 		jbConfirmModify.addMouseListener(listener);
 
 		jbCancelModify = new HMSBlueButton("取消修改");
 		jbCancelModify.setBounds(214, 221, 96, 29);
-		jbCancelModify.setFont(new Font("宋体", Font.PLAIN, 12));
+		jbCancelModify.setFont(UIConstants.FONT_12);
 		getContentPane().add(jbCancelModify);
 		cancelListener = new CancelModifySpecialCommercialListener(this);
 		jbCancelModify.addMouseListener(cancelListener);

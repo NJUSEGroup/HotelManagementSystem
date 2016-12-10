@@ -53,13 +53,13 @@ public class HotelAddUIPanel extends JPanel {
 
 		jlHotelName = new JLabel("酒店名称");
 		jlHotelName.setHorizontalAlignment(SwingConstants.CENTER);
-		jlHotelName.setFont(new Font("Arial Unicode MS", Font.PLAIN, 19));
+		jlHotelName.setFont(UIConstants.FONT_19);
 
 		jtextHotelName = new JTextField();
 		jtextHotelName.setColumns(10);
 
 		jbNextStep = new HMSBlueButton("下一步");
-		jbNextStep.setFont(new Font("宋体", Font.PLAIN, 18));
+		jbNextStep.setFont(UIConstants.FONT_18);
 		nextStepMouseListener = new NextStepMouseListener(this);
 		jbNextStep.addMouseListener(nextStepMouseListener);
 
@@ -102,7 +102,7 @@ public class HotelAddUIPanel extends JPanel {
 
 		jlpanelIN = new JLabel("添加酒店工作人员");
 		jlpanelIN.setHorizontalAlignment(SwingConstants.CENTER);
-		jlpanelIN.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
+		jlpanelIN.setFont(UIConstants.FONT_20);
 		jlpanelIN.setForeground(new Color(128, 138, 235));
 
 		GroupLayout gl_jpHotelStaffAdd = new GroupLayout(jpHotelStaffAdd);
@@ -120,7 +120,7 @@ public class HotelAddUIPanel extends JPanel {
 
 		lblNewLabel = new JLabel("添加酒店");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
+		lblNewLabel.setFont(UIConstants.FONT_20);
 		lblNewLabel.setForeground(new Color(128, 138, 235));
 
 		GroupLayout gl_jpHotelAdd = new GroupLayout(jpHotelAdd);

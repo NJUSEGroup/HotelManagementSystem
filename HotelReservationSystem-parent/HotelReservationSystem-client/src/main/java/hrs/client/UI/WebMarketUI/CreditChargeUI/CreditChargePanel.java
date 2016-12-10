@@ -65,18 +65,18 @@ public class CreditChargePanel extends JPanel {
 		jtUsername.setColumns(10);
 
 		jbConfirm = new HMSBlueButton("确认");
-		jbConfirm.setFont(new Font("宋体", Font.PLAIN, 18));
+		jbConfirm.setFont(UIConstants.FONT_18);
 		jbConfirm.addMouseListener(new ConfirmMouseListener(this));
 
 		jlChargeValue = new JLabel("充值额度");
 		jlChargeValue.setHorizontalAlignment(SwingConstants.CENTER);
-		jlChargeValue.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
+		jlChargeValue.setFont(UIConstants.FONT_20);
 
 		jtChargeValue = new JTextField();
 		jtChargeValue.setColumns(10);
 
 		jbChargeValue = new HMSBlueButton("充值");
-		jbChargeValue.setFont(new Font("宋体", Font.PLAIN, 20));
+		jbChargeValue.setFont(UIConstants.FONT_20);
 		jbChargeValue.addMouseListener(new ChargeMouseListener(this, jtChargeValue));
 
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -114,7 +114,7 @@ public class CreditChargePanel extends JPanel {
 		model = new CreditChargeModel();
 		jTable.setModel(model);
 		jTable.setBackground(UIConstants.JFRAME);
-		jTable.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
+		jTable.setFont(UIConstants.FONT_18);
 		jTable.setRowHeight(40);
 		jTable.setShowVerticalLines(false);
 		jTable.setShowHorizontalLines(true);
@@ -125,7 +125,7 @@ public class CreditChargePanel extends JPanel {
 		jTableHeader.setBackground(UIConstants.JTABLEHEADER_COLOR);
 		jTableHeader.setEnabled(false);
 		jTableHeader.setBorder(new EmptyBorder(0, 0, 0, 0));
-		jTableHeader.setFont(new Font("Arial Unicode MS", Font.PLAIN, 18));
+		jTableHeader.setFont(UIConstants.FONT_18);
 
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(jTable);

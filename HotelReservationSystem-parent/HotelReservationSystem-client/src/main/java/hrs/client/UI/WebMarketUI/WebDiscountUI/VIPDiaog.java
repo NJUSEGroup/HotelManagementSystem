@@ -77,14 +77,14 @@ public class VIPDiaog extends JDialog {
 		jcomboBoxVIP.setSelectedIndex(webDiscountVO.VIPlevel - 1);
 
 		jbComfirmModify = new HMSBlueButton("确认修改");
-		jbComfirmModify.setFont(new Font("宋体", Font.PLAIN, 13));
+		jbComfirmModify.setFont(UIConstants.FONT_13);
 		jbComfirmModify.setBounds(90, 157, 96, 29);
 		getContentPane().add(jbComfirmModify);
 		listener = new ConfirmModifyVIPListener(webDiscountPanel, this);
 		jbComfirmModify.addMouseListener(listener);
 
 		jbCancelModify = new HMSBlueButton("取消修改");
-		jbCancelModify.setFont(new Font("宋体", Font.PLAIN, 13));
+		jbCancelModify.setFont(UIConstants.FONT_13);
 		jbCancelModify.setBounds(206, 157, 96, 29);
 		getContentPane().add(jbCancelModify);
 		cancelListener = new CancelModifyVIPListener(this);

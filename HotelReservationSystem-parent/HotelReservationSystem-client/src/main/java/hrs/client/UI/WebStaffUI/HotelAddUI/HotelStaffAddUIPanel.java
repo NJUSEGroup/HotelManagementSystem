@@ -74,32 +74,32 @@ public class HotelStaffAddUIPanel extends JPanel {
 
 		jlHotelStaffUsername = new JLabel("用户名");
 		jlHotelStaffUsername.setHorizontalAlignment(SwingConstants.LEFT);
-		jlHotelStaffUsername.setFont(new Font("Arial Unicode MS", Font.PLAIN, 19));
+		jlHotelStaffUsername.setFont(UIConstants.FONT_19);
 
 		jtextHotelStaffUsrname = new JTextField();
 		jtextHotelStaffUsrname.setColumns(10);
 
 		jbLastStep = new HMSBlueButton("上一步");
-		jbLastStep.setFont(new Font("宋体", Font.PLAIN, 18));
+		jbLastStep.setFont(UIConstants.FONT_18);
 		lastStepMouseListener = new LastStepMouseListener(this);
 		jbLastStep.addMouseListener(lastStepMouseListener);
 
 		jbConfirm = new HMSBlueButton("确认");
-		jbConfirm.setFont(new Font("宋体", Font.PLAIN, 18));
+		jbConfirm.setFont(UIConstants.FONT_18);
 		listener = new ConfirmMouseListener(this);
 		jbConfirm.addMouseListener(listener);
 
 		jlPassword = new JLabel("密码");
 		jlPassword.setHorizontalAlignment(SwingConstants.LEFT);
-		jlPassword.setFont(new Font("Arial Unicode MS", Font.PLAIN, 19));
+		jlPassword.setFont(UIConstants.FONT_19);
 
 		jlPasswordConfirm = new JLabel("确认密码");
 		jlPasswordConfirm.setHorizontalAlignment(SwingConstants.LEFT);
-		jlPasswordConfirm.setFont(new Font("Arial Unicode MS", Font.PLAIN, 19));
+		jlPasswordConfirm.setFont(UIConstants.FONT_19);
 
 		jlHotelStaffRealName = new JLabel("真实姓名");
 		jlHotelStaffRealName.setHorizontalAlignment(SwingConstants.LEFT);
-		jlHotelStaffRealName.setFont(new Font("Arial Unicode MS", Font.PLAIN, 19));
+		jlHotelStaffRealName.setFont(UIConstants.FONT_19);
 
 		jtextPassword = new JTextField();
 		jtextPassword.setColumns(10);
@@ -180,7 +180,7 @@ public class HotelStaffAddUIPanel extends JPanel {
 
 		jlpanelIN = new JLabel("添加酒店工作人员");
 		jlpanelIN.setHorizontalAlignment(SwingConstants.CENTER);
-		jlpanelIN.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
+		jlpanelIN.setFont(UIConstants.FONT_20);
 		jlpanelIN.setForeground(new Color(128, 138, 235));
 
 		GroupLayout gl_jpHotelStaffAdd = new GroupLayout(jpHotelStaffAdd);
@@ -198,7 +198,7 @@ public class HotelStaffAddUIPanel extends JPanel {
 
 		lblNewLabel = new JLabel("添加酒店");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
+		lblNewLabel.setFont(UIConstants.FONT_20);
 		lblNewLabel.setForeground(new Color(128, 138, 235));
 
 		GroupLayout gl_jpHotelAdd = new GroupLayout(jpHotelAdd);
