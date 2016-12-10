@@ -48,6 +48,7 @@ public class VIPDiaog extends JDialog {
 		getContentPane().setBackground(UIConstants.JFRAME);
 		setTitle("VIP专属折扣修改");
 		setBounds(100, 100, 420, 280);
+		this.setResizable(false);
 		getContentPane().setLayout(null);
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -53,9 +53,11 @@ public class AddWebMarketerDialog extends JDialog {
 		init();
 	}
 
-	public void init() {
+	public void init() {		
 		setTitle("添加网站营销人员");
 		setBounds(100, 100, 400, 280);
+		this.setResizable(false);
+		
 		getContentPane().setLayout(null);
 		getContentPane().setBackground(UIConstants.JFRAME);
 		jpAddWebMarketer.setBorder(new EmptyBorder(5, 5, 5, 5));

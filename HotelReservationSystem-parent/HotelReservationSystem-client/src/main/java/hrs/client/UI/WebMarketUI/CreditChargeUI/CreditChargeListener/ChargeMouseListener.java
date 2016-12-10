@@ -25,8 +25,9 @@ public class ChargeMouseListener implements MouseListener {
 		} else {
 			if (jtChargeValue.getText().equals("") || Integer.parseInt(jtChargeValue.getText()) <= 0) {
 				JOptionPane.showMessageDialog(creditChargePanel, "充值大于0的整数", "Error!", JOptionPane.ERROR_MESSAGE);
+			} else {
+				creditChargePanel.charge(Integer.parseInt(jtChargeValue.getText()));
 			}
-			creditChargePanel.charge(Integer.parseInt(jtChargeValue.getText()));
 		}
 
 	}

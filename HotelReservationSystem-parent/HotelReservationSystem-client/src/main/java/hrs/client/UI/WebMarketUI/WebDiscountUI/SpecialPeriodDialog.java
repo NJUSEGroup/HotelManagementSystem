@@ -52,7 +52,9 @@ public class SpecialPeriodDialog extends JDialog {
 
 		// getContentPane().setBackground(UIConstants.JFRAME);
 		setTitle("特定期间专属折扣修改");
-		setBounds(100, 100, 420, 280);
+		setBounds(100, 100, 420, 310);
+		this.setResizable(false);
+		
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(null);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

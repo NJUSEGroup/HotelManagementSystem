@@ -38,7 +38,7 @@ public class AddWebDiscountDialog extends JDialog {
 	 */
 	private static final long serialVersionUID = -5923810422972507715L;
 
-	private final JPanel jpAdd = new JPanel();
+	private JPanel jpAdd;
 	private DateChoosePanel jtextBegintime;
 	private DateChoosePanel jtextEndtime;
 	private JTextField jtextDiscount;
@@ -83,65 +83,67 @@ public class AddWebDiscountDialog extends JDialog {
 	public void init() {
 		this.setTitle("酒店促销策略添加");
 		this.setBounds(100, 100, 600, 450);
+		this.setResizable(false);
 
 		getContentPane().setLayout(new BorderLayout());
+		jpAdd = new JPanel();
 		jpAdd.setBorder(new EmptyBorder(5, 5, 5, 5));
 		jpAdd.setBackground(UIConstants.JFRAME);
 		getContentPane().add(jpAdd, BorderLayout.CENTER);
 
 		jlPromotionType = new JLabel("折扣类型");
 		jlPromotionType.setFont(UIConstants.FONT_16);
-		jlPromotionType.setBounds(121, 15, 76, 16);
+		jlPromotionType.setBounds(108, 15, 76, 16);
 
 		jlBeginTime = new JLabel("开始时间");
 		jlBeginTime.setFont(UIConstants.FONT_16);
-		jlBeginTime.setBounds(121, 62, 76, 16);
+		jlBeginTime.setBounds(108, 62, 76, 16);
 
 		jlEndTime = new JLabel("结束时间");
 		jlEndTime.setFont(UIConstants.FONT_16);
-		jlEndTime.setBounds(121, 109, 76, 16);
+		jlEndTime.setBounds(108, 109, 76, 16);
 
 		jlLocation = new JLabel("城市");
 		jlLocation.setFont(UIConstants.FONT_16);
-		jlLocation.setBounds(121, 156, 76, 16);
+		jlLocation.setBounds(108, 156, 76, 16);
 
 		jlCommercialCircle = new JLabel("商圈");
 		jlCommercialCircle.setFont(UIConstants.FONT_16);
-		jlCommercialCircle.setBounds(121, 203, 76, 16);
+		jlCommercialCircle.setBounds(108, 203, 76, 16);
 
 		jlVIPLevel = new JLabel("VIP等级");
 		jlVIPLevel.setFont(UIConstants.FONT_16);
-		jlVIPLevel.setBounds(121, 250, 76, 16);
+		jlVIPLevel.setBounds(108, 250, 76, 16);
 
 		jlDiscount = new JLabel("折扣信息");
 		jlDiscount.setFont(UIConstants.FONT_16);
-		jlDiscount.setBounds(121, 297, 76, 16);
+		jlDiscount.setBounds(108, 297, 76, 16);
 
 		jcomboBoxType = new JComboBox<>();
-		jcomboBoxType.setBounds(262, 15, 261, 27);
+		jcomboBoxType.setBounds(259, 15, 261, 27);
 		jcomboBoxType.addItem("会员等级折扣");
 		jcomboBoxType.addItem("特定期间折扣");
 		jcomboBoxType.addItem("特定商圈专属折扣");
 		jcomboBoxType.setSelectedIndex(-1);
 
 		jtextBegintime = new DateChoosePanel();
-		jtextBegintime.setBounds(262, 52, 261, 33);
+		jtextBegintime.setBounds(259, 52, 261, 33);
 
 		jtextEndtime = new DateChoosePanel();
-		jtextEndtime.setBounds(262, 100, 261, 32);
+		jtextEndtime.setBounds(259, 100, 261, 32);
 
 		jcomboBoxLocation = new JComboBox<>();
 		for (int i = 0; i < locToName().length; i++) {
 			jcomboBoxLocation.addItem(locToName()[i]);
 		}
-		jcomboBoxLocation.setBounds(262, 156, 261, 27);
+		jcomboBoxLocation.setBounds(259, 156, 261, 27);
 		jcomboBoxLocation.setSelectedIndex(-1);
 
 		jcomboBoxCommercialCircle = new JComboBox<>();
-		jcomboBoxCommercialCircle.setBounds(262, 203, 261, 27);
+		jcomboBoxCommercialCircle.setBounds(259, 203, 261, 27);
 
 		jcomboBoxVIPLevel = new JComboBox<>();
-		jcomboBoxVIPLevel.setBounds(262, 250, 261, 27);
+		jcomboBoxVIPLevel.setBounds(259, 250, 261, 27);
 		jcomboBoxVIPLevel.addItem("1");
 		jcomboBoxVIPLevel.addItem("2");
 		jcomboBoxVIPLevel.addItem("3");
@@ -150,7 +152,7 @@ public class AddWebDiscountDialog extends JDialog {
 		jcomboBoxVIPLevel.setSelectedIndex(-1);
 
 		jtextDiscount = new JTextField();
-		jtextDiscount.setBounds(262, 297, 261, 26);
+		jtextDiscount.setBounds(259, 297, 261, 26);
 		jtextDiscount.setColumns(10);
 		jtextDiscount.setText("");
 
@@ -314,7 +316,7 @@ public class AddWebDiscountDialog extends JDialog {
 	}
 
 	public int getSelectedType() {
-		return  jcomboBoxType.getSelectedIndex();
+		return jcomboBoxType.getSelectedIndex();
 	}
 
 	public double getDiscount() {

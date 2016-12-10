@@ -1,6 +1,5 @@
 package hrs.client.UI.WebStaffUI.WebMarketUI;
 
-
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -14,6 +13,7 @@ import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketListener.ModifyWebMarketerM
 import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketListener.SearchWebMarketerConfirmMouseListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.HMSBlueButton;
+import hrs.client.util.RegExpHelper;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebStaffController.IWebStaffController;
 import hrs.common.Exception.StaffService.StaffExistedException;
@@ -51,7 +51,7 @@ public class WebMarketerUIPanel extends JPanel {
 	}
 
 	public void init() {
-		this.setSize(1080, 722);
+		this.setSize(1080, 722);		
 		this.setBackground(UIConstants.JFRAME);
 
 		jlWebMarketerSearch = new JLabel("搜索网站营销人员");
@@ -171,28 +171,31 @@ public class WebMarketerUIPanel extends JPanel {
 	}
 
 	public void add() {
-		// if (addWebMarketerDialog.setAddIndex() == 1) {
 		StaffVO addStaffVO = addWebMarketerDialog.getInput();
-		// System.out.println(addStaffVO);
-		int result = JOptionPane.showConfirmDialog(null, "是否确定添加？", "提示", JOptionPane.YES_NO_OPTION,
-				JOptionPane.INFORMATION_MESSAGE);
-		if (result == 0) {
-			try {
-				controller.addStaff(addStaffVO);
-				JOptionPane.showConfirmDialog(null, "信息添加成功", "添加成功", JOptionPane.PLAIN_MESSAGE,
-						JOptionPane.INFORMATION_MESSAGE);
-			} catch (StaffExistedException e) {
-				// TODO Auto-generated catch block
-				JOptionPane.showMessageDialog(this, "网站营销人员已存在！", "Such WebMarketer Existed",
-						JOptionPane.ERROR_MESSAGE);
+		if (!RegExpHelper.matchUsernameAndPWD(addStaffVO.username)
+				|| !RegExpHelper.matchUsernameAndPWD(addStaffVO.password)) {
+			JOptionPane.showMessageDialog(null, "用户名和密码要求至少6位，且为字母或数字！", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			int result = JOptionPane.showConfirmDialog(null, "是否确定添加？", "提示", JOptionPane.YES_NO_OPTION,
+					JOptionPane.INFORMATION_MESSAGE);
+			if (result == 0) {
+				try {
+					controller.addStaff(addStaffVO);
+					JOptionPane.showConfirmDialog(null, "信息添加成功", "添加成功", JOptionPane.PLAIN_MESSAGE,
+							JOptionPane.INFORMATION_MESSAGE);
+				} catch (StaffExistedException e) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(this, "网站营销人员已存在！", "Such WebMarketer Existed",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			}
+			addWebMarketerDialog.dispose();
 		}
-		addWebMarketerDialog.dispose();
 	}
-	// }
 
 	public void showDialog() {
 		// addWebMarketerDialog.show();
+		addWebMarketerDialog=new AddWebMarketerDialog(this);
 		addWebMarketerDialog.setVisible(true);
 		addWebMarketerDialog.setLocationRelativeTo(null);
 	}

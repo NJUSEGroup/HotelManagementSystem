@@ -24,7 +24,7 @@ public class ModifyHotelStaffMouseListener implements MouseListener {
 
 		} else {
 			if (!RegExpHelper.matchUsernameAndPWD(hotelStaffUIPanel.getPassword())) {
-				JOptionPane.showMessageDialog(null, "密码要求至少6位，且含字母和数字！", "Attention", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "密码要求至少6位，且含字母和数字！", "Error", JOptionPane.ERROR_MESSAGE);
 			} else {
 				int result = JOptionPane.showConfirmDialog(null, "是否确定修改？", "提示", JOptionPane.YES_NO_OPTION,
 						JOptionPane.INFORMATION_MESSAGE);

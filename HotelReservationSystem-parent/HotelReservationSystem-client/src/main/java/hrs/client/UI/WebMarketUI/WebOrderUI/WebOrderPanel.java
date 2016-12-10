@@ -62,49 +62,29 @@ public class WebOrderPanel extends JPanel {
 		// System.out.println(orderList);
 
 		jbRevoke = new HMSBlueButton("撤销");
+		jbRevoke.setBounds(906, 667, 90, 40);
 		jbRevoke.addMouseListener(new RevokeMouseListener(this));
 
 		jlNumberOfPO = new JLabel("共" + orderList.size() + "条记录");
-		jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
+		jlNumberOfPO.setBounds(43, 599, 79, 21);
+		jlNumberOfPO.setFont(UIConstants.FONT_17);
 
 		jlSearch = new JLabel("搜索");
+		jlSearch.setBounds(31, 23, 42, 26);
 		jlSearch.setFont(UIConstants.FONT_21);
 
 		comboBox = new JComboBox<Object>();
+		comboBox.setBounds(91, 25, 139, 27);
 		comboBox.setModel(new DefaultComboBoxModel<Object>(new String[] { "用户名", "订单号" }));
 
 		textField = new JTextField();
+		textField.setBounds(248, 23, 130, 28);
 		textField.setColumns(10);
 
-		jbSearchConfirm = new HMSBlueButton("确认");
+		jbSearchConfirm = new HMSBlueButton("搜索");
+		jbSearchConfirm.setBounds(396, 23, 85, 29);
 		jbSearchConfirm.setFont(UIConstants.FONT_14);
 		jbSearchConfirm.addMouseListener(new SearchConfirmMouseListener(this));
-
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap(881, Short.MAX_VALUE)
-						.addComponent(jbRevoke).addGap(96))
-				.addGroup(groupLayout.createSequentialGroup().addGap(43).addComponent(jlNumberOfPO).addContainerGap(950,
-						Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup().addGap(31).addComponent(jlSearch).addGap(18)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE).addGap(18)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addGap(18).addComponent(jbSearchConfirm).addContainerGap(592, Short.MAX_VALUE)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-				.createSequentialGroup()
-				.addGap(23).addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-						.createSequentialGroup().addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-								.addComponent(jbSearchConfirm, GroupLayout.PREFERRED_SIZE, 29,
-										GroupLayout.PREFERRED_SIZE))
-						.addContainerGap())
-						.addGroup(groupLayout.createSequentialGroup().addComponent(jlSearch)
-								.addPreferredGap(ComponentPlacement.RELATED, 529, Short.MAX_VALUE)
-								.addComponent(jlNumberOfPO).addGap(47).addComponent(jbRevoke).addGap(24)))));
-		setLayout(groupLayout);
 
 		jTable = new JTable();
 		model = new WebOrderModel(orderList);
@@ -128,8 +108,17 @@ public class WebOrderPanel extends JPanel {
 		scrollPane.setBounds(3, 70, 1050, 560);
 		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		scrollPane.getViewport().setBackground(UIConstants.JFRAME);
+		setLayout(null);
 		scrollPane.setOpaque(true);
+		
 		add(scrollPane);
+		add(scrollPane);
+		add(jbRevoke);
+		add(jlNumberOfPO);
+		add(jlSearch);
+		add(comboBox);
+		add(textField);
+		add(jbSearchConfirm);
 	}
 
 	public void refresh() {
@@ -137,7 +126,7 @@ public class WebOrderPanel extends JPanel {
 		model = new WebOrderModel(orderList);
 		jTable.setModel(model);
 		jlNumberOfPO.setText("共 " + orderList.size() + " 条记录");
-		jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
+		jlNumberOfPO.setFont(UIConstants.FONT_17);
 	}
 
 	public List<OrderVO> getAbnormalOrder() {
@@ -216,7 +205,6 @@ public class WebOrderPanel extends JPanel {
 		default:
 			break;
 		}
-		textField.setText("");
 	}
 
 	public OrderVO getSelected() {

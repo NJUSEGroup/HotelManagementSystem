@@ -57,57 +57,32 @@ public class CreditChargePanel extends JPanel {
 		setBackground(UIConstants.JFRAME);
 
 		jlFindUser = new JLabel("搜索用户");
+		jlFindUser.setBounds(14, 23, 114, 36);
 		jlFindUser.setHorizontalAlignment(SwingConstants.CENTER);
 		jlFindUser.setFont(UIConstants.JLABEL_FONT);
 
 		jtUsername = new JTextField();
+		jtUsername.setBounds(193, 23, 219, 36);
 		jtUsername.setColumns(10);
 
-		jbConfirm = new HMSBlueButton("确认");
+		jbConfirm = new HMSBlueButton("搜索");
+		jbConfirm.setBounds(483, 25, 85, 35);
 		jbConfirm.setFont(UIConstants.FONT_18);
 		jbConfirm.addMouseListener(new ConfirmMouseListener(this));
 
 		jlChargeValue = new JLabel("充值额度");
+		jlChargeValue.setBounds(14, 248, 114, 32);
 		jlChargeValue.setHorizontalAlignment(SwingConstants.CENTER);
 		jlChargeValue.setFont(UIConstants.FONT_20);
 
 		jtChargeValue = new JTextField();
+		jtChargeValue.setBounds(193, 249, 219, 36);
 		jtChargeValue.setColumns(10);
 
 		jbChargeValue = new HMSBlueButton("充值");
+		jbChargeValue.setBounds(483, 249, 90, 40);
 		jbChargeValue.setFont(UIConstants.FONT_20);
 		jbChargeValue.addMouseListener(new ChargeMouseListener(this, jtChargeValue));
-
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-				.createSequentialGroup().addGap(14)
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(jlChargeValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-								Short.MAX_VALUE)
-						.addComponent(jlFindUser, GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
-				.addPreferredGap(ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-				.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(jtUsername, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE)
-						.addComponent(jtChargeValue, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE))
-				.addGap(71).addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(jbConfirm)
-						.addComponent(jbChargeValue))
-				.addContainerGap(506, Short.MAX_VALUE)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout
-						.createSequentialGroup().addGap(
-								23)
-						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-										.addComponent(jtUsername, GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-										.addComponent(jbConfirm))
-								.addComponent(jlFindUser, GroupLayout.PREFERRED_SIZE, 32, Short.MAX_VALUE))
-						.addGap(189)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(jlChargeValue, GroupLayout.PREFERRED_SIZE, 32, Short.MAX_VALUE)
-								.addComponent(jtChargeValue, GroupLayout.PREFERRED_SIZE, 36, Short.MAX_VALUE)
-								.addComponent(jbChargeValue))
-						.addContainerGap(420, Short.MAX_VALUE)));
-		setLayout(groupLayout);
 
 		jTable = new JTable();
 		model = new CreditChargeModel();
@@ -131,8 +106,16 @@ public class CreditChargePanel extends JPanel {
 		scrollPane.setBounds(3, 85, 1000, 100);
 		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		scrollPane.getViewport().setBackground(UIConstants.JFRAME);
+		setLayout(null);
 		scrollPane.setOpaque(true);
 		add(scrollPane);
+		add(scrollPane);
+		add(jlChargeValue);
+		add(jlFindUser);
+		add(jtUsername);
+		add(jtChargeValue);
+		add(jbConfirm);
+		add(jbChargeValue);
 	}
 
 	public UserVO getUserVOAndShow() throws UserNotFoundException {

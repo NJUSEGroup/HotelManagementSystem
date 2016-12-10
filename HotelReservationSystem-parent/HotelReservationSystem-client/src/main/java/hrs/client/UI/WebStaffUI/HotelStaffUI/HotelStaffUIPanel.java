@@ -60,7 +60,7 @@ public class HotelStaffUIPanel extends JPanel {
 		jlSearchHotelStaff.setFont(UIConstants.JLABEL_FONT);
 
 		jcomboBoxType = new JComboBox<Object>();
-		jcomboBoxType.setModel(new DefaultComboBoxModel<Object>(new String[] { "酒店名称", "酒店工作人员名" }));
+		jcomboBoxType.setModel(new DefaultComboBoxModel<Object>(new String[] { "酒店名称", "酒店工作人员用户名" }));
 		jcomboBoxType.setSelectedIndex(-1);
 
 		jtextInput = new JTextField();
@@ -179,7 +179,7 @@ public class HotelStaffUIPanel extends JPanel {
 					JOptionPane.showMessageDialog(null, "酒店及工作人员不存在！", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
-			if (findTypeComboBox.equals("酒店工作人员名")) {
+			if (findTypeComboBox.equals("酒店工作人员用户名")) {
 				try {
 					staffVOs.add(controller.findStaffByUsername(findTypeText));
 				} catch (StaffNotFoundExceptioon e1) {

@@ -7,9 +7,6 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
 
@@ -68,38 +65,25 @@ public class WebDiscountPanel extends JPanel {
 		this.setBackground(UIConstants.JFRAME);
 
 		jbAdd = new HMSBlueButton("添加");
+		jbAdd.setBounds(612, 665, 90, 40);
 		jdAddWebDiscount = new AddWebDiscountDialog(this);// this
 		addMouseListener = new AddMouseListener(this);
 		jbAdd.addMouseListener(addMouseListener);
 
 		jbModify = new HMSBlueButton("修改");
+		jbModify.setBounds(751, 665, 90, 40);
 		modifyMouseListener = new ModifyMouseListener(this);
 		jbModify.addMouseListener(modifyMouseListener);
 
 		jbDelete = new HMSRedButton("删除");
+		jbDelete.setBounds(886, 665, 90, 40);
 		listener = new DeleteMouseListener(this);
 		jbDelete.addMouseListener(listener);
 
 		jlNumberOfPO = new JLabel();
+		jlNumberOfPO.setBounds(41, 587, 120, 23);
 		jlNumberOfPO.setText("共 " + webDiscountList.size() + " 条记录");
-		jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
-
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap(575, Short.MAX_VALUE).addComponent(jbAdd)
-						.addGap(61).addComponent(jbModify).addGap(57).addComponent(jbDelete).addGap(116))
-				.addGroup(groupLayout.createSequentialGroup().addGap(41)
-						.addComponent(jlNumberOfPO, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(944, Short.MAX_VALUE)));
-		groupLayout
-				.setVerticalGroup(
-						groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addGroup(groupLayout.createSequentialGroup().addGap(587).addComponent(jlNumberOfPO)
-										.addPreferredGap(ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-												.addComponent(jbModify).addComponent(jbAdd).addComponent(jbDelete))
-										.addGap(26)));
-		setLayout(groupLayout);
+		jlNumberOfPO.setFont(UIConstants.FONT_17);
 
 		jTable = new JTable();
 		jTable.setModel(model);
@@ -124,8 +108,14 @@ public class WebDiscountPanel extends JPanel {
 		scrollPane.setBounds(3, 20, 1060, 530);
 		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		scrollPane.getViewport().setBackground(UIConstants.JFRAME);
+		setLayout(null);
 		scrollPane.setOpaque(true);
 		add(scrollPane);
+		add(scrollPane);
+		add(jbAdd);
+		add(jbModify);
+		add(jbDelete);
+		add(jlNumberOfPO);
 	}
 
 	public List<WebDiscountVO> getWebDiscountList() {
@@ -214,6 +204,6 @@ public class WebDiscountPanel extends JPanel {
 		model = new WebDiscountModel(getWebDiscountList());
 		jTable.setModel(model);
 		jlNumberOfPO.setText("共 " + getWebDiscountList().size() + " 条记录");
-		jlNumberOfPO.setFont(UIConstants.JLABEL_NUMBER_OF_INFO);
+		jlNumberOfPO.setFont(UIConstants.FONT_17);
 	}
 }

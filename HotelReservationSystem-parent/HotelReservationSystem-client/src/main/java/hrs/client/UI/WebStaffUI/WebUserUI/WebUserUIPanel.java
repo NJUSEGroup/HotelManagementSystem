@@ -107,7 +107,6 @@ public class WebUserUIPanel extends JPanel {
 		userVO.name = showUserInfoPanel.getRealName();
 		userVO.birthDate = showUserInfoPanel.getBirthday();
 		userVO.phone = showUserInfoPanel.getPhone();
-		userVO.enterprise = showUserInfoPanel.getEnterpriseName();
 		controller.updateUser(userVO);
 	}
 
