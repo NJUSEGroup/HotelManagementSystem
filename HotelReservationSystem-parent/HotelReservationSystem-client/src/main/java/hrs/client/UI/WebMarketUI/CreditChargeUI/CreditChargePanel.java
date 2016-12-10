@@ -21,7 +21,7 @@ import javax.swing.table.JTableHeader;
 import hrs.client.UI.WebMarketUI.CreditChargeUI.CreditChargeListener.ChargeMouseListener;
 import hrs.client.UI.WebMarketUI.CreditChargeUI.CreditChargeListener.ConfirmMouseListener;
 import hrs.client.util.ControllerFactory;
-import hrs.client.util.HRSButton;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebCreditController;
 import hrs.common.Exception.UserService.UserNotFoundException;
@@ -38,7 +38,7 @@ public class CreditChargePanel extends JPanel {
 	private CreditChargeModel model;
 	private JScrollPane scrollPane;
 	private JLabel jlFindUser;
-	private HRSButton jbConfirm, jbChargeValue;
+	private HMSBlueButton jbConfirm, jbChargeValue;
 	private JLabel jlChargeValue;
 	private JTableHeader jTableHeader;
 	private JTable jTable;
@@ -64,7 +64,7 @@ public class CreditChargePanel extends JPanel {
 		jtUsername = new JTextField();
 		jtUsername.setColumns(10);
 
-		jbConfirm = new HRSButton("确认");
+		jbConfirm = new HMSBlueButton("确认");
 		jbConfirm.setFont(new Font("宋体", Font.PLAIN, 18));
 		jbConfirm.addMouseListener(new ConfirmMouseListener(this));
 
@@ -75,7 +75,7 @@ public class CreditChargePanel extends JPanel {
 		jtChargeValue = new JTextField();
 		jtChargeValue.setColumns(10);
 
-		jbChargeValue = new HRSButton("充值");
+		jbChargeValue = new HMSBlueButton("充值");
 		jbChargeValue.setFont(new Font("宋体", Font.PLAIN, 20));
 		jbChargeValue.addMouseListener(new ChargeMouseListener(this, jtChargeValue));
 

@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.CancelModifySpecialCommercialListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.ConfirmModifySpecialCommercialListener;
 import hrs.client.util.ControllerFactory;
-import hrs.client.util.HRSButton;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebDiscountController;
 import hrs.common.VO.CommercialCircleVO;
@@ -39,7 +39,7 @@ public class SpecialCommercialCircleDialog extends JDialog {
 	private JComboBox jcomboBoxCommercialCircle;
 	@SuppressWarnings("rawtypes")
 	private JComboBox jcomboBoxLocation;
-	private HRSButton jbConfirmModify, jbCancelModify;
+	private HMSBlueButton jbConfirmModify, jbCancelModify;
 	private JLabel jlDiscount;
 	private LocationVO location;
 	private List<LocationVO> locs;
@@ -83,14 +83,14 @@ public class SpecialCommercialCircleDialog extends JDialog {
 		jlDiscount.setBounds(99, 161, 61, 16);
 		getContentPane().add(jlDiscount);
 
-		jbConfirmModify = new HRSButton("确认修改");
+		jbConfirmModify = new HMSBlueButton("确认修改");
 		jbConfirmModify.setBounds(99, 221, 96, 29);
 		jbConfirmModify.setFont(new Font("宋体", Font.PLAIN, 12));
 		getContentPane().add(jbConfirmModify);
 		listener = new ConfirmModifySpecialCommercialListener(webDiscountPanel, this);
 		jbConfirmModify.addMouseListener(listener);
 
-		jbCancelModify = new HRSButton("取消修改");
+		jbCancelModify = new HMSBlueButton("取消修改");
 		jbCancelModify.setBounds(214, 221, 96, 29);
 		jbCancelModify.setFont(new Font("宋体", Font.PLAIN, 12));
 		getContentPane().add(jbCancelModify);

@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketListener.AddWebMarketerDialogConfirmMouseListener;
-import hrs.client.util.HRSButton;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.VO.StaffVO;
 import hrs.common.util.type.StaffType;
@@ -31,7 +31,7 @@ public class AddWebMarketerDialog extends JDialog {
 	private JLabel jlUsername;
 	private JLabel jlPassword;
 	private JLabel jlRealName;
-	private HRSButton jbConfirm, jbCancel;
+	private HMSBlueButton jbConfirm, jbCancel;
 
 	// /**
 	// * Launch the application.
@@ -89,14 +89,14 @@ public class AddWebMarketerDialog extends JDialog {
 		getContentPane().add(jtextRealName);
 		jtextRealName.setColumns(10);
 
-		jbConfirm = new HRSButton("确认");
+		jbConfirm = new HMSBlueButton("确认");
 		jbConfirm.setFont(new Font("宋体", Font.PLAIN, 13));
 		jbConfirm.setBounds(107, 181, 75, 29);
 		getContentPane().add(jbConfirm);
 		addWebMarketerDialogConfirmMouseListener = new AddWebMarketerDialogConfirmMouseListener(webMarketerUIPanel);
 		jbConfirm.addMouseListener(addWebMarketerDialogConfirmMouseListener);
 
-		jbCancel = new HRSButton("取消");
+		jbCancel = new HMSBlueButton("取消");
 		jbCancel.setFont(new Font("宋体", Font.PLAIN, 13));
 		jbCancel.setBounds(211, 181, 75, 29);
 		getContentPane().add(jbCancel);

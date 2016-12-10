@@ -14,7 +14,7 @@ import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketListener.AddWebMarketerMous
 import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketListener.ModifyWebMarketerMouseListener;
 import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketListener.SearchWebMarketerConfirmMouseListener;
 import hrs.client.util.ControllerFactory;
-import hrs.client.util.HRSButton;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebStaffController.IWebStaffController;
 import hrs.common.Exception.StaffService.StaffExistedException;
@@ -33,9 +33,9 @@ public class WebMarketerUIPanel extends JPanel {
 	private JTextField jtextWebMarketerUsername;
 	private JTextField jtextPassword;
 	private JTextField jtextWebMarketerRealName;
-	private HRSButton jbSearchWebMarketerConfirm;
-	private HRSButton jbModifyWebMarketer;
-	private HRSButton jbAddWebMarketer;
+	private HMSBlueButton jbSearchWebMarketerConfirm;
+	private HMSBlueButton jbModifyWebMarketer;
+	private HMSBlueButton jbAddWebMarketer;
 	private IWebStaffController controller = ControllerFactory.getWebStaffController();
 	private StaffVO webMarketerVO;
 	private SearchWebMarketerConfirmMouseListener searchWebMarketerConfirmMouseListener;
@@ -76,17 +76,17 @@ public class WebMarketerUIPanel extends JPanel {
 		jtextWebMarketerRealName = new JTextField();
 		jtextWebMarketerRealName.setColumns(10);
 
-		jbSearchWebMarketerConfirm = new HRSButton("确认");
+		jbSearchWebMarketerConfirm = new HMSBlueButton("确认");
 		jbSearchWebMarketerConfirm.setFont(new Font("宋体", Font.PLAIN, 18));
 		searchWebMarketerConfirmMouseListener = new SearchWebMarketerConfirmMouseListener(this);
 		jbSearchWebMarketerConfirm.addMouseListener(searchWebMarketerConfirmMouseListener);
 
-		jbModifyWebMarketer = new HRSButton("修改");
+		jbModifyWebMarketer = new HMSBlueButton("修改");
 		jbModifyWebMarketer.setFont(new Font("宋体", Font.PLAIN, 21));
 		modifyWebMarketerMouseListener = new ModifyWebMarketerMouseListener(this);
 		jbModifyWebMarketer.addMouseListener(modifyWebMarketerMouseListener);
 
-		jbAddWebMarketer = new HRSButton("添加");
+		jbAddWebMarketer = new HMSBlueButton("添加");
 		jbAddWebMarketer.setFont(new Font("宋体", Font.PLAIN, 21));
 		addWebMarketerMouseListener = new AddWebMarketerMouseListener(this);
 		jbAddWebMarketer.addMouseListener(addWebMarketerMouseListener);

@@ -10,8 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountPanel;
 import hrs.client.util.ControllerFactory;
-import hrs.client.util.DateChoosePanel;
-import hrs.client.util.HRSButton;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebDiscountController;
 import hrs.common.VO.CommercialCircleVO;
@@ -54,7 +53,7 @@ public class AddWebDiscountDialog extends JDialog {
 	private JLabel jlPromotionType;
 	private JLabel jlVIPLevel;
 	private JLabel jlDiscount;
-	private HRSButton jbOK, jbCancel;
+	private HMSBlueButton jbOK, jbCancel;
 
 	private WebDiscountPanel jpWebDiscount;
 	private WebDiscountVO addVO;
@@ -131,12 +130,12 @@ public class AddWebDiscountDialog extends JDialog {
 		jtextDiscount.setColumns(10);
 		jtextDiscount.setText("");
 
-		jbOK = new HRSButton("确认添加");
+		jbOK = new HMSBlueButton("确认添加");
 		jbOK.setFont(new Font("宋体", Font.PLAIN, 13));
 		listener = new OKListener(jpWebDiscount, this);
 		jbOK.addMouseListener(listener);
 
-		jbCancel = new HRSButton("取消添加");
+		jbCancel = new HMSBlueButton("取消添加");
 		jbCancel.setFont(new Font("宋体", Font.PLAIN, 13));
 		cancelAddListener = new CancelAddListener(this);
 		jbCancel.addMouseListener(cancelAddListener);
@@ -335,7 +334,8 @@ public class AddWebDiscountDialog extends JDialog {
 			}
 			break;
 		case "特定期间折扣":
-			if (jtextBegintime.getText().equals("") || jtextEndtime.getText().equals("") || jtextDiscount.getText().equals("")) {
+			if (jtextBegintime.getText().equals("") || jtextEndtime.getText().equals("")
+					|| jtextDiscount.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "请完整填写折扣信息！", "Error", JOptionPane.ERROR_MESSAGE);
 			} else {
 				// System.out.println(jcomboBoxType.getSelectedItem());

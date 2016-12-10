@@ -1,9 +1,11 @@
 package hrs.client.UI.WebStaffUI;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -23,6 +25,7 @@ public class MenulistPanel extends JPanel {
 	private JLabel jlUser;
 	private JLabel jlHotelStaff;
 	private JLabel jlWebMarketer;
+	private ImageIcon webUser, hotelAdd;
 	private WebStaffMenulistMouseListener listener;
 
 	public MenulistPanel() {
@@ -49,9 +52,13 @@ public class MenulistPanel extends JPanel {
 		jlUsername = new JLabel("宋管理", JLabel.CENTER);// 要改
 		jlUsername.setBounds(0, 108, 263, 29);
 		jlUsername.setFont(UIConstants.JLABEL_FONT);
-
+		
+		webUser = new ImageIcon("src/main/resources/imgs/WebStaffUI/WebUser.png");
+		webUser.setImage(webUser.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+		
 		jlUserInfo = new JLabel("用户信息管理", JLabel.CENTER);
 		jlUserInfo.setBounds(0, 200, 263, 65);
+		jlUserInfo.setIcon(webUser);
 		jlUserInfo.setFont(UIConstants.JLABEL_FONT);
 		jlUserInfo.setForeground(Color.WHITE);
 		jlUserInfo.setOpaque(true);
@@ -184,8 +191,12 @@ public class MenulistPanel extends JPanel {
 			}
 		});
 
+		hotelAdd = new ImageIcon("src/main/resources/imgs/WebStaffUI/AddHotel.png");
+		hotelAdd.setImage(hotelAdd.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+		
 		jlHotelAdd = new JLabel("酒店信息添加", JLabel.CENTER);
 		jlHotelAdd.setBounds(0, 400, 263, 65);
+		jlHotelAdd.setIcon(hotelAdd);
 		jlHotelAdd.setFont(UIConstants.JLABEL_FONT);
 		jlHotelAdd.setForeground(Color.WHITE);
 		jlHotelAdd.setOpaque(true);

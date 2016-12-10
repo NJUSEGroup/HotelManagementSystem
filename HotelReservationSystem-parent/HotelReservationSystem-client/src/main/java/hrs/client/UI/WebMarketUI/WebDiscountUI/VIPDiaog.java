@@ -9,7 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.CancelModifyVIPListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.ConfirmModifyVIPListener;
-import hrs.client.util.HRSButton;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.VO.WebDiscountVO;
 
@@ -30,7 +30,7 @@ public class VIPDiaog extends JDialog {
 	private JLabel jlVIP;
 	@SuppressWarnings("rawtypes")
 	private JComboBox jcomboBoxVIP;
-	private HRSButton jbComfirmModify, jbCancelModify;
+	private HMSBlueButton jbComfirmModify, jbCancelModify;
 	private WebDiscountPanel webDiscountPanel;
 	private WebDiscountVO webDiscountVO;
 	private ConfirmModifyVIPListener listener;
@@ -76,14 +76,14 @@ public class VIPDiaog extends JDialog {
 		getContentPane().add(jcomboBoxVIP);
 		jcomboBoxVIP.setSelectedIndex(webDiscountVO.VIPlevel - 1);
 
-		jbComfirmModify = new HRSButton("确认修改");
+		jbComfirmModify = new HMSBlueButton("确认修改");
 		jbComfirmModify.setFont(new Font("宋体", Font.PLAIN, 13));
 		jbComfirmModify.setBounds(90, 157, 96, 29);
 		getContentPane().add(jbComfirmModify);
 		listener = new ConfirmModifyVIPListener(webDiscountPanel, this);
 		jbComfirmModify.addMouseListener(listener);
 
-		jbCancelModify = new HRSButton("取消修改");
+		jbCancelModify = new HMSBlueButton("取消修改");
 		jbCancelModify.setFont(new Font("宋体", Font.PLAIN, 13));
 		jbCancelModify.setBounds(206, 157, 96, 29);
 		getContentPane().add(jbCancelModify);

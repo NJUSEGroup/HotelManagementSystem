@@ -2,9 +2,11 @@ package hrs.client.UI.WebMarketUI;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -24,6 +26,7 @@ public class MenulistPanel extends JPanel {
 	private JLabel jlAbnormal;
 	private JLabel jlCreditCharge;
 	private WebOrderPanel webOrderPanel;
+	private ImageIcon webDiscount, abnormalOrder, creditCharge;
 	private MenulistPanelMouseListener jpMenulistMouseListener;
 	private Color jlabel_color = UIConstants.JLABEL;
 	private Font jlabel_font = UIConstants.JLABEL_FONT;
@@ -53,8 +56,12 @@ public class MenulistPanel extends JPanel {
 		jlUsername.setBounds(0, 108, 263, 29);
 		jlUsername.setFont(UIConstants.JLABEL_FONT);
 
+		webDiscount = new ImageIcon("src/main/resources/imgs/WebMarketUI/WebDiscount.png");
+		webDiscount.setImage(webDiscount.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+
 		jlPromotion = new JLabel("促销策略", JLabel.CENTER);
 		jlPromotion.setBounds(0, 200, 263, 65);
+		jlPromotion.setIcon(webDiscount);
 		jlPromotion.setFont(jlabel_font);
 		jlPromotion.setForeground(Color.WHITE);
 		jlPromotion.setOpaque(true);
@@ -62,8 +69,12 @@ public class MenulistPanel extends JPanel {
 		jpMenulistMouseListener = new MenulistPanelMouseListener();
 		jlPromotion.addMouseListener(jpMenulistMouseListener);
 
+		abnormalOrder = new ImageIcon("src/main/resources/imgs/WebMarketUI/AbnormalOrder.png");
+		abnormalOrder.setImage(abnormalOrder.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+
 		jlAbnormal = new JLabel("异常订单", JLabel.CENTER);
 		jlAbnormal.setBounds(0, 265, 263, 65);
+		jlAbnormal.setIcon(abnormalOrder);
 		jlAbnormal.setFont(jlabel_font);
 		jlAbnormal.setForeground(Color.WHITE);
 		jlAbnormal.setOpaque(true);
@@ -75,8 +86,12 @@ public class MenulistPanel extends JPanel {
 			}
 		});
 
+		creditCharge = new ImageIcon("src/main/resources/imgs/WebMarketUI/CreditCharge.png");
+		creditCharge.setImage(creditCharge.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+
 		jlCreditCharge = new JLabel("信用充值", JLabel.CENTER);
 		jlCreditCharge.setBounds(0, 330, 263, 65);
+		jlCreditCharge.setIcon(creditCharge);
 		jlCreditCharge.setFont(jlabel_font);
 		jlCreditCharge.setForeground(Color.WHITE);
 		jlCreditCharge.setOpaque(true);

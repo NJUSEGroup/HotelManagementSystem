@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 
 import hrs.client.UI.WebStaffUI.HotelStaffUI.HotelStaffListener.SearchConfirmMouseListener;
 import hrs.client.util.ControllerFactory;
-import hrs.client.util.HRSButton;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebStaffController.IWebStaffController;
 import hrs.common.Exception.StaffService.StaffNotFoundExceptioon;
@@ -37,8 +37,8 @@ public class HotelStaffUIPanel extends JPanel {
 	private JLabel jlHotelName;
 	private JTextField jtextPassword;
 	private JTextField jtextRealName;
-	private HRSButton jbSearchHotelStaffConfirm;
-	private HRSButton jbModifyHotelStaff;
+	private HMSBlueButton jbSearchHotelStaffConfirm;
+	private HMSBlueButton jbModifyHotelStaff;
 	private SearchConfirmMouseListener confirmMouseListener;
 	private ModifyHotelStaffMouseListener modifyHotelStaffMouseListener;
 	private IWebStaffController controller = ControllerFactory.getWebStaffController();
@@ -69,7 +69,7 @@ public class HotelStaffUIPanel extends JPanel {
 		jtextInput = new JTextField();
 		jtextInput.setColumns(10);
 
-		jbSearchHotelStaffConfirm = new HRSButton("确认");
+		jbSearchHotelStaffConfirm = new HMSBlueButton("确认");
 		jbSearchHotelStaffConfirm.setFont(new Font("宋体", Font.PLAIN, 16));
 		confirmMouseListener = new SearchConfirmMouseListener(this);
 		jbSearchHotelStaffConfirm.addMouseListener(confirmMouseListener);
@@ -92,7 +92,7 @@ public class HotelStaffUIPanel extends JPanel {
 		jtextRealName = new JTextField();
 		jtextRealName.setColumns(10);
 
-		jbModifyHotelStaff = new HRSButton("修改");
+		jbModifyHotelStaff = new HMSBlueButton("修改");
 		jbModifyHotelStaff.setFont(new Font("宋体", Font.PLAIN, 18));
 		modifyHotelStaffMouseListener = new ModifyHotelStaffMouseListener(this);
 		jbModifyHotelStaff.addMouseListener(modifyHotelStaffMouseListener);

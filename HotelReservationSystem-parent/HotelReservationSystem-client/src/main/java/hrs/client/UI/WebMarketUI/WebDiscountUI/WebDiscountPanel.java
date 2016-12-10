@@ -19,7 +19,8 @@ import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.DeleteMouseLi
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.ModifyMouseListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.AddWebDiscountDialog;
 import hrs.client.util.ControllerFactory;
-import hrs.client.util.HRSButton;
+import hrs.client.util.HMSBlueButton;
+import hrs.client.util.HMSRedButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebDiscountController;
 import hrs.common.Exception.Promotion.WebDiscountService.WebDiscountNotFoundException;
@@ -36,7 +37,8 @@ public class WebDiscountPanel extends JPanel {
 	private IWebDiscountController webDiscountController;
 	private List<WebDiscountVO> webDiscountList;
 	private WebDiscountModel model;
-	private HRSButton jbAdd, jbModify, jbDelete;
+	private HMSBlueButton jbAdd, jbModify;
+	private HMSRedButton jbDelete;
 
 	private DeleteMouseListener listener;
 	private AddMouseListener addMouseListener;
@@ -68,16 +70,16 @@ public class WebDiscountPanel extends JPanel {
 		this.setSize(1080, 722);
 		this.setBackground(UIConstants.JFRAME);
 
-		jbAdd = new HRSButton("添加");
+		jbAdd = new HMSBlueButton("添加");
 		jdAddWebDiscount = new AddWebDiscountDialog(this);// this
 		addMouseListener = new AddMouseListener(this);
 		jbAdd.addMouseListener(addMouseListener);
 
-		jbModify = new HRSButton("修改");
+		jbModify = new HMSBlueButton("修改");
 		modifyMouseListener = new ModifyMouseListener(this);
 		jbModify.addMouseListener(modifyMouseListener);
 
-		jbDelete = new HRSButton("删除");
+		jbDelete = new HMSRedButton("删除");
 		listener = new DeleteMouseListener(this);
 		jbDelete.addMouseListener(listener);
 

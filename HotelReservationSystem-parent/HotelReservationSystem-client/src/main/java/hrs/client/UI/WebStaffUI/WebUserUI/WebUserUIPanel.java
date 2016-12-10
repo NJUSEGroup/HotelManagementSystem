@@ -12,7 +12,6 @@ import hrs.client.UI.WebStaffUI.WebUserUI.WebUserListener.ModifyUserInfoMouseLis
 import hrs.client.UI.WebStaffUI.WebUserUI.WebUserListener.SearchUserConfirmMouseListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.HMSBlueButton;
-import hrs.client.util.HRSButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebStaffController.IWebUserController;
 import hrs.common.Exception.UserService.UserNotFoundException;
@@ -26,7 +25,7 @@ public class WebUserUIPanel extends JPanel {
 	private IWebUserController controller = ControllerFactory.getWebUserController();
 	private JTextField jtextUsername;
 	private JLabel jlUserSearch;
-	private HRSButton jbConfirm, jbModify;
+	private HMSBlueButton jbConfirm, jbModify;
 	private ShowUserInfoPanel showUserInfoPanel;
 	private SearchUserConfirmMouseListener confirmMouseListener;
 	private UserVO userVO;
@@ -53,11 +52,11 @@ public class WebUserUIPanel extends JPanel {
 		jtextUsername = new JTextField();
 		jtextUsername.setColumns(10);
 
-		jbConfirm = new HRSButton("确认");
+		jbConfirm = new HMSBlueButton("确认");
 		confirmMouseListener = new SearchUserConfirmMouseListener(this);
 		jbConfirm.addMouseListener(confirmMouseListener);
 
-		jbModify = new HRSButton("修改");
+		jbModify = new HMSBlueButton("修改");
 		jbModify.setFont(new Font("宋体", Font.PLAIN, 21));
 		modifyUserInfoMouseListener = new ModifyUserInfoMouseListener(this);
 		jbModify.addMouseListener(modifyUserInfoMouseListener);

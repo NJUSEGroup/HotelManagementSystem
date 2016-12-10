@@ -15,7 +15,7 @@ import hrs.client.UI.WebStaffUI.WebStaffFrame;
 import hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddListener.ConfirmMouseListener;
 import hrs.client.UI.WebStaffUI.HotelAddUI.HotelAddListener.LastStepMouseListener;
 import hrs.client.util.ControllerFactory;
-import hrs.client.util.HRSButton;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebStaffController.IWebStaffController;
 import hrs.common.Exception.HotelService.HotelNotFoundException;
@@ -36,8 +36,8 @@ public class HotelStaffAddUIPanel extends JPanel {
 	private JPanel jpHotelStaffAdd;
 	private JLabel jlpanelIN;
 	private JLabel lblNewLabel;
-	private HRSButton jbConfirm;
-	private HRSButton jbLastStep;
+	private HMSBlueButton jbConfirm;
+	private HMSBlueButton jbLastStep;
 	private JLabel jlPassword;
 	private JLabel jlPasswordConfirm;
 	private JLabel jlHotelStaffRealName;
@@ -79,12 +79,12 @@ public class HotelStaffAddUIPanel extends JPanel {
 		jtextHotelStaffUsrname = new JTextField();
 		jtextHotelStaffUsrname.setColumns(10);
 
-		jbLastStep = new HRSButton("上一步");
+		jbLastStep = new HMSBlueButton("上一步");
 		jbLastStep.setFont(new Font("宋体", Font.PLAIN, 18));
 		lastStepMouseListener = new LastStepMouseListener(this);
 		jbLastStep.addMouseListener(lastStepMouseListener);
 
-		jbConfirm = new HRSButton("确认");
+		jbConfirm = new HMSBlueButton("确认");
 		jbConfirm.setFont(new Font("宋体", Font.PLAIN, 18));
 		listener = new ConfirmMouseListener(this);
 		jbConfirm.addMouseListener(listener);

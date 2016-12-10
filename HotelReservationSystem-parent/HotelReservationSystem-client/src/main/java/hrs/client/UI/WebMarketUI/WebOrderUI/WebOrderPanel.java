@@ -16,7 +16,7 @@ import javax.swing.table.JTableHeader;
 import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderListener.RevokeMouseListener;
 import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderListener.SearchConfirmMouseListener;
 import hrs.client.util.ControllerFactory;
-import hrs.client.util.HRSButton;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebOrderController;
 import hrs.common.Exception.OrderService.OrderNotFoundException;
@@ -47,7 +47,7 @@ public class WebOrderPanel extends JPanel {
 	private JLabel jlSearch;
 	@SuppressWarnings("rawtypes")
 	private JComboBox comboBox;
-	private HRSButton jbRevoke, jbSearchConfirm;
+	private HMSBlueButton jbRevoke, jbSearchConfirm;
 	private Font JTABLE_FONT = new Font("Arial Unicode MS", Font.PLAIN, 18);
 
 	/**
@@ -65,7 +65,7 @@ public class WebOrderPanel extends JPanel {
 		orderList = getAbnormalOrder();
 		// System.out.println(orderList);
 
-		jbRevoke = new HRSButton("撤销");
+		jbRevoke = new HMSBlueButton("撤销");
 		jbRevoke.addMouseListener(new RevokeMouseListener(this));
 
 		jlNumberOfPO = new JLabel("共" + orderList.size() + "条记录");
@@ -80,7 +80,7 @@ public class WebOrderPanel extends JPanel {
 		textField = new JTextField();
 		textField.setColumns(10);
 
-		jbSearchConfirm = new HRSButton("确认");
+		jbSearchConfirm = new HMSBlueButton("确认");
 		jbSearchConfirm.setFont(new Font("宋体", Font.PLAIN, 14));
 		jbSearchConfirm.addMouseListener(new SearchConfirmMouseListener(this));
 

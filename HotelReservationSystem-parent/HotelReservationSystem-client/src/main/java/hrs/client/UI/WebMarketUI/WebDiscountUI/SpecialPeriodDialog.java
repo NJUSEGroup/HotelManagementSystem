@@ -9,7 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.CancelModifySpecialPeriodDiscountListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.ConfirmModifySpecialPeriodListener;
-import hrs.client.util.HRSButton;
+import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.VO.WebDiscountVO;
 import hrs.common.util.DateHelper;
@@ -30,7 +30,7 @@ public class SpecialPeriodDialog extends JDialog {
 	private JTextField jtextBeginTime;
 	private JTextField jtextEndTime;
 	private JTextField jtextDiscount;
-	private HRSButton jbConfirmModify, jbCancalModify;
+	private HMSBlueButton jbConfirmModify, jbCancalModify;
 	private JLabel jlBeginTime;
 	private JLabel jlDiscount;
 	private JLabel jlEndTime;
@@ -90,14 +90,14 @@ public class SpecialPeriodDialog extends JDialog {
 		jtextDiscount.setColumns(10);
 		jtextDiscount.setText(webDiscountVO.discount + "");
 
-		jbConfirmModify = new HRSButton("确认修改");
+		jbConfirmModify = new HMSBlueButton("确认修改");
 		jbConfirmModify.setFont(new Font("宋体", Font.PLAIN, 12));
 		jbConfirmModify.setBounds(103, 204, 103, 29);
 		listener = new ConfirmModifySpecialPeriodListener(webDiscountPanel, this);
 		jbConfirmModify.addMouseListener(listener);
 		contentPanel.add(jbConfirmModify);
 
-		jbCancalModify = new HRSButton("取消修改");
+		jbCancalModify = new HMSBlueButton("取消修改");
 		jbCancalModify.setFont(new Font("宋体", Font.PLAIN, 12));
 		jbCancalModify.setBounds(218, 204, 103, 29);
 		contentPanel.add(jbCancalModify);
