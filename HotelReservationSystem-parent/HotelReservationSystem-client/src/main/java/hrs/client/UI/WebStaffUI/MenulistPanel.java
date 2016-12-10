@@ -68,7 +68,7 @@ public class MenulistPanel extends JPanel {
 		jlUserInfo.setOpaque(true);
 		jlUserInfo.setBackground(UIConstants.JLABEL);
 
-		jlUser = new JLabel("•用户            ", JLabel.CENTER);
+		jlUser = new JLabel("•用户          ", JLabel.CENTER);
 		jlUser.setBounds(0, 265, 263, 45);
 		jlUser.setFont(UIConstants.JLABEL_FONT);
 		jlUser.addMouseListener(listener);

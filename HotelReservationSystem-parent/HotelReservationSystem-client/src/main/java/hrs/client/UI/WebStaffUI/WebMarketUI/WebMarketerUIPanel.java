@@ -55,85 +55,65 @@ public class WebMarketerUIPanel extends JPanel {
 		this.setBackground(UIConstants.JFRAME);
 
 		jlWebMarketerSearch = new JLabel("搜索网站营销人员");
+		jlWebMarketerSearch.setBounds(61, 55, 168, 26);
 		jlWebMarketerSearch.setFont(UIConstants.JLABEL_FONT);
 
 		jlWebMarketerUsername = new JLabel("用户名");
+		jlWebMarketerUsername.setBounds(61, 131, 63, 26);
 		jlWebMarketerUsername.setFont(UIConstants.JLABEL_FONT);
 
 		jlWebMarketerPassword = new JLabel("密码");
+		jlWebMarketerPassword.setBounds(61, 200, 42, 26);
 		jlWebMarketerPassword.setFont(UIConstants.JLABEL_FONT);
 
 		jlWebMarketerRealName = new JLabel("真实姓名");
+		jlWebMarketerRealName.setBounds(61, 278, 84, 26);
 		jlWebMarketerRealName.setFont(UIConstants.JLABEL_FONT);
 
 		jtextWebMarketerUsername = new JTextField();
+		jtextWebMarketerUsername.setBounds(298, 53, 215, 37);
 		jtextWebMarketerUsername.setColumns(10);
 
 		jtextPassword = new JTextField();
+		jtextPassword.setBounds(298, 198, 215, 37);
 		jtextPassword.setColumns(10);
 
 		jtextWebMarketerRealName = new JTextField();
+		jtextWebMarketerRealName.setBounds(298, 276, 215, 37);
 		jtextWebMarketerRealName.setColumns(10);
 
-		jbSearchWebMarketerConfirm = new HMSBlueButton("确认");
+		jbSearchWebMarketerConfirm = new HMSBlueButton("搜索");
+		jbSearchWebMarketerConfirm.setBounds(579, 54, 76, 32);
 		jbSearchWebMarketerConfirm.setFont(UIConstants.FONT_18);
 		searchWebMarketerConfirmMouseListener = new SearchWebMarketerConfirmMouseListener(this);
 		jbSearchWebMarketerConfirm.addMouseListener(searchWebMarketerConfirmMouseListener);
 
 		jbModifyWebMarketer = new HMSBlueButton("修改");
+		jbModifyWebMarketer.setBounds(711, 503, 90, 40);
 		jbModifyWebMarketer.setFont(UIConstants.FONT_18);
 		modifyWebMarketerMouseListener = new ModifyWebMarketerMouseListener(this);
 		jbModifyWebMarketer.addMouseListener(modifyWebMarketerMouseListener);
 
 		jbAddWebMarketer = new HMSBlueButton("添加");
+		jbAddWebMarketer.setBounds(881, 503, 90, 40);
 		jbAddWebMarketer.setFont(UIConstants.FONT_18);
 		addWebMarketerMouseListener = new AddWebMarketerMouseListener(this);
 		jbAddWebMarketer.addMouseListener(addWebMarketerMouseListener);
 
 		jlUsernameShow = new JLabel();
-
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup().addGap(61)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(jlWebMarketerSearch)
-								.addComponent(jlWebMarketerUsername).addComponent(jlWebMarketerPassword)
-								.addComponent(jlWebMarketerRealName))
-						.addGap(69)
-						.addGroup(
-								groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(jtextWebMarketerRealName, GroupLayout.DEFAULT_SIZE, 211,
-												Short.MAX_VALUE)
-										.addComponent(jtextPassword, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-										.addComponent(jtextWebMarketerUsername, GroupLayout.DEFAULT_SIZE, 211,
-												Short.MAX_VALUE)
-										.addComponent(jlUsernameShow, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 211,
-												Short.MAX_VALUE))
-						.addGap(66).addComponent(jbSearchWebMarketerConfirm).addGap(425))
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap(691, Short.MAX_VALUE)
-						.addComponent(jbModifyWebMarketer).addGap(94).addComponent(jbAddWebMarketer).addGap(123)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addGap(53)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(jlWebMarketerSearch)
-								.addComponent(jtextWebMarketerUsername, GroupLayout.PREFERRED_SIZE, 37,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(jbSearchWebMarketerConfirm, GroupLayout.PREFERRED_SIZE, 32,
-										GroupLayout.PREFERRED_SIZE))
-						.addGap(41)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(jlWebMarketerUsername).addComponent(jlUsernameShow,
-										GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
-						.addGap(41)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(jlWebMarketerPassword).addComponent(jtextPassword,
-										GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
-						.addGap(41)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(jlWebMarketerRealName).addComponent(jtextWebMarketerRealName,
-										GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
-						.addGap(190).addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(jbModifyWebMarketer).addComponent(jbAddWebMarketer))
-						.addContainerGap(179, Short.MAX_VALUE)));
-		setLayout(groupLayout);
+		jlUsernameShow.setBounds(298, 131, 215, 24);
+		setLayout(null);
+		add(jlWebMarketerSearch);
+		add(jlWebMarketerUsername);
+		add(jlWebMarketerPassword);
+		add(jlWebMarketerRealName);
+		add(jtextWebMarketerRealName);
+		add(jtextPassword);
+		add(jtextWebMarketerUsername);
+		add(jlUsernameShow);
+		add(jbSearchWebMarketerConfirm);
+		add(jbModifyWebMarketer);
+		add(jbAddWebMarketer);
 	}
 
 	public StaffVO searchAndShow() {

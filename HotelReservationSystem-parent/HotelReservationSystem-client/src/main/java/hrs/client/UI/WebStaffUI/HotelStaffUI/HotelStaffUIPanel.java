@@ -57,108 +57,73 @@ public class HotelStaffUIPanel extends JPanel {
 		this.setBackground(UIConstants.JFRAME);
 
 		jlSearchHotelStaff = new JLabel("搜索酒店工作人员");
+		jlSearchHotelStaff.setBounds(55, 42, 168, 35);
 		jlSearchHotelStaff.setFont(UIConstants.JLABEL_FONT);
 
 		jcomboBoxType = new JComboBox<Object>();
+		jcomboBoxType.setBounds(241, 43, 173, 40);
 		jcomboBoxType.setModel(new DefaultComboBoxModel<Object>(new String[] { "酒店名称", "酒店工作人员用户名" }));
 		jcomboBoxType.setSelectedIndex(-1);
 
 		jtextInput = new JTextField();
+		jtextInput.setBounds(432, 45, 217, 35);
 		jtextInput.setColumns(10);
 
-		jbSearchHotelStaffConfirm = new HMSBlueButton("确认");
+		jbSearchHotelStaffConfirm = new HMSBlueButton("搜索");
+		jbSearchHotelStaffConfirm.setBounds(667, 45, 75, 34);
 		jbSearchHotelStaffConfirm.setFont(UIConstants.FONT_16);
 		confirmMouseListener = new SearchConfirmMouseListener(this);
 		jbSearchHotelStaffConfirm.addMouseListener(confirmMouseListener);
 
 		jlHotelStaffUsername = new JLabel("用户名");
+		jlHotelStaffUsername.setBounds(55, 126, 63, 26);
 		jlHotelStaffUsername.setFont(UIConstants.JLABEL_FONT);
 
 		jlPassword = new JLabel("密码");
+		jlPassword.setBounds(55, 184, 63, 26);
 		jlPassword.setFont(UIConstants.JLABEL_FONT);
 
 		jlRealName = new JLabel("真实姓名");
+		jlRealName.setBounds(55, 247, 84, 26);
 		jlRealName.setFont(UIConstants.JLABEL_FONT);
 
 		jlHotelName = new JLabel("酒店名称");
+		jlHotelName.setBounds(55, 309, 84, 26);
 		jlHotelName.setFont(UIConstants.JLABEL_FONT);
 
 		jtextPassword = new JTextField();
+		jtextPassword.setBounds(218, 183, 196, 35);
 		jtextPassword.setColumns(10);
 
 		jtextRealName = new JTextField();
+		jtextRealName.setBounds(218, 246, 196, 35);
 		jtextRealName.setColumns(10);
 
 		jbModifyHotelStaff = new HMSBlueButton("修改");
+		jbModifyHotelStaff.setBounds(796, 521, 90, 40);
 		jbModifyHotelStaff.setFont(UIConstants.FONT_18);
 		modifyHotelStaffMouseListener = new ModifyHotelStaffMouseListener(this);
 		jbModifyHotelStaff.addMouseListener(modifyHotelStaffMouseListener);
 
 		jlHotelNameShow = new JLabel();
+		jlHotelNameShow.setBounds(218, 309, 196, 26);
 
 		jlUsernameShow = new JLabel();
-
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout
-						.createSequentialGroup().addGap(55).addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup().addComponent(jlSearchHotelStaff)
-										.addGap(18).addComponent(jcomboBoxType, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout.createSequentialGroup().addGroup(groupLayout
-										.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-												.createParallelGroup(Alignment.TRAILING, false)
-												.addComponent(jlPassword, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-														GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(jlHotelStaffUsername, Alignment.LEADING,
-														GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-														Short.MAX_VALUE))
-										.addComponent(jlRealName).addComponent(jlHotelName))
-										.addGap(79)
-										.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-												.addComponent(jlUsernameShow, GroupLayout.DEFAULT_SIZE, 170,
-														Short.MAX_VALUE)
-												.addComponent(jlHotelNameShow, GroupLayout.DEFAULT_SIZE, 170,
-														Short.MAX_VALUE)
-												.addComponent(jtextRealName, Alignment.LEADING,
-														GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-												.addComponent(jtextPassword, Alignment.LEADING,
-														GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))))
-						.addGap(18)
-						.addComponent(jtextInput, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
-						.addGap(18).addComponent(jbSearchHotelStaffConfirm).addGap(363))
-				.addGroup(groupLayout.createSequentialGroup().addGap(796)
-						.addComponent(jbModifyHotelStaff, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(189, Short.MAX_VALUE)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addGap(42)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(jlSearchHotelStaff, GroupLayout.PREFERRED_SIZE, 35,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(jcomboBoxType, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-								.addComponent(jtextInput, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-								.addComponent(jbSearchHotelStaffConfirm, GroupLayout.PREFERRED_SIZE, 34,
-										GroupLayout.PREFERRED_SIZE))
-						.addGap(43)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(jlHotelStaffUsername)
-								.addComponent(jlUsernameShow, GroupLayout.PREFERRED_SIZE, 29,
-										GroupLayout.PREFERRED_SIZE))
-						.addGap(28)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(jlPassword).addComponent(jtextPassword, GroupLayout.PREFERRED_SIZE, 35,
-										GroupLayout.PREFERRED_SIZE))
-						.addGap(28)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(jlRealName).addComponent(jtextRealName, GroupLayout.PREFERRED_SIZE, 35,
-										GroupLayout.PREFERRED_SIZE))
-						.addGap(28)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(jlHotelName)
-								.addComponent(jlHotelNameShow, GroupLayout.PREFERRED_SIZE, 26,
-										GroupLayout.PREFERRED_SIZE))
-						.addGap(186)
-						.addComponent(jbModifyHotelStaff, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(141, Short.MAX_VALUE)));
-		setLayout(groupLayout);
+		jlUsernameShow.setBounds(218, 126, 196, 29);
+		setLayout(null);
+		add(jlSearchHotelStaff);
+		add(jcomboBoxType);
+		add(jlPassword);
+		add(jlHotelStaffUsername);
+		add(jlRealName);
+		add(jlHotelName);
+		add(jlUsernameShow);
+		add(jlHotelNameShow);
+		add(jtextRealName);
+		add(jtextPassword);
+		add(jtextInput);
+		add(jbSearchHotelStaffConfirm);
+		add(jbModifyHotelStaff);
 
 	}
 

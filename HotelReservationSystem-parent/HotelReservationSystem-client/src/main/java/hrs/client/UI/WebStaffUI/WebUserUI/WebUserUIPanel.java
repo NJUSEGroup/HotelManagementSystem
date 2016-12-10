@@ -37,6 +37,11 @@ public class WebUserUIPanel extends JPanel {
 		this.showUserInfoPanel = showUserInfoPanel;
 		init();
 		this.add(showUserInfoPanel);
+		setLayout(null);
+		add(jlUserSearch);
+		add(jtextUsername);
+		add(jbConfirm);
+		add(jbModify);
 		showUserInfoPanel.setBounds(5, 80, 1068, 623);
 		// showUserinfo(showUserInfoPanel);
 	}
@@ -46,43 +51,23 @@ public class WebUserUIPanel extends JPanel {
 		this.setBackground(UIConstants.JFRAME);
 
 		jlUserSearch = new JLabel("搜索用户");
+		jlUserSearch.setBounds(43, 40, 105, 26);
 		jlUserSearch.setFont(UIConstants.JLABEL_FONT);
 
 		jtextUsername = new JTextField();
+		jtextUsername.setBounds(175, 37, 217, 38);
 		jtextUsername.setColumns(10);
 
-		jbConfirm = new HMSBlueButton("确认");
+		jbConfirm = new HMSBlueButton("搜索");
+		jbConfirm.setBounds(454, 37, 78, 34);
 		confirmMouseListener = new SearchUserConfirmMouseListener(this);
 		jbConfirm.addMouseListener(confirmMouseListener);
 
 		jbModify = new HMSBlueButton("修改");
+		jbModify.setBounds(899, 597, 90, 40);
 		jbModify.setFont(UIConstants.FONT_21);
 		modifyUserInfoMouseListener = new ModifyUserInfoMouseListener(this);
 		jbModify.addMouseListener(modifyUserInfoMouseListener);
-
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout
-				.createParallelGroup(
-						Alignment.LEADING)
-				.addGroup(
-						groupLayout.createSequentialGroup().addGap(43)
-								.addComponent(jlUserSearch, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
-								.addGap(27)
-								.addComponent(jtextUsername, GroupLayout.PREFERRED_SIZE, 217,
-										GroupLayout.PREFERRED_SIZE)
-								.addGap(62).addComponent(jbConfirm).addContainerGap())
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup().addContainerGap(700, Short.MAX_VALUE)
-						.addComponent(jbModify).addGap(99)));
-		groupLayout
-				.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup().addGap(37)
-								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(jlUserSearch)
-										.addComponent(jbConfirm, GroupLayout.PREFERRED_SIZE, 34,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(jtextUsername, GroupLayout.PREFERRED_SIZE, 38,
-												GroupLayout.PREFERRED_SIZE))
-								.addGap(522).addComponent(jbModify).addContainerGap(66, Short.MAX_VALUE)));
-		setLayout(groupLayout);
 	}
 
 	public UserVO searchUserByUsername() {
