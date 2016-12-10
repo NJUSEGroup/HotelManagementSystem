@@ -14,9 +14,10 @@ public class MenuLabel extends JLabel {
 	 */
 	
 	Color color = UIConstants.JLABEL;
-	private MenuLabelListener listener = MenuLabelListenerFactory.getListener();
+
 	
-	public MenuLabel(String s){
+	public MenuLabel(String s,UserFrame frame){
+		MenuLabelListener listener = new MenuLabelListener(frame);
 		this.setFont(UIConstants.JLABEL_FONT);
 		
 		//标签固定大小

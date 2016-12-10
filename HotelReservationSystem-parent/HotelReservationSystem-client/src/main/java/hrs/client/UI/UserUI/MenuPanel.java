@@ -21,34 +21,36 @@ public class MenuPanel extends JPanel {
 	private final int LABEL_WIDTH = 260;
 	private final int LABEL_HEIGHT = 70;
 	
-	private MenuLabelListener listener= MenuLabelListenerFactory.getListener();
-	public MenuPanel(){
+	
+	
+	public MenuPanel(UserFrame frame){
+		
 		setBounds(0, 140, 260, 628);
 //		jp.setBackground(frameColor);
 		setLayout(null);
 		setBackground(new Color(211, 237, 249));
 		
-		searchJLabel = new MenuLabel("搜索酒店");
+		searchJLabel = new MenuLabel("搜索酒店",frame);
 		ImageIcon search = new ImageIcon("src/main/resources/imgs/UserUI/search.png");
 		search.setImage(search.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 		searchJLabel.setIcon(search);
 		
-		infoJLabel = new MenuLabel("个人信息");
+		infoJLabel = new MenuLabel("个人信息",frame);
 		ImageIcon userInfo = new ImageIcon("src/main/resources/imgs/UserUI/userinfo.png");
 		userInfo.setImage(userInfo.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 		infoJLabel.setIcon(userInfo);
 		
-		orderJLabel = new MenuLabel("订单信息");
+		orderJLabel = new MenuLabel("订单信息",frame);
 		ImageIcon order = new ImageIcon("src/main/resources/imgs/UserUI/order.png");
 		order.setImage(order.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 		orderJLabel.setIcon(order);
 		
-		hotelJLabel = new MenuLabel("酒店信息");
+		hotelJLabel = new MenuLabel("酒店信息",frame);
 		ImageIcon hotel = new ImageIcon("src/main/resources/imgs/UserUI/hotel.png");
 		hotel.setImage(hotel.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 		hotelJLabel.setIcon(hotel);
 		
-		creditJLabel = new MenuLabel("信用记录");
+		creditJLabel = new MenuLabel("信用记录",frame);
 		ImageIcon credit = new ImageIcon("src/main/resources/imgs/UserUI/credit.png");
 		credit.setImage(credit.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 		creditJLabel.setIcon(credit);

@@ -18,11 +18,10 @@ public class LeftPanel extends JPanel {
 	private static final long serialVersionUID = 6861611151362941782L;
 	Font font = UIConstants.JLABEL_FONT;
 	Color color = new Color(83, 83, 214);
-	JPanel menuJP = new MenuPanel();
-	
-	JLabel infoLabel = new JLabel("个人中心",JLabel.CENTER);
-	
-	JPanel userPanel = new JPanel();
+	private JPanel menuJP ;
+	private JLabel infoLabel ;
+	private UserFrame frame;
+	private JPanel userPanel ;
 	
 	JLabel userJL = new JLabel();
 	JLabel nameJL = new JLabel();
@@ -32,7 +31,11 @@ public class LeftPanel extends JPanel {
 	
 	private UserVO userVO;
 	
-	public LeftPanel(UserVO userVO){
+	public LeftPanel(UserVO userVO,UserFrame frame){
+		this.frame = frame;
+		menuJP = new MenuPanel(frame);
+		infoLabel = new JLabel("个人中心",JLabel.CENTER);
+		userPanel = new JPanel();
 		this.userVO = userVO;
 		setLayout(null);
 		//宽203，高768
