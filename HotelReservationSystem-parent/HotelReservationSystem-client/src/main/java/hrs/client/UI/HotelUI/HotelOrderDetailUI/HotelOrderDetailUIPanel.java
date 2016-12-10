@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import hrs.client.UI.HotelUI.HotelOrderDetailUI.Listener.ReturnListener;
 import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderMainPanel;
 import hrs.client.util.HMSBlueButton;
+import hrs.client.util.UIConstants;
 import hrs.common.VO.OrderVO;
 import hrs.common.util.DateHelper;
 
@@ -26,7 +27,6 @@ public class HotelOrderDetailUIPanel extends JPanel {
 	private static final long serialVersionUID = -1880061535262342363L;
 	private JPanel jpDetail;
 	private JPanel jpButton;
-	
 	private HMSBlueButton jbReturn;
 	private JLabel jlID;
 	private JLabel jlPlaceOrder;
@@ -67,6 +67,8 @@ public class HotelOrderDetailUIPanel extends JPanel {
 	private JTextField jtfFirm;
 	private JTextField jtfCredit;
 	private ReturnListener returnListener;
+	private Color panelColor;
+	private Font font;
 	
 	/**
 	 * 初始化酒店详细订单界面
@@ -79,9 +81,12 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		this.setSize(1080, 722);
 		this.setLayout(null);
 		
+		panelColor = UIConstants.JFRAME;
+		font = UIConstants.FONT_19;
+		
 		jpDetail = new JPanel();
 		jpDetail.setBounds(0, 0, 1080, 642);
-		jpDetail.setBackground(new Color(211, 237, 249));
+		jpDetail.setBackground(panelColor);
 		GridBagLayout gbl_jpDetail = new GridBagLayout();
 		gbl_jpDetail.columnWidths = new int[]{160, 190, 160, 356, 90, 0};
 		gbl_jpDetail.rowHeights = new int[]{45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45};
@@ -92,7 +97,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		jpButton = new JPanel();
 		jpButton.setBounds(0, 642, 1080, 80);
-		jpButton.setBackground(new Color(211, 237, 249));
+		jpButton.setBackground(panelColor);
 		jpButton.setLayout(null);
 		
 		returnListener = new ReturnListener(jpMain);
@@ -106,7 +111,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		this.add(jpDetail);
 		
 		jlID = new JLabel("订单号");
-		jlID.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlID.setFont(font);
 		jlID.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_jlID = new GridBagConstraints();
 		gbc_jlID.insets = new Insets(0, 0, 5, 5);
@@ -116,10 +121,10 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		jtfID = new JTextField();
 		jtfID.setEditable(false);
-		jtfID.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfID.setFont(font);
 		jtfID.setOpaque(true);
 		jtfID.setBorder(new EmptyBorder(0,0,0,0));
-		jtfID.setBackground(new Color(211, 237, 249));
+		jtfID.setBackground(panelColor);
 		GridBagConstraints gbc_jtfID = new GridBagConstraints();
 		gbc_jtfID.fill = GridBagConstraints.BOTH;
 		gbc_jtfID.insets = new Insets(0, 0, 5, 5);
@@ -130,7 +135,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		jlUsername = new JLabel("用户名");
 		jlUsername.setHorizontalAlignment(SwingConstants.CENTER);
-		jlUsername.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlUsername.setFont(font);
 		GridBagConstraints gbc_jlUsername = new GridBagConstraints();
 		gbc_jlUsername.insets = new Insets(0, 0, 5, 5);
 		gbc_jlUsername.gridx = 2;
@@ -138,11 +143,11 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jpDetail.add(jlUsername, gbc_jlUsername);
 		
 		jtfUsername = new JTextField();
-		jtfUsername.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfUsername.setFont(font);
 		jtfUsername.setEditable(false);
 		jtfUsername.setOpaque(true);
 		jtfUsername.setBorder(new EmptyBorder(0,0,0,0));
-		jtfUsername.setBackground(new Color(211, 237, 249));
+		jtfUsername.setBackground(panelColor);
 		GridBagConstraints gbc_jtfUsername = new GridBagConstraints();
 		gbc_jtfUsername.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfUsername.fill = GridBagConstraints.BOTH;
@@ -152,7 +157,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jtfUsername.setColumns(10);
 		
 		jlPlaceOrder = new JLabel("下单时间");
-		jlPlaceOrder.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlPlaceOrder.setFont(font);
 		jlPlaceOrder.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_jlPlaceOrder = new GridBagConstraints();
 		gbc_jlPlaceOrder.insets = new Insets(0, 0, 5, 5);
@@ -162,10 +167,10 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		jtfPlaceOrder = new JTextField();
 		jtfPlaceOrder.setEditable(false);
-		jtfPlaceOrder.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfPlaceOrder.setFont(font);
 		jtfPlaceOrder.setOpaque(true);
 		jtfPlaceOrder.setBorder(new EmptyBorder(0,0,0,0));
-		jtfPlaceOrder.setBackground(new Color(211, 237, 249));
+		jtfPlaceOrder.setBackground(panelColor);
 		GridBagConstraints gbc_jtfPlaceOrder = new GridBagConstraints();
 		gbc_jtfPlaceOrder.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfPlaceOrder.fill = GridBagConstraints.BOTH;
@@ -176,7 +181,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		jlName = new JLabel("真实姓名");
 		jlName.setHorizontalAlignment(SwingConstants.CENTER);
-		jlName.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlName.setFont(font);
 		GridBagConstraints gbc_jlName = new GridBagConstraints();
 		gbc_jlName.insets = new Insets(0, 0, 5, 5);
 		gbc_jlName.gridx = 2;
@@ -184,11 +189,11 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jpDetail.add(jlName, gbc_jlName);
 		
 		jtfName = new JTextField();
-		jtfName.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfName.setFont(font);
 		jtfName.setEditable(false);
 		jtfName.setOpaque(true);
 		jtfName.setBorder(new EmptyBorder(0,0,0,0));
-		jtfName.setBackground(new Color(211, 237, 249));
+		jtfName.setBackground(panelColor);
 		GridBagConstraints gbc_jtfName = new GridBagConstraints();
 		gbc_jtfName.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfName.fill = GridBagConstraints.BOTH;
@@ -199,7 +204,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		jlExecute = new JLabel("执行时间");
 		jlExecute.setHorizontalAlignment(SwingConstants.CENTER);
-		jlExecute.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlExecute.setFont(font);
 		GridBagConstraints gbc_jlExecute = new GridBagConstraints();
 		gbc_jlExecute.insets = new Insets(0, 0, 5, 5);
 		gbc_jlExecute.gridx = 0;
@@ -208,10 +213,10 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		jtfExecute = new JTextField();
 		jtfExecute.setEditable(false);
-		jtfExecute.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfExecute.setFont(font);
 		jtfExecute.setOpaque(true);
 		jtfExecute.setBorder(new EmptyBorder(0,0,0,0));
-		jtfExecute.setBackground(new Color(211, 237, 249));
+		jtfExecute.setBackground(panelColor);
 		GridBagConstraints gbc_jtfExecute = new GridBagConstraints();
 		gbc_jtfExecute.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfExecute.fill = GridBagConstraints.BOTH;
@@ -222,7 +227,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		jlBirthday = new JLabel("生日");
 		jlBirthday.setHorizontalAlignment(SwingConstants.CENTER);
-		jlBirthday.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlBirthday.setFont(font);
 		GridBagConstraints gbc_jlBirthday = new GridBagConstraints();
 		gbc_jlBirthday.insets = new Insets(0, 0, 5, 5);
 		gbc_jlBirthday.gridx = 2;
@@ -230,11 +235,11 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jpDetail.add(jlBirthday, gbc_jlBirthday);
 		
 		jtfBirthday = new JTextField();
-		jtfBirthday.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfBirthday.setFont(font);
 		jtfBirthday.setEditable(false);
 		jtfBirthday.setOpaque(true);
 		jtfBirthday.setBorder(new EmptyBorder(0,0,0,0));
-		jtfBirthday.setBackground(new Color(211, 237, 249));
+		jtfBirthday.setBackground(panelColor);
 		GridBagConstraints gbc_jtfBirthday = new GridBagConstraints();
 		gbc_jtfBirthday.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfBirthday.fill = GridBagConstraints.BOTH;
@@ -245,7 +250,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		jlCheckin = new JLabel("入住时间");
 		jlCheckin.setHorizontalAlignment(SwingConstants.CENTER);
-		jlCheckin.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlCheckin.setFont(font);
 		GridBagConstraints gbc_jlCheckin = new GridBagConstraints();
 		gbc_jlCheckin.insets = new Insets(0, 0, 5, 5);
 		gbc_jlCheckin.gridx = 0;
@@ -254,10 +259,10 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		jtfCheckin = new JTextField();
 		jtfCheckin.setEditable(false);
-		jtfCheckin.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfCheckin.setFont(font);
 		jtfCheckin.setOpaque(true);
 		jtfCheckin.setBorder(new EmptyBorder(0,0,0,0));
-		jtfCheckin.setBackground(new Color(211, 237, 249));
+		jtfCheckin.setBackground(panelColor);
 		GridBagConstraints gbc_jtfCheckin = new GridBagConstraints();
 		gbc_jtfCheckin.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfCheckin.fill = GridBagConstraints.BOTH;
@@ -268,7 +273,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		jlPhoneNum = new JLabel("联系方式");
 		jlPhoneNum.setHorizontalAlignment(SwingConstants.CENTER);
-		jlPhoneNum.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlPhoneNum.setFont(font);
 		GridBagConstraints gbc_jlPhoneNum = new GridBagConstraints();
 		gbc_jlPhoneNum.insets = new Insets(0, 0, 5, 5);
 		gbc_jlPhoneNum.gridx = 2;
@@ -276,11 +281,11 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jpDetail.add(jlPhoneNum, gbc_jlPhoneNum);
 		
 		jtfPhoneNum = new JTextField();
-		jtfPhoneNum.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfPhoneNum.setFont(font);
 		jtfPhoneNum.setEditable(false);
 		jtfPhoneNum.setOpaque(true);
 		jtfPhoneNum.setBorder(new EmptyBorder(0,0,0,0));
-		jtfPhoneNum.setBackground(new Color(211, 237, 249));
+		jtfPhoneNum.setBackground(panelColor);
 		GridBagConstraints gbc_jtfPhoneNum = new GridBagConstraints();
 		gbc_jtfPhoneNum.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfPhoneNum.fill = GridBagConstraints.BOTH;
@@ -291,7 +296,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		jlExpectedCheckout = new JLabel("预计离开时间");
 		jlExpectedCheckout.setHorizontalAlignment(SwingConstants.CENTER);
-		jlExpectedCheckout.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlExpectedCheckout.setFont(font);
 		GridBagConstraints gbc_jlExpectedCheckout = new GridBagConstraints();
 		gbc_jlExpectedCheckout.insets = new Insets(0, 0, 5, 5);
 		gbc_jlExpectedCheckout.gridx = 0;
@@ -300,10 +305,10 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		jtfExpectedCheckout = new JTextField();
 		jtfExpectedCheckout.setEditable(false);
-		jtfExpectedCheckout.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfExpectedCheckout.setFont(font);
 		jtfExpectedCheckout.setOpaque(true);
 		jtfExpectedCheckout.setBorder(new EmptyBorder(0,0,0,0));
-		jtfExpectedCheckout.setBackground(new Color(211, 237, 249));
+		jtfExpectedCheckout.setBackground(panelColor);
 		GridBagConstraints gbc_jtfExpectedCheckout = new GridBagConstraints();
 		gbc_jtfExpectedCheckout.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfExpectedCheckout.fill = GridBagConstraints.BOTH;
@@ -313,7 +318,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jtfExpectedCheckout.setColumns(10);
 		
 		jlFirm = new JLabel("企业名称");
-		jlFirm.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlFirm.setFont(font);
 		jlFirm.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_jlFirm = new GridBagConstraints();
 		gbc_jlFirm.insets = new Insets(0, 0, 5, 5);
@@ -322,11 +327,11 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jpDetail.add(jlFirm, gbc_jlFirm);
 		
 		jtfFirm = new JTextField();
-		jtfFirm.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfFirm.setFont(font);
 		jtfFirm.setEditable(false);
 		jtfFirm.setOpaque(true);
 		jtfFirm.setBorder(new EmptyBorder(0,0,0,0));
-		jtfFirm.setBackground(new Color(211, 237, 249));
+		jtfFirm.setBackground(panelColor);
 		GridBagConstraints gbc_jftFirm = new GridBagConstraints();
 		gbc_jftFirm.insets = new Insets(0, 0, 5, 5);
 		gbc_jftFirm.fill = GridBagConstraints.BOTH;
@@ -337,7 +342,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		jlCheckout = new JLabel("退房时间");
 		jlCheckout.setHorizontalAlignment(SwingConstants.CENTER);
-		jlCheckout.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlCheckout.setFont(font);
 		GridBagConstraints gbc_jlCheckout = new GridBagConstraints();
 		gbc_jlCheckout.insets = new Insets(0, 0, 5, 5);
 		gbc_jlCheckout.gridx = 0;
@@ -345,11 +350,11 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jpDetail.add(jlCheckout, gbc_jlCheckout);
 		
 		jtfCheckout = new JTextField();
-		jtfCheckout.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfCheckout.setFont(font);
 		jtfCheckout.setEditable(false);
 		jtfCheckout.setOpaque(true);
 		jtfCheckout.setBorder(new EmptyBorder(0,0,0,0));
-		jtfCheckout.setBackground(new Color(211, 237, 249));
+		jtfCheckout.setBackground(panelColor);
 		GridBagConstraints gbc_jtfCheckout = new GridBagConstraints();
 		gbc_jtfCheckout.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfCheckout.fill = GridBagConstraints.BOTH;
@@ -360,7 +365,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		jlCredit = new JLabel("信用值");
 		jlCredit.setHorizontalAlignment(SwingConstants.CENTER);
-		jlCredit.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlCredit.setFont(font);
 		GridBagConstraints gbc_jlCredit = new GridBagConstraints();
 		gbc_jlCredit.insets = new Insets(0, 0, 5, 5);
 		gbc_jlCredit.gridx = 2;
@@ -368,11 +373,11 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jpDetail.add(jlCredit, gbc_jlCredit);
 		
 		jtfCredit = new JTextField();
-		jtfCredit.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfCredit.setFont(font);
 		jtfCredit.setEditable(false);
 		jtfCredit.setOpaque(true);
 		jtfCredit.setBorder(new EmptyBorder(0,0,0,0));
-		jtfCredit.setBackground(new Color(211, 237, 249));
+		jtfCredit.setBackground(panelColor);
 		GridBagConstraints gbc_jtfCredit = new GridBagConstraints();
 		gbc_jtfCredit.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfCredit.fill = GridBagConstraints.BOTH;
@@ -383,7 +388,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		jlCancel = new JLabel("撤销时间");
 		jlCancel.setHorizontalAlignment(SwingConstants.CENTER);
-		jlCancel.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlCancel.setFont(font);
 		GridBagConstraints gbc_jlCancel = new GridBagConstraints();
 		gbc_jlCancel.insets = new Insets(0, 0, 5, 5);
 		gbc_jlCancel.gridx = 0;
@@ -391,11 +396,11 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jpDetail.add(jlCancel, gbc_jlCancel);
 		
 		jtfCancel = new JTextField();
-		jtfCancel.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfCancel.setFont(font);
 		jtfCancel.setEditable(false);
 		jtfCancel.setOpaque(true);
 		jtfCancel.setBorder(new EmptyBorder(0,0,0,0));
-		jtfCancel.setBackground(new Color(211, 237, 249));
+		jtfCancel.setBackground(panelColor);
 		GridBagConstraints gbc_jtfCancel = new GridBagConstraints();
 		gbc_jtfCancel.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfCancel.fill = GridBagConstraints.BOTH;
@@ -405,7 +410,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jtfCancel.setColumns(10);
 		
 		jlRoomType = new JLabel("房间类型");
-		jlRoomType.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlRoomType.setFont(font);
 		jlRoomType.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_jlRoomType = new GridBagConstraints();
 		gbc_jlRoomType.insets = new Insets(0, 0, 5, 5);
@@ -415,10 +420,10 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		jtfRoomType = new JTextField();
 		jtfRoomType.setEditable(false);
-		jtfRoomType.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfRoomType.setFont(font);
 		jtfRoomType.setOpaque(true);
 		jtfRoomType.setBorder(new EmptyBorder(0,0,0,0));
-		jtfRoomType.setBackground(new Color(211, 237, 249));
+		jtfRoomType.setBackground(panelColor);
 		GridBagConstraints gbc_jtfRoomType = new GridBagConstraints();
 		gbc_jtfRoomType.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfRoomType.fill = GridBagConstraints.BOTH;
@@ -428,7 +433,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jtfRoomType.setColumns(10);
 		
 		jlRoomNum = new JLabel("房间数量");
-		jlRoomNum.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlRoomNum.setFont(font);
 		GridBagConstraints gbc_jlRoomNum = new GridBagConstraints();
 		gbc_jlRoomNum.insets = new Insets(0, 0, 5, 5);
 		gbc_jlRoomNum.gridx = 0;
@@ -436,11 +441,11 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jpDetail.add(jlRoomNum, gbc_jlRoomNum);
 		
 		jtfRoomNum = new JTextField();
-		jtfRoomNum.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfRoomNum.setFont(font);
 		jtfRoomNum.setEditable(false);
 		jtfRoomNum.setOpaque(true);
 		jtfRoomNum.setBorder(new EmptyBorder(0,0,0,0));
-		jtfRoomNum.setBackground(new Color(211, 237, 249));
+		jtfRoomNum.setBackground(panelColor);
 		GridBagConstraints gbc_jtfRoomNum = new GridBagConstraints();
 		gbc_jtfRoomNum.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfRoomNum.fill = GridBagConstraints.BOTH;
@@ -451,7 +456,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		jlPeople = new JLabel("入住人数");
 		jlPeople.setHorizontalAlignment(SwingConstants.CENTER);
-		jlPeople.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlPeople.setFont(font);
 		GridBagConstraints gbc_jlPeople = new GridBagConstraints();
 		gbc_jlPeople.insets = new Insets(0, 0, 5, 5);
 		gbc_jlPeople.gridx = 0;
@@ -459,11 +464,11 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jpDetail.add(jlPeople, gbc_jlPeople);
 		
 		jtfPeople = new JTextField();
-		jtfPeople.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfPeople.setFont(font);
 		jtfPeople.setEditable(false);
 		jtfPeople.setOpaque(true);
 		jtfPeople.setBorder(new EmptyBorder(0,0,0,0));
-		jtfPeople.setBackground(new Color(211, 237, 249));
+		jtfPeople.setBackground(panelColor);
 		GridBagConstraints gbc_jtfPeople = new GridBagConstraints();
 		gbc_jtfPeople.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfPeople.fill = GridBagConstraints.BOTH;
@@ -473,7 +478,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jtfPeople.setColumns(10);
 		
 		jlChildren = new JLabel("有无儿童");
-		jlChildren.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlChildren.setFont(font);
 		jlChildren.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_jlChildren = new GridBagConstraints();
 		gbc_jlChildren.insets = new Insets(0, 0, 5, 5);
@@ -482,11 +487,11 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jpDetail.add(jlChildren, gbc_jlChildren);
 		
 		jtfChildren = new JTextField();
-		jtfChildren.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfChildren.setFont(font);
 		jtfChildren.setEditable(false);
 		jtfChildren.setOpaque(true);
 		jtfChildren.setBorder(new EmptyBorder(0,0,0,0));
-		jtfChildren.setBackground(new Color(211, 237, 249));
+		jtfChildren.setBackground(panelColor);
 		GridBagConstraints gbc_jtfChildren = new GridBagConstraints();
 		gbc_jtfChildren.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfChildren.fill = GridBagConstraints.BOTH;
@@ -496,7 +501,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jtfChildren.setColumns(10);
 		
 		jlMoney = new JLabel("金额");
-		jlMoney.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlMoney.setFont(font);
 		GridBagConstraints gbc_jlMoney = new GridBagConstraints();
 		gbc_jlMoney.insets = new Insets(0, 0, 5, 5);
 		gbc_jlMoney.gridx = 0;
@@ -504,11 +509,11 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jpDetail.add(jlMoney, gbc_jlMoney);
 		
 		jtfMoney = new JTextField();
-		jtfMoney.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfMoney.setFont(font);
 		jtfMoney.setEditable(false);
 		jtfMoney.setOpaque(true);
 		jtfMoney.setBorder(new EmptyBorder(0,0,0,0));
-		jtfMoney.setBackground(new Color(211, 237, 249));
+		jtfMoney.setBackground(panelColor);
 		GridBagConstraints gbc_jtfMoney = new GridBagConstraints();
 		gbc_jtfMoney.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfMoney.fill = GridBagConstraints.BOTH;
@@ -519,7 +524,7 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		
 		jlOrderStatus = new JLabel("订单状态");
 		jlOrderStatus.setHorizontalAlignment(SwingConstants.CENTER);
-		jlOrderStatus.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlOrderStatus.setFont(font);
 		GridBagConstraints gbc_jlOrderStatus = new GridBagConstraints();
 		gbc_jlOrderStatus.insets = new Insets(0, 0, 0, 5);
 		gbc_jlOrderStatus.gridx = 0;
@@ -527,11 +532,11 @@ public class HotelOrderDetailUIPanel extends JPanel {
 		jpDetail.add(jlOrderStatus, gbc_jlOrderStatus);
 		
 		jtfOrderStatus = new JTextField();
-		jtfOrderStatus.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfOrderStatus.setFont(font);
 		jtfOrderStatus.setEditable(false);
 		jtfOrderStatus.setOpaque(true);
 		jtfOrderStatus.setBorder(new EmptyBorder(0,0,0,0));
-		jtfOrderStatus.setBackground(new Color(211, 237, 249));
+		jtfOrderStatus.setBackground(panelColor);
 		GridBagConstraints gbc_jtfOrderStatus = new GridBagConstraints();
 		gbc_jtfOrderStatus.insets = new Insets(0, 0, 0, 5);
 		gbc_jtfOrderStatus.fill = GridBagConstraints.BOTH;

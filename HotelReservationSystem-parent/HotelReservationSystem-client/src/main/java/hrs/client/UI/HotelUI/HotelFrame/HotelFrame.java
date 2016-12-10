@@ -4,6 +4,8 @@ package hrs.client.UI.HotelUI.HotelFrame;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Image;
 
 import hrs.client.UI.HotelUI.HotelDiscountUI.HotelDiscountUIPanel;
 import hrs.client.UI.HotelUI.HotelFrame.Listener.MenuListListener;
@@ -21,6 +23,8 @@ import hrs.common.VO.HotelVO;
 import hrs.common.VO.StaffVO;
 
 import java.awt.event.MouseEvent;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -52,6 +56,11 @@ public class HotelFrame extends JFrame {
 	private StaffVO staff;
 	private HotelVO hotel;
 	private IHotelController controller;
+	private Font zoneFont;
+	private Font labelFont;
+	private Color frameColor;
+	private Color panelColor;
+	private Color labelColor;
 	
 	/**
 	 * Launch the application.
@@ -89,12 +98,14 @@ public class HotelFrame extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+		
+		this.setFontAndColor();
+		
 		this.setSize(1366, 768);
 		this.setLocationRelativeTo(null);
 		this.setTitle("酒店预订系统");
 		getContentPane().setLayout(null);
-		this.getContentPane().setBackground(UIConstants.JZONE);
+		this.getContentPane().setBackground(frameColor);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.setVisible(true);
@@ -102,6 +113,14 @@ public class HotelFrame extends JFrame {
 		this.setPanel();
 		this.setInfo();
 		this.setMenuList();
+	}
+	
+	public void setFontAndColor(){
+		zoneFont = UIConstants.JZONE_FONT;
+		labelFont = UIConstants.JLABEL_FONT;
+		frameColor = UIConstants.CONTENTPANE_COLOR;
+		panelColor = UIConstants.JFRAME;
+		labelColor = UIConstants.JLABEL;
 	}
 	
 	/**
@@ -118,12 +137,12 @@ public class HotelFrame extends JFrame {
 		
 		jpMenuList = new JPanel();
 		jpMenuList.setBounds(5, 5, 263, 722);
-		jpMenuList.setBackground(UIConstants.JFRAME);
+		jpMenuList.setBackground(panelColor);
 		jpMenuList.setLayout(null);
 		
 		jpCard = new JPanel(card);
 		jpCard.setBounds(273, 5, 1080, 722);
-		jpCard.setBackground(UIConstants.JFRAME);
+		jpCard.setBackground(panelColor);
 		jpCard.add(jpHotelUI, "HotelUI");
 		jpCard.add(jpHotelOrderUI, "HotelOrderUI");
 		jpCard.add(jpRoomUI, "RoomUI");
@@ -142,7 +161,7 @@ public class HotelFrame extends JFrame {
 		jlZone.setBounds(0, 0, 263, 79);
 		jlZone.setText("酒店管理中心");
 		jlZone.setHorizontalAlignment(SwingConstants.CENTER);
-		jlZone.setFont(UIConstants.JZONE_FONT);
+		jlZone.setFont(zoneFont);
 		jlZone.setOpaque(true);
 		jlZone.setBackground(UIConstants.JZONE);
 		jlZone.setForeground(UIConstants.JZONE_FONT_COLOR);
@@ -151,13 +170,13 @@ public class HotelFrame extends JFrame {
 		jlIdentity.setBounds(0, 79, 263, 29);
 		jlIdentity.setText("酒店工作人员");
 		jlIdentity.setHorizontalAlignment(SwingConstants.CENTER);
-		jlIdentity.setFont(UIConstants.JLABEL_FONT);
+		jlIdentity.setFont(labelFont);
 		
 		jlUsername = new JLabel();
 		jlUsername.setBounds(0, 108, 263, 29);
 		jlUsername.setText("Username");//要改:staff.username
 		jlUsername.setHorizontalAlignment(SwingConstants.CENTER);
-		jlUsername.setFont(UIConstants.JLABEL_FONT);
+		jlUsername.setFont(labelFont);
 		
 		jpMenuList.add(jlZone);
 		jpMenuList.add(jlIdentity);
@@ -170,55 +189,70 @@ public class HotelFrame extends JFrame {
 	public void setMenuList(){
 		menuListListener = new MenuListListener(this);
 		
+		ImageIcon hotelInfo =new ImageIcon("src/main/resources/imgs/HotelFrame/HotelInfo.png");
+		hotelInfo.setImage(hotelInfo.getImage().getScaledInstance(35,35,Image.SCALE_DEFAULT));
 		jlHotelInfo = new JLabel();
 		jlHotelInfo.setBounds(0, 200, 263, 65);
 		jlHotelInfo.setText("酒店信息");
-		jlHotelInfo.setFont(UIConstants.JLABEL_FONT);
+		jlHotelInfo.setFont(labelFont);
 		jlHotelInfo.setForeground(Color.WHITE);
 		jlHotelInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		jlHotelInfo.setOpaque(true);
-		jlHotelInfo.setBackground(UIConstants.JLABEL);
+		jlHotelInfo.setBackground(labelColor);
 		jlHotelInfo.addMouseListener(menuListListener);
+		jlHotelInfo.setIcon(hotelInfo);
 		
+		ImageIcon hotelOrder =new ImageIcon("src/main/resources/imgs/HotelFrame/HotelOrder.png");
+		hotelOrder.setImage(hotelOrder.getImage().getScaledInstance(35,35,Image.SCALE_DEFAULT));
 		jlHotelOrder = new JLabel();
 		jlHotelOrder.setBounds(0, 265, 263, 65);
 		jlHotelOrder.setText("订单管理");
-		jlHotelOrder.setFont(UIConstants.JLABEL_FONT);
+		jlHotelOrder.setFont(labelFont);
 		jlHotelOrder.setForeground(Color.WHITE);
 		jlHotelOrder.setHorizontalAlignment(SwingConstants.CENTER);
 		jlHotelOrder.setOpaque(true);
-		jlHotelOrder.setBackground(UIConstants.JLABEL);
+		jlHotelOrder.setBackground(labelColor);
 		jlHotelOrder.addMouseListener(menuListListener);
+		jlHotelOrder.setIcon(hotelOrder);
 		
+		ImageIcon room =new ImageIcon("src/main/resources/imgs/HotelFrame/Room.png");
+		room.setImage(room.getImage().getScaledInstance(35,35,Image.SCALE_DEFAULT));
 		jlRoom = new JLabel();
 		jlRoom.setBounds(0, 330, 263, 65);
 		jlRoom.setText("录入客房");
-		jlRoom.setFont(UIConstants.JLABEL_FONT);
+		jlRoom.setFont(labelFont);
 		jlRoom.setForeground(Color.WHITE);
 		jlRoom.setHorizontalAlignment(SwingConstants.CENTER);
 		jlRoom.setOpaque(true);
-		jlRoom.setBackground(UIConstants.JLABEL);
+		jlRoom.setBackground(labelColor);
 		jlRoom.addMouseListener(menuListListener);
+		jlRoom.setIcon(room);
 		
+		ImageIcon hotelDiscount =new ImageIcon("src/main/resources/imgs/HotelFrame/HotelDiscount.png");
+		hotelDiscount.setImage(hotelDiscount.getImage().getScaledInstance(35,35,Image.SCALE_DEFAULT));
 		jlHotelDiscount = new JLabel();
 		jlHotelDiscount.setBounds(0, 395, 263, 65);
 		jlHotelDiscount.setText("促销策略");
-		jlHotelDiscount.setFont(UIConstants.JLABEL_FONT);
+		jlHotelDiscount.setFont(labelFont);
 		jlHotelDiscount.setForeground(Color.WHITE);
 		jlHotelDiscount.setHorizontalAlignment(SwingConstants.CENTER);
 		jlHotelDiscount.setOpaque(true);
-		jlHotelDiscount.setBackground(UIConstants.JLABEL);
+		jlHotelDiscount.setBackground(labelColor);
 		jlHotelDiscount.addMouseListener(menuListListener);
+		jlHotelDiscount.setIcon(hotelDiscount);
 		
+		ImageIcon offlineRecord =new ImageIcon("src/main/resources/imgs/HotelFrame/OfflineRecord.png");
+		offlineRecord.setImage(offlineRecord.getImage().getScaledInstance(35,35,Image.SCALE_DEFAULT));
 		jlOfflineRecord = new JLabel();
 		jlOfflineRecord.setBounds(0, 460, 263, 65);
 		jlOfflineRecord.setText("线下入住");
-		jlOfflineRecord.setFont(UIConstants.JLABEL_FONT);
+		jlOfflineRecord.setFont(labelFont);
 		jlOfflineRecord.setForeground(Color.WHITE);
 		jlOfflineRecord.setHorizontalAlignment(SwingConstants.CENTER);
 		jlOfflineRecord.setOpaque(true);
-		jlOfflineRecord.setBackground(UIConstants.JLABEL);
+		jlOfflineRecord.setBackground(labelColor);
 		jlOfflineRecord.addMouseListener(menuListListener);
+		jlOfflineRecord.setIcon(offlineRecord);
 		
 		jpMenuList.add(jlHotelInfo);
 		jpMenuList.add(jlHotelOrder);
@@ -290,23 +324,23 @@ public class HotelFrame extends JFrame {
 		String label = ((JLabel) e.getSource()).getText();
 		
 		if(label.equals("酒店信息")){
-			jlHotelInfo.setBackground(UIConstants.JLABEL);
+			jlHotelInfo.setBackground(labelColor);
 			jlHotelInfo.setForeground(Color.WHITE);
 		}
 		else if(label.equals("订单管理")){
-			jlHotelOrder.setBackground(UIConstants.JLABEL);
+			jlHotelOrder.setBackground(labelColor);
 			jlHotelOrder.setForeground(Color.WHITE);
 		}
 		else if(label.equals("录入客房")){
-			jlRoom.setBackground(UIConstants.JLABEL);
+			jlRoom.setBackground(labelColor);
 			jlRoom.setForeground(Color.WHITE);
 		}
 		else if(label.equals("促销策略")){
-			jlHotelDiscount.setBackground(UIConstants.JLABEL);
+			jlHotelDiscount.setBackground(labelColor);
 			jlHotelDiscount.setForeground(Color.WHITE);
 		}
 		else if(label.equals("线下入住")){
-			jlOfflineRecord.setBackground(UIConstants.JLABEL);
+			jlOfflineRecord.setBackground(labelColor);
 			jlOfflineRecord.setForeground(Color.WHITE);
 		}
 	}

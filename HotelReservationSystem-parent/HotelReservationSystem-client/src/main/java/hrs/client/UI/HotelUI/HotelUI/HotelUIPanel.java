@@ -64,6 +64,7 @@ public class HotelUIPanel extends JPanel {
 	private List<LocationVO> city;
 	private List<CommercialCircleVO> circle;
 	private Font hotelUIFont;
+	private Color panelColor;
 	
 	/**
 	 * 初始化酒店信息界面面板
@@ -77,7 +78,7 @@ public class HotelUIPanel extends JPanel {
 		this.setSize(1080, 722);
 		this.setLayout(null);
 		
-		this.hotelUIFont = new Font("宋体", Font.PLAIN, 19);
+		this.setFontAndColor();
 		this.setPanel();
 		this.setLabel();
 		this.setInfoComponents();
@@ -87,18 +88,23 @@ public class HotelUIPanel extends JPanel {
 		this.showHotelInfo();
 	}
 	
+	public void setFontAndColor(){
+		hotelUIFont = UIConstants.FONT_19;
+		panelColor = UIConstants.JFRAME;
+	}
+	
 	/**
 	 * 设置面板
 	 */
 	public void setPanel(){
 		jpHotelInfo = new JPanel();
 		jpHotelInfo.setBounds(0, 0, 1080, 642);
-		jpHotelInfo.setBackground(UIConstants.JFRAME);
+		jpHotelInfo.setBackground(panelColor);
 		jpHotelInfo.setLayout(null);
 		
 		jpButton = new JPanel();
 		jpButton.setBounds(0, 642, 1080, 80);
-		jpButton.setBackground(UIConstants.JFRAME);
+		jpButton.setBackground(panelColor);
 		jpButton.setLayout(null);
 		
 		this.add(jpHotelInfo);
@@ -227,7 +233,7 @@ public class HotelUIPanel extends JPanel {
 		jtfScore.setBounds(150, 600, 105, 30);
 		jtfScore.setFont(hotelUIFont);
 		jtfScore.setBorder(new EmptyBorder(0, 0, 0, 0));
-		jtfScore.setBackground(UIConstants.JFRAME);
+		jtfScore.setBackground(panelColor);
 		jtfScore.setEditable(false);
 		
 		jpHotelInfo.add(jtfHotelName);

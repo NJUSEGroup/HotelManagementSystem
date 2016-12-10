@@ -53,6 +53,10 @@ public class OfflineRecordUIPanel extends JPanel {
 	private CheckinListener checkinListener;
 	private CheckoutListener checkoutListener;
 	private HotelVO hotel;
+	private Color panelColor;
+	private Color tableHeadColor;
+	private Font font;
+	private Font tableFont;
 	
 	/**
 	 * 初始化线下记录界面面板
@@ -68,10 +72,18 @@ public class OfflineRecordUIPanel extends JPanel {
 		
 		controller = ControllerFactory.getOfflineRecordController();
 		
+		this.setFontAndColor();
 		this.setPanel();
 		this.setSearchPanel();
 		this.setRecordPanel();
 		this.setButtonPanel();
+	}
+	
+	public void setFontAndColor(){
+		panelColor = UIConstants.JFRAME;
+		tableHeadColor = UIConstants.JTABLEHEADER_COLOR;
+		font = UIConstants.FONT_19;
+		tableFont = UIConstants.FONT_16;
 	}
 	
 	/**
@@ -80,17 +92,17 @@ public class OfflineRecordUIPanel extends JPanel {
 	public void setPanel(){
 		jpSearch = new JPanel();
 		jpSearch.setBounds(0, 0, 1080, 80);
-		jpSearch.setBackground(UIConstants.JFRAME);
+		jpSearch.setBackground(panelColor);
 		jpSearch.setLayout(null);
 		
 		jpRecord = new JPanel();
 		jpRecord.setBounds(0, 80, 1080, 562);
-		jpRecord.setBackground(UIConstants.JFRAME);
+		jpRecord.setBackground(panelColor);
 		jpRecord.setLayout(null);
 		
 		jpButton = new JPanel();
 		jpButton.setBounds(0, 642, 1080, 80);
-		jpButton.setBackground(UIConstants.JFRAME);
+		jpButton.setBackground(panelColor);
 		jpButton.setLayout(null);
 		
 		this.add(jpSearch);
@@ -106,11 +118,11 @@ public class OfflineRecordUIPanel extends JPanel {
 		jlInput.setBounds(30, 20, 120, 30);
 		jlInput.setText("请输入编号");
 		jlInput.setHorizontalAlignment(SwingConstants.CENTER);
-		jlInput.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jlInput.setFont(font);
 		
 		jtfInput = new JTextField();
 		jtfInput.setBounds(180, 20, 140, 30);
-		jtfInput.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 19));
+		jtfInput.setFont(font);
 		jtfInput.setEditable(true);
 		
 		searchListener = new SearchListener(this);
@@ -136,18 +148,18 @@ public class OfflineRecordUIPanel extends JPanel {
 		model = new OfflineRecordTableModel(record);
 		
 		jtRecord = new JTable(model);
-		jtRecord.setBackground(UIConstants.JFRAME);
-		jtRecord.setFont(new Font("宋体",Font.PLAIN,16));
+		jtRecord.setBackground(panelColor);
+		jtRecord.setFont(tableFont);
 		jtRecord.setRowHeight(40);
 		jtRecord.setShowVerticalLines(false);
 		jtRecord.addMouseListener(recordSelectedListener);
 		
 		jth = jtRecord.getTableHeader(); 
 		jth.setPreferredSize(new Dimension(jtRecord.getWidth(),40)); 
-		jth.setBackground(UIConstants.JZONE);
+		jth.setBackground(tableHeadColor);
 		jth.setEnabled(false);
 		jth.setBorder(new EmptyBorder(0,0,0,0));
-		jth.setFont(new Font("宋体", Font.PLAIN, 19));
+		jth.setFont(font);
 		
 		jspRecord = new JScrollPane(jtRecord);
 		jspRecord.setBounds(10, 10, 1060, 542);

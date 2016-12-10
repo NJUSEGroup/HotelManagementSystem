@@ -70,6 +70,8 @@ public class HotelOrderUIPanel extends JPanel {
 	private HotelVO hotel;
 	private Font orderFont;
 	private Font tableFont;
+	private Color panelColor;
+	private Color tableHeadColor;
 	
 	/**
 	 * 初始化酒店订单管理界面面板
@@ -85,15 +87,21 @@ public class HotelOrderUIPanel extends JPanel {
 		this.setSize(1080, 722);
 		this.setLayout(null);
 		
-		this.orderFont = new Font("宋体", Font.PLAIN, 19);
-		this.tableFont = new Font("宋体", Font.PLAIN, 16);
 		detailListener = new DetailListener(jpMain, this);
 		hotelOrderController = ControllerFactory.getHotelOrderController();
 		
+		this.setFontAndColor();
 		this.setPanel();
 		this.setSearchPanel();
 		this.setOrderPanel();
 		this.setButtonPanel();
+	}
+	
+	public void setFontAndColor(){
+		orderFont = UIConstants.FONT_19;
+		tableFont = UIConstants.FONT_16;
+		panelColor = UIConstants.JFRAME;
+		tableHeadColor = UIConstants.JTABLEHEADER_COLOR;
 	}
 	
 	/**
@@ -102,17 +110,17 @@ public class HotelOrderUIPanel extends JPanel {
 	public void setPanel(){
 		jpSearch = new JPanel();
 		jpSearch.setBounds(0, 0, 1080, 170);
-		jpSearch.setBackground(UIConstants.JFRAME);
+		jpSearch.setBackground(panelColor);
 		jpSearch.setLayout(null);
 		
 		jpOrder = new JPanel();
 		jpOrder.setBounds(0, 170, 1080, 472);
-		jpOrder.setBackground(UIConstants.JFRAME);
+		jpOrder.setBackground(panelColor);
 		jpOrder.setLayout(null);
 		
 		jpButton = new JPanel();
 		jpButton.setBounds(0, 642, 1080, 80);
-		jpButton.setBackground(UIConstants.JFRAME);
+		jpButton.setBackground(panelColor);
 		jpButton.setLayout(null);
 		
 		this.add(jpSearch);
@@ -195,7 +203,7 @@ public class HotelOrderUIPanel extends JPanel {
 		
 		jthOrderList = jtOrderList.getTableHeader(); 
 		jthOrderList.setPreferredSize(new Dimension(jtOrderList.getWidth(),40)); 
-		jthOrderList.setBackground(UIConstants.JZONE);
+		jthOrderList.setBackground(tableHeadColor);
 		jthOrderList.setEnabled(false);
 		jthOrderList.setBorder(new EmptyBorder(0,0,0,0));
 		jthOrderList.setFont(tableFont);
@@ -338,7 +346,7 @@ public class HotelOrderUIPanel extends JPanel {
 	 * @return
 	 */
 	public List<OrderVO> searchByOrderType(String orderType){
-		List<OrderVO> orderList = new ArrayList<OrderVO>();
+		List<OrderVO> orderList = null;
 		List<OrderVO> orderList1 = new ArrayList<OrderVO>();
 		List<OrderVO> orderList2 = new ArrayList<OrderVO>();
 		
