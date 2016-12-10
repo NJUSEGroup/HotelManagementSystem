@@ -131,7 +131,7 @@ public class HotelDiscountUIPanel extends JPanel {
 		jspDiscount.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		jspDiscount.setOpaque(false);
 		jspDiscount.getViewport().setOpaque(false);
-		jspDiscount.setBackground(Color.WHITE);
+		jspDiscount.setBackground(panelColor);
 		
 		jpDiscount.add(jspDiscount);
 	}

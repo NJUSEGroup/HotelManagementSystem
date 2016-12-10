@@ -7,6 +7,10 @@ import javax.swing.JLabel;
 import hrs.client.util.UIConstants;
 
 public class LoginJL extends JLabel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2377168664787340271L;
 	Color color = UIConstants.JLABEL;
 	protected LoginFrame frame;
 

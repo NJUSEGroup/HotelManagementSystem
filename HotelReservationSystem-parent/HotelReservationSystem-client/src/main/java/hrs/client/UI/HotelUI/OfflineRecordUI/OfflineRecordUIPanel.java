@@ -148,7 +148,7 @@ public class OfflineRecordUIPanel extends JPanel {
 		model = new OfflineRecordTableModel(record);
 		
 		jtRecord = new JTable(model);
-		jtRecord.setBackground(panelColor);
+		jtRecord.setBackground(Color.WHITE);
 		jtRecord.setFont(tableFont);
 		jtRecord.setRowHeight(40);
 		jtRecord.setShowVerticalLines(false);
@@ -166,7 +166,7 @@ public class OfflineRecordUIPanel extends JPanel {
 		jspRecord.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		jspRecord.setOpaque(false);
 		jspRecord.getViewport().setOpaque(false);
-		jspRecord.setBackground(Color.WHITE);
+		jspRecord.setBackground(panelColor);
 		
 		jpRecord.add(jspRecord);
 	}
@@ -255,12 +255,12 @@ public class OfflineRecordUIPanel extends JPanel {
 		if(jtRecord.getSelectedRow() != -1){
 			record = this.getSelectedRecord();
 			
-			try {
-				checkoutTime = record.checkoutTime.toString();
-			} catch (NullPointerException e) {
-				// TODO Auto-generated catch block
+			checkoutTime = record.checkoutTime.toString();
+			if(checkoutTime.equals(null)){
 				checkoutTime = "";
-			}if(checkoutTime.equals("")){
+			}
+			
+			if(checkoutTime.equals("")){
 				jbCheckout.setEnabled(true);
 			}
 			else{

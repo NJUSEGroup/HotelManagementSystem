@@ -40,7 +40,7 @@ public class SearchByIdOrUsernameListener implements MouseListener{
 			jpHotelOrder.refreshOrderList(orderList);
 		}
 		else{
-			if(RegExpHelper.matchOnlyNum(searchInfo)){
+			if(RegExpHelper.matchOnlyNum(jpHotelOrder.getOrderID())){
 				id = Integer.valueOf(jpHotelOrder.getOrderID());
 				orderList = jpHotelOrder.searchByOrderID(id);
 				jpHotelOrder.refreshOrderList(orderList);

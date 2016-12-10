@@ -3,6 +3,7 @@ package hrs.client.UI.HotelUI.RoomUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -47,6 +48,7 @@ public class RoomUIPanel extends JPanel {
 	private RoomSelectedListener roomSelectedListener;
 	private List<RoomVO> rooms;
 	private Color panelColor;
+	private Color tableHeadColor;
 	private Font font;
 	
 	/**
@@ -61,6 +63,7 @@ public class RoomUIPanel extends JPanel {
 		this.setSize(1080, 722);
 		this.setLayout(null);
 		
+		setFontAndColor();
 		this.setPanel();
 		this.setRoomPanel();
 		this.setButtonPanel();
@@ -68,6 +71,7 @@ public class RoomUIPanel extends JPanel {
 	
 	public void setFontAndColor(){
 		panelColor = UIConstants.JFRAME;
+		tableHeadColor = UIConstants.JTABLEHEADER_COLOR;
 		font = UIConstants.FONT_16;
 	}
 	
@@ -94,6 +98,9 @@ public class RoomUIPanel extends JPanel {
 	 */
 	public void setRoomPanel(){
 		roomController = ControllerFactory.getRoomController();
+		
+		rooms = new ArrayList<RoomVO>();
+		
 		try {
 			rooms= roomController.findByHotelID(theHotel.id);
 		} catch (RoomNotFoundException e) {
@@ -106,7 +113,7 @@ public class RoomUIPanel extends JPanel {
 		roomTableModel = new RoomTableModel(rooms);
 		
 		jtRoom = new JTable(roomTableModel);
-		jtRoom.setBackground(UIConstants.JFRAME);
+		jtRoom.setBackground(panelColor);
 		jtRoom.setFont(font);
 		jtRoom.setRowHeight(40);
 		jtRoom.setShowVerticalLines(false);
@@ -114,7 +121,7 @@ public class RoomUIPanel extends JPanel {
 		
 		jthOrderList = jtRoom.getTableHeader(); 
 		jthOrderList.setPreferredSize(new Dimension(jtRoom.getWidth(),40)); 
-		jthOrderList.setBackground(UIConstants.JZONE);
+		jthOrderList.setBackground(tableHeadColor);
 		jthOrderList.setEnabled(false);
 		jthOrderList.setBorder(new EmptyBorder(0,0,0,0));
 		jthOrderList.setFont(font);

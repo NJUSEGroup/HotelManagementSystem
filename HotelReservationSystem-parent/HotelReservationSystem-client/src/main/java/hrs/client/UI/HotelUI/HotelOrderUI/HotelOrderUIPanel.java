@@ -212,7 +212,7 @@ public class HotelOrderUIPanel extends JPanel {
 		jspOrderList.setBounds(10, 10, 1060, 452);
 		jspOrderList.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		jspOrderList.getViewport().setOpaque(false);
-		jspOrderList.setBackground(Color.WHITE);
+		jspOrderList.setBackground(panelColor);
 		
 		jpOrder.add(jspOrderList);
 	}
@@ -346,7 +346,7 @@ public class HotelOrderUIPanel extends JPanel {
 	 * @return
 	 */
 	public List<OrderVO> searchByOrderType(String orderType){
-		List<OrderVO> orderList = null;
+		List<OrderVO> orderList = new ArrayList<OrderVO>();
 		List<OrderVO> orderList1 = new ArrayList<OrderVO>();
 		List<OrderVO> orderList2 = new ArrayList<OrderVO>();
 		

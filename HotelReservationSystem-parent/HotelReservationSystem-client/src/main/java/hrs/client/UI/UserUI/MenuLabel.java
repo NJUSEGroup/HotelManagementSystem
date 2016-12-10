@@ -2,13 +2,14 @@ package hrs.client.UI.UserUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
+
 
 import javax.swing.JLabel;
 
 import hrs.client.util.UIConstants;
 
 public class MenuLabel extends JLabel {
+	private static final long serialVersionUID = 8744552006885034016L;
 	/**
 	 * 
 	 */
