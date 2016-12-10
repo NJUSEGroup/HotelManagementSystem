@@ -54,6 +54,7 @@ public class EditRoomDialog extends JDialog {
 	public void init(RoomUIPanel jpRoomUI){
 		this.jpRoomUI = jpRoomUI;
 		setSize(450, 300);
+		setResizable(false);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(null);

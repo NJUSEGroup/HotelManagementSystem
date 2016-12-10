@@ -69,6 +69,7 @@ public class AddDiscountDialog extends JDialog {
 		this.hotel = hotel;
 		this.jpDiscountUI = jpDiscountUI;
 		setSize(570, 485);
+		setResizable(false);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(null);
@@ -76,7 +77,7 @@ public class AddDiscountDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		
 		jpDiscount = new JPanel();
-		jpDiscount.setBounds(0, 0, 552, 377);
+		jpDiscount.setBounds(0, 0, 552, 380);
 		jpDiscount.setLayout(null);
 		jpDiscount.setBackground(UIConstants.JFRAME);
 		

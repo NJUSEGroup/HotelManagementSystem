@@ -272,19 +272,12 @@ public class HotelUIPanel extends JPanel {
 		hotelController = ControllerFactory.getHotelController();
 		
 		city = hotelController.findAllLocations();
-		circle = hotelController.findCircleByLoc(hotel.location.id);
 		int citySize = city.size();
-		int circleSize = circle.size();
 		String[] citys = new String[citySize];
-		String[] circles = new String[circleSize];
 		
 		for(int i=0;i<citySize;i++){
 			citys[i] = city.get(i).name;
 			jcbCity.addItem(citys[i]);
-		}
-		for(int i=0;i<circleSize;i++){
-			circles[i] = circle.get(i).name;
-			jcbCircle.addItem(circles[i]);
 		}
 	}
 	

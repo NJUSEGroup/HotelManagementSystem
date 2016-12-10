@@ -55,38 +55,38 @@ public class HotelFrame extends JFrame {
 	private MenuListListener menuListListener;
 	private StaffVO staff;
 	private HotelVO hotel;
-//	private IHotelController controller;
+	private IHotelController controller;
 	private Font zoneFont;
 	private Font labelFont;
 	private Color frameColor;
 	private Color panelColor;
 	private Color labelColor;
 	
-//	public static void main(String args[])
-//	{
-//		HotelFrame frame = new HotelFrame();
-//	}
+	public static void main(String args[])
+	{
+		HotelFrame frame = new HotelFrame();
+	}
 	/**
 	 * 初始化酒店管理中心界面主框架
 	 * @throws RoomNotFoundException 
 	 * @throws OrderNotFoundException 
 	 */
-	public HotelFrame(StaffVO staff){
-		init(staff);
+	public HotelFrame(/**StaffVO staff**/){
+		init(/**staff**/);
 	}
 	
-	public void init(StaffVO staff){
-		this.staff = staff;
-		hotel = staff.hotel;
+	public void init(/**StaffVO staff**/){
+//		this.staff = staff;
+//		hotel = staff.hotel;
 		
-//		controller = ControllerFactory.getHotelController();
+		controller = ControllerFactory.getHotelController();
 		
-//		try {
-//			hotel = controller.findHotelByID(4);
-//		} catch (HotelNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			hotel = controller.findHotelByID(4);
+		} catch (HotelNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		this.setFontAndColor();
 		
@@ -164,7 +164,8 @@ public class HotelFrame extends JFrame {
 		
 		jlUsername = new JLabel();
 		jlUsername.setBounds(0, 108, 263, 29);
-		jlUsername.setText("Username");//要改:staff.username
+		jlUsername.setText("Username");
+//		jlUsername.setText(staff.username);
 		jlUsername.setHorizontalAlignment(SwingConstants.CENTER);
 		jlUsername.setFont(labelFont);
 		
