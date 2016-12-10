@@ -63,7 +63,7 @@ public class RoomUIPanel extends JPanel {
 		this.setSize(1080, 722);
 		this.setLayout(null);
 		
-		setFontAndColor();
+		this.setFontAndColor();
 		this.setPanel();
 		this.setRoomPanel();
 		this.setButtonPanel();
@@ -113,7 +113,7 @@ public class RoomUIPanel extends JPanel {
 		roomTableModel = new RoomTableModel(rooms);
 		
 		jtRoom = new JTable(roomTableModel);
-		jtRoom.setBackground(panelColor);
+		jtRoom.setBackground(Color.WHITE);
 		jtRoom.setFont(font);
 		jtRoom.setRowHeight(40);
 		jtRoom.setShowVerticalLines(false);

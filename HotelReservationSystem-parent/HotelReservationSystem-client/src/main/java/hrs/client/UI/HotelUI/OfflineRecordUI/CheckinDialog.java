@@ -63,6 +63,7 @@ public class CheckinDialog extends JDialog {
 		this.jpRecord = jpRecord;
 		this.hotel = hotel;
 		setSize(531, 485);
+		setResizable(false);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(null);

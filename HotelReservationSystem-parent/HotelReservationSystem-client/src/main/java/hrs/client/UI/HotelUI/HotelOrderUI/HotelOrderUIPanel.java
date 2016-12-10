@@ -160,8 +160,8 @@ public class HotelOrderUIPanel extends JPanel {
 		
 		jtfSearch = new JTextField();
 		jtfSearch.setBounds(400, 100, 230, 30);
-		jcbSearch.setFont(orderFont);
-		jcbSearch.setEditable(true);
+		jtfSearch.setFont(orderFont);
+		jtfSearch.setEditable(true);
 		
 		searchListener1 = new SearchByOrderTypeListener(this);
 		searchListener2 = new SearchByIdOrUsernameListener(this);

@@ -23,6 +23,7 @@ import hrs.client.util.ControllerFactory;
 import hrs.client.util.DateChoosePanel;
 import hrs.client.util.HMSBlueButton;
 import hrs.client.util.HMSGrayButton;
+import hrs.client.util.RegExpHelper;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.HotelController.IHotelDiscountController;
 import hrs.common.Exception.PromotionService.EnterpriseNotFoundException;
@@ -68,6 +69,7 @@ public class AddDiscountDialog extends JDialog {
 		this.hotel = hotel;
 		this.jpDiscountUI = jpDiscountUI;
 		setSize(570, 485);
+		setResizable(false);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(null);
@@ -75,7 +77,7 @@ public class AddDiscountDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		
 		jpDiscount = new JPanel();
-		jpDiscount.setBounds(0, 0, 552, 377);
+		jpDiscount.setBounds(0, 0, 552, 380);
 		jpDiscount.setLayout(null);
 		jpDiscount.setBackground(UIConstants.JFRAME);
 		
@@ -260,7 +262,8 @@ public class AddDiscountDialog extends JDialog {
 	 * 新增酒店促销策略
 	 */
 	public void add(){
-		double discount = Double.valueOf(jtfDiscount.getText());
+		String sdiscount = jtfDiscount.getText();
+		double discount = Double.valueOf(sdiscount);
 		int roomNum = ((Integer) jsRoomNum.getValue()).intValue();
 		if(discount<0){
 			JOptionPane.showMessageDialog(null, "折扣信息不能小于0！", "错误", JOptionPane.WARNING_MESSAGE);
