@@ -233,8 +233,6 @@ public class AddWebDiscountDialog extends JDialog {
 					jtextBegintime.setUnusable();
 					jtextEndtime.setUnusable();
 					jtextDiscount.setText("");
-					jtextBegintime.setBackground(Color.LIGHT_GRAY);
-					jtextEndtime.setBackground(Color.LIGHT_GRAY);
 					jcomboBoxVIPLevel.setBackground(Color.LIGHT_GRAY);
 					jcomboBoxCommercialCircle.setEnabled(true);
 					jcomboBoxLocation.setEnabled(true);
@@ -313,6 +311,10 @@ public class AddWebDiscountDialog extends JDialog {
 			break;
 		}
 		return addVO;// 从dialog返回一个有数据的vo给jp
+	}
+
+	public int getSelectedType() {
+		return  jcomboBoxType.getSelectedIndex();
 	}
 
 	public double getDiscount() {

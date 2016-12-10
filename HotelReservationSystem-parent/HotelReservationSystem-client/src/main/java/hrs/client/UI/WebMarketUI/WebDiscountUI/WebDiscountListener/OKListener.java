@@ -21,13 +21,17 @@ public class OKListener implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if (jdAddWebDiscount.getDiscount() < 0 || jdAddWebDiscount.getDiscount() >= 1) {
-			JOptionPane.showMessageDialog(null, "折扣大于0，小于1！", "Error", JOptionPane.ERROR_MESSAGE);
+		if (jdAddWebDiscount.getSelectedType()==-1) {
+			JOptionPane.showMessageDialog(null, "请先选择折扣类型！", "Error", JOptionPane.ERROR_MESSAGE);
 		} else {
-			jpWebDiscount.addWebDiscount();// 从vo显示到界面上,vo????
-			JOptionPane.showMessageDialog(null, "促销策略成功添加！", "Success", JOptionPane.PLAIN_MESSAGE, null);
-			jdAddWebDiscount.dispose();
-			jdAddWebDiscount.refresh();
+			if (jdAddWebDiscount.getDiscount() < 0 || jdAddWebDiscount.getDiscount() >= 1) {
+				JOptionPane.showMessageDialog(null, "折扣大于0，小于1！", "Error", JOptionPane.ERROR_MESSAGE);
+			} else {
+				jpWebDiscount.addWebDiscount();// 从vo显示到界面上,vo????
+				JOptionPane.showMessageDialog(null, "促销策略成功添加！", "Success", JOptionPane.PLAIN_MESSAGE, null);
+				jdAddWebDiscount.dispose();
+				jdAddWebDiscount.refresh();
+			}
 		}
 	}
 
