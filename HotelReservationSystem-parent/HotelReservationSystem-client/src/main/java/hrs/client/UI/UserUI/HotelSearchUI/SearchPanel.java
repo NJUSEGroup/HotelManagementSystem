@@ -116,7 +116,7 @@ public class SearchPanel extends JPanel {
 		add(commercialBox);
 
 		checkOutDate = new DateChoosePanel();
-		checkOutDate.setBounds(RIGHTIN_X, JL_HEIGHT * 2, checkInDate.getWidth(), checkInDate.getHeight());
+		checkOutDate.setBounds(RIGHTIN_X, JL_HEIGHT * 2+5, checkInDate.getWidth(), checkInDate.getHeight());
 		add(checkOutDate);
 
 		roomNumField = new JTextField();
@@ -149,7 +149,7 @@ public class SearchPanel extends JPanel {
 		add(cityBox);
 
 		checkInDate = new DateChoosePanel();
-		checkInDate.setBounds(LEFTIN_X, JL_HEIGHT * 2, checkInDate.getWidth(), checkInDate.getHeight());
+		checkInDate.setBounds(LEFTIN_X, JL_HEIGHT * 2+5, checkInDate.getWidth(), checkInDate.getHeight());
 		add(checkInDate);
 
 		roomTypeBox = new JComboBox<>();

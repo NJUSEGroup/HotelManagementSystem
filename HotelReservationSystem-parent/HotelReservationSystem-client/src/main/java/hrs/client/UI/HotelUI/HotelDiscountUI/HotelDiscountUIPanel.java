@@ -50,7 +50,10 @@ public class HotelDiscountUIPanel extends JPanel {
 	private EditListener editListener;
 	private DeleteListener deleteListener;
 	private List<HotelDiscountVO> discounts;
-	
+	private Color panelColor;
+	private Color tableHeadColor;
+	private Font tableFont;
+	private Font tableHeadFont;
 	
 	/**
 	 * Create the panel.
@@ -65,9 +68,17 @@ public class HotelDiscountUIPanel extends JPanel {
 		this.setSize(1080, 722);
 		this.setLayout(null);
 		
+		this.setFontAndColor();
 		this.setPanel();
 		this.setDiscountPanel();
 		this.setButtonPanel();
+	}
+	
+	public void setFontAndColor(){
+		tableHeadColor = UIConstants.JTABLEHEADER_COLOR;
+		panelColor = UIConstants.JFRAME;
+		tableFont = UIConstants.FONT_16;
+		tableHeadFont = UIConstants.FONT_19;
 	}
 	
 	/**
@@ -76,12 +87,12 @@ public class HotelDiscountUIPanel extends JPanel {
 	public void setPanel(){
 		jpDiscount = new JPanel();
 		jpDiscount.setBounds(0, 0, 1080, 642);
-		jpDiscount.setBackground(new Color(211, 237, 249));
+		jpDiscount.setBackground(panelColor);
 		jpDiscount.setLayout(null);
 		
 		jpButton = new JPanel();
 		jpButton.setBounds(0, 642, 1080, 80);
-		jpButton.setBackground(new Color(211, 237, 249));
+		jpButton.setBackground(panelColor);
 		jpButton.setLayout(null);
 		
 		this.add(jpDiscount);
@@ -102,18 +113,18 @@ public class HotelDiscountUIPanel extends JPanel {
 		model = new HotelDiscountTableModel(discounts);
 		
 		jtDiscount = new JTable(model);
-		jtDiscount.setBackground(UIConstants.JFRAME);
-		jtDiscount.setFont(new Font("宋体",Font.PLAIN,16));
+		jtDiscount.setBackground(Color.WHITE);
+		jtDiscount.setFont(tableFont);
 		jtDiscount.setRowHeight(40);
 		jtDiscount.setShowVerticalLines(false);
 		jtDiscount.addMouseListener(discountSelectedListener);
 		
 		jth = jtDiscount.getTableHeader(); 
 		jth.setPreferredSize(new Dimension(jtDiscount.getWidth(),40)); 
-		jth.setBackground(UIConstants.JZONE);
+		jth.setBackground(tableHeadColor);
 		jth.setEnabled(false);
 		jth.setBorder(new EmptyBorder(0,0,0,0));
-		jth.setFont(new Font("宋体", Font.PLAIN, 19));
+		jth.setFont(tableHeadFont);
 		
 		jspDiscount = new JScrollPane(jtDiscount);
 		jspDiscount.setBounds(10, 10, 1060, 622);

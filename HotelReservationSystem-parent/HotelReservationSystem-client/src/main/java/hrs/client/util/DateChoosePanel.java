@@ -35,7 +35,7 @@ public class DateChoosePanel extends JPanel {
 	private DateChooseListener listener;
 	
 	private Calendar currentTm ;
-	Font font = UIConstants.JLABEL_FONT;
+	Font font = UIConstants.FONT_17;
 	public DateChoosePanel(){
 		currentTm = Calendar.getInstance();
 		listener = new DateChooseListener(this);
@@ -43,7 +43,7 @@ public class DateChoosePanel extends JPanel {
 	}
 
 	private void Init() {
-		setSize(260,40);
+		setSize(260,30);
 		setLayout(null);
 		setBackground(UIConstants.JFRAME);
 		
@@ -57,7 +57,7 @@ public class DateChoosePanel extends JPanel {
 		yearBox.addItem(currentTm.get(Calendar.YEAR)+1);
 		yearBox.addItemListener(listener);
 		yearBox.setFont(font);
-		yearBox.setBounds(0,5,70,30);
+		yearBox.setBounds(0,5,70,20);
 		yearBox.setSelectedItem(currentTm.get(Calendar.YEAR));
 		add(yearBox);
 		
@@ -66,7 +66,7 @@ public class DateChoosePanel extends JPanel {
 			monthBox.addItem(i);
 		}
 		monthBox.setFont(font);
-		monthBox.setBounds(100,5,50,30);
+		monthBox.setBounds(100,5,50,20);
 		monthBox.setSelectedItem(currentTm.get(Calendar.MONTH)+1);
 		monthBox.addItemListener(listener);
 		add(monthBox);
@@ -77,7 +77,7 @@ public class DateChoosePanel extends JPanel {
 			dayBox.addItem(i);
 		}
 		dayBox.setFont(font);
-		dayBox.setBounds(180,5,50,30);
+		dayBox.setBounds(180,5,50,20);
 		dayBox.setSelectedItem(currentTm.get(Calendar.DATE));
 		add(dayBox);
 		
@@ -86,17 +86,17 @@ public class DateChoosePanel extends JPanel {
 	private void setLabel() {
 		JLabel yearJL = new JLabel("年");
 		yearJL.setFont(font);
-		yearJL.setBounds(70,0,30,40);
+		yearJL.setBounds(70,0,30,30);
 		add(yearJL);
 		
 		JLabel monthJL = new JLabel("月");
 		monthJL.setFont(font);
-		monthJL.setBounds(150,0,30,40);
+		monthJL.setBounds(150,0,30,30);
 		add(monthJL);
 		
 		JLabel dayJL = new JLabel("日");
 		dayJL.setFont(font);
-		dayJL.setBounds(230,0,30,40);
+		dayJL.setBounds(230,0,30,30);
 		add(dayJL);
 		
 	}

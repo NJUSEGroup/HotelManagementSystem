@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -44,7 +45,9 @@ public class RoomUIPanel extends JPanel {
 	private AddListener addListener;
 	private EditListener editListener;
 	private RoomSelectedListener roomSelectedListener;
-	List<RoomVO> rooms;
+	private List<RoomVO> rooms;
+	private Color panelColor;
+	private Font font;
 	
 	/**
 	 * 初始化录入客房界面面板
@@ -63,18 +66,23 @@ public class RoomUIPanel extends JPanel {
 		this.setButtonPanel();
 	}
 	
+	public void setFontAndColor(){
+		panelColor = UIConstants.JFRAME;
+		font = UIConstants.FONT_16;
+	}
+	
 	/**
 	 * 设置面板
 	 */
 	public void setPanel(){
 		jpRoom = new JPanel();
 		jpRoom.setBounds(0, 0, 1080, 642);
-		jpRoom.setBackground(UIConstants.JFRAME);
+		jpRoom.setBackground(panelColor);
 		jpRoom.setLayout(null);
 		
 		jpButton = new JPanel();
 		jpButton.setBounds(0, 642, 1080, 80);
-		jpButton.setBackground(UIConstants.JFRAME);
+		jpButton.setBackground(panelColor);
 		jpButton.setLayout(null);
 		
 		this.add(jpRoom);
@@ -90,7 +98,7 @@ public class RoomUIPanel extends JPanel {
 			rooms= roomController.findByHotelID(theHotel.id);
 		} catch (RoomNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "您的酒店尚未录入客房！", "提示", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		roomSelectedListener = new RoomSelectedListener(this);
@@ -99,7 +107,7 @@ public class RoomUIPanel extends JPanel {
 		
 		jtRoom = new JTable(roomTableModel);
 		jtRoom.setBackground(UIConstants.JFRAME);
-		jtRoom.setFont(new Font("方正兰亭超细黑简体",Font.PLAIN,16));
+		jtRoom.setFont(font);
 		jtRoom.setRowHeight(40);
 		jtRoom.setShowVerticalLines(false);
 		jtRoom.addMouseListener(roomSelectedListener);
@@ -109,7 +117,7 @@ public class RoomUIPanel extends JPanel {
 		jthOrderList.setBackground(UIConstants.JZONE);
 		jthOrderList.setEnabled(false);
 		jthOrderList.setBorder(new EmptyBorder(0,0,0,0));
-		jthOrderList.setFont(new Font("方正兰亭超细黑简体", Font.PLAIN, 16));
+		jthOrderList.setFont(font);
 		
 		jspRoom = new JScrollPane(jtRoom);
 		jspRoom.setBounds(10, 10, 1060, 622);

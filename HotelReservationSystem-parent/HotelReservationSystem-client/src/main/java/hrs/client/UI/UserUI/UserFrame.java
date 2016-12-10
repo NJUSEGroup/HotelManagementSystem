@@ -31,7 +31,8 @@ public class UserFrame extends JFrame{
 	private JPanel hotelPanel;
 	private JPanel hotelInfoPanel;
 	
-	JPanel cardPanel = new JPanel();
+	public CardLayout card;
+	public JPanel cardPanel;
 	
 	private UserVO userVO;
 	private String username;
@@ -48,7 +49,8 @@ public class UserFrame extends JFrame{
 		
 		
 		
-		CardLayout card=new CardLayout();
+		card=new CardLayout();
+		cardPanel = new JPanel();
 		cardPanel.setLayout(card);
 		cardPanel.setBounds(263,0,1103,768);
 		cardPanel.add("userInfoPanel",userInfoPanel);
@@ -59,10 +61,10 @@ public class UserFrame extends JFrame{
 		card.show(cardPanel, "hotelPanel");
 	
 		
-		MenuLabelListenerFactory.getListener().setCard(card,cardPanel);
+		
 		
 		//设置左侧面板
-		leftPanel = new LeftPanel(userVO);
+		leftPanel = new LeftPanel(userVO,this);
 		this.add(leftPanel);
 		
 
