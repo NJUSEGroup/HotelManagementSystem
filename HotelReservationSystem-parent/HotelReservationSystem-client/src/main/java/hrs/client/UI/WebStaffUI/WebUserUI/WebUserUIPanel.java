@@ -1,8 +1,6 @@
 package hrs.client.UI.WebStaffUI.WebUserUI;
 
 import javax.swing.JPanel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -36,13 +34,8 @@ public class WebUserUIPanel extends JPanel {
 	public WebUserUIPanel(ShowUserInfoPanel showUserInfoPanel) {
 		this.showUserInfoPanel = showUserInfoPanel;
 		init();
-		this.add(showUserInfoPanel);
-		setLayout(null);
-		add(jlUserSearch);
-		add(jtextUsername);
-		add(jbConfirm);
-		add(jbModify);
-		showUserInfoPanel.setBounds(5, 80, 1068, 623);
+		this.add(showUserInfoPanel);	
+		showUserInfoPanel.setBounds(5, 80, 1068, 430);
 		// showUserinfo(showUserInfoPanel);
 	}
 
@@ -55,19 +48,25 @@ public class WebUserUIPanel extends JPanel {
 		jlUserSearch.setFont(UIConstants.JLABEL_FONT);
 
 		jtextUsername = new JTextField();
-		jtextUsername.setBounds(175, 37, 217, 38);
+		jtextUsername.setBounds(175, 37, 253, 38);
 		jtextUsername.setColumns(10);
 
 		jbConfirm = new HMSBlueButton("搜索");
-		jbConfirm.setBounds(454, 37, 78, 34);
+		jbConfirm.setBounds(490, 37, 80, 34);
 		confirmMouseListener = new SearchUserConfirmMouseListener(this);
 		jbConfirm.addMouseListener(confirmMouseListener);
 
 		jbModify = new HMSBlueButton("修改");
-		jbModify.setBounds(899, 597, 90, 40);
+		jbModify.setBounds(850, 586, 90, 40);
 		jbModify.setFont(UIConstants.FONT_21);
 		modifyUserInfoMouseListener = new ModifyUserInfoMouseListener(this);
 		jbModify.addMouseListener(modifyUserInfoMouseListener);
+		
+		setLayout(null);
+		add(jlUserSearch);
+		add(jtextUsername);
+		add(jbConfirm);
+		add(jbModify);
 	}
 
 	public UserVO searchUserByUsername() {

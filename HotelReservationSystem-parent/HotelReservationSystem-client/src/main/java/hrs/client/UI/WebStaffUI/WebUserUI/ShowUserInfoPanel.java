@@ -8,9 +8,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.text.ParseException;
+import java.util.Date;
 
 import javax.swing.JTextField;
 
+import hrs.client.util.DateChoosePanel;
 import hrs.client.util.UIConstants;
 import hrs.common.VO.UserVO;
 import hrs.common.util.DateHelper;
@@ -29,7 +31,7 @@ public class ShowUserInfoPanel extends JPanel {
 	private JLabel jlCredit;
 	private JTextField jtextPassword;
 	private JTextField jtextRealName;
-	private JTextField jtextBirthday;
+	private DateChoosePanel jtextBirthdayShow;
 	private JTextField jtextPhone;
 	private JLabel jlCreditvalue;
 	private JLabel jlUsernameShow;
@@ -43,7 +45,7 @@ public class ShowUserInfoPanel extends JPanel {
 	}
 
 	public void init() {
-		this.setSize(1068, 523);
+		this.setSize(1068, 430);
 		this.setBackground(new Color(211, 237, 249));
 
 		jlUsername = new JLabel("用户名");
@@ -75,29 +77,29 @@ public class ShowUserInfoPanel extends JPanel {
 		jlCredit.setFont(UIConstants.FONT_18);
 
 		jtextPassword = new JTextField();
-		jtextPassword.setBounds(171, 89, 217, 38);
+		jtextPassword.setBounds(171, 89, 253, 38);
 		jtextPassword.setColumns(10);
 
 		jtextRealName = new JTextField();
-		jtextRealName.setBounds(171, 145, 217, 38);
+		jtextRealName.setBounds(171, 145, 253, 38);
 		jtextRealName.setColumns(10);
 
-		jtextBirthday = new JTextField();
-		jtextBirthday.setBounds(171, 201, 217, 38);
-		jtextBirthday.setColumns(10);
+		jtextBirthdayShow = new DateChoosePanel();
+		jtextBirthdayShow.changeTobirth();
+		jtextBirthdayShow.setBounds(171, 208, 253, 38);
 
 		jtextPhone = new JTextField();
-		jtextPhone.setBounds(171, 257, 217, 38);
+		jtextPhone.setBounds(171, 257, 253, 38);
 		jtextPhone.setColumns(10);
 
 		jlUsernameShow = new JLabel();
-		jlUsernameShow.setBounds(171, 36, 217, 38);
+		jlUsernameShow.setBounds(171, 36, 253, 38);
 		
 		jlEnterpriseShow = new JLabel();
-		jlEnterpriseShow.setBounds(171, 313, 217, 38);
+		jlEnterpriseShow.setBounds(171, 313, 253, 38);
 		
 		jlCreditvalue = new JLabel();
-		jlCreditvalue.setBounds(171, 369, 217, 38);
+		jlCreditvalue.setBounds(171, 369, 253, 38);
 		
 		setLayout(null);
 		
@@ -113,7 +115,7 @@ public class ShowUserInfoPanel extends JPanel {
 		add(jlEnterpriseShow);
 		add(jtextRealName);
 		add(jtextPassword);
-		add(jtextBirthday);
+		add(jtextBirthdayShow);
 		add(jtextPhone);
 	}
 
@@ -130,16 +132,7 @@ public class ShowUserInfoPanel extends JPanel {
 	}
 
 	public java.util.Date getBirthday() {
-		String string = jtextBirthday.getText();
-		// System.out.println(jtextBirthday.getText());
-		java.util.Date date = null;
-		try {
-			date = DateHelper.parse(string);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(null, "请输入正确的日期格式", "Error", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		}
+		Date date = jtextBirthdayShow.getDate();
 		return date;
 	}
 
@@ -152,7 +145,7 @@ public class ShowUserInfoPanel extends JPanel {
 		jlUsernameShow.setText(userVO.username);
 		jtextPassword.setText(userVO.password);
 		jtextRealName.setText(userVO.name);
-		jtextBirthday.setText(DateHelper.format(userVO.birthDate));
+		jtextBirthdayShow.setDate(userVO.birthDate);
 		jtextPhone.setText(userVO.phone);
 		jlEnterpriseShow.setText(userVO.enterprise);
 		jlCreditvalue.setText(userVO.credit + "");

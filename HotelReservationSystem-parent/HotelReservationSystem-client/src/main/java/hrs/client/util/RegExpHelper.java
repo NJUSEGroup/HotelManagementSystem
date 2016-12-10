@@ -44,5 +44,6 @@ public class RegExpHelper {
 	public static void main(String[] args) {
 		System.out.println(RegExpHelper.matchUsernameAndPWD("12siWSsa"));
 		System.out.println(RegExpHelper.matchOnlyNum("123s"));
+		System.out.println(RegExpHelper.matchOnlyNum("0.23333"));
 	}
 }

@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.CancelModifySpecialPeriodDiscountListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.ConfirmModifySpecialPeriodListener;
+import hrs.client.util.DateChoosePanel;
 import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.VO.WebDiscountVO;
@@ -26,8 +27,10 @@ public class SpecialPeriodDialog extends JDialog {
 	 */
 	private static final long serialVersionUID = -7392840371079479208L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField jtextBeginTime;
-	private JTextField jtextEndTime;
+//	private JTextField jtextBeginTime;
+//	private JTextField jtextEndTime;
+	private DateChoosePanel jtextBeginTime;
+	private DateChoosePanel jtextEndTime;
 	private JTextField jtextDiscount;
 	private HMSBlueButton jbConfirmModify, jbCancalModify;
 	private JLabel jlBeginTime;
@@ -50,7 +53,6 @@ public class SpecialPeriodDialog extends JDialog {
 		webDiscountVO = webDiscountPanel.getSelected();
 		// System.out.println(webDiscountVO);
 
-		// getContentPane().setBackground(UIConstants.JFRAME);
 		setTitle("特定期间专属折扣修改");
 		setBounds(100, 100, 420, 310);
 		this.setResizable(false);
@@ -62,45 +64,43 @@ public class SpecialPeriodDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 
 		jlBeginTime = new JLabel("开始时间");
-		jlBeginTime.setBounds(103, 42, 61, 16);
+		jlBeginTime.setBounds(56, 37, 61, 16);
 		contentPanel.add(jlBeginTime);
 
 		jlEndTime = new JLabel("结束时间");
-		jlEndTime.setBounds(103, 98, 61, 16);
+		jlEndTime.setBounds(56, 93, 61, 16);
 		contentPanel.add(jlEndTime);
 
 		jlDiscount = new JLabel("折扣信息");
-		jlDiscount.setBounds(103, 154, 61, 16);
+		jlDiscount.setBounds(56, 154, 61, 16);
 		contentPanel.add(jlDiscount);
 
-		jtextBeginTime = new JTextField();
-		jtextBeginTime.setBounds(205, 37, 130, 26);
+		jtextBeginTime = new DateChoosePanel();
+		jtextBeginTime.setBounds(144, 34, 249, 26);
 		contentPanel.add(jtextBeginTime);
-		jtextBeginTime.setColumns(10);
-		jtextBeginTime.setText(DateHelper.format((webDiscountVO.beginTime)));
+		jtextBeginTime.setDate(webDiscountVO.beginTime);
 
-		jtextEndTime = new JTextField();
-		jtextEndTime.setBounds(205, 93, 130, 26);
+		jtextEndTime = new DateChoosePanel();
+		jtextEndTime.setBounds(144, 90, 249, 26);
 		contentPanel.add(jtextEndTime);
-		jtextEndTime.setColumns(10);
-		jtextEndTime.setText(DateHelper.format((webDiscountVO.endTime)));
+		jtextEndTime.setDate(webDiscountVO.endTime);
 
 		jtextDiscount = new JTextField();
-		jtextDiscount.setBounds(205, 149, 130, 26);
+		jtextDiscount.setBounds(144, 149, 249, 26);
 		contentPanel.add(jtextDiscount);
 		jtextDiscount.setColumns(10);
 		jtextDiscount.setText(webDiscountVO.discount + "");
 
 		jbConfirmModify = new HMSBlueButton("确认修改");
 		jbConfirmModify.setFont(UIConstants.FONT_12);
-		jbConfirmModify.setBounds(103, 204, 103, 29);
+		jbConfirmModify.setBounds(87, 204, 103, 29);
 		listener = new ConfirmModifySpecialPeriodListener(webDiscountPanel, this);
 		jbConfirmModify.addMouseListener(listener);
 		contentPanel.add(jbConfirmModify);
 
 		jbCancalModify = new HMSBlueButton("取消修改");
 		jbCancalModify.setFont(UIConstants.FONT_12);
-		jbCancalModify.setBounds(218, 204, 103, 29);
+		jbCancalModify.setBounds(235, 204, 103, 29);
 		contentPanel.add(jbCancalModify);
 		cancelListener = new CancelModifySpecialPeriodDiscountListener(this);
 		jbCancalModify.addMouseListener(cancelListener);
@@ -108,21 +108,9 @@ public class SpecialPeriodDialog extends JDialog {
 	}
 
 	public WebDiscountVO getModifyVO() {
-		Date newBeginTime = null;
-		Date newEndTime = null;
-		try {
-			newBeginTime = DateHelper.parse(jtextBeginTime.getText());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(null, "请输入正确的日期格式", "Error", JOptionPane.ERROR_MESSAGE);
-		}
-		try {
-			newEndTime = DateHelper.parse(jtextEndTime.getText());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(null, "请输入正确的日期格式", "Error", JOptionPane.ERROR_MESSAGE);
-		}
-		double newDiscount = Double.parseDouble(jtextDiscount.getText());
+		Date newBeginTime = jtextBeginTime.getDate();
+		Date newEndTime = jtextEndTime.getDate();
+		double newDiscount = Double.parseDouble(DoubleFormat.format(jtextDiscount.getText()));
 		webDiscountVO.beginTime = newBeginTime;
 		webDiscountVO.endTime = newEndTime;
 		webDiscountVO.discount = newDiscount;

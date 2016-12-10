@@ -62,7 +62,7 @@ public class WebOrderPanel extends JPanel {
 		// System.out.println(orderList);
 
 		jbRevoke = new HMSBlueButton("撤销");
-		jbRevoke.setBounds(906, 667, 90, 40);
+		jbRevoke.setBounds(881, 643, 90, 40);
 		jbRevoke.addMouseListener(new RevokeMouseListener(this));
 
 		jlNumberOfPO = new JLabel("共" + orderList.size() + "条记录");
@@ -83,7 +83,7 @@ public class WebOrderPanel extends JPanel {
 
 		jbSearchConfirm = new HMSBlueButton("搜索");
 		jbSearchConfirm.setBounds(396, 23, 85, 29);
-		jbSearchConfirm.setFont(UIConstants.FONT_14);
+		jbSearchConfirm.setFont(UIConstants.FONT_17);
 		jbSearchConfirm.addMouseListener(new SearchConfirmMouseListener(this));
 
 		jTable = new JTable();

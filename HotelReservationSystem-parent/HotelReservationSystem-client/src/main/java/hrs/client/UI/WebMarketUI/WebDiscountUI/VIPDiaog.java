@@ -91,7 +91,7 @@ public class VIPDiaog extends JDialog {
 
 	public WebDiscountVO getModifyVO() {
 		int newVIPLevel = Integer.parseInt(jcomboBoxVIP.getSelectedItem().toString());
-		double newDiscount = Double.parseDouble(jtextDiscount.getText());
+		double newDiscount = Double.parseDouble(DoubleFormat.format(jtextDiscount.getText()));
 		webDiscountVO.VIPlevel = newVIPLevel;
 		webDiscountVO.discount = newDiscount;
 		// System.out.println(webDiscountVO);

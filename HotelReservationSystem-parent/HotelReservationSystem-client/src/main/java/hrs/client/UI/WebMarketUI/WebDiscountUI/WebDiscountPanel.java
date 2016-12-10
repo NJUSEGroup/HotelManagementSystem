@@ -23,6 +23,8 @@ import hrs.common.VO.WebDiscountVO;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class WebDiscountPanel extends JPanel {
 	/**
@@ -65,18 +67,22 @@ public class WebDiscountPanel extends JPanel {
 		this.setBackground(UIConstants.JFRAME);
 
 		jbAdd = new HMSBlueButton("添加");
-		jbAdd.setBounds(612, 665, 90, 40);
+		jbAdd.setBounds(612, 641, 90, 40);
 		jdAddWebDiscount = new AddWebDiscountDialog(this);// this
 		addMouseListener = new AddMouseListener(this);
 		jbAdd.addMouseListener(addMouseListener);
 
 		jbModify = new HMSBlueButton("修改");
-		jbModify.setBounds(751, 665, 90, 40);
+		jbModify.setBounds(751, 641, 90, 40);
 		modifyMouseListener = new ModifyMouseListener(this);
 		jbModify.addMouseListener(modifyMouseListener);
 
 		jbDelete = new HMSRedButton("删除");
-		jbDelete.setBounds(886, 665, 90, 40);
+		jbDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		jbDelete.setBounds(887, 641, 90, 40);
 		listener = new DeleteMouseListener(this);
 		jbDelete.addMouseListener(listener);
 

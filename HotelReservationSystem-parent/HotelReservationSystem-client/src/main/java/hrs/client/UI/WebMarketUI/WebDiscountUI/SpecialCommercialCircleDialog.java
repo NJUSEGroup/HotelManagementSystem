@@ -147,7 +147,7 @@ public class SpecialCommercialCircleDialog extends JDialog {
 	public WebDiscountVO getModifyVO() {
 		locations = controller.findAllLocations();
 		int j = 0, k = 0;
-		double newDiscount = Double.parseDouble(jtextDiscount.getText());
+		double newDiscount = Double.parseDouble(DoubleFormat.format(jtextDiscount.getText()));
 		String newLocation = (String) jcomboBoxLocation.getSelectedItem();
 		String newCommercialCircle = (String) jcomboBoxCommercialCircle.getSelectedItem();
 		for (j = 0; j < locations.size(); j++) {

@@ -84,6 +84,8 @@ public class AddWebDiscountDialog extends JDialog {
 		this.setTitle("酒店促销策略添加");
 		this.setBounds(100, 100, 600, 450);
 		this.setResizable(false);
+		this.setLocationRelativeTo(null);
+		this.setModal(true);
 
 		getContentPane().setLayout(new BorderLayout());
 		jpAdd = new JPanel();
@@ -175,6 +177,7 @@ public class AddWebDiscountDialog extends JDialog {
 		setUnableAndCombox();
 
 		initWebDiscountDialog();
+
 		jpAdd.setLayout(null);
 		jpAdd.add(jlDiscount);
 		jpAdd.add(jlCommercialCircle);
@@ -198,22 +201,27 @@ public class AddWebDiscountDialog extends JDialog {
 		jcomboBoxType.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				if (jcomboBoxType.getSelectedItem().toString().equals("特定商圈专属折扣")) {
-					jcomboBoxLocation.addItemListener(new ItemListener() {
-						@Override
-						public void itemStateChanged(ItemEvent e) {
-							// TODO Auto-generated method stub
-							locationIndex = jcomboBoxLocation.getSelectedIndex();
-							location = locs.get(locationIndex);
-							commercialCircleList = controller.findCircleByLoc(location.id);
-							Object[] circleName = new Object[commercialCircleList.size()];
-							for (int i = 0; i != commercialCircleList.size(); ++i) {
-								circleName[i] = commercialCircleList.get(i).name;
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					if (jcomboBoxType.getSelectedItem().toString().equals("特定商圈专属折扣")) {
+						jcomboBoxLocation.addItemListener(new ItemListener() {
+							@Override
+							public void itemStateChanged(ItemEvent e1) {
+								// TODO Auto-generated method stub
+								locationIndex = jcomboBoxLocation.getSelectedIndex();
+								System.out.println(locationIndex);
+								location = locs.get(locationIndex);
+								commercialCircleList = controller.findCircleByLoc(location.id);
+								Object[] circleName = new Object[commercialCircleList.size()];
+
+								for (int i = 0; i != commercialCircleList.size(); ++i) {
+									circleName[i] = commercialCircleList.get(i).name;
+								}
+
+								DefaultComboBoxModel<Object> model = new DefaultComboBoxModel<>(circleName);
+								jcomboBoxCommercialCircle.setModel(model);
 							}
-							DefaultComboBoxModel<Object> model = new DefaultComboBoxModel<>(circleName);
-							jcomboBoxCommercialCircle.setModel(model);
-						}
-					});
+						});
+					}
 				}
 			}
 		});
@@ -279,7 +287,7 @@ public class AddWebDiscountDialog extends JDialog {
 					|| jcomboBoxLocation.getSelectedIndex() == -1) {
 				JOptionPane.showMessageDialog(null, "请完整填写折扣信息！", "Error", JOptionPane.ERROR_MESSAGE);
 			} else {
-				double commercialCircleDiscount = Double.parseDouble(jtextDiscount.getText());
+				double commercialCircleDiscount = Double.parseDouble(DoubleFormat.format(jtextDiscount.getText()));
 				locationIndex = jcomboBoxLocation.getSelectedIndex();
 				location = locs.get(locationIndex);
 				int commercialCircleIndex = jcomboBoxCommercialCircle.getSelectedIndex();
@@ -292,7 +300,7 @@ public class AddWebDiscountDialog extends JDialog {
 			if (jtextDiscount.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "请完整填写折扣信息！", "Error", JOptionPane.ERROR_MESSAGE);
 			} else {
-				double specialPeriodDiscount = Double.parseDouble(jtextDiscount.getText());
+				double specialPeriodDiscount = Double.parseDouble(DoubleFormat.format(jtextDiscount.getText()));
 				Date discountBeginTime = jtextBegintime.getDate();
 				Date discountEndTime = jtextEndtime.getDate();
 				addVO = new WebDiscountVO(specialPeriodDiscount, WebsiteDiscountType.SpecialPeriod, null, null,
@@ -304,7 +312,7 @@ public class AddWebDiscountDialog extends JDialog {
 				JOptionPane.showMessageDialog(null, "请完整填写折扣信息！", "Error", JOptionPane.ERROR_MESSAGE);
 			} else {
 				int VIPLevel = Integer.parseInt(jcomboBoxVIPLevel.getSelectedItem().toString());
-				double vipDiscount = Double.parseDouble(jtextDiscount.getText());
+				double vipDiscount = Double.parseDouble(DoubleFormat.format(jtextDiscount.getText()));
 				addVO = new WebDiscountVO(vipDiscount, WebsiteDiscountType.VIP, null, null, null, null, VIPLevel);
 			}
 			break;
