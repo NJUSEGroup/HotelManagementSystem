@@ -43,6 +43,8 @@ public class LoginFrame extends JFrame {
 	private ILoginController loginController = ControllerFactory.getLoginController();
 	private int HEIGHT = 506;
 	private int WIDTH = 1100;
+	private int PANEL_W = 420;
+	private int PANEL_X = WIDTH - PANEL_W - 50;
 	private BGPanel backGroundPanel;
 	private CardLayout cardLayout;
 
@@ -107,7 +109,7 @@ public class LoginFrame extends JFrame {
 		cardLayout.show(contentPane, "login");
 		
 		
-		contentPane.setBounds(630, 100, 420, HEIGHT - 170);
+		contentPane.setBounds(PANEL_X, 100, PANEL_W, HEIGHT - 170);
 	
 		backGroundPanel.add(contentPane);
 		
@@ -120,15 +122,15 @@ public class LoginFrame extends JFrame {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(null);
 		buttonPanel.setBackground(Color.white);
-		buttonPanel.setBounds(630, 40, 420, 60);
+		buttonPanel.setBounds(PANEL_X, 40, PANEL_W, 60);
 		backGroundPanel.add(buttonPanel);
 		
 		LoginJL loginJL = new LoginJL(this, "登录");
-		loginJL.setBounds(70,10,130,50);
+		loginJL.setBounds(70,10,130,40);
 		buttonPanel.add(loginJL);
 		
 		RegisterJL registerJL = new RegisterJL(this, "注册");
-		registerJL.setBounds(210,10,130,50);
+		registerJL.setBounds(210,10,130,40);
 		buttonPanel.add(registerJL);
 	}
 

@@ -34,7 +34,7 @@ public class RegisterPanel extends JPanel {
 	private int JL_WIDTH = 120;
 	private int JL_HEIGHT = 30;
 	private int TEXT_WIDTH = 250;
-	private int TEXT_HEIGHT = 24;
+	private int TEXT_HEIGHT = 20;
 	private int GAP = (JL_HEIGHT-TEXT_HEIGHT)/2;
 	private int START_X = 0;
 	private int START_Y = 0;
@@ -49,6 +49,7 @@ public class RegisterPanel extends JPanel {
 	
 	private DateChoosePanel dateChoosePanel;
 	Font font = UIConstants.JLABEL_FONT;
+	Font smallF = UIConstants.FONT_16;
 	private ILoginController controller;
 	private LoginFrame frame;
 	/**
@@ -70,40 +71,48 @@ public class RegisterPanel extends JPanel {
 	}
 	private void setLabel() {
 		CommonLabel accountTypeJL = new CommonLabel("用户类型");
+		accountTypeJL.setFont(smallF);
 		accountTypeJL.setBounds(START_X, START_Y, JL_WIDTH, JL_HEIGHT);
 		add(accountTypeJL);
 		
 		CommonLabel accountJL = new CommonLabel("用户名*");
+		accountJL.setFont(smallF);
 		accountJL.setBounds(START_X, START_Y+JL_HEIGHT, JL_WIDTH, JL_HEIGHT);
 		add(accountJL);
 		
 		CommonLabel passwordJL = new CommonLabel("密码*");
+		passwordJL.setFont(smallF);
 		passwordJL.setBounds(START_X, START_Y+JL_HEIGHT*2, JL_WIDTH, JL_HEIGHT);
 		add(passwordJL);
 		
 		CommonLabel confirmpassJL = new CommonLabel("确认密码*");
+		confirmpassJL.setFont(smallF);
 		confirmpassJL.setBounds(START_X, START_Y+JL_HEIGHT*3, JL_WIDTH, JL_HEIGHT);
 		add(confirmpassJL);
 		
 		CommonLabel nameJL = new CommonLabel("真实姓名*");
+		nameJL.setFont(smallF);
 		nameJL.setBounds(START_X, START_Y+JL_HEIGHT*4, JL_WIDTH, JL_HEIGHT);
 		add(nameJL);
 		
 		CommonLabel birthdayJL = new CommonLabel("生日");
+		birthdayJL.setFont(smallF);
 		birthdayJL.setBounds(START_X, START_Y+JL_HEIGHT*5, JL_WIDTH, JL_HEIGHT+10);
 		add(birthdayJL);
 		
 		CommonLabel phoneJL = new CommonLabel("联系方式*");
+		phoneJL.setFont(smallF);
 		phoneJL.setBounds(START_X, START_Y+JL_HEIGHT*6+10, JL_WIDTH, JL_HEIGHT);
 		add(phoneJL);
 		
 		CommonLabel enterpriseJL = new CommonLabel("企业名称");
+		enterpriseJL.setFont(smallF);
 		enterpriseJL.setBounds(START_X, START_Y+JL_HEIGHT*7+10, JL_WIDTH, JL_HEIGHT);
 		add(enterpriseJL);
 	}
 	private void setInputField() {
 		typeBox = new JComboBox<>();
-		typeBox.setFont(font);
+		typeBox.setFont(smallF);
 		typeBox.addItem("普通用户");
 		typeBox.addItem("企业用户");
 		typeBox.setBounds(START_X+JL_WIDTH+30, START_Y+GAP, TEXT_WIDTH, TEXT_HEIGHT);
@@ -111,22 +120,22 @@ public class RegisterPanel extends JPanel {
 		add(typeBox);
 		
 		usernameField = new JTextField();
-		usernameField.setFont(font);
+		usernameField.setFont(smallF);
 		usernameField.setBounds(START_X+JL_WIDTH+30, START_Y+GAP+JL_HEIGHT, TEXT_WIDTH, TEXT_HEIGHT);
 		add(usernameField);
 		
 		passwordField = new JPasswordField();
-		passwordField.setFont(font);
+		passwordField.setFont(smallF);
 		passwordField.setBounds(START_X+JL_WIDTH+30, START_Y+GAP+JL_HEIGHT*2, TEXT_WIDTH, TEXT_HEIGHT);
 		add(passwordField);
 		
 		confirmpassField = new JPasswordField();
-		confirmpassField.setFont(font);
+		confirmpassField.setFont(smallF);
 		confirmpassField.setBounds(START_X+JL_WIDTH+30, START_Y+GAP+JL_HEIGHT*3, TEXT_WIDTH, TEXT_HEIGHT);
 		add(confirmpassField);
 		
 		nameField = new JTextField();
-		nameField.setFont(font);
+		nameField.setFont(smallF);
 		nameField.setBounds(START_X+JL_WIDTH+30, START_Y+GAP+JL_HEIGHT*4, TEXT_WIDTH, TEXT_HEIGHT);
 		add(nameField);
 		
@@ -138,12 +147,12 @@ public class RegisterPanel extends JPanel {
 		
 		
 		phoneField = new JTextField();
-		phoneField.setFont(font);
+		phoneField.setFont(smallF);
 		phoneField.setBounds(START_X+JL_WIDTH+30, START_Y+GAP+JL_HEIGHT*6+10, TEXT_WIDTH, TEXT_HEIGHT);
 		add(phoneField);
 		
 		enterpriseField = new JTextField();
-		enterpriseField.setFont(font);
+		enterpriseField.setFont(smallF);
 		enterpriseField.setBounds(START_X+JL_WIDTH+30, START_Y+GAP+JL_HEIGHT*7+10, TEXT_WIDTH, TEXT_HEIGHT);
 		add(enterpriseField);
 		enterpriseField.setEnabled(false);
