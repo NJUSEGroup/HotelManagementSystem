@@ -5,7 +5,10 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import hrs.client.UI.HotelUI.OfflineRecordUI.OfflineRecordUIPanel;
+import hrs.client.util.RegExpHelper;
 import hrs.common.VO.OfflineRecordVO;
 
 public class SearchListener implements MouseListener{
@@ -25,10 +28,17 @@ public class SearchListener implements MouseListener{
 		
 		jpRecord.recordNotSelected();
 		
-		int id = jpRecord.getID();
-		List<OfflineRecordVO> record = new ArrayList<OfflineRecordVO>();
-		record = jpRecord.searchRecordByID(id);
-		jpRecord.refresh(record);
+		String sid = jpRecord.getID();
+		int id = 0;
+		if(!RegExpHelper.matchOnlyNum(sid)){
+			JOptionPane.showMessageDialog(null, "编号中不能包含非数字字符！", "错误", JOptionPane.ERROR_MESSAGE);
+		}
+		else{
+			id = Integer.valueOf(sid);
+			List<OfflineRecordVO> record = new ArrayList<OfflineRecordVO>();
+			record = jpRecord.searchRecordByID(id);
+			jpRecord.refresh(record);
+		}
 	}
 
 	@Override

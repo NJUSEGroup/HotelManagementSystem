@@ -196,8 +196,8 @@ public class OfflineRecordUIPanel extends JPanel {
 	 * 获得当前输入的线下记录编号
 	 * @return
 	 */
-	public int getID(){
-		return Integer.valueOf(jtfInput.getText());
+	public String getID(){
+		return jtfInput.getText();
 	}
 	
 	/**
@@ -251,12 +251,14 @@ public class OfflineRecordUIPanel extends JPanel {
 	 */
 	public void recordSelected(){
 		String checkoutTime = "";
-		OfflineRecordVO record = null;
+		OfflineRecordVO record = new OfflineRecordVO();
 		if(jtRecord.getSelectedRow() != -1){
 			record = this.getSelectedRecord();
 			
-			checkoutTime = record.checkoutTime.toString();
-			if(checkoutTime.equals(null)){
+			if(record.checkoutTime!=null){
+				checkoutTime = record.checkoutTime.toString();
+			}
+			else{
 				checkoutTime = "";
 			}
 			

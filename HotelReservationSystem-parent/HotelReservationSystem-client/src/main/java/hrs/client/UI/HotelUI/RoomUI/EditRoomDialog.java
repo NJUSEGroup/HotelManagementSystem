@@ -18,6 +18,7 @@ import hrs.client.UI.HotelUI.RoomUI.Listener.EditCancelListener;
 import hrs.client.UI.HotelUI.RoomUI.Listener.EditConfirmListener;
 import hrs.client.util.HMSBlueButton;
 import hrs.client.util.HMSGrayButton;
+import hrs.client.util.RegExpHelper;
 import hrs.common.VO.RoomVO;
 import hrs.common.util.type.RoomType;
 
@@ -166,6 +167,9 @@ public class EditRoomDialog extends JDialog {
 		}
 		else if(((Integer) jsRoomNum.getValue()).intValue()==0){
 			JOptionPane.showMessageDialog(this, "房间数量不能为零！", "错误", JOptionPane.ERROR_MESSAGE);
+		}
+		else if(!RegExpHelper.matchOnlyNum(jtfRoomMoney.getText())){
+			JOptionPane.showMessageDialog(this, "原始价格中不能包含非数字字符！", "错误", JOptionPane.ERROR_MESSAGE);
 		}
 		else if(Double.valueOf(jtfRoomMoney.getText())<0){
 			JOptionPane.showMessageDialog(this, "原始价格不能为负数！", "错误", JOptionPane.ERROR_MESSAGE);
