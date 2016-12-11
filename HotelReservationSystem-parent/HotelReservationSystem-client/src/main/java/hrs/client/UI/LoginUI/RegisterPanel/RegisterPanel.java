@@ -204,6 +204,7 @@ public class RegisterPanel extends JPanel {
 			try {
 				controller.register(userVO);
 				JOptionPane.showMessageDialog(null, "注册成功!", "成功", JOptionPane.INFORMATION_MESSAGE);
+				cancel();
 				frame.showLogin();
 			} catch (UserExistedException e) {
 				JOptionPane.showMessageDialog(null, "用户名已存在!", "提示", JOptionPane.INFORMATION_MESSAGE);
@@ -214,10 +215,15 @@ public class RegisterPanel extends JPanel {
 			if(dateChoosePanel.getDate()!=null)
 				userVO.birthDate = dateChoosePanel.getDate();
 			userVO.type = UserType.Enterprise;
+			if(enterpriseField.getText().equals("")){
+				JOptionPane.showMessageDialog(null, "企业名称不得为空!", "提示", JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
 			userVO.enterprise = enterpriseField.getText();
 			try {
 				controller.register(userVO);
 				JOptionPane.showMessageDialog(null, "注册成功!", "成功", JOptionPane.INFORMATION_MESSAGE);
+				cancel();
 				frame.showLogin();
 			} catch (UserExistedException e) {
 				JOptionPane.showMessageDialog(null, "用户名已存在!", "提示", JOptionPane.INFORMATION_MESSAGE);

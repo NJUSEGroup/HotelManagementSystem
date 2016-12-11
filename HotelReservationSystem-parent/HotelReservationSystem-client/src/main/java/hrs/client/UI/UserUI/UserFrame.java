@@ -6,6 +6,8 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import org.springframework.web.bind.annotation.InitBinder;
+
 import hrs.client.UI.UserUI.CreditInfoUI.CreditInfoPanel;
 import hrs.client.UI.UserUI.HotelInfoUI.HotelInfoPanel;
 import hrs.client.UI.UserUI.HotelSearchUI.HotelPanel;
@@ -25,11 +27,11 @@ public class UserFrame extends JFrame{
 	private int height, width;
 	private JPanel leftPanel ;
 	
-	private JPanel userInfoPanel ;
-	private JPanel creditInfoPanel;
-	private JPanel orderInfoPanel;
-	private JPanel hotelPanel;
-	private JPanel hotelInfoPanel;
+	private UserInfoPanel userInfoPanel ;
+	private CreditInfoPanel creditInfoPanel;
+	private OrderInfoPanel orderInfoPanel;
+	private HotelPanel hotelPanel;
+	private HotelInfoPanel hotelInfoPanel;
 	
 	public CardLayout card;
 	public JPanel cardPanel;
@@ -38,55 +40,7 @@ public class UserFrame extends JFrame{
 	private String username;
 	
 	public UserFrame(UserVO userVO){
-		
-		this.username = userVO.username;
-		userInfoPanel = new UserInfoPanel(username);
-		creditInfoPanel = new CreditInfoPanel(username);
-		orderInfoPanel = new OrderInfoPanel(userVO);
-		hotelPanel = new HotelPanel(userVO);
-		hotelInfoPanel = new HotelInfoPanel(userVO);
-		//初始化操作
-		Init();
-		
-		
-		
-		card=new CardLayout();
-		cardPanel = new JPanel();
-		cardPanel.setLayout(card);
-		cardPanel.setBounds(263,0,1103,768);
-		cardPanel.add("userInfoPanel",userInfoPanel);
-		cardPanel.add("creditInfoPanel",creditInfoPanel);
-		cardPanel.add("orderInfoPanel",orderInfoPanel);
-		cardPanel.add("hotelPanel",hotelPanel);
-		cardPanel.add("hotelInfoPanel", hotelInfoPanel);
-		card.show(cardPanel, "hotelPanel");
-	
-		
-		
-		
-		//设置左侧面板
-		leftPanel = new LeftPanel(userVO,this);
-		this.add(leftPanel);
-		
-
-		this.add(cardPanel);
-
-		
-	}
-	
-//	public static void main(String[] args){
-//		IUserController controller = ControllerFactory.getUserController();
-//		UserVO vo;
-//		try {
-//			vo = controller.findUserByUsername("admin");
-//			new UserFrame(vo);
-//		} catch (UserNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//	}
-	private void Init() {
+		this.userVO = userVO;
 		height = 768;
 		width = 1366;
 		this.setSize(width,height);
@@ -99,9 +53,67 @@ public class UserFrame extends JFrame{
 		//空布局
 		this.setLayout(null);
 		
-		
-//		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
 		
+		this.username = userVO.username;
+		
+		card=new CardLayout();
+		cardPanel = new JPanel();
+		cardPanel.setLayout(card);
+		cardPanel.setBounds(263,0,1103,768);
+		searchHotel();
+		//设置左侧面板
+		leftPanel = new LeftPanel(userVO,this);
+		this.add(leftPanel);
+		
+
+		this.add(cardPanel);
+
+		
 	}
+	
+	public static void main(String[] args){
+		IUserController controller = ControllerFactory.getUserController();
+		UserVO vo;
+		try {
+			vo = controller.findUserByUsername("admin");
+			new UserFrame(vo);
+		} catch (UserNotFoundException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+	public void showOrder() {
+		orderInfoPanel = new OrderInfoPanel(userVO);
+		cardPanel.add("orderInfoPanel",orderInfoPanel);
+		card.show(cardPanel, "orderInfoPanel");
+		
+	}
+	public void showUserInfo(){
+		userInfoPanel = new UserInfoPanel(userVO);
+		userInfoPanel.setFrame(this);
+		cardPanel.add("userInfoPanel",userInfoPanel);
+		card.show(cardPanel, "userInfoPanel");
+	}
+
+	public void showCredit() {
+		creditInfoPanel = new CreditInfoPanel(username);
+		cardPanel.add("creditInfoPanel",creditInfoPanel);
+		card.show(cardPanel, "creditInfoPanel");
+	}
+
+	public void searchHotel() {
+		hotelPanel = new HotelPanel(userVO);
+		cardPanel.add("hotelPanel",hotelPanel);
+		card.show(cardPanel, "hotelPanel");
+	}
+
+	public void showHotel() {
+		hotelInfoPanel = new HotelInfoPanel(userVO);
+		cardPanel.add("hotelInfoPanel",hotelInfoPanel);
+		card.show(cardPanel, "hotelInfoPanel");
+	}
+
+	
 }

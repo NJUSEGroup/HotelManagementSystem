@@ -3,6 +3,7 @@ package hrs.client.util;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 
 import java.awt.Font;
+import java.awt.Graphics;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -11,6 +12,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import android.R.integer;
 import hrs.common.util.DateHelper;
 
 /**
@@ -27,9 +29,9 @@ public class DateChoosePanel extends JPanel {
 	/**
 	 * 
 	 */
-	private JComboBox<Integer> yearBox;
-	private JComboBox<Integer> monthBox;
-	private JComboBox<Integer> dayBox;
+	public JComboBox<Integer> yearBox;
+	public JComboBox<Integer> monthBox;
+	public JComboBox<Integer> dayBox;
 	private DateChooseListener listener;
 
 	private Calendar currentTm;
@@ -57,7 +59,7 @@ public class DateChoosePanel extends JPanel {
 		yearBox.addItemListener(listener);
 		yearBox.setFont(font);
 		yearBox.setBounds(0, 5, 70, 20);
-		yearBox.setSelectedItem(currentTm.get(Calendar.YEAR));
+//		yearBox.setSelectedItem(currentTm.get(Calendar.YEAR));
 		add(yearBox);
 
 		monthBox = new JComboBox<>();
@@ -66,7 +68,7 @@ public class DateChoosePanel extends JPanel {
 		}
 		monthBox.setFont(font);
 		monthBox.setBounds(100, 5, 50, 20);
-		monthBox.setSelectedItem(currentTm.get(Calendar.MONTH) + 1);
+//		monthBox.setSelectedItem(currentTm.get(Calendar.MONTH) + 1);
 		monthBox.addItemListener(listener);
 		add(monthBox);
 
@@ -77,9 +79,14 @@ public class DateChoosePanel extends JPanel {
 		}
 		dayBox.setFont(font);
 		dayBox.setBounds(180, 5, 50, 20);
-		dayBox.setSelectedItem(currentTm.get(Calendar.DATE));
+//		dayBox.setSelectedItem(currentTm.get(Calendar.DATE));
 		add(dayBox);
 
+	}
+	public void setCurrent(){
+		yearBox.setSelectedItem(currentTm.get(Calendar.YEAR));
+		monthBox.setSelectedItem(currentTm.get(Calendar.MONTH));
+		dayBox.setSelectedItem(currentTm.get(Calendar.DATE));
 	}
 
 	private void setLabel() {
@@ -101,18 +108,21 @@ public class DateChoosePanel extends JPanel {
 	}
 
 	public void change() {
-		// 只要一项为0，就是不选择
-		if ((Integer) yearBox.getSelectedItem() == 0 || (Integer) monthBox.getSelectedItem() == 0
-				|| (Integer) dayBox.getSelectedItem() == 0) {
+		
+		if ((Integer) yearBox.getSelectedIndex() == -1 || (Integer) monthBox.getSelectedIndex() == -1
+				|| (Integer) dayBox.getSelectedIndex() == -1) {
 			return;
 		}
 		currentTm.set(Calendar.YEAR, (Integer) yearBox.getSelectedItem());
+		System.out.println("有改变"+monthBox.getSelectedItem());
 		currentTm.set(Calendar.MONTH, (Integer) monthBox.getSelectedItem() - 1);
 		dayBox.removeAllItems();
 		int MaxDay = currentTm.getActualMaximum(Calendar.DATE);
 		for (Integer i = 1; i <= MaxDay; i++) {
 			dayBox.addItem(i);
 		}
+		
+		
 
 	}
 
@@ -127,6 +137,7 @@ public class DateChoosePanel extends JPanel {
 		dayBox.setSelectedIndex(-1);
 	}
 
+	
 	/**
 	 * 得到当前panel选择的日期
 	 * 
@@ -137,15 +148,22 @@ public class DateChoosePanel extends JPanel {
 				||  dayBox.getSelectedIndex() == -1) {
 			return null;
 		}
-		int year = (Integer) yearBox.getSelectedItem();
-		int month = (Integer) monthBox.getSelectedItem() - 1;
-		int day = (Integer) dayBox.getSelectedItem();
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(year, month, day, 0, 0, 0);
-//		System.out.println(DateHelper.format(calendar.getTime()));
-		return calendar.getTime();
+		System.out.println("运行了getDate");
+		currentTm.set(Calendar.YEAR, (Integer) yearBox.getSelectedItem());
+		System.out.println((Integer) yearBox.getSelectedItem());
+		currentTm.set(Calendar.MONTH, ((Integer)monthBox.getSelectedItem()) - 1);
+		System.out.println((Integer)monthBox.getSelectedItem());
+		currentTm.set(Calendar.DATE, (Integer) dayBox.getSelectedItem());
+		System.out.println((Integer) dayBox.getSelectedItem());
+		System.out.println(DateHelper.format(currentTm.getTime()));
+		return currentTm.getTime();
 	}
-
+	
+//	public void get(){
+//		System.out.println("运行了get");
+//		System.out.println(currentTm.get(Calendar.MONTH));
+//		System.out.println(DateHelper.format(currentTm.getTime()));
+//	}
 	/**
 	 * 设置panel显示的时间
 	 * 
@@ -155,6 +173,11 @@ public class DateChoosePanel extends JPanel {
 		String theDate = (new SimpleDateFormat("yyyy/MM/dd")).format(date);
 		String[] time = theDate.split("/");
 
+//		Calendar calendar = Calendar.getInstance();
+//		calendar.setTime(date);
+//		yearBox.setSelectedItem(calendar.get(Calendar.YEAR));
+//		monthBox.setSelectedItem(calendar.get(Calendar.MONTH)+1);
+//		dayBox.setSelectedItem(calendar.get(Calendar.DATE));
 		yearBox.setSelectedItem(Integer.valueOf(time[0]));
 		monthBox.setSelectedItem(Integer.valueOf(time[1]));
 		dayBox.setSelectedItem(Integer.valueOf(time[2]));

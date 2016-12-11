@@ -44,9 +44,9 @@ public class LoginFrame extends JFrame {
 	private LoginPanel loginPanel;
 	private RegisterPanel registerPanel;
 	private int HEIGHT = 506;
-	private int WIDTH = 1100;
+	private int WIDTH = 1300;
 	private int PANEL_W = 420;
-	private int PANEL_X = WIDTH - PANEL_W - 50;
+	private int PANEL_X = WIDTH - PANEL_W - 70;
 	private BGPanel backGroundPanel;
 	private CardLayout cardLayout;
 
@@ -157,9 +157,10 @@ public class LoginFrame extends JFrame {
 		StaffType type = staffVO.type;
 		switch (type) {
 		case HotelStaff:
-			HotelFrame hotelFrame = new HotelFrame(staffVO);
-			hotelFrame.setVisible(true);
-			this.dispose();break;
+//			HotelFrame hotelFrame = new HotelFrame(staffVO);
+//			hotelFrame.setVisible(true);
+//			this.dispose();
+			break;
 		case WebsiteAdminister:
 			WebStaffFrame  webStaffFrame= new WebStaffFrame(staffVO);
 			webStaffFrame.setVisible(true);

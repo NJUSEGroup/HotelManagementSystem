@@ -263,6 +263,9 @@ public class OrderShowPanel extends CommonPanel {
 		if(statusBox.getSelectedItem().equals("已执行")||statusBox.getSelectedItem().equals("已撤销")){
 			revokeButton.setEnabled(false);
 		}
+		if(statusBox.getSelectedItem().equals("未执行")||statusBox.getSelectedItem().equals("已撤销")||statusBox.getSelectedItem().equals("异常adad")){
+			evalueButton.setEnabled(false);
+		}
 	}
 
 	public void setButtonUnable() {
