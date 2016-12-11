@@ -238,12 +238,27 @@ public class OfflineRecordUIPanel extends JPanel {
 	}
 	
 	/**
+	 * 刷新线下记录界面
+	 */
+	public void refresh(){
+		this.refreshRecordList(this.getAllRecords());
+		this.refreshSearchTerms();
+	}
+	
+	/**
 	 * 刷新线下记录列表
 	 * @param record
 	 */
-	public void refresh(List<OfflineRecordVO> record){
+	public void refreshRecordList(List<OfflineRecordVO> record){
 		model = new OfflineRecordTableModel(record);
 		jtRecord.setModel(model);
+	}
+	
+	/**
+	 * 刷新搜索框
+	 */
+	public void refreshSearchTerms(){
+		jtfInput.setText("");
 	}
 	
 	/**

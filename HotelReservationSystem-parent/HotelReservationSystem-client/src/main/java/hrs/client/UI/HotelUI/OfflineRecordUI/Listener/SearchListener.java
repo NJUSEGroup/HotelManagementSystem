@@ -37,7 +37,7 @@ public class SearchListener implements MouseListener{
 			id = Integer.valueOf(sid);
 			List<OfflineRecordVO> record = new ArrayList<OfflineRecordVO>();
 			record = jpRecord.searchRecordByID(id);
-			jpRecord.refresh(record);
+			jpRecord.refreshRecordList(record);
 		}
 	}
 

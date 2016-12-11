@@ -206,7 +206,7 @@ public class AddRoomDialog extends JDialog {
 			JOptionPane.showMessageDialog(this, "房间数量不能为零！", "错误", JOptionPane.ERROR_MESSAGE);
 		}
 		else if(!RegExpHelper.matchOnlyNum(jtfMoney.getText())){
-			JOptionPane.showMessageDialog(this, "原始价格中不能包含非数字字符！", "错误", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "原始价格中不能包含除了小数点以外的非数字字符！", "错误", JOptionPane.ERROR_MESSAGE);
 		}
 		else if(Double.valueOf(jtfMoney.getText())<0){
 			JOptionPane.showMessageDialog(this, "原始价格不能为负数！", "错误", JOptionPane.ERROR_MESSAGE);

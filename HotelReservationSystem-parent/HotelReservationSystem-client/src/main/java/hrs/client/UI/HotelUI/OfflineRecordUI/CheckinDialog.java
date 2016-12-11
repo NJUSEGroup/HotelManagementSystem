@@ -262,7 +262,7 @@ public class CheckinDialog extends JDialog {
 		newRecord.num = Integer.valueOf((String) jcbRoomNum.getSelectedItem());
 		
 		recordController.offlineCheckin(newRecord);
-		jpRecord.refresh(jpRecord.getAllRecords());
+		jpRecord.refreshRecordList(jpRecord.getAllRecords());
 		
 		this.dispose();
 		

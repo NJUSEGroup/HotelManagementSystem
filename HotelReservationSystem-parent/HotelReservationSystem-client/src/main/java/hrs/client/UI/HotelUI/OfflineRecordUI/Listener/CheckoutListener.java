@@ -2,8 +2,11 @@ package hrs.client.UI.HotelUI.OfflineRecordUI.Listener;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import hrs.client.UI.HotelUI.OfflineRecordUI.OfflineRecordUIPanel;
+import hrs.common.VO.OfflineRecordVO;
 
 public class CheckoutListener implements MouseListener{
 
@@ -20,8 +23,13 @@ public class CheckoutListener implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if(jpRecord.isCheckoutEnable()){
-			jpRecord.checkout(jpRecord.getSelectedRecord());
-			jpRecord.refresh(jpRecord.getAllRecords());
+			OfflineRecordVO record = new OfflineRecordVO();
+			List<OfflineRecordVO> newRecord = new ArrayList<OfflineRecordVO>();
+			record = jpRecord.getSelectedRecord();
+			jpRecord.checkout(record);
+			record = jpRecord.getSelectedRecord();
+			newRecord.add(record);
+			jpRecord.refreshRecordList(newRecord);
 		}
 	}
 
