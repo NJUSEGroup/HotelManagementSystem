@@ -78,9 +78,10 @@ public class WebUserUIPanel extends JPanel {
 			try {
 				userVO = controller.findUserByUsername(username);
 			} catch (UserNotFoundException e) {
-				// TODO Auto-generated catch block				
-				JOptionPane.showMessageDialog(this, "用户不存在！", "No Such User", JOptionPane.ERROR_MESSAGE);
+				// TODO Auto-generated catch block
 				showUserInfoPanel.clear();
+				JOptionPane.showMessageDialog(null, "用户不存在！", "No Such User", JOptionPane.ERROR_MESSAGE);
+				return null;
 			}
 			return userVO;
 		}
@@ -104,7 +105,9 @@ public class WebUserUIPanel extends JPanel {
 	}
 
 	public void showUserinfo() {
-		showUserInfoPanel.inputInfo(searchUserByUsername());
+		if (searchUserByUsername() != null) {
+			showUserInfoPanel.inputInfo(searchUserByUsername());
+		}
 	}
 
 }
