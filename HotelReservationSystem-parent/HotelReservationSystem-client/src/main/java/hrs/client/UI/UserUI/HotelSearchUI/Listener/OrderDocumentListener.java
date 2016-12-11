@@ -13,19 +13,19 @@ public class OrderDocumentListener implements DocumentListener {
 
 	@Override
 	public void insertUpdate(DocumentEvent e) {
-		panel.change();
+		panel.changePeopleNum();
 
 	}
 
 	@Override
 	public void removeUpdate(DocumentEvent e) {
-		panel.change();
+		panel.changePeopleNum();
 
 	}
 
 	@Override
 	public void changedUpdate(DocumentEvent e) {
-		panel.change();
+		panel.changePeopleNum();
 
 	}
 

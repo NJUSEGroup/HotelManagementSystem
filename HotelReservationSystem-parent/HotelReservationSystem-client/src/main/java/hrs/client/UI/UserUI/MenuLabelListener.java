@@ -30,17 +30,21 @@ public class MenuLabelListener extends MouseAdapter {
 		 jl = (JLabel)e.getSource();
 		 String s = jl.getText();
 		 if(s.equals("信用记录")){
-			 frame.card.show(frame.cardPanel, "creditInfoPanel");
+			 frame.showCredit();
 		 }
 		 if(s.equals("订单信息")){
-			 frame.card.show(frame.cardPanel, "orderInfoPanel");
+			 frame.showOrder();;
 		 }	 
-		 if(s.equals("个人信息"))
-			 frame.card.show(frame.cardPanel, "userInfoPanel");
-		 if(s.equals("搜索酒店"))
-			 frame.card.show(frame.cardPanel, "hotelPanel");
-		 if(s.equals("酒店信息"))
-			 frame.card.show(frame.cardPanel, "hotelInfoPanel");
+		 if(s.equals("个人信息")){
+			 frame.showUserInfo();		 }
+		 if(s.equals("搜索酒店")){
+			 frame.searchHotel();
+		 }
+			
+		 if(s.equals("酒店信息")){
+			 frame.showHotel();
+		 }
+			 
 	 }
 
 	 public void mouseExited(MouseEvent e){

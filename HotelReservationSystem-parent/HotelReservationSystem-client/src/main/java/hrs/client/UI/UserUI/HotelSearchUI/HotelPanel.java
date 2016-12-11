@@ -55,6 +55,8 @@ public class HotelPanel extends ComNeedBackPanel {
 		
 	}
 	
+	
+	
 	/**
 	 * 显示酒店详细信息界面
 	 * @param hotel 需要显示的酒店信息

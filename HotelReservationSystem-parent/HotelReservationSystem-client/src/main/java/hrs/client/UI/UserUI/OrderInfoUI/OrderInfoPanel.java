@@ -9,6 +9,10 @@ import hrs.common.VO.OrderVO;
 import hrs.common.VO.UserVO;
 
 public class OrderInfoPanel extends CommonPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5849665936669289324L;
 	private JPanel cardPanel = new JPanel();
 	private CardLayout card = new CardLayout();
 	private JPanel detailedOrderPanel;//订单详细信息面板

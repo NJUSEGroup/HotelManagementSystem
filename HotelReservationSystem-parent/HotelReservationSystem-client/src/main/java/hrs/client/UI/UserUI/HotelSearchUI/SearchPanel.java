@@ -73,7 +73,7 @@ public class SearchPanel extends JPanel {
 	private JTextField roomNumField;// 房间数量
 	private TwoFieldPanel valueField;// 价格区间
 	private TwoFieldPanel scoreField;// 评分区间
-	private JComboBox<Integer> starBox;// 星级选框
+	private JComboBox<String> starBox;// 星级选框
 	private JTextField hotelNameField;// 酒店名称输入区
 	private JCheckBox hasOrderedBox;
 	Font font = UIConstants.JLABEL_FONT;
@@ -116,6 +116,7 @@ public class SearchPanel extends JPanel {
 		add(commercialBox);
 
 		checkOutDate = new DateChoosePanel();
+		checkOutDate.setCurrent();
 		checkOutDate.setBounds(RIGHTIN_X, JL_HEIGHT * 2+5, checkInDate.getWidth(), checkInDate.getHeight());
 		add(checkOutDate);
 
@@ -149,6 +150,7 @@ public class SearchPanel extends JPanel {
 		add(cityBox);
 
 		checkInDate = new DateChoosePanel();
+		checkInDate.setCurrent();
 		checkInDate.setBounds(LEFTIN_X, JL_HEIGHT * 2+5, checkInDate.getWidth(), checkInDate.getHeight());
 		add(checkInDate);
 
@@ -166,10 +168,12 @@ public class SearchPanel extends JPanel {
 		add(valueField);
 
 		starBox = new JComboBox<>();
-		for (Integer i = 0; i <= 5; i++) {
-			starBox.addItem(i);
+		starBox.addItem("空");
+		for (Integer i = 1; i <= 5; i++) {
+			starBox.addItem(i+"");
 		}
 		starBox.setFont(font);
+		starBox.setSelectedItem("空");
 		starBox.setBounds(LEFTIN_X, JL_HEIGHT * 5 + GAP, 60, TEXT_H);
 		add(starBox);
 
@@ -311,8 +315,9 @@ public class SearchPanel extends JPanel {
 			valueFilter.setHigh(valueField.getHigh());
 			list.add(valueFilter);
 		}
-		if ((Integer) starBox.getSelectedItem() != 0) {
-			starFilter.setStar((Integer) starBox.getSelectedItem());
+		if ( !starBox.getSelectedItem().equals("空")) {
+			int star = Integer.parseInt((String)starBox.getSelectedItem());
+			starFilter.setStar(star);
 			list.add(starFilter);
 		}
 		if (hasOrderedBox.isSelected())
@@ -337,5 +342,7 @@ public class SearchPanel extends JPanel {
 	public BeginAndLeaveTime getOrderTime() {
 		return new BeginAndLeaveTime(checkInDate.getDate(), checkOutDate.getDate());
 	}
+
+	
 
 }

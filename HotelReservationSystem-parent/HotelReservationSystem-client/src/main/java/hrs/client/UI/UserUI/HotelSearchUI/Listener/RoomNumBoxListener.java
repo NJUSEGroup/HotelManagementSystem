@@ -5,17 +5,15 @@ import java.awt.event.ItemListener;
 
 import hrs.client.UI.UserUI.HotelSearchUI.PlaceOrderPanel;
 
-public class OrderItemListener implements ItemListener {
+public class RoomNumBoxListener implements ItemListener {
 	private PlaceOrderPanel panel;
-	
-	public OrderItemListener(PlaceOrderPanel panel) {
+	public RoomNumBoxListener(PlaceOrderPanel panel){
 		this.panel = panel;
 	}
-
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED)
-			panel.setOrderInfo();
+			panel.changeRoomNum();
 
 	}
 
