@@ -18,7 +18,7 @@ public class DeleteMouseListener implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		int result = JOptionPane.showConfirmDialog(null, "是否确定删除？", "提示", JOptionPane.YES_NO_OPTION,
+		int result = JOptionPane.showConfirmDialog(this.jpwebDiscount, "是否确定删除？", "提示", JOptionPane.YES_NO_OPTION,
 				JOptionPane.INFORMATION_MESSAGE);
 		if (result == 0) {
 			try {

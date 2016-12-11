@@ -47,9 +47,12 @@ public class VIPDiaog extends JDialog {
 		webDiscountVO = webDiscountPanel.getSelected();
 
 		getContentPane().setBackground(UIConstants.JFRAME);
-		setTitle("VIP专属折扣修改");
-		setBounds(100, 100, 420, 280);
+		this.setTitle("VIP专属折扣修改");
+		this.setBounds(100, 100, 420, 280);
+		this.setModal(true);
 		this.setResizable(false);
+		this.setLocationRelativeTo(null);
+		
 		getContentPane().setLayout(null);
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

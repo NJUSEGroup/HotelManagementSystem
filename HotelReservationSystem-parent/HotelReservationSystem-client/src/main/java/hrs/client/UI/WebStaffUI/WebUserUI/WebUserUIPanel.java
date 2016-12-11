@@ -34,7 +34,7 @@ public class WebUserUIPanel extends JPanel {
 	public WebUserUIPanel(ShowUserInfoPanel showUserInfoPanel) {
 		this.showUserInfoPanel = showUserInfoPanel;
 		init();
-		this.add(showUserInfoPanel);	
+		this.add(showUserInfoPanel);
 		showUserInfoPanel.setBounds(5, 80, 1068, 430);
 		// showUserinfo(showUserInfoPanel);
 	}
@@ -61,7 +61,7 @@ public class WebUserUIPanel extends JPanel {
 		jbModify.setFont(UIConstants.FONT_21);
 		modifyUserInfoMouseListener = new ModifyUserInfoMouseListener(this);
 		jbModify.addMouseListener(modifyUserInfoMouseListener);
-		
+
 		setLayout(null);
 		add(jlUserSearch);
 		add(jtextUsername);
@@ -78,8 +78,9 @@ public class WebUserUIPanel extends JPanel {
 			try {
 				userVO = controller.findUserByUsername(username);
 			} catch (UserNotFoundException e) {
-				// TODO Auto-generated catch block
+				// TODO Auto-generated catch block				
 				JOptionPane.showMessageDialog(this, "用户不存在！", "No Such User", JOptionPane.ERROR_MESSAGE);
+				showUserInfoPanel.clear();
 			}
 			return userVO;
 		}
@@ -105,4 +106,5 @@ public class WebUserUIPanel extends JPanel {
 	public void showUserinfo() {
 		showUserInfoPanel.inputInfo(searchUserByUsername());
 	}
+
 }

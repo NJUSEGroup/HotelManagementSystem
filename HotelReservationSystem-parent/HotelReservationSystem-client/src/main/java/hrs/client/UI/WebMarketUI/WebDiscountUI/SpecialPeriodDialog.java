@@ -13,12 +13,9 @@ import hrs.client.util.DoubleFormat;
 import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
 import hrs.common.VO.WebDiscountVO;
-import hrs.common.util.DateHelper;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import java.text.ParseException;
 import java.util.Date;
 
 public class SpecialPeriodDialog extends JDialog {
@@ -28,8 +25,6 @@ public class SpecialPeriodDialog extends JDialog {
 	 */
 	private static final long serialVersionUID = -7392840371079479208L;
 	private final JPanel contentPanel = new JPanel();
-//	private JTextField jtextBeginTime;
-//	private JTextField jtextEndTime;
 	private DateChoosePanel jtextBeginTime;
 	private DateChoosePanel jtextEndTime;
 	private JTextField jtextDiscount;
@@ -52,12 +47,13 @@ public class SpecialPeriodDialog extends JDialog {
 	 */
 	public void init() {
 		webDiscountVO = webDiscountPanel.getSelected();
-		// System.out.println(webDiscountVO);
 
-		setTitle("特定期间专属折扣修改");
-		setBounds(100, 100, 420, 310);
+		this.setTitle("特定期间专属折扣修改");
+		this.setBounds(100, 100, 420, 310);
+		this.setModal(true);
 		this.setResizable(false);
-		
+		this.setLocationRelativeTo(null);
+
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(null);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

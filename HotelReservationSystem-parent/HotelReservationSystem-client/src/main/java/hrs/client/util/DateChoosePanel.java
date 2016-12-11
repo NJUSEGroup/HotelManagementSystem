@@ -85,7 +85,7 @@ public class DateChoosePanel extends JPanel {
 	private void setLabel() {
 		JLabel yearJL = new JLabel("年");
 		yearJL.setFont(font);
-		yearJL.setBounds(70, 0, 30, 30);
+		yearJL.setBounds(70, 0, 30, 30);		
 		add(yearJL);
 
 		JLabel monthJL = new JLabel("月");

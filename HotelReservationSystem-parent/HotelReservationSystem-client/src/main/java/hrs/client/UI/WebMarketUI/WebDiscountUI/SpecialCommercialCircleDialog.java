@@ -64,9 +64,12 @@ public class SpecialCommercialCircleDialog extends JDialog {
 		webDiscountVO = webDiscountPanel.getSelected();
 
 		getContentPane().setBackground(UIConstants.JFRAME);
-		setTitle("特定商圈专属折扣修改");
-		setBounds(100, 100, 420, 300);
+		this.setTitle("特定商圈专属折扣修改");
+		this.setBounds(100, 100, 420, 300);
 		this.setResizable(false);
+		this.setModal(true);
+		this.setLocationRelativeTo(null);
+		
 		getContentPane().setLayout(null);
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

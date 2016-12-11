@@ -1,21 +1,14 @@
 package hrs.client.UI.WebStaffUI.WebUserUI;
 
 import java.awt.Color;
-
 import javax.swing.JPanel;
-
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.text.ParseException;
 import java.util.Date;
-
 import javax.swing.JTextField;
 
 import hrs.client.util.DateChoosePanel;
 import hrs.client.util.UIConstants;
 import hrs.common.VO.UserVO;
-import hrs.common.util.DateHelper;
 
 public class ShowUserInfoPanel extends JPanel {
 	/**
@@ -94,15 +87,15 @@ public class ShowUserInfoPanel extends JPanel {
 
 		jlUsernameShow = new JLabel();
 		jlUsernameShow.setBounds(171, 36, 253, 38);
-		
+
 		jlEnterpriseShow = new JLabel();
 		jlEnterpriseShow.setBounds(171, 313, 253, 38);
-		
+
 		jlCreditvalue = new JLabel();
 		jlCreditvalue.setBounds(171, 369, 253, 38);
-		
+
 		setLayout(null);
-		
+
 		add(jlCredit);
 		add(jlEnterpriseName);
 		add(jlPhone);
@@ -141,14 +134,24 @@ public class ShowUserInfoPanel extends JPanel {
 		return jtextPhone.getText();
 	}
 
+	public void clear() {
+		jlUsernameShow.setText("");
+		jtextPassword.setText("");
+		jtextRealName.setText("");
+		jtextPhone.setText("");
+		jlEnterpriseShow.setText("");
+		jlCreditvalue.setText("");
+		jtextBirthdayShow.changeTobirth();
+	}
+
 	public void inputInfo(UserVO userVO) {
 		jlUsernameShow.setText(userVO.username);
 		jtextPassword.setText(userVO.password);
-		jtextRealName.setText(userVO.name);
-		jtextBirthdayShow.setDate(userVO.birthDate);
+		jtextRealName.setText(userVO.name);	
 		jtextPhone.setText(userVO.phone);
 		jlEnterpriseShow.setText(userVO.enterprise);
 		jlCreditvalue.setText(userVO.credit + "");
+		jtextBirthdayShow.setDate(userVO.birthDate);
 	}
 
 }

@@ -1,15 +1,13 @@
 package hrs.client.UI.WebStaffUI.HotelStaffUI;
 
 import javax.swing.JPanel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 
